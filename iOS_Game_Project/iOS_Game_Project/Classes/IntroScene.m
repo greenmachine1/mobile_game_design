@@ -33,8 +33,18 @@
     self = [super init];
     if (!self) return(nil);
     
+    // **** setting the sprite to hold the guy image **** //
+    CCSprite *guySprite = [CCSprite spriteWithImageNamed:@"guy_pixel_art.png"];
+    
+    // **** setting the location to be the very center of the screen **** //
+    [guySprite setPosition:ccp(self.contentSize.width / 2, self.contentSize.height / 2)];
+    
+    // **** addin the guy to the screen **** //
+    [self addChild:guySprite];
 
 	return self;
 }
+
+
 
 @end

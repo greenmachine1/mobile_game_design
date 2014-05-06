@@ -211,6 +211,7 @@
 		D65677291918979C003CC6E9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D65677281918979C003CC6E9 /* main.m */; };
 		D656772D1918979C003CC6E9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D656772C1918979C003CC6E9 /* AppDelegate.m */; };
 		D65677331918979C003CC6E9 /* IntroScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D65677321918979C003CC6E9 /* IntroScene.m */; };
+		D6B2120219199933005D3E7F /* guy_pixel_art.png in Resources */ = {isa = PBXBuildFile; fileRef = D6B2120119199933005D3E7F /* guy_pixel_art.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -650,6 +651,7 @@
 		D656772C1918979C003CC6E9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Classes/AppDelegate.m; sourceTree = "<group>"; };
 		D65677311918979C003CC6E9 /* IntroScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IntroScene.h; path = Classes/IntroScene.h; sourceTree = "<group>"; };
 		D65677321918979C003CC6E9 /* IntroScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = IntroScene.m; path = Classes/IntroScene.m; sourceTree = "<group>"; };
+		D6B2120119199933005D3E7F /* guy_pixel_art.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guy_pixel_art.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -721,6 +723,7 @@
 		D656749C1918979A003CC6E9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D6B2120119199933005D3E7F /* guy_pixel_art.png */,
 				D656749D1918979A003CC6E9 /* Default.png */,
 				D656749F1918979A003CC6E9 /* Default@2x.png */,
 				D65674A11918979A003CC6E9 /* Default-568h@2x.png */,
@@ -1614,6 +1617,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D65674A01918979A003CC6E9 /* Default@2x.png in Resources */,
+				D6B2120219199933005D3E7F /* guy_pixel_art.png in Resources */,
 				D65674B31918979A003CC6E9 /* Icon-120.png in Resources */,
 				D65676B71918979C003CC6E9 /* LICENSE_CCBReader.txt in Resources */,
 				D65674A91918979A003CC6E9 /* Icon@2x.png in Resources */,
@@ -1983,6 +1987,7 @@
 				D65677381918979C003CC6E9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D65677391918979C003CC6E9 /* Build configuration list for PBXNativeTarget "iOS_Game_Project" */ = {
 			isa = XCConfigurationList;
@@ -1991,6 +1996,7 @@
 				D656773B1918979C003CC6E9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
