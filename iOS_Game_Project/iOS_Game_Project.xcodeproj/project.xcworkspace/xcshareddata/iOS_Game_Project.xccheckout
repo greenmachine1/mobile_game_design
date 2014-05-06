@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>6032C0AD-271F-4FA3-8F51-FE1B27748EDE</string>
+	<key>IDESourceControlProjectName</key>
+	<string>iOS_Game_Project</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>45134F10-D768-4F8F-AD54-AF143E7026FA</key>
+		<string>ssh://github.com/greenmachine1/mobile_game_design</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>iOS_Game_Project/iOS_Game_Project.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>45134F10-D768-4F8F-AD54-AF143E7026FA</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/greenmachine1/mobile_game_design</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>45134F10-D768-4F8F-AD54-AF143E7026FA</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>45134F10-D768-4F8F-AD54-AF143E7026FA</string>
+			<key>IDESourceControlWCCName</key>
+			<string>mobile_game_design</string>
+		</dict>
+	</array>
+</dict>
+</plist>
