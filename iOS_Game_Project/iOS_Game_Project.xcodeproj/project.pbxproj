@@ -210,7 +210,6 @@
 		D65677251918979C003CC6E9 /* LICENSE_Chipmunk.txt in Resources */ = {isa = PBXBuildFile; fileRef = D65677241918979C003CC6E9 /* LICENSE_Chipmunk.txt */; };
 		D65677291918979C003CC6E9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D65677281918979C003CC6E9 /* main.m */; };
 		D656772D1918979C003CC6E9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D656772C1918979C003CC6E9 /* AppDelegate.m */; };
-		D65677301918979C003CC6E9 /* HelloWorldScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D656772F1918979C003CC6E9 /* HelloWorldScene.m */; };
 		D65677331918979C003CC6E9 /* IntroScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D65677321918979C003CC6E9 /* IntroScene.m */; };
 /* End PBXBuildFile section */
 
@@ -649,8 +648,6 @@
 		D65677281918979C003CC6E9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = main.m; path = "Supporting Files/main.m"; sourceTree = "<group>"; };
 		D656772B1918979C003CC6E9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Classes/AppDelegate.h; sourceTree = "<group>"; };
 		D656772C1918979C003CC6E9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Classes/AppDelegate.m; sourceTree = "<group>"; };
-		D656772E1918979C003CC6E9 /* HelloWorldScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HelloWorldScene.h; path = Classes/HelloWorldScene.h; sourceTree = "<group>"; };
-		D656772F1918979C003CC6E9 /* HelloWorldScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = HelloWorldScene.m; path = Classes/HelloWorldScene.m; sourceTree = "<group>"; };
 		D65677311918979C003CC6E9 /* IntroScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IntroScene.h; path = Classes/IntroScene.h; sourceTree = "<group>"; };
 		D65677321918979C003CC6E9 /* IntroScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = IntroScene.m; path = Classes/IntroScene.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1542,8 +1539,6 @@
 			children = (
 				D656772B1918979C003CC6E9 /* AppDelegate.h */,
 				D656772C1918979C003CC6E9 /* AppDelegate.m */,
-				D656772E1918979C003CC6E9 /* HelloWorldScene.h */,
-				D656772F1918979C003CC6E9 /* HelloWorldScene.m */,
 				D65677311918979C003CC6E9 /* IntroScene.h */,
 				D65677321918979C003CC6E9 /* IntroScene.m */,
 			);
@@ -1747,7 +1742,6 @@
 				D65675761918979B003CC6E9 /* ccShaders.m in Sources */,
 				D656768A1918979C003CC6E9 /* matrix.c in Sources */,
 				D656759C1918979B003CC6E9 /* CCTiledMapLayer.m in Sources */,
-				D65677301918979C003CC6E9 /* HelloWorldScene.m in Sources */,
 				D65676901918979C003CC6E9 /* neon_matrix_impl.c in Sources */,
 				D65675151918979A003CC6E9 /* CCLabelTTF.m in Sources */,
 				D65675CA1918979B003CC6E9 /* NSEvent+CC.m in Sources */,
