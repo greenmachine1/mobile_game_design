@@ -26,19 +26,19 @@
 }
 
 // -----------------------------------------------------------------------
-
 - (id)init
 {
     // Apple recommend assigning self with supers return value
     self = [super init];
     if (!self) return(nil);
     
-    // Enable touch handling on scene node
-    self.userInteractionEnabled = YES;
+    
     
 // -----------------------------------------------------------------------
     // **** enabling audio for effects **** //
-
+    hammer = [OALSimpleAudio sharedInstance];
+    water = [OALSimpleAudio sharedInstance];
+    
     
 // -----------------------------------------------------------------------
     // **** getting the x and y coords of the screen size **** //
@@ -52,8 +52,9 @@
     // **** adding the background color to the scene **** //
     [self addChild:background];
     
+    
+    
 // -----------------------------------------------------------------------
-
     // **** setting the sprite to hold the guy image **** //
     guySprite = [CCSprite spriteWithImageNamed:@"guy_pixel_art.png"];
     
@@ -63,19 +64,21 @@
     // **** addin the guy to the screen **** //
     [self addChild:guySprite];
     
-// -----------------------------------------------------------------------
     
+    
+// -----------------------------------------------------------------------
     // **** adding in the block sprite **** //
-        blockSprite = [CCSprite spriteWithImageNamed:@"Block.png"];
+    blockSprite = [CCSprite spriteWithImageNamed:@"Block.png"];
     
-        // **** setting its position **** //
-        [blockSprite setPosition:ccp(100.0, 100.0)];
+    // **** setting its position **** //
+    [blockSprite setPosition:ccp(100.0, 100.0)];
     
-        // **** adding it to the scene **** //
-        [self addChild:blockSprite];
+    // **** adding it to the scene **** //
+    [self addChild:blockSprite];
+    
+    
     
 // -----------------------------------------------------------------------
-    
     // **** adding the enemy sprite **** //
     enemySprite = [CCSprite spriteWithImageNamed:@"enemy.png"];
     
@@ -90,8 +93,17 @@
 	return self;
 }
 
-// ------------------------------------------------------------------------
+-(void)onEnter{
+    [super onEnter];
+    
+    // Enable touch handling on scene node
+    self.userInteractionEnabled = YES;
+}
 
+
+
+
+// ------------------------------------------------------------------------
 // **** up and down movement of the enemy
 -(void)actionSequence{
     
@@ -112,8 +124,9 @@
 }
 
 
-// ------------------------------------------------------------------------
 
+
+// ------------------------------------------------------------------------
 // **** update loop **** //
 -(void)update:(CCTime)delta{
     
@@ -123,16 +136,20 @@
         // **** repositioning my guy **** //
         guySprite.position = ccp(20, 200);
         
+        // **** plays a hammer type sound **** //
+        [water playBg:@"Hammer.mp3" loop:false];
+        
+        pointOfEnemy = ccp(enemySprite.position.x, enemySprite.position.y);
+        
     }
     
 }
 
+
+
+
+
 // -------------------------------------------------------------------------
-
-
-
-
-
 // **** checking for collision **** //
 -(BOOL)collision{
     
@@ -143,9 +160,9 @@
     }
     return false;
 }
+
+
 // -------------------------------------------------------------------------
-
-
 // **** move the guy to a point on the screen **** //
 -(void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event{
     
@@ -156,6 +173,15 @@
     CCActionMoveTo *actionMove = [CCActionMoveTo actionWithDuration:1.0f position:touchPoint];
     
     [guySprite runAction:actionMove];
+    
+    // **** this basically sees if your touch over the enemy is true and if so **** //
+    // **** play a sea sound **** //
+    if((touchPoint.x <= enemySprite.position.x + 20) && (touchPoint.x >= enemySprite.position.x - 20) &&
+       (touchPoint.y <= enemySprite.position.y + 20) && (touchPoint.y >= enemySprite.position.y - 20)){
+    
+        // **** plays a sea sound **** //
+        [water playBg:@"sea_audio.mp3" loop:false];
+    }
     
 }
 

@@ -25,10 +25,13 @@
     CCSprite *blockSprite;
     CCSprite *enemySprite;
     
-    OALSimpleAudio *owwAudio;
+    OALSimpleAudio *hammer;
+    OALSimpleAudio *water;
     
     int xBounds;
     int yBounds;
+    
+    CGPoint pointOfEnemy;
     
 }
 
