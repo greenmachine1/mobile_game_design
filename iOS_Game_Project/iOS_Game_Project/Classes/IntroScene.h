@@ -22,8 +22,9 @@
 @interface IntroScene : CCScene{
     
     CCSprite *guySprite;
-    
     CCSprite *blockSprite;
+    
+    OALSimpleAudio *owwAudio;
     
     int xBounds;
     int yBounds;

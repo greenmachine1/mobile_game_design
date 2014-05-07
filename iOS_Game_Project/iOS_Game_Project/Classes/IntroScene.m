@@ -36,8 +36,17 @@
     // Enable touch handling on scene node
     self.userInteractionEnabled = YES;
     
-    xBounds = (self.contentSize.width);
-    yBounds = (self.contentSize.height);
+// -----------------------------------------------------------------------
+    // **** enabling audio for effects **** //
+    owwAudio = [OALSimpleAudio sharedInstance];
+    
+    // **** preloading as to not bog down the CPU **** //
+    [owwAudio preloadEffect:@"owww.mp3"];
+    
+// -----------------------------------------------------------------------
+    // **** getting the x and y coords of the screen size **** //
+    xBounds = self.contentSize.width;
+    yBounds = self.contentSize.height;
 
     
     // **** changing the background color to a light blue **** //
@@ -72,7 +81,7 @@
 	return self;
 }
 
-
+// ------------------------------------------------------------------------
 
 // **** update loop **** //
 -(void)update:(CCTime)delta{
@@ -82,11 +91,13 @@
         
         // **** repositioning my guy **** //
         guySprite.position = ccp(200, 200);
+        
+        [owwAudio playBg:@"owww.mp3" loop:false];
     }
     
 }
 
-
+// -------------------------------------------------------------------------
 
 // **** checking for collision **** //
 -(BOOL)collision{
@@ -98,6 +109,8 @@
     }
     return false;
 }
+
+// -------------------------------------------------------------------------
 
 // **** move the guy to a point on the screen **** //
 -(void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event{
