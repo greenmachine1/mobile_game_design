@@ -23,6 +23,7 @@
     
     CCSprite *guySprite;
     CCSprite *blockSprite;
+    CCSprite *enemySprite;
     
     OALSimpleAudio *owwAudio;
     

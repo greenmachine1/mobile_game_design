@@ -38,10 +38,7 @@
     
 // -----------------------------------------------------------------------
     // **** enabling audio for effects **** //
-    owwAudio = [OALSimpleAudio sharedInstance];
-    
-    // **** preloading as to not bog down the CPU **** //
-    [owwAudio preloadEffect:@"owww.mp3"];
+
     
 // -----------------------------------------------------------------------
     // **** getting the x and y coords of the screen size **** //
@@ -69,17 +66,51 @@
 // -----------------------------------------------------------------------
     
     // **** adding in the block sprite **** //
-    blockSprite = [CCSprite spriteWithImageNamed:@"Block.png"];
+        blockSprite = [CCSprite spriteWithImageNamed:@"Block.png"];
+    
+        // **** setting its position **** //
+        [blockSprite setPosition:ccp(100.0, 100.0)];
+    
+        // **** adding it to the scene **** //
+        [self addChild:blockSprite];
+    
+// -----------------------------------------------------------------------
+    
+    // **** adding the enemy sprite **** //
+    enemySprite = [CCSprite spriteWithImageNamed:@"enemy.png"];
     
     // **** setting its position **** //
-    [blockSprite setPosition:ccp(100.0, 100.0)];
+    [enemySprite setPosition:ccp(200.0, 300.0)];
     
     // **** adding it to the scene **** //
-    [self addChild:blockSprite];
+    [self addChild:enemySprite];
     
-
+    [self actionSequence];
+    
 	return self;
 }
+
+// ------------------------------------------------------------------------
+
+// **** up and down movement of the enemy
+-(void)actionSequence{
+    
+    // **** setting up the first position **** //
+    CCActionMoveTo *enemyMoveTo = [CCActionMoveTo actionWithDuration:2.0f position:ccp(200.0f, 20.f)];
+    
+    // **** setting up the second position **** //
+    CCActionMoveTo *enemyMoveFrom = [CCActionMoveTo actionWithDuration:2.0f position:ccp(200.0f, 300.f)];
+    
+    // **** setting up the back and forth sequence **** //
+    CCActionSequence *enemyActionSequence = [CCActionSequence actionOne:enemyMoveTo two:enemyMoveFrom];
+    
+    // **** repeating the sequence forever **** //
+    CCActionRepeatForever *repeatEnemyActionSequence = [CCActionRepeatForever actionWithAction:enemyActionSequence];
+    
+    // **** setting it in motion **** //
+    [enemySprite runAction:repeatEnemyActionSequence];
+}
+
 
 // ------------------------------------------------------------------------
 
@@ -90,14 +121,17 @@
         NSLog(@"Collision!");
         
         // **** repositioning my guy **** //
-        guySprite.position = ccp(200, 200);
+        guySprite.position = ccp(20, 200);
         
-        [owwAudio playBg:@"owww.mp3" loop:false];
     }
     
 }
 
 // -------------------------------------------------------------------------
+
+
+
+
 
 // **** checking for collision **** //
 -(BOOL)collision{
@@ -109,8 +143,8 @@
     }
     return false;
 }
-
 // -------------------------------------------------------------------------
+
 
 // **** move the guy to a point on the screen **** //
 -(void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event{
