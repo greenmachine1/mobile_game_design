@@ -33,6 +33,9 @@
     self = [super init];
     if (!self) return(nil);
     
+    // Enable touch handling on scene node
+    self.userInteractionEnabled = YES;
+    
     xBounds = (self.contentSize.width);
     yBounds = (self.contentSize.height);
 
@@ -69,16 +72,46 @@
 	return self;
 }
 
-// **** updated every second **** //
+
+
+// **** update loop **** //
 -(void)update:(CCTime)delta{
     
-    // **** moving the guy sprite **** //
-    // **** this is also a form of collision detection **** //
-    // **** making sure he doesnt go past the wall bounds **** //
-    if(guySprite.position.x < (xBounds - 30)){
-        guySprite.position = ccp(guySprite.position.x + 1, guySprite.position.y);
+    if([self collision] == true){
+        NSLog(@"Collision!");
+        
+        // **** repositioning my guy **** //
+        guySprite.position = ccp(200, 200);
     }
+    
 }
+
+
+
+// **** checking for collision **** //
+-(BOOL)collision{
+    
+    if((guySprite.position.x <= blockSprite.position.x + 20) && (guySprite.position.x >= blockSprite.position.x - 20) &&
+       (guySprite.position.y <= blockSprite.position.y + 20) && (guySprite.position.y >= blockSprite.position.y - 20)){
+        
+        return true;
+    }
+    return false;
+}
+
+// **** move the guy to a point on the screen **** //
+-(void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event{
+    
+    CGPoint touchPoint = [touch locationInNode:self];
+    
+    NSLog(@"%@", NSStringFromCGPoint(touchPoint));
+    
+    CCActionMoveTo *actionMove = [CCActionMoveTo actionWithDuration:1.0f position:touchPoint];
+    
+    [guySprite runAction:actionMove];
+    
+}
+
 
 
 
