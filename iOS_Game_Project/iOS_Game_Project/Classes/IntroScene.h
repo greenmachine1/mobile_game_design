@@ -19,7 +19,16 @@
  *  Main usage for CCLayer now, is to make colored backgrounds (rectangles)
  *
  */
-@interface IntroScene : CCScene
+@interface IntroScene : CCScene{
+    
+    CCSprite *guySprite;
+    
+    CCSprite *blockSprite;
+    
+    int xBounds;
+    int yBounds;
+    
+}
 
 // -----------------------------------------------------------------------
 

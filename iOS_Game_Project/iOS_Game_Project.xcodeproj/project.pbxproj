@@ -212,6 +212,7 @@
 		D656772D1918979C003CC6E9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D656772C1918979C003CC6E9 /* AppDelegate.m */; };
 		D65677331918979C003CC6E9 /* IntroScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D65677321918979C003CC6E9 /* IntroScene.m */; };
 		D6B2120219199933005D3E7F /* guy_pixel_art.png in Resources */ = {isa = PBXBuildFile; fileRef = D6B2120119199933005D3E7F /* guy_pixel_art.png */; };
+		D6B212041919ACED005D3E7F /* Block.png in Resources */ = {isa = PBXBuildFile; fileRef = D6B212031919ACED005D3E7F /* Block.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -652,6 +653,7 @@
 		D65677311918979C003CC6E9 /* IntroScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IntroScene.h; path = Classes/IntroScene.h; sourceTree = "<group>"; };
 		D65677321918979C003CC6E9 /* IntroScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = IntroScene.m; path = Classes/IntroScene.m; sourceTree = "<group>"; };
 		D6B2120119199933005D3E7F /* guy_pixel_art.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guy_pixel_art.png; sourceTree = "<group>"; };
+		D6B212031919ACED005D3E7F /* Block.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Block.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -728,6 +730,7 @@
 				D656749F1918979A003CC6E9 /* Default@2x.png */,
 				D65674A11918979A003CC6E9 /* Default-568h@2x.png */,
 				D65674A31918979A003CC6E9 /* Default-Landscape~ipad.png */,
+				D6B212031919ACED005D3E7F /* Block.png */,
 				D65674C01918979A003CC6E9 /* Info.plist */,
 				D65674C11918979A003CC6E9 /* iTunesArtwork */,
 				D65674C31918979A003CC6E9 /* iTunesArtwork@2x */,
@@ -1621,6 +1624,7 @@
 				D65674B31918979A003CC6E9 /* Icon-120.png in Resources */,
 				D65676B71918979C003CC6E9 /* LICENSE_CCBReader.txt in Resources */,
 				D65674A91918979A003CC6E9 /* Icon@2x.png in Resources */,
+				D6B212041919ACED005D3E7F /* Block.png in Resources */,
 				D65674BB1918979A003CC6E9 /* Icon-Small@2x.png in Resources */,
 				D65674AD1918979A003CC6E9 /* Icon-72@2x.png in Resources */,
 				D656749E1918979A003CC6E9 /* Default.png in Resources */,
