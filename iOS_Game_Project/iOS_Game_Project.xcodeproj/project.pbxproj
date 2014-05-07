@@ -213,7 +213,6 @@
 		D65677331918979C003CC6E9 /* IntroScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D65677321918979C003CC6E9 /* IntroScene.m */; };
 		D6B2120219199933005D3E7F /* guy_pixel_art.png in Resources */ = {isa = PBXBuildFile; fileRef = D6B2120119199933005D3E7F /* guy_pixel_art.png */; };
 		D6B212041919ACED005D3E7F /* Block.png in Resources */ = {isa = PBXBuildFile; fileRef = D6B212031919ACED005D3E7F /* Block.png */; };
-		D6B214CF1919C3BA005D3E7F /* owww.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D6B214CE1919C3B9005D3E7F /* owww.mp3 */; };
 		D6B214D1191A15A3005D3E7F /* enemy.png in Resources */ = {isa = PBXBuildFile; fileRef = D6B214D0191A15A3005D3E7F /* enemy.png */; };
 		D6B214D4191A2048005D3E7F /* Hammer.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D6B214D2191A2048005D3E7F /* Hammer.mp3 */; };
 		D6B214D5191A2048005D3E7F /* sea_audio.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D6B214D3191A2048005D3E7F /* sea_audio.mp3 */; };
@@ -658,7 +657,6 @@
 		D65677321918979C003CC6E9 /* IntroScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = IntroScene.m; path = Classes/IntroScene.m; sourceTree = "<group>"; };
 		D6B2120119199933005D3E7F /* guy_pixel_art.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guy_pixel_art.png; sourceTree = "<group>"; };
 		D6B212031919ACED005D3E7F /* Block.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Block.png; sourceTree = "<group>"; };
-		D6B214CE1919C3B9005D3E7F /* owww.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = owww.mp3; sourceTree = "<group>"; };
 		D6B214D0191A15A3005D3E7F /* enemy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = enemy.png; sourceTree = "<group>"; };
 		D6B214D2191A2048005D3E7F /* Hammer.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Hammer.mp3; sourceTree = "<group>"; };
 		D6B214D3191A2048005D3E7F /* sea_audio.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sea_audio.mp3; sourceTree = "<group>"; };
@@ -734,6 +732,7 @@
 			isa = PBXGroup;
 			children = (
 				D6B214D6191A208C005D3E7F /* Audio */,
+				D6B214D0191A15A3005D3E7F /* enemy.png */,
 				D6B2120119199933005D3E7F /* guy_pixel_art.png */,
 				D656749D1918979A003CC6E9 /* Default.png */,
 				D656749F1918979A003CC6E9 /* Default@2x.png */,
@@ -1565,8 +1564,6 @@
 			children = (
 				D6B214D2191A2048005D3E7F /* Hammer.mp3 */,
 				D6B214D3191A2048005D3E7F /* sea_audio.mp3 */,
-				D6B214D0191A15A3005D3E7F /* enemy.png */,
-				D6B214CE1919C3B9005D3E7F /* owww.mp3 */,
 			);
 			name = Audio;
 			sourceTree = "<group>";
@@ -1661,7 +1658,6 @@
 				D65674A21918979A003CC6E9 /* Default-568h@2x.png in Resources */,
 				D65674C21918979A003CC6E9 /* iTunesArtwork in Resources */,
 				D65674BD1918979A003CC6E9 /* Icon-Spotlight-iOS7.png in Resources */,
-				D6B214CF1919C3BA005D3E7F /* owww.mp3 in Resources */,
 				D6B214D4191A2048005D3E7F /* Hammer.mp3 in Resources */,
 				D65674B11918979A003CC6E9 /* Icon-76@2x.png in Resources */,
 				D65677251918979C003CC6E9 /* LICENSE_Chipmunk.txt in Resources */,
