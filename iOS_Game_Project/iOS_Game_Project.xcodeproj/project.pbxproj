@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D649E519191EABF40040341B /* Block_sprite_Object.m in Sources */ = {isa = PBXBuildFile; fileRef = D649E518191EABF40040341B /* Block_sprite_Object.m */; };
 		D65674841918979A003CC6E9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D65674831918979A003CC6E9 /* QuartzCore.framework */; };
 		D65674861918979A003CC6E9 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D65674851918979A003CC6E9 /* OpenGLES.framework */; };
 		D65674881918979A003CC6E9 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D65674871918979A003CC6E9 /* OpenAL.framework */; };
@@ -229,6 +230,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D649E517191EABF40040341B /* Block_sprite_Object.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Block_sprite_Object.h; sourceTree = "<group>"; };
+		D649E518191EABF40040341B /* Block_sprite_Object.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Block_sprite_Object.m; sourceTree = "<group>"; };
 		D65674801918979A003CC6E9 /* iOS_Game_Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOS_Game_Project.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D65674831918979A003CC6E9 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		D65674851918979A003CC6E9 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -1555,6 +1558,8 @@
 				D656772C1918979C003CC6E9 /* AppDelegate.m */,
 				D65677311918979C003CC6E9 /* IntroScene.h */,
 				D65677321918979C003CC6E9 /* IntroScene.m */,
+				D649E517191EABF40040341B /* Block_sprite_Object.h */,
+				D649E518191EABF40040341B /* Block_sprite_Object.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -1790,6 +1795,7 @@
 				D65675E51918979B003CC6E9 /* NSAttributedString+CCAdditions.m in Sources */,
 				D65676A71918979C003CC6E9 /* CCBKeyframe.m in Sources */,
 				D65676611918979C003CC6E9 /* CCControlTextureFactory.m in Sources */,
+				D649E519191EABF40040341B /* Block_sprite_Object.m in Sources */,
 				D65674E61918979A003CC6E9 /* CCAnimationCache.m in Sources */,
 				D656766A1918979C003CC6E9 /* CCTableView.m in Sources */,
 				D656772D1918979C003CC6E9 /* AppDelegate.m in Sources */,

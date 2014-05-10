@@ -10,6 +10,8 @@
 // Import the interfaces
 #import "IntroScene.h"
 
+#import "Block_sprite_Object.h"
+
 // -----------------------------------------------------------------------
 #pragma mark - IntroScene
 // -----------------------------------------------------------------------
@@ -32,6 +34,7 @@
     self = [super init];
     if (!self) return(nil);
     
+
     
     
 // -----------------------------------------------------------------------
@@ -66,15 +69,21 @@
     
     
     
+    
+    
 // -----------------------------------------------------------------------
-    // **** adding in the block sprite **** //
-    blockSprite = [CCSprite spriteWithImageNamed:@"Block.png"];
+    // **** calling on the block sprite object **** //
     
-    // **** setting its position **** //
-    [blockSprite setPosition:ccp(100.0, 100.0)];
+    Block_sprite_Object *newObject = [Block_sprite_Object createBlockWithLocation:ccp(100.0f, 100.0f)];
+    Block_sprite_Object *secondObject = [Block_sprite_Object createBlockWithLocation:ccp(200.0f, 140.0f)];
     
-    // **** adding it to the scene **** //
-    [self addChild:blockSprite];
+    // **** from this I can get specific x and y values from each object **** //
+    // **** for collision detection **** //
+    pointOfSecondObject = [secondObject returnedPosition];
+    
+    [self addChild:secondObject];
+    [self addChild:newObject];
+    
     
     
     
@@ -88,10 +97,12 @@
     // **** adding it to the scene **** //
     [self addChild:enemySprite];
     
+    // **** triggering the action sequence **** //
     [self actionSequence];
     
 	return self;
 }
+
 
 -(void)onEnter{
     [super onEnter];
@@ -130,7 +141,7 @@
 // **** update loop **** //
 -(void)update:(CCTime)delta{
     
-    if([self collision] == true){
+    if([self collisionOfFirstObject:guySprite.position second:pointOfSecondObject] == true){
         NSLog(@"Collision!");
         
         // **** repositioning my guy **** //
@@ -149,12 +160,14 @@
 
 
 
+
+
 // -------------------------------------------------------------------------
-// **** checking for collision **** //
--(BOOL)collision{
+// **** checking for collision, taking in two points and comparing **** //
+-(BOOL)collisionOfFirstObject:(CGPoint)firstObject second:(CGPoint)secondObject{
     
-    if((guySprite.position.x <= blockSprite.position.x + 20) && (guySprite.position.x >= blockSprite.position.x - 20) &&
-       (guySprite.position.y <= blockSprite.position.y + 20) && (guySprite.position.y >= blockSprite.position.y - 20)){
+    if((firstObject.x <= secondObject.x + 20) && (firstObject.x >= secondObject.x - 20) &&
+       (firstObject.y <= secondObject.y + 20) && (firstObject.y >= secondObject.y - 20)){
         
         return true;
     }

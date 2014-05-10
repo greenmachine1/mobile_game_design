@@ -32,6 +32,7 @@
     int yBounds;
     
     CGPoint pointOfEnemy;
+    CGPoint pointOfSecondObject;
     
 }
 
