@@ -9,7 +9,10 @@
 
 // Importing cocos2d.h and cocos2d-ui.h, will import anything you need to start using cocos2d-v3
 #import "cocos2d.h"
+
 #import "cocos2d-ui.h"
+
+#import "Enemy_Sprite_Object.h"
 
 // -----------------------------------------------------------------------
 
@@ -22,8 +25,7 @@
 @interface IntroScene : CCScene{
     
     CCSprite *guySprite;
-    CCSprite *blockSprite;
-    CCSprite *enemySprite;
+    Enemy_Sprite_Object *newEnemy;
     
     OALSimpleAudio *hammer;
     OALSimpleAudio *water;

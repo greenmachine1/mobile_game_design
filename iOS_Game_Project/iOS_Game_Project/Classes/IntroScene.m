@@ -12,6 +12,8 @@
 
 #import "Block_sprite_Object.h"
 
+#import "Enemy_Sprite_Object.h"
+
 // -----------------------------------------------------------------------
 #pragma mark - IntroScene
 // -----------------------------------------------------------------------
@@ -89,16 +91,10 @@
     
 // -----------------------------------------------------------------------
     // **** adding the enemy sprite **** //
-    enemySprite = [CCSprite spriteWithImageNamed:@"enemy.png"];
+    // **** creating an enemy with a starting point **** //
+    newEnemy = [Enemy_Sprite_Object createEnemyWithStartingPoint:ccp(200.0f, 300.0f)];
     
-    // **** setting its position **** //
-    [enemySprite setPosition:ccp(200.0, 300.0)];
-    
-    // **** adding it to the scene **** //
-    [self addChild:enemySprite];
-    
-    // **** triggering the action sequence **** //
-    [self actionSequence];
+    [self addChild:newEnemy];
     
 	return self;
 }
@@ -114,44 +110,18 @@
 
 
 
-// ------------------------------------------------------------------------
-// **** up and down movement of the enemy
--(void)actionSequence{
-    
-    // **** setting up the first position **** //
-    CCActionMoveTo *enemyMoveTo = [CCActionMoveTo actionWithDuration:2.0f position:ccp(200.0f, 20.f)];
-    
-    // **** setting up the second position **** //
-    CCActionMoveTo *enemyMoveFrom = [CCActionMoveTo actionWithDuration:2.0f position:ccp(200.0f, 300.f)];
-    
-    // **** setting up the back and forth sequence **** //
-    CCActionSequence *enemyActionSequence = [CCActionSequence actionOne:enemyMoveTo two:enemyMoveFrom];
-    
-    // **** repeating the sequence forever **** //
-    CCActionRepeatForever *repeatEnemyActionSequence = [CCActionRepeatForever actionWithAction:enemyActionSequence];
-    
-    // **** setting it in motion **** //
-    [enemySprite runAction:repeatEnemyActionSequence];
-}
-
-
 
 
 // ------------------------------------------------------------------------
 // **** update loop **** //
 -(void)update:(CCTime)delta{
     
+    // **** running collision detection on the guy sprite and point of the second object **** //
     if([self collisionOfFirstObject:guySprite.position second:pointOfSecondObject] == true){
         NSLog(@"Collision!");
         
-        // **** repositioning my guy **** //
-        //guySprite.position = ccp(pointOfSecondObject.x + 60, pointOfSecondObject.y + 60);
-        
         // **** plays a hammer type sound **** //
         [water playBg:@"Hammer.mp3" loop:false];
-        
-        pointOfEnemy = ccp(enemySprite.position.x, enemySprite.position.y);
-        
     }
     
 }
@@ -195,7 +165,7 @@
     
     // **** this basically sees if your touch over the enemy is true and if so **** //
     // **** play a sea sound **** //
-    if([self collisionOfFirstObject:touchPoint second:enemySprite.position] == true){
+    if([self collisionOfFirstObject:touchPoint second:[newEnemy returnLocationOfEnemy]] == true){
         
         // **** plays a sea sound **** //
         [water playBg:@"sea_audio.mp3" loop:false];

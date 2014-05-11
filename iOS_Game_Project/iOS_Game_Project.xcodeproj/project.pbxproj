@@ -212,6 +212,7 @@
 		D65677291918979C003CC6E9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D65677281918979C003CC6E9 /* main.m */; };
 		D656772D1918979C003CC6E9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D656772C1918979C003CC6E9 /* AppDelegate.m */; };
 		D65677331918979C003CC6E9 /* IntroScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D65677321918979C003CC6E9 /* IntroScene.m */; };
+		D6AC2934191FFDA600049642 /* Enemy_Sprite_Object.m in Sources */ = {isa = PBXBuildFile; fileRef = D6AC2933191FFDA600049642 /* Enemy_Sprite_Object.m */; };
 		D6B2120219199933005D3E7F /* guy_pixel_art.png in Resources */ = {isa = PBXBuildFile; fileRef = D6B2120119199933005D3E7F /* guy_pixel_art.png */; };
 		D6B212041919ACED005D3E7F /* Block.png in Resources */ = {isa = PBXBuildFile; fileRef = D6B212031919ACED005D3E7F /* Block.png */; };
 		D6B214D1191A15A3005D3E7F /* enemy.png in Resources */ = {isa = PBXBuildFile; fileRef = D6B214D0191A15A3005D3E7F /* enemy.png */; };
@@ -658,6 +659,8 @@
 		D656772C1918979C003CC6E9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Classes/AppDelegate.m; sourceTree = "<group>"; };
 		D65677311918979C003CC6E9 /* IntroScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IntroScene.h; path = Classes/IntroScene.h; sourceTree = "<group>"; };
 		D65677321918979C003CC6E9 /* IntroScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = IntroScene.m; path = Classes/IntroScene.m; sourceTree = "<group>"; };
+		D6AC2932191FFDA600049642 /* Enemy_Sprite_Object.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Enemy_Sprite_Object.h; sourceTree = "<group>"; };
+		D6AC2933191FFDA600049642 /* Enemy_Sprite_Object.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Enemy_Sprite_Object.m; sourceTree = "<group>"; };
 		D6B2120119199933005D3E7F /* guy_pixel_art.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guy_pixel_art.png; sourceTree = "<group>"; };
 		D6B212031919ACED005D3E7F /* Block.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Block.png; sourceTree = "<group>"; };
 		D6B214D0191A15A3005D3E7F /* enemy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = enemy.png; sourceTree = "<group>"; };
@@ -1560,6 +1563,8 @@
 				D65677321918979C003CC6E9 /* IntroScene.m */,
 				D649E517191EABF40040341B /* Block_sprite_Object.h */,
 				D649E518191EABF40040341B /* Block_sprite_Object.m */,
+				D6AC2932191FFDA600049642 /* Enemy_Sprite_Object.h */,
+				D6AC2933191FFDA600049642 /* Enemy_Sprite_Object.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -1780,6 +1785,7 @@
 				D65675CA1918979B003CC6E9 /* NSEvent+CC.m in Sources */,
 				D65676271918979B003CC6E9 /* ALDevice.m in Sources */,
 				D656769A1918979C003CC6E9 /* vec2.c in Sources */,
+				D6AC2934191FFDA600049642 /* Enemy_Sprite_Object.m in Sources */,
 				D65674CA1918979A003CC6E9 /* CCAction.m in Sources */,
 				D656752E1918979A003CC6E9 /* CCParallaxNode.m in Sources */,
 				D65676961918979C003CC6E9 /* ray2.c in Sources */,
