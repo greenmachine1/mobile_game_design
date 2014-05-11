@@ -13,7 +13,6 @@
 @interface Enemy_Sprite_Object : CCNode
 {
     CCSprite *enemySprite;
-    CGPoint startingPointOfSprite;
 }
 
 +(id)createEnemyWithStartingPoint:(CGPoint)startingPoint;

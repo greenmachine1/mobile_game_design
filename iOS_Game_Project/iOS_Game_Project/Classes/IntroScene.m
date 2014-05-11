@@ -14,6 +14,8 @@
 
 #import "Enemy_Sprite_Object.h"
 
+#import "Main_Guy_Object.h"
+
 // -----------------------------------------------------------------------
 #pragma mark - IntroScene
 // -----------------------------------------------------------------------
@@ -60,14 +62,11 @@
     
     
 // -----------------------------------------------------------------------
-    // **** setting the sprite to hold the guy image **** //
-    guySprite = [CCSprite spriteWithImageNamed:@"guy_pixel_art.png"];
     
-    // **** setting the location to be the very center of the screen **** //
-    [guySprite setPosition:ccp(self.contentSize.width / 2, self.contentSize.height / 2)];
+    // **** creating an instance of the main guy **** //
+    newMainGuy = [Main_Guy_Object createGuyAtLocation:ccp(self.contentSize.width / 2, self.contentSize.height / 2)];
     
-    // **** addin the guy to the screen **** //
-    [self addChild:guySprite];
+    [self addChild:newMainGuy];
     
     
     
@@ -77,7 +76,7 @@
     // **** calling on the block sprite object **** //
     
     Block_sprite_Object *newObject = [Block_sprite_Object createBlockWithLocation:ccp(100.0f, 100.0f)];
-    Block_sprite_Object *secondObject = [Block_sprite_Object createBlockWithLocation:ccp(200.0f, 140.0f)];
+    secondObject = [Block_sprite_Object createBlockWithLocation:ccp(200.0f, 140.0f)];
     
     // **** from this I can get specific x and y values from each object **** //
     // **** for collision detection **** //
@@ -116,9 +115,12 @@
 // **** update loop **** //
 -(void)update:(CCTime)delta{
     
+    
     // **** running collision detection on the guy sprite and point of the second object **** //
-    if([self collisionOfFirstObject:guySprite.position second:pointOfSecondObject] == true){
+    if([self collisionOfFirstObject:[newMainGuy returnLocation] second:pointOfSecondObject] == true){
         NSLog(@"Collision!");
+        
+        NSLog(@"Location %@", NSStringFromCGPoint([newMainGuy returnLocation]));
         
         // **** plays a hammer type sound **** //
         [water playBg:@"Hammer.mp3" loop:false];
@@ -134,12 +136,14 @@
 
 // -------------------------------------------------------------------------
 // **** checking for collision, taking in two points and comparing **** //
--(BOOL)collisionOfFirstObject:(CGPoint)firstObject second:(CGPoint)secondObject{
+-(BOOL)collisionOfFirstObject:(CGPoint)first second:(CGPoint)second{
     
-    if((firstObject.x <= secondObject.x + 20) && (firstObject.x >= secondObject.x - 20) &&
-       (firstObject.y <= secondObject.y + 20) && (firstObject.y >= secondObject.y - 20)){
+    if((first.x <= second.x + 20) && (first.x >= second.x - 20) &&
+       (first.y <= second.y + 20) && (first.y >= second.y - 20)){
         
-        guySprite.position = ccp(pointOfSecondObject.x + 100, pointOfSecondObject.y + 100);
+        [newMainGuy moveGuyToPoint:ccp(50.0f, 50.0f)];
+        
+        NSLog(@"Location %@", NSStringFromCGPoint([newMainGuy returnLocation]));
         
         return true;
     }
@@ -159,9 +163,7 @@
     
     NSLog(@"%@", NSStringFromCGPoint(touchPoint));
     
-    CCActionMoveTo *actionMove = [CCActionMoveTo actionWithDuration:1.0f position:touchPoint];
-    
-    [guySprite runAction:actionMove];
+    [newMainGuy moveGuyToPoint:touchPoint];
     
     // **** this basically sees if your touch over the enemy is true and if so **** //
     // **** play a sea sound **** //

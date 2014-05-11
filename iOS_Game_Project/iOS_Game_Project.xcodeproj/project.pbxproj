@@ -213,6 +213,7 @@
 		D656772D1918979C003CC6E9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D656772C1918979C003CC6E9 /* AppDelegate.m */; };
 		D65677331918979C003CC6E9 /* IntroScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D65677321918979C003CC6E9 /* IntroScene.m */; };
 		D6AC2934191FFDA600049642 /* Enemy_Sprite_Object.m in Sources */ = {isa = PBXBuildFile; fileRef = D6AC2933191FFDA600049642 /* Enemy_Sprite_Object.m */; };
+		D6AC29371920140F00049642 /* Main_Guy_Object.m in Sources */ = {isa = PBXBuildFile; fileRef = D6AC29361920140F00049642 /* Main_Guy_Object.m */; };
 		D6B2120219199933005D3E7F /* guy_pixel_art.png in Resources */ = {isa = PBXBuildFile; fileRef = D6B2120119199933005D3E7F /* guy_pixel_art.png */; };
 		D6B212041919ACED005D3E7F /* Block.png in Resources */ = {isa = PBXBuildFile; fileRef = D6B212031919ACED005D3E7F /* Block.png */; };
 		D6B214D1191A15A3005D3E7F /* enemy.png in Resources */ = {isa = PBXBuildFile; fileRef = D6B214D0191A15A3005D3E7F /* enemy.png */; };
@@ -661,6 +662,8 @@
 		D65677321918979C003CC6E9 /* IntroScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = IntroScene.m; path = Classes/IntroScene.m; sourceTree = "<group>"; };
 		D6AC2932191FFDA600049642 /* Enemy_Sprite_Object.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Enemy_Sprite_Object.h; sourceTree = "<group>"; };
 		D6AC2933191FFDA600049642 /* Enemy_Sprite_Object.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Enemy_Sprite_Object.m; sourceTree = "<group>"; };
+		D6AC29351920140F00049642 /* Main_Guy_Object.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Main_Guy_Object.h; sourceTree = "<group>"; };
+		D6AC29361920140F00049642 /* Main_Guy_Object.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Main_Guy_Object.m; sourceTree = "<group>"; };
 		D6B2120119199933005D3E7F /* guy_pixel_art.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guy_pixel_art.png; sourceTree = "<group>"; };
 		D6B212031919ACED005D3E7F /* Block.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Block.png; sourceTree = "<group>"; };
 		D6B214D0191A15A3005D3E7F /* enemy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = enemy.png; sourceTree = "<group>"; };
@@ -1565,6 +1568,8 @@
 				D649E518191EABF40040341B /* Block_sprite_Object.m */,
 				D6AC2932191FFDA600049642 /* Enemy_Sprite_Object.h */,
 				D6AC2933191FFDA600049642 /* Enemy_Sprite_Object.m */,
+				D6AC29351920140F00049642 /* Main_Guy_Object.h */,
+				D6AC29361920140F00049642 /* Main_Guy_Object.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -1808,6 +1813,7 @@
 				D65674FD1918979A003CC6E9 /* CCDrawingPrimitives.m in Sources */,
 				D65675EE1918979B003CC6E9 /* TGAlib.m in Sources */,
 				D65675BA1918979B003CC6E9 /* UITouch+CC.m in Sources */,
+				D6AC29371920140F00049642 /* Main_Guy_Object.m in Sources */,
 				D65676981918979C003CC6E9 /* utility.c in Sources */,
 				D65675F71918979B003CC6E9 /* ZipUtils.m in Sources */,
 				D65676081918979B003CC6E9 /* OALUtilityActions.m in Sources */,
