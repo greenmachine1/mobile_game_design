@@ -145,7 +145,7 @@
         NSLog(@"Collision!");
         
         // **** repositioning my guy **** //
-        guySprite.position = ccp(20, 200);
+        //guySprite.position = ccp(pointOfSecondObject.x + 60, pointOfSecondObject.y + 60);
         
         // **** plays a hammer type sound **** //
         [water playBg:@"Hammer.mp3" loop:false];
@@ -169,10 +169,16 @@
     if((firstObject.x <= secondObject.x + 20) && (firstObject.x >= secondObject.x - 20) &&
        (firstObject.y <= secondObject.y + 20) && (firstObject.y >= secondObject.y - 20)){
         
+        guySprite.position = ccp(pointOfSecondObject.x + 100, pointOfSecondObject.y + 100);
+        
         return true;
     }
     return false;
 }
+
+
+
+
 
 
 // -------------------------------------------------------------------------
@@ -189,13 +195,11 @@
     
     // **** this basically sees if your touch over the enemy is true and if so **** //
     // **** play a sea sound **** //
-    if((touchPoint.x <= enemySprite.position.x + 20) && (touchPoint.x >= enemySprite.position.x - 20) &&
-       (touchPoint.y <= enemySprite.position.y + 20) && (touchPoint.y >= enemySprite.position.y - 20)){
-    
+    if([self collisionOfFirstObject:touchPoint second:enemySprite.position] == true){
+        
         // **** plays a sea sound **** //
         [water playBg:@"sea_audio.mp3" loop:false];
     }
-    
 }
 
 
