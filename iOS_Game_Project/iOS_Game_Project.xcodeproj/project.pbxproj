@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D649E519191EABF40040341B /* Block_sprite_Object.m in Sources */ = {isa = PBXBuildFile; fileRef = D649E518191EABF40040341B /* Block_sprite_Object.m */; };
 		D65674841918979A003CC6E9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D65674831918979A003CC6E9 /* QuartzCore.framework */; };
 		D65674861918979A003CC6E9 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D65674851918979A003CC6E9 /* OpenGLES.framework */; };
 		D65674881918979A003CC6E9 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D65674871918979A003CC6E9 /* OpenAL.framework */; };
@@ -212,8 +211,6 @@
 		D65677291918979C003CC6E9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D65677281918979C003CC6E9 /* main.m */; };
 		D656772D1918979C003CC6E9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D656772C1918979C003CC6E9 /* AppDelegate.m */; };
 		D65677331918979C003CC6E9 /* IntroScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D65677321918979C003CC6E9 /* IntroScene.m */; };
-		D6AC2934191FFDA600049642 /* Enemy_Sprite_Object.m in Sources */ = {isa = PBXBuildFile; fileRef = D6AC2933191FFDA600049642 /* Enemy_Sprite_Object.m */; };
-		D6AC29371920140F00049642 /* Main_Guy_Object.m in Sources */ = {isa = PBXBuildFile; fileRef = D6AC29361920140F00049642 /* Main_Guy_Object.m */; };
 		D6B2120219199933005D3E7F /* guy_pixel_art.png in Resources */ = {isa = PBXBuildFile; fileRef = D6B2120119199933005D3E7F /* guy_pixel_art.png */; };
 		D6B212041919ACED005D3E7F /* Block.png in Resources */ = {isa = PBXBuildFile; fileRef = D6B212031919ACED005D3E7F /* Block.png */; };
 		D6B214D1191A15A3005D3E7F /* enemy.png in Resources */ = {isa = PBXBuildFile; fileRef = D6B214D0191A15A3005D3E7F /* enemy.png */; };
@@ -232,8 +229,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		D649E517191EABF40040341B /* Block_sprite_Object.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Block_sprite_Object.h; sourceTree = "<group>"; };
-		D649E518191EABF40040341B /* Block_sprite_Object.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Block_sprite_Object.m; sourceTree = "<group>"; };
 		D65674801918979A003CC6E9 /* iOS_Game_Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOS_Game_Project.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D65674831918979A003CC6E9 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		D65674851918979A003CC6E9 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -660,10 +655,6 @@
 		D656772C1918979C003CC6E9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Classes/AppDelegate.m; sourceTree = "<group>"; };
 		D65677311918979C003CC6E9 /* IntroScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IntroScene.h; path = Classes/IntroScene.h; sourceTree = "<group>"; };
 		D65677321918979C003CC6E9 /* IntroScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = IntroScene.m; path = Classes/IntroScene.m; sourceTree = "<group>"; };
-		D6AC2932191FFDA600049642 /* Enemy_Sprite_Object.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Enemy_Sprite_Object.h; sourceTree = "<group>"; };
-		D6AC2933191FFDA600049642 /* Enemy_Sprite_Object.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Enemy_Sprite_Object.m; sourceTree = "<group>"; };
-		D6AC29351920140F00049642 /* Main_Guy_Object.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Main_Guy_Object.h; sourceTree = "<group>"; };
-		D6AC29361920140F00049642 /* Main_Guy_Object.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Main_Guy_Object.m; sourceTree = "<group>"; };
 		D6B2120119199933005D3E7F /* guy_pixel_art.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guy_pixel_art.png; sourceTree = "<group>"; };
 		D6B212031919ACED005D3E7F /* Block.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Block.png; sourceTree = "<group>"; };
 		D6B214D0191A15A3005D3E7F /* enemy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = enemy.png; sourceTree = "<group>"; };
@@ -1564,12 +1555,6 @@
 				D656772C1918979C003CC6E9 /* AppDelegate.m */,
 				D65677311918979C003CC6E9 /* IntroScene.h */,
 				D65677321918979C003CC6E9 /* IntroScene.m */,
-				D649E517191EABF40040341B /* Block_sprite_Object.h */,
-				D649E518191EABF40040341B /* Block_sprite_Object.m */,
-				D6AC2932191FFDA600049642 /* Enemy_Sprite_Object.h */,
-				D6AC2933191FFDA600049642 /* Enemy_Sprite_Object.m */,
-				D6AC29351920140F00049642 /* Main_Guy_Object.h */,
-				D6AC29361920140F00049642 /* Main_Guy_Object.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -1790,7 +1775,6 @@
 				D65675CA1918979B003CC6E9 /* NSEvent+CC.m in Sources */,
 				D65676271918979B003CC6E9 /* ALDevice.m in Sources */,
 				D656769A1918979C003CC6E9 /* vec2.c in Sources */,
-				D6AC2934191FFDA600049642 /* Enemy_Sprite_Object.m in Sources */,
 				D65674CA1918979A003CC6E9 /* CCAction.m in Sources */,
 				D656752E1918979A003CC6E9 /* CCParallaxNode.m in Sources */,
 				D65676961918979C003CC6E9 /* ray2.c in Sources */,
@@ -1806,14 +1790,12 @@
 				D65675E51918979B003CC6E9 /* NSAttributedString+CCAdditions.m in Sources */,
 				D65676A71918979C003CC6E9 /* CCBKeyframe.m in Sources */,
 				D65676611918979C003CC6E9 /* CCControlTextureFactory.m in Sources */,
-				D649E519191EABF40040341B /* Block_sprite_Object.m in Sources */,
 				D65674E61918979A003CC6E9 /* CCAnimationCache.m in Sources */,
 				D656766A1918979C003CC6E9 /* CCTableView.m in Sources */,
 				D656772D1918979C003CC6E9 /* AppDelegate.m in Sources */,
 				D65674FD1918979A003CC6E9 /* CCDrawingPrimitives.m in Sources */,
 				D65675EE1918979B003CC6E9 /* TGAlib.m in Sources */,
 				D65675BA1918979B003CC6E9 /* UITouch+CC.m in Sources */,
-				D6AC29371920140F00049642 /* Main_Guy_Object.m in Sources */,
 				D65676981918979C003CC6E9 /* utility.c in Sources */,
 				D65675F71918979B003CC6E9 /* ZipUtils.m in Sources */,
 				D65676081918979B003CC6E9 /* OALUtilityActions.m in Sources */,

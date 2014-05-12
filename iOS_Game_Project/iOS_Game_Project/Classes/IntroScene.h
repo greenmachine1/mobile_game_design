@@ -12,11 +12,6 @@
 
 #import "cocos2d-ui.h"
 
-#import "Enemy_Sprite_Object.h"
-
-#import "Block_sprite_Object.h"
-
-#import "Main_Guy_Object.h"
 
 // -----------------------------------------------------------------------
 
@@ -28,9 +23,6 @@
  */
 @interface IntroScene : CCScene{
     
-    Main_Guy_Object *newMainGuy;
-    Enemy_Sprite_Object *newEnemy;
-    Block_sprite_Object *secondObject;
     
     OALSimpleAudio *hammer;
     OALSimpleAudio *water;
