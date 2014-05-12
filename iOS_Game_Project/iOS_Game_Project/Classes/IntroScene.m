@@ -78,9 +78,10 @@
 
 -(void)creationOfBlocks{
     
+    
     for(int i = 1; i < xBounds / 64; i ++){
         
-        Block_Wall *newBlockWallLayout = [Block_Wall createWallAtPosition:ccp(i * 64, 32.0f)];
+        Block_Wall *newBlockWallLayout = [Block_Wall createWallAtPosition:ccp(i * 32, 32.0f)];
         [self addChild:newBlockWallLayout];
     }
     
