@@ -10,6 +10,7 @@
 // Import the interfaces
 #import "IntroScene.h"
 
+#import "Block_Wall.h"
 
 // -----------------------------------------------------------------------
 #pragma mark - IntroScene
@@ -55,8 +56,37 @@
     // **** adding the background color to the scene **** //
     [self addChild:background];
     
+    
+    [self creationOfBlocks];
+    
+    
+    // **** looking for the block wall **** //
+    for(Block_Wall *blocks in self.children){
+        
+        if([blocks isKindOfClass:[Block_Wall class]]){
+            NSLog(@"Found");
+        }
+    }
+    
+    
+// -----------------------------------------------------------------------
+    
+    
 	return self;
 }
+
+
+-(void)creationOfBlocks{
+    
+    for(int i = 1; i < xBounds / 64; i ++){
+        
+        Block_Wall *newBlockWallLayout = [Block_Wall createWallAtPosition:ccp(i * 64, 32.0f)];
+        [self addChild:newBlockWallLayout];
+    }
+    
+}
+
+
 
 
 

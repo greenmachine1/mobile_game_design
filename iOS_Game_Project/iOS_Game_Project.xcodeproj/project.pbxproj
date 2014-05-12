@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D61030D91920A0D600A1D150 /* Block_Wall.m in Sources */ = {isa = PBXBuildFile; fileRef = D61030D81920A0D600A1D150 /* Block_Wall.m */; };
 		D65674841918979A003CC6E9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D65674831918979A003CC6E9 /* QuartzCore.framework */; };
 		D65674861918979A003CC6E9 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D65674851918979A003CC6E9 /* OpenGLES.framework */; };
 		D65674881918979A003CC6E9 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D65674871918979A003CC6E9 /* OpenAL.framework */; };
@@ -229,6 +230,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D61030D71920A0D600A1D150 /* Block_Wall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Block_Wall.h; sourceTree = "<group>"; };
+		D61030D81920A0D600A1D150 /* Block_Wall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Block_Wall.m; sourceTree = "<group>"; };
 		D65674801918979A003CC6E9 /* iOS_Game_Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOS_Game_Project.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D65674831918979A003CC6E9 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		D65674851918979A003CC6E9 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -1555,6 +1558,8 @@
 				D656772C1918979C003CC6E9 /* AppDelegate.m */,
 				D65677311918979C003CC6E9 /* IntroScene.h */,
 				D65677321918979C003CC6E9 /* IntroScene.m */,
+				D61030D71920A0D600A1D150 /* Block_Wall.h */,
+				D61030D81920A0D600A1D150 /* Block_Wall.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -1774,6 +1779,7 @@
 				D65675151918979A003CC6E9 /* CCLabelTTF.m in Sources */,
 				D65675CA1918979B003CC6E9 /* NSEvent+CC.m in Sources */,
 				D65676271918979B003CC6E9 /* ALDevice.m in Sources */,
+				D61030D91920A0D600A1D150 /* Block_Wall.m in Sources */,
 				D656769A1918979C003CC6E9 /* vec2.c in Sources */,
 				D65674CA1918979A003CC6E9 /* CCAction.m in Sources */,
 				D656752E1918979A003CC6E9 /* CCParallaxNode.m in Sources */,
