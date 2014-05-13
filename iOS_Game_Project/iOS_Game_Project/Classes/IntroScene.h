@@ -12,6 +12,8 @@
 
 #import "cocos2d-ui.h"
 
+#import "Guy_Sprite_Object.h"
+
 
 // -----------------------------------------------------------------------
 
@@ -30,8 +32,7 @@
     int xBounds;
     int yBounds;
     
-    CGPoint pointOfEnemy;
-    CGPoint pointOfSecondObject;
+    Guy_Sprite_Object *newGuySprite;
     
 }
 

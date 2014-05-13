@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D61030D91920A0D600A1D150 /* Block_Wall.m in Sources */ = {isa = PBXBuildFile; fileRef = D61030D81920A0D600A1D150 /* Block_Wall.m */; };
+		D63E6DEB1921E33D007D962E /* Guy_Sprite_Object.m in Sources */ = {isa = PBXBuildFile; fileRef = D63E6DEA1921E33D007D962E /* Guy_Sprite_Object.m */; };
 		D65674841918979A003CC6E9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D65674831918979A003CC6E9 /* QuartzCore.framework */; };
 		D65674861918979A003CC6E9 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D65674851918979A003CC6E9 /* OpenGLES.framework */; };
 		D65674881918979A003CC6E9 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D65674871918979A003CC6E9 /* OpenAL.framework */; };
@@ -232,6 +233,8 @@
 /* Begin PBXFileReference section */
 		D61030D71920A0D600A1D150 /* Block_Wall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Block_Wall.h; sourceTree = "<group>"; };
 		D61030D81920A0D600A1D150 /* Block_Wall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Block_Wall.m; sourceTree = "<group>"; };
+		D63E6DE91921E33D007D962E /* Guy_Sprite_Object.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Guy_Sprite_Object.h; sourceTree = "<group>"; };
+		D63E6DEA1921E33D007D962E /* Guy_Sprite_Object.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Guy_Sprite_Object.m; sourceTree = "<group>"; };
 		D65674801918979A003CC6E9 /* iOS_Game_Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOS_Game_Project.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D65674831918979A003CC6E9 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		D65674851918979A003CC6E9 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -1560,6 +1563,8 @@
 				D65677321918979C003CC6E9 /* IntroScene.m */,
 				D61030D71920A0D600A1D150 /* Block_Wall.h */,
 				D61030D81920A0D600A1D150 /* Block_Wall.m */,
+				D63E6DE91921E33D007D962E /* Guy_Sprite_Object.h */,
+				D63E6DEA1921E33D007D962E /* Guy_Sprite_Object.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -1687,6 +1692,7 @@
 				D656764A1918979C003CC6E9 /* NSMutableArray+WeakReferences.m in Sources */,
 				D65675C41918979B003CC6E9 /* CCGLView.m in Sources */,
 				D656768E1918979C003CC6E9 /* mat4.c in Sources */,
+				D63E6DEB1921E33D007D962E /* Guy_Sprite_Object.m in Sources */,
 				D65674EA1918979A003CC6E9 /* CCAtlasNode.m in Sources */,
 				D65676381918979C003CC6E9 /* OpenALManager.m in Sources */,
 				D65676441918979C003CC6E9 /* IOSVersion.m in Sources */,

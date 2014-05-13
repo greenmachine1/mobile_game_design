@@ -34,4 +34,10 @@
     return self;
 }
 
+-(CGPoint)returnLocation{
+    
+    return self.position;
+    
+}
+
 @end

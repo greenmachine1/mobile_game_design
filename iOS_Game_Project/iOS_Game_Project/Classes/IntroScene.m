@@ -12,6 +12,8 @@
 
 #import "Block_Wall.h"
 
+#import "Guy_Sprite_Object.h"
+
 // -----------------------------------------------------------------------
 #pragma mark - IntroScene
 // -----------------------------------------------------------------------
@@ -26,6 +28,8 @@
 {
 	return [[self alloc] init];
 }
+
+
 
 // -----------------------------------------------------------------------
 - (id)init
@@ -57,31 +61,52 @@
     [self addChild:background];
     
     
+    
+// -----------------------------------------------------------------------
+    // **** creation of the guy sprite **** //
+    newGuySprite = [Guy_Sprite_Object createGuySpriteWithLocation:ccp(200.0f, 200.0f)];
+    
+    // **** adding the guy to the scene **** //
+    [self addChild:newGuySprite];
+    
+    
+    
+// -----------------------------------------------------------------------
+    // **** creation of the blocks ***** //
     [self creationOfBlocks];
     
     
+    
+// -----------------------------------------------------------------------
     // **** looking for the block wall **** //
     for(Block_Wall *blocks in self.children){
         
         if([blocks isKindOfClass:[Block_Wall class]]){
-            NSLog(@"Found");
+            NSLog(@"%@", NSStringFromCGPoint([blocks returnLocation]));
         }
     }
-    
-    
-// -----------------------------------------------------------------------
-    
-    
 	return self;
 }
 
 
+// -----------------------------------------------------------------------
+// **** creation of the blocks method **** //
 -(void)creationOfBlocks{
     
     
+    NSLog(@"x : %i and y: %i", xBounds, yBounds);
+    // **** creation of the upper level blocks **** //
     for(int i = 1; i < xBounds / 64; i ++){
         
-        Block_Wall *newBlockWallLayout = [Block_Wall createWallAtPosition:ccp(i * 32, 32.0f)];
+        Block_Wall *newBlockWallLayout = [Block_Wall createWallAtPosition:ccp(i * 64, 32.0f)];
+        [self addChild:newBlockWallLayout];
+    }
+    
+    
+    // **** creation of the lower level blocks **** //
+    for(int j = 1; j < xBounds / 64; j++){
+        
+        Block_Wall *newBlockWallLayout = [Block_Wall createWallAtPosition:ccp(j * 64, yBounds - 32)];
         [self addChild:newBlockWallLayout];
     }
     
@@ -91,7 +116,7 @@
 
 
 
-
+// -----------------------------------------------------------------------
 -(void)onEnter{
     [super onEnter];
     
@@ -101,12 +126,31 @@
 
 
 
-
+// ------------------------------------------------------------------------
 // **** update loop **** //
 -(void)update:(CCTime)delta{
     
     
     
+}
+
+// -------------------------------------------------------------------------
+// **** move the guy to a point on the screen **** //
+-(void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event{
+    
+    CGPoint touchPoint = [touch locationInNode:self];
+    
+    NSLog(@"%@", NSStringFromCGPoint(touchPoint));
+    
+    newGuySprite.position = touchPoint;
+    
+    // **** this basically sees if your touch over the enemy is true and if so **** //
+    // **** play a sea sound **** //
+    //if([self collisionOfFirstObject:touchPoint second:[newEnemy returnLocationOfEnemy]] == true){
+        
+        // **** plays a sea sound **** //
+    //    [water playBg:@"sea_audio.mp3" loop:false];
+    //}
 }
 
 

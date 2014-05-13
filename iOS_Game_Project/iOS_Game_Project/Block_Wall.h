@@ -16,5 +16,6 @@
 }
 
 +(id)createWallAtPosition:(CGPoint)point;
+-(CGPoint)returnLocation;
 
 @end
