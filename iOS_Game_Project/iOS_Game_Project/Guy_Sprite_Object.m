@@ -35,4 +35,12 @@
     
 }
 
+
+// **** returning the position **** //
+-(CGPoint)returnLocation{
+    
+    return self.position;
+}
+
+
 @end

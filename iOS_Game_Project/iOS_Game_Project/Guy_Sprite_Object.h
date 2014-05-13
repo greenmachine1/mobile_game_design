@@ -16,4 +16,5 @@
 }
 
 +(id)createGuySpriteWithLocation:(CGPoint)locationPoint;
+-(CGPoint)returnLocation;
 @end

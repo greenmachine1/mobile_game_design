@@ -141,16 +141,60 @@
     CGPoint touchPoint = [touch locationInNode:self];
     
     NSLog(@"%@", NSStringFromCGPoint(touchPoint));
+    NSLog(@"Point of guy %@", NSStringFromCGPoint([newGuySprite returnLocation]));
     
     newGuySprite.position = touchPoint;
     
-    // **** this basically sees if your touch over the enemy is true and if so **** //
-    // **** play a sea sound **** //
-    //if([self collisionOfFirstObject:touchPoint second:[newEnemy returnLocationOfEnemy]] == true){
+    // **** looking for the block wall **** //
+    for(Block_Wall *blocks in self.children){
         
-        // **** plays a sea sound **** //
-    //    [water playBg:@"sea_audio.mp3" loop:false];
-    //}
+        // **** going through all my block classes and getting their locations **** //
+        if([blocks isKindOfClass:[Block_Wall class]]){
+            
+            // **** collision detection **** //
+            if([newGuySprite returnLocation].y <= [blocks returnLocation].y){
+                NSLog(@"Encounter!");
+            }
+            
+            
+            NSLog(@"%@", NSStringFromCGPoint([blocks returnLocation]));
+        }
+    }
+    
+}
+
+
+//   X-->         -  64 / 2 +
+// ----------------------------------------
+// - Y                                    -
+// - |                                    -
+// - V                                    -
+// -  +                                   - +
+// -                                      -
+// - 64 / 2            O                  - 64 / 2
+// -                                      -
+// -  -                                   - -
+// -                                      -
+// -                                      -
+// -                                      -
+// -                                      -
+// ----------------------------------------
+//                 - 64 / 2 +
+
+
+
+// ---------------------------------------------------------------------------
+// **** collision of one object compared to another
+-(void)collisionOfFirstObject:(CCNode *)first andSecondObject:(CCNode *)second{
+    
+    if(first.position.x + 32 < second.position.x + 32){
+        
+        
+    }
+    
+    
+    
+    
 }
 
 
