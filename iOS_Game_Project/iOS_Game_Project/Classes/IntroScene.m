@@ -118,13 +118,16 @@
     }
     
 
+    
+    for(int k = 1; k < 3; k++){
+        
         // **** creation of the middle block **** //
-        Block_Wall *midBlock = [Block_Wall createWallAtPosition:ccp(128.0f, 128.0f)];
+        Block_Wall *midBlock = [Block_Wall createWallAtPosition:ccp(128.0f, 96.0f)];
         
         midBlock.name = @"Middle";
         
         [self addChild:midBlock];
-    
+    }
     
     
     
