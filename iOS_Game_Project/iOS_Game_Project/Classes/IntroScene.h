@@ -26,11 +26,12 @@
 @interface IntroScene : CCScene{
     
     
-    OALSimpleAudio *hammer;
-    OALSimpleAudio *water;
+    OALSimpleAudio *playSound;
     
     int xBounds;
     int yBounds;
+    
+    CGPoint touchPoint;
     
     Guy_Sprite_Object *newGuySprite;
     

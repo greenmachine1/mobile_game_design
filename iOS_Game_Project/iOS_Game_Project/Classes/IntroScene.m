@@ -43,8 +43,7 @@
     
 // -----------------------------------------------------------------------
     // **** enabling audio for effects **** //
-    hammer = [OALSimpleAudio sharedInstance];
-    water = [OALSimpleAudio sharedInstance];
+    playSound = [OALSimpleAudio sharedInstance];
     
     
     
@@ -89,6 +88,8 @@
 }
 
 
+
+
 // -----------------------------------------------------------------------
 // **** creation of the blocks method **** //
 -(void)creationOfBlocks{
@@ -116,6 +117,15 @@
         [self addChild:newBlockWallLayout];
     }
     
+
+        // **** creation of the middle block **** //
+        Block_Wall *midBlock = [Block_Wall createWallAtPosition:ccp(128.0f, 128.0f)];
+        
+        midBlock.name = @"Middle";
+        
+        [self addChild:midBlock];
+    
+    
     
     
 }
@@ -134,6 +144,9 @@
 
 
 
+
+
+
 // ------------------------------------------------------------------------
 // **** update loop **** //
 -(void)update:(CCTime)delta{
@@ -143,11 +156,15 @@
     
 }
 
+
+
+
+
 // -------------------------------------------------------------------------
 // **** move the guy to a point on the screen **** //
 -(void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event{
     
-    CGPoint touchPoint = [touch locationInNode:self];
+    touchPoint = [touch locationInNode:self];
     
     NSLog(@"%@", NSStringFromCGPoint(touchPoint));
     NSLog(@"Point of guy %@", NSStringFromCGPoint([newGuySprite returnLocation]));
@@ -157,6 +174,8 @@
 }
 
 
+// -------------------------------------------------------------------------
+// **** collision detection for wall types **** //
 -(void)collisionForWall{
     
     // **** looking for the block wall **** //
@@ -171,15 +190,41 @@
                 if([blocks.name isEqualToString:@"Upper"]){
                     
                     NSLog(@"upper");
-                    newGuySprite.position = ccp(blocks.position.x, blocks.position.y - 64);
+                    newGuySprite.position = ccp(touchPoint.x, blocks.position.y - 64);
                     NSLog(@"Collision at %@", NSStringFromCGPoint(newGuySprite.position));
+                    
+                    //[playSound playBg:@"Hammer.mp3"];
                     
                 }else if([blocks.name isEqualToString:@"Lower"]){
                     
                     NSLog(@"Lower");
                     // **** repositioning my guy **** //
-                    newGuySprite.position = ccp(blocks.position.x , blocks.position.y + 64);
+                    newGuySprite.position = ccp(touchPoint.x , blocks.position.y + 64);
                     NSLog(@"Collision at %@", NSStringFromCGPoint(newGuySprite.position));
+                    
+                    //[playSound playBg:@"Hammer.mp3"];
+                    
+                // **** for any block that is in the middle **** //
+                }else if([blocks.name isEqualToString:@"Middle"]){
+                    NSLog(@"hit the middle block");
+                    
+                    if(newGuySprite.position.x < blocks.position.x){
+                        
+                        newGuySprite.position = ccp(blocks.position.x + 64, touchPoint.y);
+                        
+                    }else if(newGuySprite.position.x > blocks.position.x){
+                        
+                        newGuySprite.position = ccp(blocks.position.x - 64, touchPoint.y);
+                        
+                    }else if(newGuySprite.position.y < blocks.position.y){
+                        
+                        newGuySprite.position = ccp(touchPoint.x, blocks.position.y - 64);
+                        
+                    }else if(newGuySprite.position.y > blocks.position.y){
+                        
+                        newGuySprite.position = ccp(touchPoint.x, blocks.position.y + 64);
+                        
+                    }
                 }
                 
                 
