@@ -13,9 +13,13 @@
 @interface Block_Wall : CCNode
 {
     CCSprite *brickWallSprite;
+    NSString *nameString;
 }
 
 +(id)createWallAtPosition:(CGPoint)point;
 -(CGPoint)returnLocation;
+-(CGRect)getBoundingBox;
+
+@property (nonatomic, strong)NSString *name;
 
 @end

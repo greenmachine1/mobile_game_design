@@ -10,7 +10,7 @@
 
 @implementation Block_Wall
 
-
+@synthesize name;
 // **** creation of wall block **** //
 +(id)createWallAtPosition:(CGPoint)point{
     
@@ -22,6 +22,8 @@
 -(id)initWithPoint:(CGPoint)point{
     
     if(self = [super init]){
+        
+        name = @"Block";
         
         // **** setting the location **** //
         self.position = point;
@@ -38,6 +40,15 @@
     
     return self.position;
     
+}
+
+// **** returns the bounding box around the sprite **** //
+-(CGRect)getBoundingBox{
+    
+    return CGRectMake(self.position.x - (brickWallSprite.contentSize.width / 2),
+                      self.position.y - (brickWallSprite.contentSize.height / 2),
+                      brickWallSprite.contentSize.width,
+                      brickWallSprite.contentSize.height);
 }
 
 @end

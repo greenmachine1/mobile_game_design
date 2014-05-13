@@ -99,6 +99,9 @@
     for(int i = 1; i < xBounds / 64; i ++){
         
         Block_Wall *newBlockWallLayout = [Block_Wall createWallAtPosition:ccp(i * 64, 32.0f)];
+        
+        newBlockWallLayout.name = @"Lower";
+        
         [self addChild:newBlockWallLayout];
     }
     
@@ -107,8 +110,13 @@
     for(int j = 1; j < xBounds / 64; j++){
         
         Block_Wall *newBlockWallLayout = [Block_Wall createWallAtPosition:ccp(j * 64, yBounds - 32)];
+        
+        newBlockWallLayout.name = @"Upper";
+        
         [self addChild:newBlockWallLayout];
     }
+    
+    
     
 }
 
@@ -130,7 +138,8 @@
 // **** update loop **** //
 -(void)update:(CCTime)delta{
     
-    
+    // **** collision for wall method **** //
+    [self collisionForWall];
     
 }
 
@@ -145,57 +154,45 @@
     
     newGuySprite.position = touchPoint;
     
+}
+
+
+-(void)collisionForWall{
+    
     // **** looking for the block wall **** //
     for(Block_Wall *blocks in self.children){
         
         // **** going through all my block classes and getting their locations **** //
         if([blocks isKindOfClass:[Block_Wall class]]){
             
-            // **** collision detection **** //
-            if([newGuySprite returnLocation].y <= [blocks returnLocation].y){
-                NSLog(@"Encounter!");
+            // **** check for collision **** //
+            if(CGRectIntersectsRect([blocks getBoundingBox], [newGuySprite getBoundingBox])){
+                
+                if([blocks.name isEqualToString:@"Upper"]){
+                    
+                    NSLog(@"upper");
+                    newGuySprite.position = ccp(blocks.position.x, blocks.position.y - 64);
+                    NSLog(@"Collision at %@", NSStringFromCGPoint(newGuySprite.position));
+                    
+                }else if([blocks.name isEqualToString:@"Lower"]){
+                    
+                    NSLog(@"Lower");
+                    // **** repositioning my guy **** //
+                    newGuySprite.position = ccp(blocks.position.x , blocks.position.y + 64);
+                    NSLog(@"Collision at %@", NSStringFromCGPoint(newGuySprite.position));
+                }
+                
+                
             }
-            
-            
-            NSLog(@"%@", NSStringFromCGPoint([blocks returnLocation]));
         }
     }
-    
+
 }
 
 
-//   X-->         -  64 / 2 +
-// ----------------------------------------
-// - Y                                    -
-// - |                                    -
-// - V                                    -
-// -  +                                   - +
-// -                                      -
-// - 64 / 2            O                  - 64 / 2
-// -                                      -
-// -  -                                   - -
-// -                                      -
-// -                                      -
-// -                                      -
-// -                                      -
-// ----------------------------------------
-//                 - 64 / 2 +
 
 
 
-// ---------------------------------------------------------------------------
-// **** collision of one object compared to another
--(void)collisionOfFirstObject:(CCNode *)first andSecondObject:(CCNode *)second{
-    
-    if(first.position.x + 32 < second.position.x + 32){
-        
-        
-    }
-    
-    
-    
-    
-}
 
 
 

@@ -42,5 +42,14 @@
     return self.position;
 }
 
+// **** returns the bounding box around the sprite **** //
+-(CGRect)getBoundingBox{
+    
+    return CGRectMake(self.position.x - (guySprite.contentSize.width / 2),
+                      self.position.y - (guySprite.contentSize.height / 2),
+                      guySprite.contentSize.width,
+                      guySprite.contentSize.height);
+}
+
 
 @end

@@ -17,4 +17,5 @@
 
 +(id)createGuySpriteWithLocation:(CGPoint)locationPoint;
 -(CGPoint)returnLocation;
+-(CGRect)getBoundingBox;
 @end
