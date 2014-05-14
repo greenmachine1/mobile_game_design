@@ -14,6 +14,8 @@
 
 #import "Guy_Sprite_Object.h"
 
+#import "Enemy_Sprite_Object.h"
+
 // -----------------------------------------------------------------------
 #pragma mark - IntroScene
 // -----------------------------------------------------------------------
@@ -63,7 +65,8 @@
     
 // -----------------------------------------------------------------------
     // **** creation of the guy sprite **** //
-    newGuySprite = [Guy_Sprite_Object createGuySpriteWithLocation:ccp(200.0f, 200.0f)];
+    newGuySprite = [Guy_Sprite_Object createGuySpriteWithLocation:ccp(xBounds - 64, yBounds / 2)];
+    
     
     // **** adding the guy to the scene **** //
     [self addChild:newGuySprite];
@@ -119,18 +122,23 @@
     
 
     
-    for(int k = 1; k < 3; k++){
+    
         
-        // **** creation of the middle block **** //
-        Block_Wall *midBlock = [Block_Wall createWallAtPosition:ccp(128.0f, 96.0f)];
+    // **** creation of the middle block **** //
+    Block_Wall *midBlock = [Block_Wall createWallAtPosition:ccp(128.0f, 96.0f)];
         
-        midBlock.name = @"Middle";
+    midBlock.name = @"Middle";
         
-        [self addChild:midBlock];
-    }
+    [self addChild:midBlock];
     
     
+// ---------------------------------------------------------------------------------
+    // **** creation of enemy **** //
+    newEnemySprite = [Enemy_Sprite_Object createEnemyWithLocation:ccp(200.0f, yBounds - 96)];
     
+    [self addChild:newEnemySprite];
+    
+
 }
 
 
@@ -154,8 +162,13 @@
 // **** update loop **** //
 -(void)update:(CCTime)delta{
     
+    deltaTime = delta;
+    
     // **** collision for wall method **** //
     [self collisionForWall];
+    
+    
+    
     
 }
 
@@ -169,12 +182,34 @@
     
     touchPoint = [touch locationInNode:self];
     
+    NSLog(@"%f", deltaTime);
+    
+    
     NSLog(@"%@", NSStringFromCGPoint(touchPoint));
     NSLog(@"Point of guy %@", NSStringFromCGPoint([newGuySprite returnLocation]));
     
-    newGuySprite.position = touchPoint;
+    
+    CCActionMoveTo *newMoveTooAction = [CCActionMoveTo actionWithDuration:2.0f position:touchPoint];
+    
+    [newGuySprite runAction:newMoveTooAction];
     
 }
+
+
+
+// ------------------------------------------------------------------------
+// **** collision detection for enemy **** //
+-(void)collisionForEnemy{
+    
+    
+    
+    
+}
+
+
+
+
+
 
 
 // -------------------------------------------------------------------------

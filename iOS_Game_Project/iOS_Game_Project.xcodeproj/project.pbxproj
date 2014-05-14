@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D61030D91920A0D600A1D150 /* Block_Wall.m in Sources */ = {isa = PBXBuildFile; fileRef = D61030D81920A0D600A1D150 /* Block_Wall.m */; };
+		D63681B5192405EC0011A1BB /* Enemy_Sprite_Object.m in Sources */ = {isa = PBXBuildFile; fileRef = D63681B4192405EC0011A1BB /* Enemy_Sprite_Object.m */; };
 		D63E6DEB1921E33D007D962E /* Guy_Sprite_Object.m in Sources */ = {isa = PBXBuildFile; fileRef = D63E6DEA1921E33D007D962E /* Guy_Sprite_Object.m */; };
 		D65674841918979A003CC6E9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D65674831918979A003CC6E9 /* QuartzCore.framework */; };
 		D65674861918979A003CC6E9 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D65674851918979A003CC6E9 /* OpenGLES.framework */; };
@@ -233,6 +234,8 @@
 /* Begin PBXFileReference section */
 		D61030D71920A0D600A1D150 /* Block_Wall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Block_Wall.h; sourceTree = "<group>"; };
 		D61030D81920A0D600A1D150 /* Block_Wall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Block_Wall.m; sourceTree = "<group>"; };
+		D63681B3192405EC0011A1BB /* Enemy_Sprite_Object.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Enemy_Sprite_Object.h; sourceTree = "<group>"; };
+		D63681B4192405EC0011A1BB /* Enemy_Sprite_Object.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Enemy_Sprite_Object.m; sourceTree = "<group>"; };
 		D63E6DE91921E33D007D962E /* Guy_Sprite_Object.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Guy_Sprite_Object.h; sourceTree = "<group>"; };
 		D63E6DEA1921E33D007D962E /* Guy_Sprite_Object.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Guy_Sprite_Object.m; sourceTree = "<group>"; };
 		D65674801918979A003CC6E9 /* iOS_Game_Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOS_Game_Project.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1565,6 +1568,8 @@
 				D61030D81920A0D600A1D150 /* Block_Wall.m */,
 				D63E6DE91921E33D007D962E /* Guy_Sprite_Object.h */,
 				D63E6DEA1921E33D007D962E /* Guy_Sprite_Object.m */,
+				D63681B3192405EC0011A1BB /* Enemy_Sprite_Object.h */,
+				D63681B4192405EC0011A1BB /* Enemy_Sprite_Object.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -1751,6 +1756,7 @@
 				D65675CD1918979B003CC6E9 /* base64.c in Sources */,
 				D656760C1918979B003CC6E9 /* OALAudioTrack.m in Sources */,
 				D656754F1918979B003CC6E9 /* CCProgressNode.m in Sources */,
+				D63681B5192405EC0011A1BB /* Enemy_Sprite_Object.m in Sources */,
 				D65675421918979B003CC6E9 /* CCPhysicsBody.m in Sources */,
 				D65675C71918979B003CC6E9 /* CCWindow.m in Sources */,
 				D65674DC1918979A003CC6E9 /* CCActionProgressTimer.m in Sources */,

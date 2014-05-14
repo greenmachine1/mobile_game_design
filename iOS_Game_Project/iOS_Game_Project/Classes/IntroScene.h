@@ -14,6 +14,8 @@
 
 #import "Guy_Sprite_Object.h"
 
+#import "Enemy_Sprite_Object.h"
+
 
 // -----------------------------------------------------------------------
 
@@ -25,15 +27,16 @@
  */
 @interface IntroScene : CCScene{
     
-    
     OALSimpleAudio *playSound;
     
     int xBounds;
     int yBounds;
     
     CGPoint touchPoint;
+    CCTime deltaTime;
     
     Guy_Sprite_Object *newGuySprite;
+    Enemy_Sprite_Object *newEnemySprite;
     
 }
 
