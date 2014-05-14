@@ -167,7 +167,7 @@
     // **** collision for wall method **** //
     [self collisionForWall];
     
-    
+    [self collisionForEnemy];
     
     
 }
@@ -201,8 +201,16 @@
 // **** collision detection for enemy **** //
 -(void)collisionForEnemy{
     
-    
-    
+    // **** basically If the user touches the enemy, I need to reset their position **** //
+    if(CGRectIntersectsRect([newGuySprite getBoundingBox], [newEnemySprite getBoundingBox])){
+        
+        
+        // **** stops the guy from continuing to move after hitting **** //
+        [newGuySprite stopAllActions];
+        
+        // **** resets the position of the guy **** //
+        newGuySprite.position = ccp(xBounds - 64, yBounds / 2);
+    }
     
 }
 
