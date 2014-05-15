@@ -16,6 +16,8 @@
 
 #import "Enemy_Sprite_Object.h"
 
+#import "EndBox.h"
+
 
 // -----------------------------------------------------------------------
 
@@ -43,6 +45,7 @@
     
     Guy_Sprite_Object *newGuySprite;
     Enemy_Sprite_Object *newEnemySprite;
+    EndBox *newEndBox;
     
 }
 

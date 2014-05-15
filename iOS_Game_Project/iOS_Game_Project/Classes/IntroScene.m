@@ -16,6 +16,8 @@
 
 #import "Enemy_Sprite_Object.h"
 
+#import "EndBox.h"
+
 // -----------------------------------------------------------------------
 #pragma mark - IntroScene
 // -----------------------------------------------------------------------
@@ -84,6 +86,8 @@
     
     
     
+    
+    
 // -----------------------------------------------------------------------
     // **** creation of the blocks ***** //
     [self creationOfBlocks];
@@ -91,8 +95,19 @@
 // -----------------------------------------------------------------------
     // **** creation of enemy **** //
     [self creationOfEnemy];
+    
+    
+// -----------------------------------------------------------------------
+    // **** creation of enemy **** //
+    [self createEndBox];
+    
+    
+    
+    
 	return self;
 }
+
+
 
 
 // ---------------------------------------------------------------------------------
@@ -105,6 +120,23 @@
     
     [self addChild:newEnemySprite];
 }
+
+
+
+
+
+// ---------------------------------------------------------------------------------
+// **** creation of end box **** //
+-(void)createEndBox{
+    
+    newEndBox = [EndBox createEndBoxWithLocation:ccp(64.0f, yBounds / 2)];
+    
+    [newEndBox setZOrder:1];
+    
+    [self addChild:newEndBox];
+}
+
+
 
 
 // -----------------------------------------------------------------------
@@ -147,6 +179,8 @@
 
 
 
+
+
 // -----------------------------------------------------------------------
 -(void)onEnter{
     [super onEnter];
@@ -172,6 +206,9 @@
     // **** collision for enemy method **** //
     [self collisionForEnemy];
     
+    // **** collision with the end **** //
+    [self collisionWithEnd];
+    
     
     
 }
@@ -195,10 +232,26 @@
 }
 
 
-// **** getting the end point **** //
--(void)touchEnded:(UITouch *)touch withEvent:(UIEvent *)event{
+
+
+
+
+
+// **** collision with the end of the game **** //
+-(void)collisionWithEnd{
     
-    endPoint = newGuySprite.position;
+    // **** if the guy is in the end box boundry **** //
+    if(CGRectIntersectsRect([newGuySprite getBoundingBox], [newEndBox getBoundingBox])){
+        
+        // **** reposition the guy so as to not keep triggering the collision **** //
+        newGuySprite.position = ccp(xBounds - 64, yBounds / 2);
+        
+        // **** stopping all the actions on the new guy sprite **** //
+        [newGuySprite stopAllActions];
+        
+        NSLog(@"Goooooooaaaal!");
+    }
+    
     
 }
 

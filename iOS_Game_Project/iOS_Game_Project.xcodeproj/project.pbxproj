@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		D61030D91920A0D600A1D150 /* Block_Wall.m in Sources */ = {isa = PBXBuildFile; fileRef = D61030D81920A0D600A1D150 /* Block_Wall.m */; };
 		D63681B5192405EC0011A1BB /* Enemy_Sprite_Object.m in Sources */ = {isa = PBXBuildFile; fileRef = D63681B4192405EC0011A1BB /* Enemy_Sprite_Object.m */; };
+		D6376B32192495AA00BFF544 /* EndBox.m in Sources */ = {isa = PBXBuildFile; fileRef = D6376B31192495AA00BFF544 /* EndBox.m */; };
 		D63E6DEB1921E33D007D962E /* Guy_Sprite_Object.m in Sources */ = {isa = PBXBuildFile; fileRef = D63E6DEA1921E33D007D962E /* Guy_Sprite_Object.m */; };
 		D65674841918979A003CC6E9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D65674831918979A003CC6E9 /* QuartzCore.framework */; };
 		D65674861918979A003CC6E9 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D65674851918979A003CC6E9 /* OpenGLES.framework */; };
@@ -236,6 +237,8 @@
 		D61030D81920A0D600A1D150 /* Block_Wall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Block_Wall.m; sourceTree = "<group>"; };
 		D63681B3192405EC0011A1BB /* Enemy_Sprite_Object.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Enemy_Sprite_Object.h; sourceTree = "<group>"; };
 		D63681B4192405EC0011A1BB /* Enemy_Sprite_Object.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Enemy_Sprite_Object.m; sourceTree = "<group>"; };
+		D6376B30192495AA00BFF544 /* EndBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EndBox.h; sourceTree = "<group>"; };
+		D6376B31192495AA00BFF544 /* EndBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EndBox.m; sourceTree = "<group>"; };
 		D63E6DE91921E33D007D962E /* Guy_Sprite_Object.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Guy_Sprite_Object.h; sourceTree = "<group>"; };
 		D63E6DEA1921E33D007D962E /* Guy_Sprite_Object.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Guy_Sprite_Object.m; sourceTree = "<group>"; };
 		D65674801918979A003CC6E9 /* iOS_Game_Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOS_Game_Project.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1570,6 +1573,8 @@
 				D63E6DEA1921E33D007D962E /* Guy_Sprite_Object.m */,
 				D63681B3192405EC0011A1BB /* Enemy_Sprite_Object.h */,
 				D63681B4192405EC0011A1BB /* Enemy_Sprite_Object.m */,
+				D6376B30192495AA00BFF544 /* EndBox.h */,
+				D6376B31192495AA00BFF544 /* EndBox.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -1827,6 +1832,7 @@
 				D656755E1918979B003CC6E9 /* CCScene.m in Sources */,
 				D656758C1918979B003CC6E9 /* CCTexture.m in Sources */,
 				D656761E1918979B003CC6E9 /* ALCaptureDevice.m in Sources */,
+				D6376B32192495AA00BFF544 /* EndBox.m in Sources */,
 				D656755A1918979B003CC6E9 /* CCResponderManager.m in Sources */,
 				D65674F21918979A003CC6E9 /* CCConfiguration.m in Sources */,
 				D65676351918979C003CC6E9 /* ALWrapper.m in Sources */,
