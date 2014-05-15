@@ -32,6 +32,10 @@
     int xBounds;
     int yBounds;
     
+    float startingSpeed;
+    float endingSpeed;
+    
+    CGPoint endPoint;
     CGPoint touchPoint;
     CCTime deltaTime;
     

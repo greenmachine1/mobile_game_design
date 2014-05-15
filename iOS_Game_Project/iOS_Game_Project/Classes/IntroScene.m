@@ -53,10 +53,16 @@
     // **** getting the x and y coords of the screen size **** //
     xBounds = self.contentSize.width;
     yBounds = self.contentSize.height;
+    
+    startingSpeed = 0;
+    endingSpeed = 20;
 
     
     // **** changing the background color to a light blue **** //
     CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.1 green:0.4 blue:0.5 alpha:1.0]];
+    
+    // **** setting the depth order **** //
+    [background setZOrder:0];
     
     // **** adding the background color to the scene **** //
     [self addChild:background];
@@ -65,8 +71,12 @@
     
 // -----------------------------------------------------------------------
     // **** creation of the guy sprite **** //
-    newGuySprite = [Guy_Sprite_Object createGuySpriteWithLocation:ccp(xBounds - 64, yBounds / 2)];
     
+    touchPoint = ccp(xBounds - 64, yBounds / 2);
+    endPoint = touchPoint;
+    
+    newGuySprite = [Guy_Sprite_Object createGuySpriteWithLocation:touchPoint];
+    [newGuySprite setZOrder:1];
     
     // **** adding the guy to the scene **** //
     [self addChild:newGuySprite];
@@ -77,20 +87,23 @@
     // **** creation of the blocks ***** //
     [self creationOfBlocks];
     
-    
-    
 // -----------------------------------------------------------------------
-    // **** looking for the block wall **** //
-    for(Block_Wall *blocks in self.children){
-        
-        if([blocks isKindOfClass:[Block_Wall class]]){
-            NSLog(@"%@", NSStringFromCGPoint([blocks returnLocation]));
-        }
-    }
+    // **** creation of enemy **** //
+    [self creationOfEnemy];
 	return self;
 }
 
 
+// ---------------------------------------------------------------------------------
+// **** creation of enemy **** //
+-(void)creationOfEnemy{
+    
+    newEnemySprite = [Enemy_Sprite_Object createEnemyWithLocation:ccp(200.0f, yBounds - 96)];
+    
+    [newGuySprite setZOrder:1];
+    
+    [self addChild:newEnemySprite];
+}
 
 
 // -----------------------------------------------------------------------
@@ -103,9 +116,8 @@
     for(int i = 1; i < xBounds / 64; i ++){
         
         Block_Wall *newBlockWallLayout = [Block_Wall createWallAtPosition:ccp(i * 64, 32.0f)];
-        
         newBlockWallLayout.name = @"Lower";
-        
+        [newBlockWallLayout setZOrder:1];
         [self addChild:newBlockWallLayout];
     }
     
@@ -114,30 +126,19 @@
     for(int j = 1; j < xBounds / 64; j++){
         
         Block_Wall *newBlockWallLayout = [Block_Wall createWallAtPosition:ccp(j * 64, yBounds - 32)];
-        
         newBlockWallLayout.name = @"Upper";
-        
+        [newBlockWallLayout setZOrder:1];
         [self addChild:newBlockWallLayout];
     }
     
 
-    
-    
-        
+
     // **** creation of the middle block **** //
     Block_Wall *midBlock = [Block_Wall createWallAtPosition:ccp(128.0f, 96.0f)];
         
     midBlock.name = @"Middle";
-        
+    [midBlock setZOrder:1];
     [self addChild:midBlock];
-    
-    
-// ---------------------------------------------------------------------------------
-    // **** creation of enemy **** //
-    newEnemySprite = [Enemy_Sprite_Object createEnemyWithLocation:ccp(200.0f, yBounds - 96)];
-    
-    [self addChild:newEnemySprite];
-    
 
 }
 
@@ -167,7 +168,17 @@
     // **** collision for wall method **** //
     [self collisionForWall];
     
+    // **** collision for enemy method **** //
     [self collisionForEnemy];
+    
+    
+    
+}
+
+
+// **** basically making the guy speed up as he moves **** //
+-(void)interpolationMovement:(CCTime)dTime{
+    
     
     
 }
@@ -182,16 +193,33 @@
     
     touchPoint = [touch locationInNode:self];
     
-    NSLog(@"%f", deltaTime);
+    //newGuySprite.position = touchPoint;
+    
+    NSLog(@"Start %@, end %@", NSStringFromCGPoint(endPoint), NSStringFromCGPoint(touchPoint));
+    
+    float x;
+    float y;
     
     
-    NSLog(@"%@", NSStringFromCGPoint(touchPoint));
-    NSLog(@"Point of guy %@", NSStringFromCGPoint([newGuySprite returnLocation]));
+    for(int i = 0; i < 10; i++){
+        
+        
+        x = ((touchPoint.x * i) + (endPoint.x * (10 - i))) / 10;
+        y = ((touchPoint.y * i) + (endPoint.y * (10 - i))) / 10;
+        
+        newGuySprite.position = ccp(x, y);
+    }
     
     
-    CCActionMoveTo *newMoveTooAction = [CCActionMoveTo actionWithDuration:2.0f position:touchPoint];
     
-    [newGuySprite runAction:newMoveTooAction];
+    
+}
+
+
+// **** getting the end point **** //
+-(void)touchEnded:(UITouch *)touch withEvent:(UIEvent *)event{
+    
+    endPoint = newGuySprite.position;
     
 }
 
@@ -204,12 +232,15 @@
     // **** basically If the user touches the enemy, I need to reset their position **** //
     if(CGRectIntersectsRect([newGuySprite getBoundingBox], [newEnemySprite getBoundingBox])){
         
-        
         // **** stops the guy from continuing to move after hitting **** //
         [newGuySprite stopAllActions];
         
+        [playSound playBg:@"sea_audio.mp3"];
+        
+        touchPoint = ccp(xBounds - 64, yBounds / 2);
+        
         // **** resets the position of the guy **** //
-        newGuySprite.position = ccp(xBounds - 64, yBounds / 2);
+        newGuySprite.position = touchPoint;
     }
     
 }
@@ -272,31 +303,10 @@
                         
                     }
                 }
-                
-                
             }
         }
     }
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 @end
