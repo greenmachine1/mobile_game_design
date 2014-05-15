@@ -27,7 +27,7 @@
         
         self.position = location;
         
-        endBoxSprite = [CCSprite spriteWithImageNamed:@"Block.png"];
+        endBoxSprite = [CCSprite spriteWithImageNamed:@"Goal.png"];
         
         [self addChild:endBoxSprite];
         

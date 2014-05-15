@@ -165,7 +165,6 @@
     }
     
 
-
     // **** creation of the middle block **** //
     Block_Wall *midBlock = [Block_Wall createWallAtPosition:ccp(128.0f, 96.0f)];
         
@@ -223,10 +222,6 @@
     
     touchPoint = [touch locationInNode:self];
     
-    float velocity1 = (touchPoint.x - endPoint.x) * deltaTime;
-    
-    NSLog(@"%f", velocity1);
-    
     // **** trying out my delta time **** //
     CCActionMoveTo *moveGuy = [CCActionMoveTo actionWithDuration:deltaTime * 20 position:touchPoint];
     
@@ -252,55 +247,11 @@
         // **** stopping all the actions on the new guy sprite **** //
         [newGuySprite stopAllActions];
         
+        [playSound playBg:@"Applause.mp3"];
+        
         [self goalPopup:@"Gooaaaal!"];
     }
 }
-
-
-
-
-
-
-// -------------------------------------------------------------------------
-// **** popup **** //
--(void)goalPopup:(NSString *)passedInString{
-    
-    // **** initializing a goalbox **** //
-    CCLayoutBox *goalBox = [[CCLayoutBox alloc] init];
-    
-    CCButton *okButton = [CCButton buttonWithTitle:@"Ok!"];
-    okButton.block = ^(id sender){
-        
-        // **** dismissing the goal box **** //
-        [goalBox removeFromParentAndCleanup:true];
-        
-    };
-    
-    
-    CCLabelTTF *label = [CCLabelTTF labelWithString:passedInString fontName:@"Chalkduster" fontSize:20.0f];
-    label.positionType = CCPositionTypeNormalized;
-    label.color = [CCColor redColor];
-    label.position = ccp(0.5f, 0.5f);
-    
-
-    
-    goalBox.direction = CCLayoutBoxDirectionVertical;
-    goalBox.spacing = 20.0f;
-    goalBox.color = [CCColor greenColor];
-    
-    goalBox.position = ccp(xBounds / 2, yBounds / 2);
-    goalBox.cascadeColorEnabled = YES;
-    goalBox.cascadeOpacityEnabled = YES;
-    
-    [goalBox addChild:okButton];
-    [goalBox addChild:label];
-    
-    [self addChild:goalBox];
-    
-}
-
-
-
 
 
 
@@ -326,8 +277,6 @@
     }
     
 }
-
-
 
 
 
@@ -389,6 +338,56 @@
         }
     }
 }
+
+
+
+
+
+// -------------------------------------------------------------------------
+// **** popup **** //
+-(void)goalPopup:(NSString *)passedInString{
+    
+    // **** initializing a goalbox **** //
+    CCLayoutBox *goalBox = [[CCLayoutBox alloc] init];
+    
+    // **** the ok button **** //
+    CCButton *okButton = [CCButton buttonWithTitle:@"Ok!"];
+    okButton.block = ^(id sender){
+        
+        // **** dismissing the box **** //
+        [goalBox removeFromParentAndCleanup:true];
+        
+    };
+    
+    // **** setting up a label **** //
+    CCLabelTTF *label = [CCLabelTTF labelWithString:passedInString fontName:@"Chalkduster" fontSize:20.0f];
+    label.positionType = CCPositionTypeNormalized;
+    label.color = [CCColor redColor];
+    label.position = ccp(0.5f, 0.5f);
+    
+    
+    // **** setting parameters for the goal box **** //
+    goalBox.direction = CCLayoutBoxDirectionVertical;
+    goalBox.spacing = 20.0f;
+    goalBox.color = [CCColor greenColor];
+    
+    goalBox.position = ccp(xBounds / 2, yBounds / 2);
+    goalBox.cascadeColorEnabled = YES;
+    goalBox.cascadeOpacityEnabled = YES;
+    
+    [goalBox addChild:okButton];
+    [goalBox addChild:label];
+    
+    [self addChild:goalBox];
+    
+}
+
+
+
+
+
+
+
 
 
 @end
