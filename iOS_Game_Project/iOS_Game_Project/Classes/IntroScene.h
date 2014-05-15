@@ -35,6 +35,8 @@
     float startingSpeed;
     float endingSpeed;
     
+    float velocity;
+    
     CGPoint endPoint;
     CGPoint touchPoint;
     CCTime deltaTime;

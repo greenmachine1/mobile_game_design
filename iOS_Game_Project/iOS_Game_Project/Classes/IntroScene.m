@@ -73,10 +73,11 @@
     // **** creation of the guy sprite **** //
     
     touchPoint = ccp(xBounds - 64, yBounds / 2);
-    endPoint = touchPoint;
     
     newGuySprite = [Guy_Sprite_Object createGuySpriteWithLocation:touchPoint];
     [newGuySprite setZOrder:1];
+    
+    endPoint = newGuySprite.position;
     
     // **** adding the guy to the scene **** //
     [self addChild:newGuySprite];
@@ -176,14 +177,6 @@
 }
 
 
-// **** basically making the guy speed up as he moves **** //
--(void)interpolationMovement:(CCTime)dTime{
-    
-    
-    
-}
-
-
 
 
 
@@ -193,25 +186,11 @@
     
     touchPoint = [touch locationInNode:self];
     
-    //newGuySprite.position = touchPoint;
     
-    NSLog(@"Start %@, end %@", NSStringFromCGPoint(endPoint), NSStringFromCGPoint(touchPoint));
+    // **** trying out my delta time **** //
+    CCActionMoveTo *moveGuy = [CCActionMoveTo actionWithDuration:deltaTime * 20 position:touchPoint];
     
-    float x;
-    float y;
-    
-    
-    for(int i = 0; i < 10; i++){
-        
-        
-        x = ((touchPoint.x * i) + (endPoint.x * (10 - i))) / 10;
-        y = ((touchPoint.y * i) + (endPoint.y * (10 - i))) / 10;
-        
-        newGuySprite.position = ccp(x, y);
-    }
-    
-    
-    
+    [newGuySprite runAction:moveGuy];
     
 }
 
