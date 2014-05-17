@@ -114,11 +114,11 @@
 // **** creation of enemy **** //
 -(void)creationOfEnemy{
     
-    newEnemySprite = [Enemy_Sprite_Object createEnemyWithLocation:ccp(200.0f, yBounds - 96)];
+    //newEnemySprite = [Enemy_Sprite_Object createEnemyWithLocation:ccp(200.0f, yBounds - 96)];
     
-    [newGuySprite setZOrder:1];
+    //[newGuySprite setZOrder:1];
     
-    [self addChild:newEnemySprite];
+    //[self addChild:newEnemySprite];
 }
 
 
@@ -129,11 +129,11 @@
 // **** creation of end box **** //
 -(void)createEndBox{
     
-    newEndBox = [EndBox createEndBoxWithLocation:ccp(64.0f, yBounds / 2)];
+    //newEndBox = [EndBox createEndBoxWithLocation:ccp(64.0f, yBounds / 2)];
     
-    [newEndBox setZOrder:1];
+    //[newEndBox setZOrder:1];
     
-    [self addChild:newEndBox];
+    //[self addChild:newEndBox];
 }
 
 
@@ -144,14 +144,14 @@
 -(void)creationOfBlocks{
     
     
-    NSLog(@"x : %i and y: %i", xBounds, yBounds);
     // **** creation of the upper level blocks **** //
     for(int i = 1; i < xBounds / 64; i ++){
         
         Block_Wall *newBlockWallLayout = [Block_Wall createWallAtPosition:ccp(i * 64, 32.0f)];
         newBlockWallLayout.name = @"Lower";
-        [newBlockWallLayout setZOrder:1];
-        [self addChild:newBlockWallLayout];
+        
+        //[newBlockWallLayout setZOrder:1];
+        [self addChild:newBlockWallLayout z:1 name:@"Lower"];
     }
     
     
@@ -208,6 +208,7 @@
     // **** collision with the end **** //
     [self collisionWithEnd];
     
+    //[self collisionWithWalls];
     
     
 }
@@ -282,6 +283,8 @@
 
 
 
+
+
 // -------------------------------------------------------------------------
 // **** collision detection for wall types **** //
 -(void)collisionForWall{
@@ -298,7 +301,9 @@
                 if([blocks.name isEqualToString:@"Upper"]){
                     
                     NSLog(@"upper");
-                    newGuySprite.position = ccp(touchPoint.x, blocks.position.y - 64);
+                    //newGuySprite.position = ccp(touchPoint.x, blocks.position.y - 64);
+                    newGuySprite.position = ccp(newGuySprite.position.x, blocks.position.y - 64);
+                    [newGuySprite stopAllActions];
                     NSLog(@"Collision at %@", NSStringFromCGPoint(newGuySprite.position));
                     
                     //[playSound playBg:@"Hammer.mp3"];
@@ -307,7 +312,7 @@
                     
                     NSLog(@"Lower");
                     // **** repositioning my guy **** //
-                    newGuySprite.position = ccp(touchPoint.x , blocks.position.y + 64);
+                    newGuySprite.position = ccp(newGuySprite.position.x , blocks.position.y + 64);
                     NSLog(@"Collision at %@", NSStringFromCGPoint(newGuySprite.position));
                     
                     //[playSound playBg:@"Hammer.mp3"];
@@ -318,19 +323,19 @@
                     
                     if(newGuySprite.position.x < blocks.position.x){
                         
-                        newGuySprite.position = ccp(blocks.position.x + 64, touchPoint.y);
+                        newGuySprite.position = ccp(blocks.position.x + 64, newGuySprite.position.y);
                         
                     }else if(newGuySprite.position.x > blocks.position.x){
                         
-                        newGuySprite.position = ccp(blocks.position.x - 64, touchPoint.y);
+                        newGuySprite.position = ccp(blocks.position.x - 64, newGuySprite.position.y);
                         
                     }else if(newGuySprite.position.y < blocks.position.y){
                         
-                        newGuySprite.position = ccp(touchPoint.x, blocks.position.y - 64);
+                        newGuySprite.position = ccp(newGuySprite.position.x, blocks.position.y - 64);
                         
                     }else if(newGuySprite.position.y > blocks.position.y){
                         
-                        newGuySprite.position = ccp(touchPoint.x, blocks.position.y + 64);
+                        newGuySprite.position = ccp(newGuySprite.position.x, blocks.position.y + 64);
                         
                     }
                 }
@@ -338,6 +343,7 @@
         }
     }
 }
+
 
 
 
