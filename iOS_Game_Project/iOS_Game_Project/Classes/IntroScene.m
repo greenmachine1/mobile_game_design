@@ -166,7 +166,7 @@
     
 
     // **** creation of the middle block **** //
-    Block_Wall *midBlock = [Block_Wall createWallAtPosition:ccp(128.0f, 96.0f)];
+    Block_Wall *midBlock = [Block_Wall createWallAtPosition:ccp(128.0f, 128.0f)];
         
     midBlock.name = @"Middle";
     [midBlock setZOrder:1];
@@ -319,8 +319,17 @@
                     
                 // **** for any block that is in the middle **** //
                 }else if([blocks.name isEqualToString:@"Middle"]){
-                    NSLog(@"hit the middle block");
                     
+                    newGuySprite.position = ccp(newGuySprite.position.x, newGuySprite.position.y);
+                    //[newGuySprite stopAllActions];
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    /*
                     if(newGuySprite.position.x < blocks.position.x){
                         
                         newGuySprite.position = ccp(blocks.position.x + 64, newGuySprite.position.y);
@@ -338,6 +347,8 @@
                         newGuySprite.position = ccp(newGuySprite.position.x, blocks.position.y + 64);
                         
                     }
+                     
+                     */
                 }
             }
         }
