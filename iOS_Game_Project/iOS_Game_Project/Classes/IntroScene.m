@@ -331,7 +331,9 @@
                     float negativeYForBlock = blocks.position.y - [blocks getBoundingBox].size.height / 2;
                     
                     
-                    // *** uggghhhh complicated! **** //
+                    // **** checking to see if the right side of the free standing block has been touched **** //
+                    // **** if so, check the top and bottom edges to make sure its free before allowing **** //
+                    // **** to pass **** //
                     if((negativeXForGuy < positiveXForBlock) && ((negativeYForGuy < positiveYForBlock) && (positiveYForGuy > negativeYForBlock)) && (!(negativeXForGuy < blocks.position.x))){
                         
                         
@@ -340,6 +342,20 @@
                         
                         
                     }
+                    
+                    // **** checking to see if the left side of the free standing block has been touched **** //
+                    // **** if so, check the top and bottom edges to makes sure its free before allowing **** //
+                    // **** to pass **** //
+                    else if((positiveXForGuy > negativeXForBlock) && ((negativeYForGuy < positiveYForBlock) && (positiveYForGuy > negativeYForBlock)) && (!(negativeYForGuy > blocks.position.x))){
+                        
+                        
+                        newGuySprite.position = ccp(blocks.position.x - 64, newGuySprite.position.y);
+                        [newGuySprite stopAllActions];
+                        
+                        
+                    }
+                    
+                    
                     
                     
                         
@@ -355,38 +371,12 @@
                     
             
                     
-                    
-                       
-                    
-                    
-                    
-                    
-                    /*
-                    if(newGuySprite.position.x < blocks.position.x){
-                        
-                        newGuySprite.position = ccp(blocks.position.x + 64, newGuySprite.position.y);
-                        
-                    }else if(newGuySprite.position.x > blocks.position.x){
-                        
-                        newGuySprite.position = ccp(blocks.position.x - 64, newGuySprite.position.y);
-                        
-                    }else if(newGuySprite.position.y < blocks.position.y){
-                        
-                        newGuySprite.position = ccp(newGuySprite.position.x, blocks.position.y - 64);
-                        
-                    }else if(newGuySprite.position.y > blocks.position.y){
-                        
-                        newGuySprite.position = ccp(newGuySprite.position.x, blocks.position.y + 64);
-                        
-                    }
-                     
-                     */
+
                 }
             }
         }
     }
 }
-
 
 
 
