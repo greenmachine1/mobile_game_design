@@ -356,6 +356,26 @@
                     }
                     
                     
+                    // **** checking to see if the positive y intercepts with the negative y for the block **** //
+                    else if((positiveYForGuy > negativeYForBlock) && ((negativeXForGuy < positiveYForBlock) && (positiveXForGuy > negativeXForBlock)) && (!(positiveYForGuy > blocks.position.y))){
+                        
+                        
+                        newGuySprite.position = ccp(newGuySprite.position.x, blocks.position.y - 64);
+                        [newGuySprite stopAllActions];
+                        
+                        
+                    }
+                    
+                    // **** checking to see if the negative y intercepts with the positive y for the block **** //
+                    else if((negativeYForGuy < positiveYForBlock) && ((negativeXForGuy < positiveXForBlock) && (positiveXForGuy > negativeXForBlock)) && (!(negativeYForGuy < blocks.position.y))){
+                        
+                        
+                        newGuySprite.position = ccp(newGuySprite.position.x, blocks.position.y + 64);
+                        
+                        
+                    }
+                    
+                    
                     
                     
                     
