@@ -143,7 +143,7 @@
 // **** creation of the blocks method **** //
 -(void)creationOfBlocks{
     
-    
+    /*
     // **** creation of the upper level blocks **** //
     for(int i = 1; i < xBounds / 64; i ++){
         
@@ -164,7 +164,7 @@
         [self addChild:newBlockWallLayout];
     }
     
-
+     */
     // **** creation of the middle block **** //
     Block_Wall *midBlock = [Block_Wall createWallAtPosition:ccp(128.0f, 128.0f)];
         
@@ -313,6 +313,7 @@
                     NSLog(@"Lower");
                     // **** repositioning my guy **** //
                     newGuySprite.position = ccp(newGuySprite.position.x , blocks.position.y + 64);
+                    [newGuySprite stopAllActions];
                     NSLog(@"Collision at %@", NSStringFromCGPoint(newGuySprite.position));
                     
                     //[playSound playBg:@"Hammer.mp3"];
@@ -320,11 +321,31 @@
                 // **** for any block that is in the middle **** //
                 }else if([blocks.name isEqualToString:@"Middle"]){
                     
-                    newGuySprite.position = ccp(newGuySprite.position.x, newGuySprite.position.y);
-                    //[newGuySprite stopAllActions];
-                    
-                    
-                    
+                    if((newGuySprite.position.x - 32) < (blocks.position.x + 32)){
+                        
+                        
+                        NSLog(@"Collision from the right ");
+                        newGuySprite.position = ccp(blocks.position.x + 64, newGuySprite.position.y);
+                        [newGuySprite stopAllActions];
+                        
+                        
+                    }
+                    if((newGuySprite.position.x + 32) > (blocks.position.x - 32)){
+                        
+                        
+                        NSLog(@"Collision from the left");
+                        newGuySprite.position = ccp(blocks.position.x - 64, newGuySprite.position.y);
+                        [newGuySprite stopAllActions];
+                        
+                        
+                    }
+                    if((newGuySprite.position.y + 32) > (blocks.position.x - 32)){
+                        
+                        NSLog(@"Collision from the top");
+                        newGuySprite.position = ccp(newGuySprite.position.x, blocks.position.y + 64);
+                        [newGuySprite stopAllActions];
+                        
+                    }
                     
                     
                     
