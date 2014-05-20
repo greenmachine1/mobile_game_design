@@ -301,7 +301,6 @@
                 if([blocks.name isEqualToString:@"Upper"]){
                     
                     NSLog(@"upper");
-                    //newGuySprite.position = ccp(touchPoint.x, blocks.position.y - 64);
                     newGuySprite.position = ccp(newGuySprite.position.x, blocks.position.y - 64);
                     [newGuySprite stopAllActions];
                     NSLog(@"Collision at %@", NSStringFromCGPoint(newGuySprite.position));
@@ -321,31 +320,43 @@
                 // **** for any block that is in the middle **** //
                 }else if([blocks.name isEqualToString:@"Middle"]){
                     
-                    if((newGuySprite.position.x - 32) < (blocks.position.x + 32)){
+                    float positiveXForGuy = newGuySprite.position.x + [newGuySprite getBoundingBox].size.width / 2;
+                    float negativeXForGuy = newGuySprite.position.x - [newGuySprite getBoundingBox].size.width / 2;
+                    float positiveYForGuy = newGuySprite.position.y + [newGuySprite getBoundingBox].size.height / 2;
+                    float negativeYForGuy = newGuySprite.position.y - [newGuySprite getBoundingBox].size.height / 2;
+                    
+                    float positiveXForBlock = blocks.position.x + [blocks getBoundingBox].size.width / 2;
+                    float negativeXForBlock = blocks.position.x - [blocks getBoundingBox].size.width / 2;
+                    float positiveYForBlock = blocks.position.y + [blocks getBoundingBox].size.height / 2;
+                    float negativeYForBlock = blocks.position.y - [blocks getBoundingBox].size.height / 2;
+                    
+                    
+                    // *** uggghhhh complicated! **** //
+                    if((negativeXForGuy < positiveXForBlock) && ((negativeYForGuy < positiveYForBlock) && (positiveYForGuy > negativeYForBlock)) && (!(negativeXForGuy < blocks.position.x))){
                         
                         
-                        NSLog(@"Collision from the right ");
-                        newGuySprite.position = ccp(blocks.position.x + 64, newGuySprite.position.y);
+                        newGuySprite.position = ccp(blocks.position.x + 64 , newGuySprite.position.y);
                         [newGuySprite stopAllActions];
                         
                         
                     }
-                    if((newGuySprite.position.x + 32) > (blocks.position.x - 32)){
+                    
+                    
                         
                         
-                        NSLog(@"Collision from the left");
-                        newGuySprite.position = ccp(blocks.position.x - 64, newGuySprite.position.y);
-                        [newGuySprite stopAllActions];
+                
                         
                         
-                    }
-                    if((newGuySprite.position.y + 32) > (blocks.position.x - 32)){
-                        
-                        NSLog(@"Collision from the top");
-                        newGuySprite.position = ccp(newGuySprite.position.x, blocks.position.y + 64);
-                        [newGuySprite stopAllActions];
-                        
-                    }
+                    
+                    
+                    
+                    
+                    
+                    
+            
+                    
+                    
+                       
                     
                     
                     
