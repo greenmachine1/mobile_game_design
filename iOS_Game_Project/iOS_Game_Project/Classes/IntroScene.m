@@ -346,7 +346,7 @@
                     // **** checking to see if the left side of the free standing block has been touched **** //
                     // **** if so, check the top and bottom edges to makes sure its free before allowing **** //
                     // **** to pass **** //
-                    else if((positiveXForGuy > negativeXForBlock) && ((negativeYForGuy < positiveYForBlock) && (positiveYForGuy > negativeYForBlock)) && (!(negativeYForGuy > blocks.position.x))){
+                    else if((positiveXForGuy > negativeXForBlock) && ((negativeYForGuy < positiveYForBlock) && (positiveYForGuy > negativeYForBlock)) && (!(positiveXForGuy > blocks.position.x))){
                         
                         
                         newGuySprite.position = ccp(blocks.position.x - 64, newGuySprite.position.y);
@@ -354,6 +354,10 @@
                         
                         
                     }
+                    
+                    
+                    
+                    
                     
                     
                     
