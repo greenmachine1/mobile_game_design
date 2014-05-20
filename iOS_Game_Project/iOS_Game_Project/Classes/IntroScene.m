@@ -114,11 +114,11 @@
 // **** creation of enemy **** //
 -(void)creationOfEnemy{
     
-    //newEnemySprite = [Enemy_Sprite_Object createEnemyWithLocation:ccp(200.0f, yBounds - 96)];
+    newEnemySprite = [Enemy_Sprite_Object createEnemyWithLocation:ccp(200.0f, yBounds - 96)];
     
-    //[newGuySprite setZOrder:1];
+    [newGuySprite setZOrder:1];
     
-    //[self addChild:newEnemySprite];
+    [self addChild:newEnemySprite];
 }
 
 
@@ -129,11 +129,11 @@
 // **** creation of end box **** //
 -(void)createEndBox{
     
-    //newEndBox = [EndBox createEndBoxWithLocation:ccp(64.0f, yBounds / 2)];
+    newEndBox = [EndBox createEndBoxWithLocation:ccp(64.0f, yBounds / 2)];
     
-    //[newEndBox setZOrder:1];
+    [newEndBox setZOrder:1];
     
-    //[self addChild:newEndBox];
+    [self addChild:newEndBox];
 }
 
 
@@ -143,7 +143,7 @@
 // **** creation of the blocks method **** //
 -(void)creationOfBlocks{
     
-    /*
+    
     // **** creation of the upper level blocks **** //
     for(int i = 1; i < xBounds / 64; i ++){
         
@@ -164,9 +164,9 @@
         [self addChild:newBlockWallLayout];
     }
     
-     */
+    
     // **** creation of the middle block **** //
-    Block_Wall *midBlock = [Block_Wall createWallAtPosition:ccp(128.0f, 128.0f)];
+    Block_Wall *midBlock = [Block_Wall createWallAtPosition:ccp(128.0f, 96.0f)];
         
     midBlock.name = @"Middle";
     [midBlock setZOrder:1];
@@ -320,6 +320,11 @@
                 // **** for any block that is in the middle **** //
                 }else if([blocks.name isEqualToString:@"Middle"]){
                     
+                    
+                    // **** sometime in the future, I want to make this a standalone method **** //
+                    // **** used to pass in two sprites to compare collision **** //
+                    
+                    // **** naming all the constant boundries **** //
                     float positiveXForGuy = newGuySprite.position.x + [newGuySprite getBoundingBox].size.width / 2;
                     float negativeXForGuy = newGuySprite.position.x - [newGuySprite getBoundingBox].size.width / 2;
                     float positiveYForGuy = newGuySprite.position.y + [newGuySprite getBoundingBox].size.height / 2;
