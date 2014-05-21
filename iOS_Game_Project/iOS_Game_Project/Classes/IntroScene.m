@@ -35,7 +35,6 @@
 
 
 
-// -----------------------------------------------------------------------
 - (id)init
 {
     // Apple recommend assigning self with supers return value
@@ -43,15 +42,11 @@
     if (!self) return(nil);
     
 
-    
-    
-// -----------------------------------------------------------------------
     // **** enabling audio for effects **** //
     playSound = [OALSimpleAudio sharedInstance];
     
     
     
-// -----------------------------------------------------------------------
     // **** getting the x and y coords of the screen size **** //
     xBounds = self.contentSize.width;
     yBounds = self.contentSize.height;
@@ -71,9 +66,7 @@
     
     
     
-// -----------------------------------------------------------------------
     // **** creation of the guy sprite **** //
-    
     touchPoint = ccp(xBounds - 64, yBounds / 2);
     
     newGuySprite = [Guy_Sprite_Object createGuySpriteWithLocation:touchPoint];
@@ -81,28 +74,16 @@
     
     endPoint = newGuySprite.position;
     
+    
+    
     // **** adding the guy to the scene **** //
     [self addChild:newGuySprite];
     
-    
-    
-    
-    
-// -----------------------------------------------------------------------
-    // **** creation of the blocks ***** //
     [self creationOfBlocks];
     
-// -----------------------------------------------------------------------
-    // **** creation of enemy **** //
     [self creationOfEnemy];
     
-    
-// -----------------------------------------------------------------------
-    // **** creation of enemy **** //
     [self createEndBox];
-    
-    
-    
     
 	return self;
 }
@@ -110,8 +91,7 @@
 
 
 
-// ---------------------------------------------------------------------------------
-// **** creation of enemy **** //
+
 -(void)creationOfEnemy{
     
     newEnemySprite = [Enemy_Sprite_Object createEnemyWithLocation:ccp(200.0f, yBounds - 96)];
@@ -125,8 +105,7 @@
 
 
 
-// ---------------------------------------------------------------------------------
-// **** creation of end box **** //
+
 -(void)createEndBox{
     
     newEndBox = [EndBox createEndBoxWithLocation:ccp(64.0f, yBounds / 2)];
@@ -139,10 +118,8 @@
 
 
 
-// -----------------------------------------------------------------------
-// **** creation of the blocks method **** //
+
 -(void)creationOfBlocks{
-    
     
     // **** creation of the upper level blocks **** //
     for(int i = 1; i < xBounds / 64; i ++){
@@ -150,7 +127,6 @@
         Block_Wall *newBlockWallLayout = [Block_Wall createWallAtPosition:ccp(i * 64, 32.0f)];
         newBlockWallLayout.name = @"Lower";
         
-        //[newBlockWallLayout setZOrder:1];
         [self addChild:newBlockWallLayout z:1 name:@"Lower"];
     }
     
@@ -180,7 +156,7 @@
 
 
 
-// -----------------------------------------------------------------------
+
 -(void)onEnter{
     [super onEnter];
     
@@ -193,32 +169,24 @@
 
 
 
-// ------------------------------------------------------------------------
-// **** update loop **** //
+
 -(void)update:(CCTime)delta{
     
     deltaTime = delta;
     
-    // **** collision for wall method **** //
     [self collisionForWall];
-    
-    // **** collision for enemy method **** //
+
     [self collisionForEnemy];
     
-    // **** collision with the end **** //
     [self collisionWithEnd];
-    
-    //[self collisionWithWalls];
-    
-    
 }
 
 
 
 
 
-// -------------------------------------------------------------------------
-// **** move the guy to a point on the screen **** //
+// **** touch began should be just for updating the touch point and **** //
+// **** nothing more **** //
 -(void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event{
     
     touchPoint = [touch locationInNode:self];
@@ -235,8 +203,6 @@
 
 
 
-// -------------------------------------------------------------------------
-// **** collision with the end of the game **** //
 -(void)collisionWithEnd{
     
     // **** if the guy is in the end box boundry **** //
@@ -245,7 +211,6 @@
         // **** reposition the guy so as to not keep triggering the collision **** //
         newGuySprite.position = ccp(xBounds - 64, yBounds / 2);
         
-        // **** stopping all the actions on the new guy sprite **** //
         [newGuySprite stopAllActions];
         
         [playSound playBg:@"Applause.mp3"];
@@ -257,8 +222,8 @@
 
 
 
-// ------------------------------------------------------------------------
-// **** collision detection for enemy **** //
+
+
 -(void)collisionForEnemy{
     
     // **** basically If the user touches the enemy, I need to reset their position **** //
@@ -285,8 +250,8 @@
 
 
 
-// -------------------------------------------------------------------------
-// **** collision detection for wall types **** //
+
+// **** collision detection for all wall types **** //
 -(void)collisionForWall{
     
     // **** looking for the block wall **** //
@@ -305,8 +270,6 @@
                     [newGuySprite stopAllActions];
                     NSLog(@"Collision at %@", NSStringFromCGPoint(newGuySprite.position));
                     
-                    //[playSound playBg:@"Hammer.mp3"];
-                    
                 }else if([blocks.name isEqualToString:@"Lower"]){
                     
                     NSLog(@"Lower");
@@ -315,14 +278,8 @@
                     [newGuySprite stopAllActions];
                     NSLog(@"Collision at %@", NSStringFromCGPoint(newGuySprite.position));
                     
-                    //[playSound playBg:@"Hammer.mp3"];
-                    
-                // **** for any block that is in the middle **** //
+                
                 }else if([blocks.name isEqualToString:@"Middle"]){
-                    
-                    
-                    // **** sometime in the future, I want to make this a standalone method **** //
-                    // **** used to pass in two sprites to compare collision **** //
                     
                     // **** naming all the constant boundries **** //
                     float positiveXForGuy = newGuySprite.position.x + [newGuySprite getBoundingBox].size.width / 2;
@@ -361,7 +318,7 @@
                     }
                     
                     
-                    // **** checking to see if the positive y intercepts with the negative y for the block **** //
+                    // **** use the same principals as above for top and bottom collision **** //
                     else if((positiveYForGuy > negativeYForBlock) && ((negativeXForGuy < positiveYForBlock) && (positiveXForGuy > negativeXForBlock)) && (!(positiveYForGuy > blocks.position.y))){
                         
                         
@@ -371,7 +328,7 @@
                         
                     }
                     
-                    // **** checking to see if the negative y intercepts with the positive y for the block **** //
+                    
                     else if((negativeYForGuy < positiveYForBlock) && ((negativeXForGuy < positiveXForBlock) && (positiveXForGuy > negativeXForBlock)) && (!(negativeYForGuy < blocks.position.y))){
                         
                         
@@ -379,28 +336,6 @@
                         
                         
                     }
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                        
-                        
-                
-                        
-                        
-                    
-                    
-                    
-                    
-                    
-                    
-            
-                    
-
                 }
             }
         }
@@ -409,10 +344,6 @@
 
 
 
-
-
-// -------------------------------------------------------------------------
-// **** popup **** //
 -(void)goalPopup:(NSString *)passedInString{
     
     // **** initializing a goalbox **** //

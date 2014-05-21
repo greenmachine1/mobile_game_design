@@ -17,7 +17,6 @@
     
     return [[self alloc] initWithLocation:location];
     
-    
 }
 
 -(id)initWithLocation:(CGPoint)location{
