@@ -53,7 +53,8 @@
     // setting the movement speed of the guy //
     speed = 200;
     
-    
+    // setting the initial score which is 5 //
+    score = 5;
     
     
     
@@ -72,7 +73,7 @@
     [newGuySprite setZOrder:1];
     
     
-    // **** setting the starting point as an initial reference **** //
+    // setting the starting point as an initial reference //
     startPoint = newGuySprite.position;
     
     touchPoint = newGuySprite.position;
@@ -103,9 +104,6 @@
 
 
 
-
-
-
 -(void)creationOfEnemy{
     
     newEnemySprite = [Enemy_Sprite_Object createEnemyWithLocation:ccp(200.0f, yBounds - 96)];
@@ -117,9 +115,6 @@
 
 
 
-
-
-
 -(void)createEndBox{
     
     newEndBox = [EndBox createEndBoxWithLocation:ccp(64.0f, yBounds / 2)];
@@ -128,8 +123,6 @@
     
     [self addChild:newEndBox];
 }
-
-
 
 
 
@@ -173,8 +166,7 @@
 
 -(void)update:(CCTime)delta{
 
-    
-    
+    // correct movement using delta time //
     if(newGuySprite.position.x < touchPoint.x){
         
         newGuySprite.position = ccp(newGuySprite.position.x + speed * delta, newGuySprite.position.y);
@@ -185,20 +177,16 @@
         newGuySprite.position = ccp(newGuySprite.position.x - speed * delta, newGuySprite.position.y);
         
     }
-    
     if(newGuySprite.position.y < touchPoint.y){
         
         newGuySprite.position = ccp(newGuySprite.position.x, newGuySprite.position.y + speed * delta);
         
     }
-    
     if(newGuySprite.position.y > touchPoint.y){
         
         newGuySprite.position = ccp(newGuySprite.position.x, newGuySprite.position.y - speed * delta);
         
     }
-    
-    
     if((newGuySprite.position.x == touchPoint.x) && (newGuySprite.position.y == touchPoint.y)){
         
         newGuySprite.position = ccp(newGuySprite.position.x, newGuySprite.position.y);
@@ -223,8 +211,6 @@
     
     touchPoint = [touch locationInNode:self];
     
-
-
 }
 
 
@@ -263,10 +249,26 @@
         
         [playSound playBg:@"sea_audio.mp3"];
         
+        score = score - 1;
+        
+        NSLog(@"Score is %i", score);
+        
+        // game over //
+        if(score < 1){
+            
+            [self gameOver];
+        }
+        
         touchPoint = ccp(xBounds - 64, yBounds / 2);
         
         //   resets the position of the guy   //
         newGuySprite.position = touchPoint;
+        
+        // changes the color when hit to denote visually... that hes been hit //
+        [newGuySprite changeColor];
+        
+        
+        newGuySprite.color = [CCColor redColor];
         
         [self goalPopup:@"Ouch!!!!"];
     }
@@ -274,6 +276,14 @@
 }
 
 
+
+
+-(void)gameOver{
+    
+    NSLog(@"Game Over!");
+    
+    
+}
 
 
 
@@ -373,7 +383,9 @@
 
 
 
+// creating a pop up message that takes in a string //
 -(void)goalPopup:(NSString *)passedInString{
+    
     
     //   initializing a goalbox   //
     CCLayoutBox *goalBox = [[CCLayoutBox alloc] init];

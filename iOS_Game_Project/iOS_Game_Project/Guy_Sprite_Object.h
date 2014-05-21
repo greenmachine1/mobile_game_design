@@ -18,4 +18,5 @@
 +(id)createGuySpriteWithLocation:(CGPoint)locationPoint;
 -(CGPoint)returnLocation;
 -(CGRect)getBoundingBox;
+-(void)changeColor;
 @end

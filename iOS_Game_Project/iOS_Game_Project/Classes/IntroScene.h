@@ -36,6 +36,8 @@
     
     int speed;
     
+    int score;
+    
     float xDistance;
     float yDistance;
     
