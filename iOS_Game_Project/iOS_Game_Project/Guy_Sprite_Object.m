@@ -13,14 +13,14 @@
 @implementation Guy_Sprite_Object
 
 
-// **** creation of guy sprite **** //
+//   creation of guy sprite   //
 +(id)createGuySpriteWithLocation:(CGPoint)locationPoint{
     
     return [[self alloc] initWithLocation:locationPoint];
     
 }
 
-// **** init with location
+//   init with location
 -(id)initWithLocation:(CGPoint)locationPoint{
     
     if(self = [super init]){
@@ -36,13 +36,13 @@
 }
 
 
-// **** returning the position **** //
+//   returning the position   //
 -(CGPoint)returnLocation{
     
     return self.position;
 }
 
-// **** returns the bounding box around the sprite **** //
+//   returns the bounding box around the sprite   //
 -(CGRect)getBoundingBox{
     
     return CGRectMake(self.position.x - (guySprite.contentSize.width / 2),

@@ -42,41 +42,36 @@
     if (!self) return(nil);
     
 
-    // **** enabling audio for effects **** //
+    // enabling audio for effects //
     playSound = [OALSimpleAudio sharedInstance];
     
     
-    
-    // **** getting the x and y coords of the screen size **** //
+    // getting the x and y coords of the screen size //
     xBounds = self.contentSize.width;
     yBounds = self.contentSize.height;
     
-    startingSpeed = 0;
-    endingSpeed = 20;
-
+    // setting the movement speed of the guy //
+    speed = 20;
     
-    // **** changing the background color to a light blue **** //
+    // changing the background color to a light blue   //
     CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.1 green:0.4 blue:0.5 alpha:1.0]];
     
-    // **** setting the depth order **** //
+    //   setting the depth order   //
     [background setZOrder:0];
     
-    // **** adding the background color to the scene **** //
+    //   adding the background color to the scene   //
     [self addChild:background];
     
-    
-    
-    // **** creation of the guy sprite **** //
+    //   setting the initial starting point of the guy   //
     touchPoint = ccp(xBounds - 64, yBounds / 2);
     
+    
+    //   creation of the guy sprite   //
     newGuySprite = [Guy_Sprite_Object createGuySpriteWithLocation:touchPoint];
     [newGuySprite setZOrder:1];
     
-    endPoint = newGuySprite.position;
-    
-    
-    
-    // **** adding the guy to the scene **** //
+
+    //   adding the guy to the scene   //
     [self addChild:newGuySprite];
     
     [self creationOfBlocks];
@@ -87,6 +82,17 @@
     
 	return self;
 }
+
+
+
+-(void)onEnter{
+    [super onEnter];
+    
+    // Enable touch handling on scene node
+    self.userInteractionEnabled = YES;
+}
+
+
 
 
 
@@ -121,7 +127,7 @@
 
 -(void)creationOfBlocks{
     
-    // **** creation of the upper level blocks **** //
+    //   creation of the upper level blocks   //
     for(int i = 1; i < xBounds / 64; i ++){
         
         Block_Wall *newBlockWallLayout = [Block_Wall createWallAtPosition:ccp(i * 64, 32.0f)];
@@ -131,7 +137,7 @@
     }
     
     
-    // **** creation of the lower level blocks **** //
+    //   creation of the lower level blocks   //
     for(int j = 1; j < xBounds / 64; j++){
         
         Block_Wall *newBlockWallLayout = [Block_Wall createWallAtPosition:ccp(j * 64, yBounds - 32)];
@@ -141,7 +147,7 @@
     }
     
     
-    // **** creation of the middle block **** //
+    //   creation of the middle block   //
     Block_Wall *midBlock = [Block_Wall createWallAtPosition:ccp(128.0f, 96.0f)];
         
     midBlock.name = @"Middle";
@@ -157,22 +163,10 @@
 
 
 
--(void)onEnter{
-    [super onEnter];
-    
-    // Enable touch handling on scene node
-    self.userInteractionEnabled = YES;
-}
-
-
-
-
-
-
-
 -(void)update:(CCTime)delta{
     
-    deltaTime = delta;
+    // need to move the guy towards the touchPoint with every frame //
+    newGuySprite.position = touchPoint;
     
     [self collisionForWall];
 
@@ -185,16 +179,16 @@
 
 
 
-// **** touch began should be just for updating the touch point and **** //
-// **** nothing more **** //
+//   touch began should be just for updating the touch point and   //
+//   nothing more   //
 -(void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event{
     
     touchPoint = [touch locationInNode:self];
     
-    // **** trying out my delta time **** //
-    CCActionMoveTo *moveGuy = [CCActionMoveTo actionWithDuration:deltaTime * 20 position:touchPoint];
+    //   trying out my delta time   //
+    //CCActionMoveTo *moveGuy = [CCActionMoveTo actionWithDuration:2.0f position:touchPoint];
     
-    [newGuySprite runAction:moveGuy];
+    //[newGuySprite runAction:moveGuy];
     
 }
 
@@ -205,10 +199,10 @@
 
 -(void)collisionWithEnd{
     
-    // **** if the guy is in the end box boundry **** //
+    //   if the guy is in the end box boundry   //
     if(CGRectIntersectsRect([newGuySprite getBoundingBox], [newEndBox getBoundingBox])){
         
-        // **** reposition the guy so as to not keep triggering the collision **** //
+        //   reposition the guy so as to not keep triggering the collision   //
         newGuySprite.position = ccp(xBounds - 64, yBounds / 2);
         
         [newGuySprite stopAllActions];
@@ -226,17 +220,17 @@
 
 -(void)collisionForEnemy{
     
-    // **** basically If the user touches the enemy, I need to reset their position **** //
+    //   basically If the user touches the enemy, I need to reset their position   //
     if(CGRectIntersectsRect([newGuySprite getBoundingBox], [newEnemySprite getBoundingBox])){
         
-        // **** stops the guy from continuing to move after hitting **** //
+        //   stops the guy from continuing to move after hitting   //
         [newGuySprite stopAllActions];
         
         [playSound playBg:@"sea_audio.mp3"];
         
         touchPoint = ccp(xBounds - 64, yBounds / 2);
         
-        // **** resets the position of the guy **** //
+        //   resets the position of the guy   //
         newGuySprite.position = touchPoint;
         
         [self goalPopup:@"Ouch!!!!"];
@@ -251,16 +245,16 @@
 
 
 
-// **** collision detection for all wall types **** //
+//   collision detection for all wall types   //
 -(void)collisionForWall{
     
-    // **** looking for the block wall **** //
+    //   looking for the block wall   //
     for(Block_Wall *blocks in self.children){
         
-        // **** going through all my block classes and getting their locations **** //
+        //   going through all my block classes and getting their locations   //
         if([blocks isKindOfClass:[Block_Wall class]]){
             
-            // **** check for collision **** //
+            //   check for collision   //
             if(CGRectIntersectsRect([blocks getBoundingBox], [newGuySprite getBoundingBox])){
                 
                 if([blocks.name isEqualToString:@"Upper"]){
@@ -273,7 +267,7 @@
                 }else if([blocks.name isEqualToString:@"Lower"]){
                     
                     NSLog(@"Lower");
-                    // **** repositioning my guy **** //
+                    //   repositioning my guy   //
                     newGuySprite.position = ccp(newGuySprite.position.x , blocks.position.y + 64);
                     [newGuySprite stopAllActions];
                     NSLog(@"Collision at %@", NSStringFromCGPoint(newGuySprite.position));
@@ -281,7 +275,7 @@
                 
                 }else if([blocks.name isEqualToString:@"Middle"]){
                     
-                    // **** naming all the constant boundries **** //
+                    //   naming all the constant boundries   //
                     float positiveXForGuy = newGuySprite.position.x + [newGuySprite getBoundingBox].size.width / 2;
                     float negativeXForGuy = newGuySprite.position.x - [newGuySprite getBoundingBox].size.width / 2;
                     float positiveYForGuy = newGuySprite.position.y + [newGuySprite getBoundingBox].size.height / 2;
@@ -293,9 +287,9 @@
                     float negativeYForBlock = blocks.position.y - [blocks getBoundingBox].size.height / 2;
                     
                     
-                    // **** checking to see if the right side of the free standing block has been touched **** //
-                    // **** if so, check the top and bottom edges to make sure its free before allowing **** //
-                    // **** to pass **** //
+                    //   checking to see if the right side of the free standing block has been touched   //
+                    //   if so, check the top and bottom edges to make sure its free before allowing   //
+                    //   to pass   //
                     if((negativeXForGuy < positiveXForBlock) && ((negativeYForGuy < positiveYForBlock) && (positiveYForGuy > negativeYForBlock)) && (!(negativeXForGuy < blocks.position.x))){
                         
                         
@@ -305,9 +299,9 @@
                         
                     }
                     
-                    // **** checking to see if the left side of the free standing block has been touched **** //
-                    // **** if so, check the top and bottom edges to makes sure its free before allowing **** //
-                    // **** to pass **** //
+                    //   checking to see if the left side of the free standing block has been touched   //
+                    //   if so, check the top and bottom edges to makes sure its free before allowing   //
+                    //   to pass   //
                     else if((positiveXForGuy > negativeXForBlock) && ((negativeYForGuy < positiveYForBlock) && (positiveYForGuy > negativeYForBlock)) && (!(positiveXForGuy > blocks.position.x))){
                         
                         
@@ -318,7 +312,7 @@
                     }
                     
                     
-                    // **** use the same principals as above for top and bottom collision **** //
+                    //   use the same principals as above for top and bottom collision   //
                     else if((positiveYForGuy > negativeYForBlock) && ((negativeXForGuy < positiveYForBlock) && (positiveXForGuy > negativeXForBlock)) && (!(positiveYForGuy > blocks.position.y))){
                         
                         
@@ -346,26 +340,26 @@
 
 -(void)goalPopup:(NSString *)passedInString{
     
-    // **** initializing a goalbox **** //
+    //   initializing a goalbox   //
     CCLayoutBox *goalBox = [[CCLayoutBox alloc] init];
     
-    // **** the ok button **** //
+    //   the ok button   //
     CCButton *okButton = [CCButton buttonWithTitle:@"Ok!"];
     okButton.block = ^(id sender){
         
-        // **** dismissing the box **** //
+        //   dismissing the box   //
         [goalBox removeFromParentAndCleanup:true];
         
     };
     
-    // **** setting up a label **** //
+    //   setting up a label   //
     CCLabelTTF *label = [CCLabelTTF labelWithString:passedInString fontName:@"Chalkduster" fontSize:20.0f];
     label.positionType = CCPositionTypeNormalized;
     label.color = [CCColor redColor];
     label.position = ccp(0.5f, 0.5f);
     
     
-    // **** setting parameters for the goal box **** //
+    //   setting parameters for the goal box   //
     goalBox.direction = CCLayoutBoxDirectionVertical;
     goalBox.spacing = 20.0f;
     goalBox.color = [CCColor greenColor];

@@ -11,24 +11,24 @@
 @implementation Block_Wall
 
 @synthesize name;
-// **** creation of wall block **** //
+//   creation of wall block   //
 +(id)createWallAtPosition:(CGPoint)point{
     
     return [[self alloc] initWithPoint:point];
     
 }
 
-// **** initialization of the sprite **** //
+//   initialization of the sprite   //
 -(id)initWithPoint:(CGPoint)point{
     
     if(self = [super init]){
         
         name = @"Block";
         
-        // **** setting the location **** //
+        //   setting the location   //
         self.position = point;
         
-        // **** setting the image of the sprite **** //
+        //   setting the image of the sprite   //
         brickWallSprite = [CCSprite spriteWithImageNamed:@"Block.png"];
     
         [self addChild:brickWallSprite];
@@ -42,7 +42,7 @@
     
 }
 
-// **** returns the bounding box around the sprite **** //
+//   returns the bounding box around the sprite   //
 -(CGRect)getBoundingBox{
     
     return CGRectMake(self.position.x - (brickWallSprite.contentSize.width / 2),

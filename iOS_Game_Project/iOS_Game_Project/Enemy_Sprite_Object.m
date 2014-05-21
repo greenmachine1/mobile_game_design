@@ -51,13 +51,13 @@
     
 }
 
-// **** returning the position **** //
+//   returning the position   //
 -(CGPoint)returnLocation{
     
     return self.position;
 }
 
-// **** returns the bounding box around the sprite **** //
+//   returns the bounding box around the sprite   //
 -(CGRect)getBoundingBox{
     
     return CGRectMake(self.position.x - (mainEnemySprite.contentSize.width / 2),

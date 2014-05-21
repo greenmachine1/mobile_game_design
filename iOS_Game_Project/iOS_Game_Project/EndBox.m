@@ -17,9 +17,7 @@
     
     return [[self alloc] initWithLocation:location];
     
-    
-    
-    
+
 }
 
 -(id)initWithLocation:(CGPoint)location{
@@ -38,7 +36,7 @@
     
 }
 
-// **** returns the bounding box around the sprite **** //
+//   returns the bounding box around the sprite   //
 -(CGRect)getBoundingBox{
     
     return CGRectMake(self.position.x - (endBoxSprite.contentSize.width / 2),
