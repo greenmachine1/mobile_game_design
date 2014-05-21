@@ -51,25 +51,33 @@
     yBounds = self.contentSize.height;
     
     // setting the movement speed of the guy //
-    speed = 20;
+    speed = 200;
     
-    // changing the background color to a light blue   //
+    
+    
+    
+    
+    
+    // background stuff //
     CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.1 green:0.4 blue:0.5 alpha:1.0]];
-    
-    //   setting the depth order   //
     [background setZOrder:0];
     
     //   adding the background color to the scene   //
     [self addChild:background];
     
-    //   setting the initial starting point of the guy   //
-    touchPoint = ccp(xBounds - 64, yBounds / 2);
     
     
-    //   creation of the guy sprite   //
-    newGuySprite = [Guy_Sprite_Object createGuySpriteWithLocation:touchPoint];
+    
+    newGuySprite = [Guy_Sprite_Object createGuySpriteWithLocation:ccp(xBounds - 64, yBounds / 2)];
     [newGuySprite setZOrder:1];
     
+    
+    // **** setting the starting point as an initial reference **** //
+    startPoint = newGuySprite.position;
+    
+    touchPoint = newGuySprite.position;
+    
+    NSLog(@"start point for guy is %@", NSStringFromCGPoint(touchPoint));
 
     //   adding the guy to the scene   //
     [self addChild:newGuySprite];
@@ -164,9 +172,39 @@
 
 
 -(void)update:(CCTime)delta{
+
     
-    // need to move the guy towards the touchPoint with every frame //
-    newGuySprite.position = touchPoint;
+    
+    if(newGuySprite.position.x < touchPoint.x){
+        
+        newGuySprite.position = ccp(newGuySprite.position.x + speed * delta, newGuySprite.position.y);
+        
+    }
+    if(newGuySprite.position.x > touchPoint.x){
+        
+        newGuySprite.position = ccp(newGuySprite.position.x - speed * delta, newGuySprite.position.y);
+        
+    }
+    
+    if(newGuySprite.position.y < touchPoint.y){
+        
+        newGuySprite.position = ccp(newGuySprite.position.x, newGuySprite.position.y + speed * delta);
+        
+    }
+    
+    if(newGuySprite.position.y > touchPoint.y){
+        
+        newGuySprite.position = ccp(newGuySprite.position.x, newGuySprite.position.y - speed * delta);
+        
+    }
+    
+    
+    if((newGuySprite.position.x == touchPoint.x) && (newGuySprite.position.y == touchPoint.y)){
+        
+        newGuySprite.position = ccp(newGuySprite.position.x, newGuySprite.position.y);
+        
+    }
+    
     
     [self collisionForWall];
 
@@ -185,11 +223,8 @@
     
     touchPoint = [touch locationInNode:self];
     
-    //   trying out my delta time   //
-    //CCActionMoveTo *moveGuy = [CCActionMoveTo actionWithDuration:2.0f position:touchPoint];
-    
-    //[newGuySprite runAction:moveGuy];
-    
+
+
 }
 
 

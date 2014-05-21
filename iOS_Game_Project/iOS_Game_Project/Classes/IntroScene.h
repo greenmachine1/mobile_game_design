@@ -36,6 +36,12 @@
     
     int speed;
     
+    float xDistance;
+    float yDistance;
+    
+    CGPoint startPoint;
+    CGPoint endPoint;
+    
     CGPoint touchPoint;
     CCTime deltaTime;
     
