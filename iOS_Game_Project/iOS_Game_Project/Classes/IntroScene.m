@@ -194,7 +194,9 @@
 
 
 
-
+// this block has no collision detection as of yet //
+// I plan to implement it to an existing block class //
+// at a later point //
 -(void)creationOfRandomBlock{
     
     // loading images into cache
@@ -340,7 +342,6 @@
         // removes one heart at a time from the screen //
         [self removeChildByName:@"Heart" cleanup:YES];
     
-        
         // game over //
         if(score < 1){
             
@@ -366,6 +367,12 @@
 -(void)gameOver{
     
     NSLog(@"Game Over!");
+    
+    score = 4;
+    
+    [self creationOfHealthHearts];
+    
+    [self goalPopup:@"Game Over!"];
     
     
 }
@@ -473,14 +480,15 @@
     
     
     //   initializing a goalbox   //
-    CCLayoutBox *goalBox = [[CCLayoutBox alloc] init];
+    goalBox = [[CCLayoutBox alloc] init];
     
     //   the ok button   //
     CCButton *okButton = [CCButton buttonWithTitle:@"Ok!"];
     okButton.block = ^(id sender){
         
         //   dismissing the box   //
-        [goalBox removeFromParentAndCleanup:true];
+        //[goalBox removeFromParentAndCleanup:true];
+        [self removeGoalBox];
         
     };
     
@@ -505,10 +513,17 @@
     
     [self addChild:goalBox];
     
+    [self performSelector:@selector(removeGoalBox) withObject:self afterDelay:2.0f];
+    
 }
 
 
-
+-(void)removeGoalBox{
+    
+    //   dismissing the box   //
+    [goalBox removeFromParentAndCleanup:true];
+    
+}
 
 
 

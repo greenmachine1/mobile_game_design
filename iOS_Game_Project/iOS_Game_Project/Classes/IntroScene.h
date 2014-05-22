@@ -55,6 +55,8 @@
     Enemy_Sprite_Object *newEnemySprite;
     EndBox *newEndBox;
     
+    CCLayoutBox *goalBox;
+    
 }
 
 

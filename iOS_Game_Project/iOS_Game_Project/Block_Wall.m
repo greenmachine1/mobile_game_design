@@ -8,6 +8,8 @@
 
 #import "Block_Wall.h"
 
+#import "CCAnimation.h"
+
 @implementation Block_Wall
 
 @synthesize name;
@@ -30,7 +32,7 @@
         
         //   setting the image of the sprite   //
         brickWallSprite = [CCSprite spriteWithImageNamed:@"Block.png"];
-    
+        
         [self addChild:brickWallSprite];
     }
     return self;
