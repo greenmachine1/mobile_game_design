@@ -51,12 +51,18 @@
 
 -(void)pauseAndResume:(int)toggle{
     
+    if(toggle == 1){
     
-    pauseSprite = [CCSprite spriteWithImageNamed:@"play.png"];
+        pauseSprite = [CCSprite spriteWithImageNamed:@"play.png"];
     
-    [self addChild:pauseSprite];
+        [self addChild:pauseSprite];
     
-    
+    }else if(toggle == 0){
+        
+        pauseSprite = [CCSprite spriteWithImageNamed:@"pause_sprite.png"];
+        
+        [self addChild:pauseSprite];
+    }
     
     
 }

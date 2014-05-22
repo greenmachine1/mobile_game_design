@@ -60,7 +60,7 @@
     // setting the initial score which is 5 //
     score = 4;
     
-    togglePausePlay = 0;
+    togglePausePlay = 1;
     
     numberOfHearts = [[NSMutableArray alloc] init];
     
@@ -300,8 +300,7 @@
 //   touch began should be just for updating the touch point and   //
 //   nothing more   //
 -(void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event{
-    
-    
+
     
     touchPoint = [touch locationInNode:self];
     
@@ -309,9 +308,11 @@
         
         NSLog(@"Yes");
         // calling on the pause and resume method //
-        [newPauseAndPlay pauseAndResume:1];
+        [newPauseAndPlay pauseAndResume:togglePausePlay];
+    
     }
     
+    togglePausePlay = 0;
 }
 
 
