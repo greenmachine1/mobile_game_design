@@ -217,6 +217,9 @@
 		D65677331918979C003CC6E9 /* IntroScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D65677321918979C003CC6E9 /* IntroScene.m */; };
 		D6AA90941924AEC0000620E1 /* Applause.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D6AA90931924AEC0000620E1 /* Applause.mp3 */; };
 		D6AA90961924AFE5000620E1 /* Goal.png in Resources */ = {isa = PBXBuildFile; fileRef = D6AA90951924AFE5000620E1 /* Goal.png */; };
+		D6AC44D7192DECC700B842FB /* blockanimation.plist in Resources */ = {isa = PBXBuildFile; fileRef = D6AC44D5192DECC700B842FB /* blockanimation.plist */; };
+		D6AC44D8192DECC700B842FB /* blockanimation.pvr in Resources */ = {isa = PBXBuildFile; fileRef = D6AC44D6192DECC700B842FB /* blockanimation.pvr */; };
+		D6AC44E3192E00F000B842FB /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6AC44E2192E00F000B842FB /* SpriteKit.framework */; };
 		D6B2120219199933005D3E7F /* guy_pixel_art.png in Resources */ = {isa = PBXBuildFile; fileRef = D6B2120119199933005D3E7F /* guy_pixel_art.png */; };
 		D6B212041919ACED005D3E7F /* Block.png in Resources */ = {isa = PBXBuildFile; fileRef = D6B212031919ACED005D3E7F /* Block.png */; };
 		D6B214D1191A15A3005D3E7F /* enemy.png in Resources */ = {isa = PBXBuildFile; fileRef = D6B214D0191A15A3005D3E7F /* enemy.png */; };
@@ -673,6 +676,9 @@
 		D65677321918979C003CC6E9 /* IntroScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = IntroScene.m; path = Classes/IntroScene.m; sourceTree = "<group>"; };
 		D6AA90931924AEC0000620E1 /* Applause.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Applause.mp3; sourceTree = "<group>"; };
 		D6AA90951924AFE5000620E1 /* Goal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Goal.png; sourceTree = "<group>"; };
+		D6AC44D5192DECC700B842FB /* blockanimation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = blockanimation.plist; path = Resources/blockanimation.plist; sourceTree = "<group>"; };
+		D6AC44D6192DECC700B842FB /* blockanimation.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = blockanimation.pvr; path = Resources/blockanimation.pvr; sourceTree = "<group>"; };
+		D6AC44E2192E00F000B842FB /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
 		D6B2120119199933005D3E7F /* guy_pixel_art.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guy_pixel_art.png; sourceTree = "<group>"; };
 		D6B212031919ACED005D3E7F /* Block.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Block.png; sourceTree = "<group>"; };
 		D6B214D0191A15A3005D3E7F /* enemy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = enemy.png; sourceTree = "<group>"; };
@@ -688,6 +694,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D6AC44E3192E00F000B842FB /* SpriteKit.framework in Frameworks */,
 				D656749A1918979A003CC6E9 /* libObjectiveChipmunk.a in Frameworks */,
 				D65674881918979A003CC6E9 /* OpenAL.framework in Frameworks */,
 				D656748E1918979A003CC6E9 /* UIKit.framework in Frameworks */,
@@ -725,6 +732,7 @@
 		D65674821918979A003CC6E9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D6AC44E2192E00F000B842FB /* SpriteKit.framework */,
 				D65674831918979A003CC6E9 /* QuartzCore.framework */,
 				D65674851918979A003CC6E9 /* OpenGLES.framework */,
 				D65674871918979A003CC6E9 /* OpenAL.framework */,
@@ -752,6 +760,8 @@
 		D656749C1918979A003CC6E9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D6AC44D5192DECC700B842FB /* blockanimation.plist */,
+				D6AC44D6192DECC700B842FB /* blockanimation.pvr */,
 				D6B214D6191A208C005D3E7F /* Audio */,
 				D6B214D0191A15A3005D3E7F /* enemy.png */,
 				D6EECBD9192D6095008D6EF0 /* healthHeartSprite.png */,
@@ -1677,6 +1687,7 @@
 				D65674B31918979A003CC6E9 /* Icon-120.png in Resources */,
 				D65676B71918979C003CC6E9 /* LICENSE_CCBReader.txt in Resources */,
 				D65674A91918979A003CC6E9 /* Icon@2x.png in Resources */,
+				D6AC44D8192DECC700B842FB /* blockanimation.pvr in Resources */,
 				D6B212041919ACED005D3E7F /* Block.png in Resources */,
 				D65674BB1918979A003CC6E9 /* Icon-Small@2x.png in Resources */,
 				D6EECBDA192D6095008D6EF0 /* healthHeartSprite.png in Resources */,
@@ -1701,6 +1712,7 @@
 				D65674BF1918979A003CC6E9 /* Icon-Spotlight-iOS7@2x.png in Resources */,
 				D65674AF1918979A003CC6E9 /* Icon-76.png in Resources */,
 				D65676851918979C003CC6E9 /* ChangeLog in Resources */,
+				D6AC44D7192DECC700B842FB /* blockanimation.plist in Resources */,
 				D65674C41918979A003CC6E9 /* iTunesArtwork@2x in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

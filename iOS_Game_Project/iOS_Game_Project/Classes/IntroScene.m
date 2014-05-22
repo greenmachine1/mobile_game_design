@@ -20,6 +20,14 @@
 
 #import "heathHeartSprite.h"
 
+#import "cocos2d.h"
+
+#import "CCAnimation.h"
+
+
+
+
+
 // -----------------------------------------------------------------------
 #pragma mark - IntroScene
 // -----------------------------------------------------------------------
@@ -77,6 +85,11 @@
     
     
     
+    
+    
+    
+    
+    
     newGuySprite = [Guy_Sprite_Object createGuySpriteWithLocation:ccp(xBounds - 64, yBounds / 2)];
     [newGuySprite setZOrder:1];
     
@@ -85,8 +98,6 @@
     startPoint = newGuySprite.position;
     
     touchPoint = newGuySprite.position;
-    
-    NSLog(@"start point for guy is %@", NSStringFromCGPoint(touchPoint));
 
     //   adding the guy to the scene   //
     [self addChild:newGuySprite];
@@ -98,6 +109,8 @@
     [self createEndBox];
     
     [self creationOfHealthHearts];
+    
+    [self creationOfRandomBlock];
     
 	return self;
 }
@@ -117,8 +130,6 @@
     for(int i = 1; i < 5; i++){
         
         heathHeartSprite *newHealthHeart = [heathHeartSprite createHeathHeartAtLocation:ccp(32 * i, yBounds - 32)];
-        
-        //[newHealthHeart setZOrder:2];
         
         [self addChild:newHealthHeart z:2 name:@"Heart"];
     }
@@ -180,6 +191,57 @@
     [self addChild:midBlock];
 
 }
+
+
+
+
+-(void)creationOfRandomBlock{
+    
+    // loading images into cache
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"blockanimation.plist"];
+    
+    NSMutableArray *blockImages = [[NSMutableArray alloc] init];
+    /*
+    for(int i = 0; i < 4; i++){
+        
+        [blockImages addObject:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"Block1.png"]]];
+        
+        
+    }
+     */
+    
+    
+    // manually adding all the images to the array 
+    [blockImages addObject:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"Block1.png"]]];
+    [blockImages addObject:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"Block2.png"]]];
+    [blockImages addObject:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"Block3.png"]]];
+    [blockImages addObject:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"Block4.png"]]];
+    [blockImages addObject:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"Block5.png"]]];
+    
+    
+    NSLog(@"Number of objects in the array %lu", (unsigned long)blockImages.count);
+    NSLog(@"The objects %@", blockImages);
+    
+    
+    CCAnimation *animateBlock = [CCAnimation animationWithSpriteFrames:blockImages delay:0.5f];
+    
+    CCActionAnimate *animateAction = [CCActionAnimate actionWithAnimation:animateBlock];
+    
+    CCSprite *blockSprite = [CCSprite spriteWithImageNamed:@"Block1.png"];
+    
+    [blockSprite runAction:animateAction];
+    
+    blockSprite.position = ccp(xBounds / 2, yBounds / 2);
+    
+    [self addChild:blockSprite];
+    
+
+    
+    
+}
+
+
+
 
 
 
