@@ -18,6 +18,8 @@
 
 #import "EndBox.h"
 
+#import "heathHeartSprite.h"
+
 // -----------------------------------------------------------------------
 #pragma mark - IntroScene
 // -----------------------------------------------------------------------
@@ -56,6 +58,7 @@
     // setting the initial score which is 5 //
     score = 5;
     
+    numberOfHearts = [[NSMutableArray alloc] init];
     
     
     
@@ -89,6 +92,8 @@
     
     [self createEndBox];
     
+    [self creationOfHealthHearts];
+    
 	return self;
 }
 
@@ -100,6 +105,20 @@
     // Enable touch handling on scene node
     self.userInteractionEnabled = YES;
 }
+
+
+-(void)creationOfHealthHearts{
+
+    for(int i = 1; i < 5; i++){
+        
+        heathHeartSprite *newHealthHeart = [heathHeartSprite createHeathHeartAtLocation:ccp(64 * i, yBounds - 32)];
+        
+        //[newHealthHeart setZOrder:2];
+        
+        [self addChild:newHealthHeart z:2 name:@"Heart"];
+    }
+}
+
 
 
 
@@ -250,8 +269,10 @@
         [playSound playBg:@"sea_audio.mp3"];
         
         score = score - 1;
-        
-        NSLog(@"Score is %i", score);
+
+        // removes one heart at a time from the screen //
+        [self removeChildByName:@"Heart" cleanup:YES];
+    
         
         // game over //
         if(score < 1){
@@ -266,9 +287,6 @@
         
         // changes the color when hit to denote visually... that hes been hit //
         [newGuySprite changeColor];
-        
-        
-        newGuySprite.color = [CCColor redColor];
         
         [self goalPopup:@"Ouch!!!!"];
     }

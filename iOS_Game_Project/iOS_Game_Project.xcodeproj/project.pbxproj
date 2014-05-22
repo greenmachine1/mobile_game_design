@@ -222,6 +222,8 @@
 		D6B214D1191A15A3005D3E7F /* enemy.png in Resources */ = {isa = PBXBuildFile; fileRef = D6B214D0191A15A3005D3E7F /* enemy.png */; };
 		D6B214D4191A2048005D3E7F /* Hammer.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D6B214D2191A2048005D3E7F /* Hammer.mp3 */; };
 		D6B214D5191A2048005D3E7F /* sea_audio.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D6B214D3191A2048005D3E7F /* sea_audio.mp3 */; };
+		D6EECBDA192D6095008D6EF0 /* healthHeartSprite.png in Resources */ = {isa = PBXBuildFile; fileRef = D6EECBD9192D6095008D6EF0 /* healthHeartSprite.png */; };
+		D6EECBDD192D613B008D6EF0 /* heathHeartSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = D6EECBDC192D613B008D6EF0 /* heathHeartSprite.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -676,6 +678,9 @@
 		D6B214D0191A15A3005D3E7F /* enemy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = enemy.png; sourceTree = "<group>"; };
 		D6B214D2191A2048005D3E7F /* Hammer.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Hammer.mp3; sourceTree = "<group>"; };
 		D6B214D3191A2048005D3E7F /* sea_audio.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sea_audio.mp3; sourceTree = "<group>"; };
+		D6EECBD9192D6095008D6EF0 /* healthHeartSprite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = healthHeartSprite.png; sourceTree = "<group>"; };
+		D6EECBDB192D613B008D6EF0 /* heathHeartSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = heathHeartSprite.h; sourceTree = "<group>"; };
+		D6EECBDC192D613B008D6EF0 /* heathHeartSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = heathHeartSprite.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -749,6 +754,7 @@
 			children = (
 				D6B214D6191A208C005D3E7F /* Audio */,
 				D6B214D0191A15A3005D3E7F /* enemy.png */,
+				D6EECBD9192D6095008D6EF0 /* healthHeartSprite.png */,
 				D6AA90951924AFE5000620E1 /* Goal.png */,
 				D6B2120119199933005D3E7F /* guy_pixel_art.png */,
 				D656749D1918979A003CC6E9 /* Default.png */,
@@ -1580,6 +1586,8 @@
 				D63681B4192405EC0011A1BB /* Enemy_Sprite_Object.m */,
 				D6376B30192495AA00BFF544 /* EndBox.h */,
 				D6376B31192495AA00BFF544 /* EndBox.m */,
+				D6EECBDB192D613B008D6EF0 /* heathHeartSprite.h */,
+				D6EECBDC192D613B008D6EF0 /* heathHeartSprite.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -1671,6 +1679,7 @@
 				D65674A91918979A003CC6E9 /* Icon@2x.png in Resources */,
 				D6B212041919ACED005D3E7F /* Block.png in Resources */,
 				D65674BB1918979A003CC6E9 /* Icon-Small@2x.png in Resources */,
+				D6EECBDA192D6095008D6EF0 /* healthHeartSprite.png in Resources */,
 				D65674AD1918979A003CC6E9 /* Icon-72@2x.png in Resources */,
 				D6AA90961924AFE5000620E1 /* Goal.png in Resources */,
 				D656749E1918979A003CC6E9 /* Default.png in Resources */,
@@ -1763,6 +1772,7 @@
 				D65675B71918979B003CC6E9 /* CCGLView.m in Sources */,
 				D656757A1918979B003CC6E9 /* CCSprite.m in Sources */,
 				D65674D61918979A003CC6E9 /* CCActionInterval.m in Sources */,
+				D6EECBDD192D613B008D6EF0 /* heathHeartSprite.m in Sources */,
 				D65675451918979B003CC6E9 /* CCPhysicsJoint.m in Sources */,
 				D65675231918979A003CC6E9 /* CCMotionStreak.m in Sources */,
 				D65674D31918979A003CC6E9 /* CCActionInstant.m in Sources */,

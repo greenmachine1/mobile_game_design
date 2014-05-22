@@ -38,11 +38,15 @@
 }
 
 
+
+
 //   returning the position   //
 -(CGPoint)returnLocation{
     
     return self.position;
 }
+
+
 
 //   returns the bounding box around the sprite   //
 -(CGRect)getBoundingBox{
@@ -53,16 +57,22 @@
                       guySprite.contentSize.height);
 }
 
+
+
 -(void)changeColor{
     
+    // changes the guy to red //
     guySprite.color = [CCColor colorWithRed:1.0f green:0.0f blue:0.0f];
     
     [self performSelector:@selector(changeBackColor) withObject:self afterDelay:2.0f];
     
 }
 
+
+
 -(void)changeBackColor{
     
+    // changes the guy back to normal //
     guySprite.color = [CCColor colorWithRed:1.0f green:1.0f blue:1.0f];
     
 }

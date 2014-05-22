@@ -37,6 +37,7 @@
     int speed;
     
     int score;
+    NSMutableArray *numberOfHearts;
     
     float xDistance;
     float yDistance;
