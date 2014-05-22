@@ -211,7 +211,7 @@
      */
     
     
-    // manually adding all the images to the array 
+    // manually adding all the images to the array
     [blockImages addObject:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"Block1.png"]]];
     [blockImages addObject:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"Block2.png"]]];
     [blockImages addObject:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"Block3.png"]]];
@@ -219,16 +219,16 @@
     [blockImages addObject:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"Block5.png"]]];
     
     
-    NSLog(@"Number of objects in the array %lu", (unsigned long)blockImages.count);
-    NSLog(@"The objects %@", blockImages);
     
+    // creating the animation //
+    CCAnimation *animateBlock = [CCAnimation animationWithSpriteFrames:blockImages delay:0.3f];
     
-    CCAnimation *animateBlock = [CCAnimation animationWithSpriteFrames:blockImages delay:0.5f];
-    
+    // creating an action based on that animation //
     CCActionAnimate *animateAction = [CCActionAnimate actionWithAnimation:animateBlock];
     
     CCSprite *blockSprite = [CCSprite spriteWithImageNamed:@"Block1.png"];
     
+    // attaching that action to the block sprite
     [blockSprite runAction:animateAction];
     
     blockSprite.position = ccp(xBounds / 2, yBounds / 2);
