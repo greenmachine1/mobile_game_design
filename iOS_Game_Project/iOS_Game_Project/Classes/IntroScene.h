@@ -18,6 +18,8 @@
 
 #import "EndBox.h"
 
+#import "pauseAndPlay.h"
+
 
 
 
@@ -40,6 +42,9 @@
     int speed;
     
     int score;
+    
+    int togglePausePlay;
+    
     NSMutableArray *numberOfHearts;
     
     float xDistance;
@@ -56,6 +61,7 @@
     EndBox *newEndBox;
     
     CCLayoutBox *goalBox;
+    pauseAndPlay *newPauseAndPlay;
     
 }
 

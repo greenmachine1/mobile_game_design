@@ -9,20 +9,14 @@
 
 // Import the interfaces
 #import "IntroScene.h"
-
 #import "Block_Wall.h"
-
 #import "Guy_Sprite_Object.h"
-
 #import "Enemy_Sprite_Object.h"
-
 #import "EndBox.h"
-
 #import "heathHeartSprite.h"
-
 #import "cocos2d.h"
-
 #import "CCAnimation.h"
+#import "pauseAndPlay.h"
 
 
 
@@ -66,6 +60,8 @@
     // setting the initial score which is 5 //
     score = 4;
     
+    togglePausePlay = 0;
+    
     numberOfHearts = [[NSMutableArray alloc] init];
     
     
@@ -80,16 +76,7 @@
     //   adding the background color to the scene   //
     [self addChild:background];
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     newGuySprite = [Guy_Sprite_Object createGuySpriteWithLocation:ccp(xBounds - 64, yBounds / 2)];
     [newGuySprite setZOrder:1];
     
@@ -111,6 +98,8 @@
     [self creationOfHealthHearts];
     
     [self creationOfRandomBlock];
+    
+    [self creationOfPauseAndResume];
     
 	return self;
 }
@@ -244,6 +233,20 @@
 
 
 
+-(void)creationOfPauseAndResume{
+    
+    newPauseAndPlay = [pauseAndPlay creationOfPauseAndPlayAtLocation:ccp(xBounds - 32.0f, 32.0f)];
+    
+    [newPauseAndPlay setZOrder:1];
+    
+    [self addChild:newPauseAndPlay];
+    
+    
+    
+}
+
+
+
 
 
 
@@ -287,6 +290,7 @@
     [self collisionForEnemy];
     
     [self collisionWithEnd];
+    
 }
 
 
@@ -297,7 +301,16 @@
 //   nothing more   //
 -(void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event{
     
+    
+    
     touchPoint = [touch locationInNode:self];
+    
+    if(CGRectContainsPoint([newPauseAndPlay getBoundingBox], touchPoint)){
+        
+        NSLog(@"Yes");
+        // calling on the pause and resume method //
+        [newPauseAndPlay pauseAndResume:1];
+    }
     
 }
 
