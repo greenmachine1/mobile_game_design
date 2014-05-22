@@ -56,9 +56,12 @@
     speed = 200;
     
     // setting the initial score which is 5 //
-    score = 5;
+    score = 4;
     
     numberOfHearts = [[NSMutableArray alloc] init];
+    
+    
+    
     
     
     
@@ -68,6 +71,8 @@
     
     //   adding the background color to the scene   //
     [self addChild:background];
+    
+    
     
     
     
@@ -111,7 +116,7 @@
 
     for(int i = 1; i < 5; i++){
         
-        heathHeartSprite *newHealthHeart = [heathHeartSprite createHeathHeartAtLocation:ccp(64 * i, yBounds - 32)];
+        heathHeartSprite *newHealthHeart = [heathHeartSprite createHeathHeartAtLocation:ccp(32 * i, yBounds - 32)];
         
         //[newHealthHeart setZOrder:2];
         
