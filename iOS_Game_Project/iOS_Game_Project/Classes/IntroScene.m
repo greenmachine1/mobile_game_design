@@ -54,6 +54,10 @@
     xBounds = self.contentSize.width;
     yBounds = self.contentSize.height;
     
+    
+    
+    
+    
     // setting the movement speed of the guy //
     speed = 200;
     
@@ -61,9 +65,8 @@
     score = 4;
     
     togglePausePlay = 1;
-    
-    numberOfHearts = [[NSMutableArray alloc] init];
-    
+
+
     
     
     
@@ -114,6 +117,10 @@
 }
 
 
+
+
+
+
 -(void)creationOfHealthHearts{
 
     for(int i = 1; i < 5; i++){
@@ -139,6 +146,10 @@
 
 
 
+
+
+
+
 -(void)createEndBox{
     
     newEndBox = [EndBox createEndBoxWithLocation:ccp(64.0f, yBounds / 2)];
@@ -147,6 +158,27 @@
     
     [self addChild:newEndBox];
 }
+
+
+
+
+
+
+-(void)creationOfPauseAndResume{
+    
+    newPauseAndPlay = [pauseAndPlay creationOfPauseAndPlayAtLocation:ccp(xBounds - 32.0f, 32.0f)];
+    
+    [newPauseAndPlay setZOrder:1];
+    
+    [self addChild:newPauseAndPlay];
+    
+    
+    
+}
+
+
+
+
 
 
 
@@ -232,18 +264,6 @@
 }
 
 
-
--(void)creationOfPauseAndResume{
-    
-    newPauseAndPlay = [pauseAndPlay creationOfPauseAndPlayAtLocation:ccp(xBounds - 32.0f, 32.0f)];
-    
-    [newPauseAndPlay setZOrder:1];
-    
-    [self addChild:newPauseAndPlay];
-    
-    
-    
-}
 
 
 

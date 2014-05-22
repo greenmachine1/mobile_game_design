@@ -40,12 +40,9 @@
     int yBounds;
     
     int speed;
-    
     int score;
     
     int togglePausePlay;
-    
-    NSMutableArray *numberOfHearts;
     
     float xDistance;
     float yDistance;
@@ -54,7 +51,6 @@
     CGPoint endPoint;
     
     CGPoint touchPoint;
-    CCTime deltaTime;
     
     Guy_Sprite_Object *newGuySprite;
     Enemy_Sprite_Object *newEnemySprite;
