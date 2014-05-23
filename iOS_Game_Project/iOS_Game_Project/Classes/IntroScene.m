@@ -207,6 +207,7 @@
     //   creation of the middle block   //
     Block_Wall *midBlock = [Block_Wall createWallAtPosition:ccp(128.0f, 96.0f)];
     
+    // animate the block //
     [midBlock blockAnimate];
         
     midBlock.name = @"Middle";
@@ -214,53 +215,6 @@
     [self addChild:midBlock];
 
 }
-
-
-
-// this block has no collision detection as of yet //
-// I plan to implement it to an existing block class //
-// at a later point //
--(void)creationOfRandomBlock{
-    
-    // loading images into cache
-    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"blockanimation.plist"];
-    
-    NSMutableArray *blockImages = [[NSMutableArray alloc] init];
-    
-    for(int i = 1; i < 6; i++){
-        
-        [blockImages addObject:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"Block%i.png", i]]];
-        
-        
-    }
-    
-    
-    // creating the animation //
-    CCAnimation *animateBlock = [CCAnimation animationWithSpriteFrames:blockImages delay:0.3f];
-    
-    // creating an action based on that animation //
-    CCActionAnimate *animateAction = [CCActionAnimate actionWithAnimation:animateBlock];
-    
-    CCSprite *blockSprite = [CCSprite spriteWithImageNamed:@"Block1.png"];
-    
-    // attaching that action to the block sprite
-    [blockSprite runAction:animateAction];
-    
-    blockSprite.position = ccp(xBounds / 2, yBounds / 2);
-    
-    [self addChild:blockSprite];
-    
-
-    
-    
-}
-
-
-
-
-
-
-
 
 
 
