@@ -224,23 +224,23 @@
     [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"blockanimation.plist"];
     
     NSMutableArray *blockImages = [[NSMutableArray alloc] init];
-    /*
-    for(int i = 0; i < 4; i++){
+    
+    for(int i = 1; i < 5; i++){
         
-        [blockImages addObject:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"Block1.png"]]];
+        [blockImages addObject:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"Block%i.png", i]]];
         
         
     }
-     */
     
     
+    /*
     // manually adding all the images to the array
     [blockImages addObject:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"Block1.png"]]];
     [blockImages addObject:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"Block2.png"]]];
     [blockImages addObject:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"Block3.png"]]];
     [blockImages addObject:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"Block4.png"]]];
     [blockImages addObject:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"Block5.png"]]];
-    
+    */
     
     
     // creating the animation //
