@@ -100,7 +100,7 @@
     
     [self creationOfHealthHearts];
     
-    [self creationOfRandomBlock];
+    //[self creationOfRandomBlock];
     
     [self creationOfPauseAndResume];
     
@@ -206,6 +206,8 @@
     
     //   creation of the middle block   //
     Block_Wall *midBlock = [Block_Wall createWallAtPosition:ccp(128.0f, 96.0f)];
+    
+    [midBlock blockAnimate];
         
     midBlock.name = @"Middle";
     [midBlock setZOrder:1];
@@ -225,22 +227,12 @@
     
     NSMutableArray *blockImages = [[NSMutableArray alloc] init];
     
-    for(int i = 1; i < 5; i++){
+    for(int i = 1; i < 6; i++){
         
         [blockImages addObject:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"Block%i.png", i]]];
         
         
     }
-    
-    
-    /*
-    // manually adding all the images to the array
-    [blockImages addObject:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"Block1.png"]]];
-    [blockImages addObject:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"Block2.png"]]];
-    [blockImages addObject:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"Block3.png"]]];
-    [blockImages addObject:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"Block4.png"]]];
-    [blockImages addObject:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"Block5.png"]]];
-    */
     
     
     // creating the animation //

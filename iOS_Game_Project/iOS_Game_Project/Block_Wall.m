@@ -53,4 +53,37 @@
                       brickWallSprite.contentSize.height);
 }
 
+-(void)blockAnimate{
+    
+    // loading images into cache
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"blockanimation.plist"];
+    
+    NSMutableArray *blockImages = [[NSMutableArray alloc] init];
+    
+    for(int i = 1; i < 6; i++){
+        
+        [blockImages addObject:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"Block%i.png", i]]];
+        
+        
+    }
+    
+    
+    // creating the animation //
+    CCAnimation *animateBlock = [CCAnimation animationWithSpriteFrames:blockImages delay:0.3f];
+    
+    // creating an action based on that animation //
+    CCActionAnimate *animateAction = [CCActionAnimate actionWithAnimation:animateBlock];
+    
+    CCSprite *blockSprite = [CCSprite spriteWithImageNamed:@"Block1.png"];
+    
+    // attaching that action to the block sprite
+    [blockSprite runAction:animateAction];
+    
+    //blockSprite.position = ccp(xBounds / 2, yBounds / 2);
+    
+    [self addChild:blockSprite];
+    
+    
+}
+
 @end

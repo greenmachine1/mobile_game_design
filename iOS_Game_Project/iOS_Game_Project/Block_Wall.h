@@ -19,6 +19,7 @@
 +(id)createWallAtPosition:(CGPoint)point;
 -(CGPoint)returnLocation;
 -(CGRect)getBoundingBox;
+-(void)blockAnimate;
 
 @property (nonatomic, strong)NSString *name;
 
