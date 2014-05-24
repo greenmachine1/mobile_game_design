@@ -50,6 +50,8 @@
     playSound = [OALSimpleAudio sharedInstance];
     
     
+    
+    
     // getting the x and y coords of the screen size //
     xBounds = self.contentSize.width;
     yBounds = self.contentSize.height;
@@ -70,8 +72,6 @@
     
     
     
-    
-    
     // background stuff //
     CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.1 green:0.4 blue:0.5 alpha:1.0]];
     [background setZOrder:0];
@@ -79,18 +79,17 @@
     //   adding the background color to the scene   //
     [self addChild:background];
     
-
+    
+    
+    
+    // creating the guy //
     newGuySprite = [Guy_Sprite_Object createGuySpriteWithLocation:ccp(xBounds - 64, yBounds / 2)];
     [newGuySprite setZOrder:1];
     
-    
-    // setting the starting point as an initial reference //
-    startPoint = newGuySprite.position;
-    
     touchPoint = newGuySprite.position;
-
-    //   adding the guy to the scene   //
     [self addChild:newGuySprite];
+    
+    
     
     [self creationOfBlocks];
     
@@ -357,12 +356,16 @@
 }
 
 
+
 -(void)collisionWithAnyBlock{
     
+    // checking for block objects //
     for(Block_Wall *blocks in self.children){
         
+        // checking to see if its the kind of class //
         if([blocks isKindOfClass:[Block_Wall class]]){
             
+            // checking for intersection of two bounding boxes //
             if(CGRectIntersectsRect([blocks getBoundingBox], [newGuySprite getBoundingBox])){
             
                 //   naming all the constant boundries   //
@@ -433,17 +436,7 @@
     
     //   initializing a goalbox   //
     goalBox = [[CCLayoutBox alloc] init];
-    
-    //   the ok button   //
-    CCButton *okButton = [CCButton buttonWithTitle:@"Ok!"];
-    okButton.block = ^(id sender){
-        
-        //   dismissing the box   //
-        //[goalBox removeFromParentAndCleanup:true];
-        [self removeGoalBox];
-        
-    };
-    
+
     //   setting up a label   //
     CCLabelTTF *label = [CCLabelTTF labelWithString:passedInString fontName:@"Chalkduster" fontSize:20.0f];
     label.positionType = CCPositionTypeNormalized;
@@ -459,15 +452,14 @@
     goalBox.position = ccp(xBounds / 2, yBounds / 2);
     goalBox.cascadeColorEnabled = YES;
     goalBox.cascadeOpacityEnabled = YES;
-    
-    [goalBox addChild:okButton];
+
     [goalBox addChild:label];
-    
     [self addChild:goalBox];
     
     [self performSelector:@selector(removeGoalBox) withObject:self afterDelay:2.0f];
     
 }
+
 
 
 -(void)removeGoalBox{

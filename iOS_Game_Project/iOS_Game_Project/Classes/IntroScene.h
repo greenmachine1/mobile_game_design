@@ -47,9 +47,6 @@
     float xDistance;
     float yDistance;
     
-    CGPoint startPoint;
-    CGPoint endPoint;
-    
     CGPoint touchPoint;
     
     Guy_Sprite_Object *newGuySprite;
