@@ -100,8 +100,6 @@
     
     [self creationOfHealthHearts];
     
-    //[self creationOfRandomBlock];
-    
     [self creationOfPauseAndResume];
     
 	return self;
@@ -122,7 +120,7 @@
 
 
 -(void)creationOfHealthHearts{
-
+    
     for(int i = 1; i < 5; i++){
         
         heathHeartSprite *newHealthHeart = [heathHeartSprite createHeathHeartAtLocation:ccp(32 * i, yBounds - 32)];
@@ -186,33 +184,34 @@
     
     //   creation of the upper level blocks   //
     for(int i = 1; i < xBounds / 64; i ++){
+        Block_Wall *newBlockWallLayout = [Block_Wall createWallAtPosition:ccp((i * 64), 32.0f)];
         
-        Block_Wall *newBlockWallLayout = [Block_Wall createWallAtPosition:ccp(i * 64, 32.0f)];
-        newBlockWallLayout.name = @"Lower";
-        
-        [self addChild:newBlockWallLayout z:1 name:@"Lower"];
+        [self addChild:newBlockWallLayout z:1];
     }
+    
+    
+    
     
     
     //   creation of the lower level blocks   //
     for(int j = 1; j < xBounds / 64; j++){
         
         Block_Wall *newBlockWallLayout = [Block_Wall createWallAtPosition:ccp(j * 64, yBounds - 32)];
-        newBlockWallLayout.name = @"Upper";
-        [newBlockWallLayout setZOrder:1];
-        [self addChild:newBlockWallLayout];
+        
+        [self addChild:newBlockWallLayout z:1];
     }
     
     
+    
+    
+    
     //   creation of the middle block   //
-    Block_Wall *midBlock = [Block_Wall createWallAtPosition:ccp(128.0f, 96.0f)];
+    Block_Wall *midBlock = [Block_Wall createWallAtPosition:ccp(128.0f, yBounds / 2)];
     
     // animate the block //
     [midBlock blockAnimate];
-        
-    midBlock.name = @"Middle";
-    [midBlock setZOrder:1];
-    [self addChild:midBlock];
+    
+    [self addChild:midBlock z:1];
 
 }
 
@@ -251,7 +250,7 @@
     }
     
     
-    [self collisionForWall];
+    [self collisionWithAnyBlock];
 
     [self collisionForEnemy];
     
@@ -358,95 +357,68 @@
 }
 
 
-
-
-
-
-//   collision detection for all wall types   //
--(void)collisionForWall{
+-(void)collisionWithAnyBlock{
     
-    //   looking for the block wall   //
     for(Block_Wall *blocks in self.children){
         
-        //   going through all my block classes and getting their locations   //
         if([blocks isKindOfClass:[Block_Wall class]]){
             
-            //   check for collision   //
             if(CGRectIntersectsRect([blocks getBoundingBox], [newGuySprite getBoundingBox])){
+            
+                //   naming all the constant boundries   //
+                float positiveXForGuy = newGuySprite.position.x + [newGuySprite getBoundingBox].size.width / 2;
+                float negativeXForGuy = newGuySprite.position.x - [newGuySprite getBoundingBox].size.width / 2;
+                float positiveYForGuy = newGuySprite.position.y + [newGuySprite getBoundingBox].size.height / 2;
+                float negativeYForGuy = newGuySprite.position.y - [newGuySprite getBoundingBox].size.height / 2;
                 
-                if([blocks.name isEqualToString:@"Upper"]){
+                float positiveXForBlock = blocks.position.x + [blocks getBoundingBox].size.width / 2;
+                float negativeXForBlock = blocks.position.x - [blocks getBoundingBox].size.width / 2;
+                float positiveYForBlock = blocks.position.y + [blocks getBoundingBox].size.height / 2;
+                float negativeYForBlock = blocks.position.y - [blocks getBoundingBox].size.height / 2;
+                
+                
+                //   checking to see if the right side of the free standing block has been touched   //
+                //   if so, check the top and bottom edges to make sure its free before allowing   //
+                //   to pass   //
+                if((negativeXForGuy < positiveXForBlock) && ((negativeYForGuy < positiveYForBlock) && (positiveYForGuy > negativeYForBlock)) && (!(negativeXForGuy < blocks.position.x))){
                     
-                    NSLog(@"upper");
+                    
+                    newGuySprite.position = ccp(blocks.position.x + 64 , newGuySprite.position.y);
+                    [newGuySprite stopAllActions];
+                    
+                    
+                }
+                
+                //   checking to see if the left side of the free standing block has been touched   //
+                //   if so, check the top and bottom edges to makes sure its free before allowing   //
+                //   to pass   //
+                else if((positiveXForGuy > negativeXForBlock) && ((negativeYForGuy < positiveYForBlock) && (positiveYForGuy > negativeYForBlock)) && (!(positiveXForGuy > blocks.position.x))){
+                    
+                    
+                    newGuySprite.position = ccp(blocks.position.x - 64, newGuySprite.position.y);
+                    [newGuySprite stopAllActions];
+                    
+                    
+                }
+                
+                
+                //   use the same principals as above for top and bottom collision   //
+                else if((positiveYForGuy > negativeYForBlock) && ((negativeXForGuy < positiveXForBlock) && (positiveXForGuy > negativeXForBlock)) && (!(positiveYForGuy > blocks.position.y))){
+                    
+                    
                     newGuySprite.position = ccp(newGuySprite.position.x, blocks.position.y - 64);
                     [newGuySprite stopAllActions];
-                    NSLog(@"Collision at %@", NSStringFromCGPoint(newGuySprite.position));
                     
-                }else if([blocks.name isEqualToString:@"Lower"]){
                     
-                    NSLog(@"Lower");
-                    //   repositioning my guy   //
-                    newGuySprite.position = ccp(newGuySprite.position.x , blocks.position.y + 64);
-                    [newGuySprite stopAllActions];
-                    NSLog(@"Collision at %@", NSStringFromCGPoint(newGuySprite.position));
-                    
+                }
                 
-                }else if([blocks.name isEqualToString:@"Middle"]){
-                    
-                    //   naming all the constant boundries   //
-                    float positiveXForGuy = newGuySprite.position.x + [newGuySprite getBoundingBox].size.width / 2;
-                    float negativeXForGuy = newGuySprite.position.x - [newGuySprite getBoundingBox].size.width / 2;
-                    float positiveYForGuy = newGuySprite.position.y + [newGuySprite getBoundingBox].size.height / 2;
-                    float negativeYForGuy = newGuySprite.position.y - [newGuySprite getBoundingBox].size.height / 2;
-                    
-                    float positiveXForBlock = blocks.position.x + [blocks getBoundingBox].size.width / 2;
-                    float negativeXForBlock = blocks.position.x - [blocks getBoundingBox].size.width / 2;
-                    float positiveYForBlock = blocks.position.y + [blocks getBoundingBox].size.height / 2;
-                    float negativeYForBlock = blocks.position.y - [blocks getBoundingBox].size.height / 2;
+                
+                else if((negativeYForGuy < positiveYForBlock) && ((negativeXForGuy < positiveXForBlock) && (positiveXForGuy > negativeXForBlock)) && (!(negativeYForGuy < blocks.position.y))){
                     
                     
-                    //   checking to see if the right side of the free standing block has been touched   //
-                    //   if so, check the top and bottom edges to make sure its free before allowing   //
-                    //   to pass   //
-                    if((negativeXForGuy < positiveXForBlock) && ((negativeYForGuy < positiveYForBlock) && (positiveYForGuy > negativeYForBlock)) && (!(negativeXForGuy < blocks.position.x))){
-                        
-                        
-                        newGuySprite.position = ccp(blocks.position.x + 64 , newGuySprite.position.y);
-                        [newGuySprite stopAllActions];
-                        
-                        
-                    }
-                    
-                    //   checking to see if the left side of the free standing block has been touched   //
-                    //   if so, check the top and bottom edges to makes sure its free before allowing   //
-                    //   to pass   //
-                    else if((positiveXForGuy > negativeXForBlock) && ((negativeYForGuy < positiveYForBlock) && (positiveYForGuy > negativeYForBlock)) && (!(positiveXForGuy > blocks.position.x))){
-                        
-                        
-                        newGuySprite.position = ccp(blocks.position.x - 64, newGuySprite.position.y);
-                        [newGuySprite stopAllActions];
-                        
-                        
-                    }
+                    newGuySprite.position = ccp(newGuySprite.position.x, blocks.position.y + 64);
                     
                     
-                    //   use the same principals as above for top and bottom collision   //
-                    else if((positiveYForGuy > negativeYForBlock) && ((negativeXForGuy < positiveYForBlock) && (positiveXForGuy > negativeXForBlock)) && (!(positiveYForGuy > blocks.position.y))){
-                        
-                        
-                        newGuySprite.position = ccp(newGuySprite.position.x, blocks.position.y - 64);
-                        [newGuySprite stopAllActions];
-                        
-                        
-                    }
-                    
-                    
-                    else if((negativeYForGuy < positiveYForBlock) && ((negativeXForGuy < positiveXForBlock) && (positiveXForGuy > negativeXForBlock)) && (!(negativeYForGuy < blocks.position.y))){
-                        
-                        
-                        newGuySprite.position = ccp(newGuySprite.position.x, blocks.position.y + 64);
-                        
-                        
-                    }
                 }
             }
         }
