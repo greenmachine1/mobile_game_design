@@ -54,6 +54,7 @@
     EndBox *newEndBox;
     
     CCLayoutBox *goalBox;
+    
     pauseAndPlay *newPauseAndPlay;
     
 }

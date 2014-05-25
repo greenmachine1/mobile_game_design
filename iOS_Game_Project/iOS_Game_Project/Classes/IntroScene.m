@@ -205,7 +205,7 @@
     
     
     //   creation of the middle block   //
-    Block_Wall *midBlock = [Block_Wall createWallAtPosition:ccp(128.0f, yBounds / 2)];
+    Block_Wall *midBlock = [Block_Wall createWallAtPosition:ccp(128.0f, 96.0f)];
     
     // animate the block //
     [midBlock blockAnimate];
@@ -264,7 +264,6 @@
 //   touch began should be just for updating the touch point and   //
 //   nothing more   //
 -(void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event{
-
     
     touchPoint = [touch locationInNode:self];
     
@@ -310,9 +309,6 @@
     //   basically If the user touches the enemy, I need to reset their position   //
     if(CGRectIntersectsRect([newGuySprite getBoundingBox], [newEnemySprite getBoundingBox])){
         
-        //   stops the guy from continuing to move after hitting   //
-        [newGuySprite stopAllActions];
-        
         [playSound playBg:@"sea_audio.mp3"];
         
         score = score - 1;
@@ -330,6 +326,9 @@
         
         //   resets the position of the guy   //
         newGuySprite.position = touchPoint;
+        
+        //   stops the guy from continuing to move after hitting   //
+        [newGuySprite stopAllActions];
         
         // changes the color when hit to denote visually... that hes been hit //
         [newGuySprite changeColor];
@@ -352,8 +351,9 @@
     
     [self goalPopup:@"Game Over!"];
     
-    
 }
+
+
 
 
 
@@ -385,22 +385,17 @@
                 //   to pass   //
                 if((negativeXForGuy < positiveXForBlock) && ((negativeYForGuy < positiveYForBlock) && (positiveYForGuy > negativeYForBlock)) && (!(negativeXForGuy < blocks.position.x))){
                     
-                    
                     newGuySprite.position = ccp(blocks.position.x + 64 , newGuySprite.position.y);
                     [newGuySprite stopAllActions];
-                    
-                    
                 }
                 
                 //   checking to see if the left side of the free standing block has been touched   //
                 //   if so, check the top and bottom edges to makes sure its free before allowing   //
                 //   to pass   //
                 else if((positiveXForGuy > negativeXForBlock) && ((negativeYForGuy < positiveYForBlock) && (positiveYForGuy > negativeYForBlock)) && (!(positiveXForGuy > blocks.position.x))){
-                    
-                    
+        
                     newGuySprite.position = ccp(blocks.position.x - 64, newGuySprite.position.y);
                     [newGuySprite stopAllActions];
-                    
                     
                 }
                 
@@ -408,19 +403,16 @@
                 //   use the same principals as above for top and bottom collision   //
                 else if((positiveYForGuy > negativeYForBlock) && ((negativeXForGuy < positiveXForBlock) && (positiveXForGuy > negativeXForBlock)) && (!(positiveYForGuy > blocks.position.y))){
                     
-                    
                     newGuySprite.position = ccp(newGuySprite.position.x, blocks.position.y - 64);
                     [newGuySprite stopAllActions];
-                    
                     
                 }
                 
                 
                 else if((negativeYForGuy < positiveYForBlock) && ((negativeXForGuy < positiveXForBlock) && (positiveXForGuy > negativeXForBlock)) && (!(negativeYForGuy < blocks.position.y))){
                     
-                    
                     newGuySprite.position = ccp(newGuySprite.position.x, blocks.position.y + 64);
-                    
+                    [newGuySprite stopAllActions];
                     
                 }
             }
@@ -432,17 +424,17 @@
 
 // creating a pop up message that takes in a string //
 -(void)goalPopup:(NSString *)passedInString{
-    
+
     
     //   initializing a goalbox   //
     goalBox = [[CCLayoutBox alloc] init];
 
     //   setting up a label   //
     CCLabelTTF *label = [CCLabelTTF labelWithString:passedInString fontName:@"Chalkduster" fontSize:20.0f];
+
     label.positionType = CCPositionTypeNormalized;
     label.color = [CCColor redColor];
     label.position = ccp(0.5f, 0.5f);
-    
     
     //   setting parameters for the goal box   //
     goalBox.direction = CCLayoutBoxDirectionVertical;
@@ -454,6 +446,7 @@
     goalBox.cascadeOpacityEnabled = YES;
 
     [goalBox addChild:label];
+    
     [self addChild:goalBox];
     
     [self performSelector:@selector(removeGoalBox) withObject:self afterDelay:2.0f];
