@@ -7,10 +7,11 @@
 //
 
 #import "CCScene.h"
+#import "cocos2d.h"
 
 @interface SplashScreen : CCScene
 {
-    
+    CCSprite *mainSplashScreen;
 }
 
 +(SplashScreen *)scene;

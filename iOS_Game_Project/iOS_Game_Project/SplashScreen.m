@@ -23,6 +23,16 @@
     
     if(self = [super init]){
         
+        int xBounds = self.contentSize.width;
+        int yBounds = self.contentSize.height;
+        
+        mainSplashScreen = [CCSprite spriteWithImageNamed:@"Intro_graphic.png"];
+        
+        mainSplashScreen.scale = 0.5f;
+        
+        mainSplashScreen.position = ccp(xBounds / 2, yBounds / 2);
+        
+        [self addChild:mainSplashScreen];
         
         
         // switches scenes after 5 seconds of displaying the splash screen //
