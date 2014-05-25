@@ -9,5 +9,10 @@
 #import "CCScene.h"
 
 @interface SplashScreen : CCScene
+{
+    
+}
+
++(SplashScreen *)scene;
 
 @end
