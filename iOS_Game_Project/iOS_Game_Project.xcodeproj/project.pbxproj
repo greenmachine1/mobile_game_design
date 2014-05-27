@@ -218,6 +218,7 @@
 		D65677291918979C003CC6E9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D65677281918979C003CC6E9 /* main.m */; };
 		D656772D1918979C003CC6E9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D656772C1918979C003CC6E9 /* AppDelegate.m */; };
 		D65677331918979C003CC6E9 /* IntroScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D65677321918979C003CC6E9 /* IntroScene.m */; };
+		D697111C1934354100899F60 /* menu_box_pause.png in Resources */ = {isa = PBXBuildFile; fileRef = D697111B1934354100899F60 /* menu_box_pause.png */; };
 		D698D42D192E7DE1004FB750 /* pause_sprite.png in Resources */ = {isa = PBXBuildFile; fileRef = D698D42B192E7DE1004FB750 /* pause_sprite.png */; };
 		D698D42E192E7DE1004FB750 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = D698D42C192E7DE1004FB750 /* play.png */; };
 		D6AA90941924AEC0000620E1 /* Applause.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D6AA90931924AEC0000620E1 /* Applause.mp3 */; };
@@ -687,6 +688,7 @@
 		D656772C1918979C003CC6E9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Classes/AppDelegate.m; sourceTree = "<group>"; };
 		D65677311918979C003CC6E9 /* IntroScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IntroScene.h; path = Classes/IntroScene.h; sourceTree = "<group>"; };
 		D65677321918979C003CC6E9 /* IntroScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = IntroScene.m; path = Classes/IntroScene.m; sourceTree = "<group>"; };
+		D697111B1934354100899F60 /* menu_box_pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_box_pause.png; sourceTree = "<group>"; };
 		D698D42B192E7DE1004FB750 /* pause_sprite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pause_sprite.png; sourceTree = "<group>"; };
 		D698D42C192E7DE1004FB750 /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
 		D6AA90931924AEC0000620E1 /* Applause.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Applause.mp3; sourceTree = "<group>"; };
@@ -784,6 +786,7 @@
 				D6B214D0191A15A3005D3E7F /* enemy.png */,
 				D6EC7E861931EB4000690E86 /* Intro_graphic.png */,
 				D698D42B192E7DE1004FB750 /* pause_sprite.png */,
+				D697111B1934354100899F60 /* menu_box_pause.png */,
 				D698D42C192E7DE1004FB750 /* play.png */,
 				D6EECBD9192D6095008D6EF0 /* healthHeartSprite.png */,
 				D6AA90951924AFE5000620E1 /* Goal.png */,
@@ -1736,6 +1739,7 @@
 				D65674A21918979A003CC6E9 /* Default-568h@2x.png in Resources */,
 				D65674C21918979A003CC6E9 /* iTunesArtwork in Resources */,
 				D6AA90941924AEC0000620E1 /* Applause.mp3 in Resources */,
+				D697111C1934354100899F60 /* menu_box_pause.png in Resources */,
 				D65674BD1918979A003CC6E9 /* Icon-Spotlight-iOS7.png in Resources */,
 				D6B214D4191A2048005D3E7F /* Hammer.mp3 in Resources */,
 				D65674B11918979A003CC6E9 /* Icon-76@2x.png in Resources */,

@@ -37,8 +37,6 @@
     int speed;
     int score;
     
-    int togglePausePlay;
-    
     float xDistance;
     float yDistance;
     
@@ -48,10 +46,12 @@
     Enemy_Sprite_Object *newEnemySprite;
     EndBox *newEndBox;
     
-    CCButton *pauseButton;
-    
     CCLayoutBox *goalBox;
     
+    // pause elements //
+    CCNodeColor *backgroundColorOnPause;
+    CCButton *pauseButton;
+    CCLayoutBox *pauseLayoutBox;
     
 }
 

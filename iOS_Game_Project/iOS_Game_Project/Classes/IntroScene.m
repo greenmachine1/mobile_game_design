@@ -16,6 +16,7 @@
 #import "heathHeartSprite.h"
 #import "cocos2d.h"
 #import "CCAnimation.h"
+#import "MainMenuScene.h"
 
 
 
@@ -75,6 +76,7 @@
     
     
     
+    // adding pause functionality //
     CCSpriteFrame *pauseSprite = [CCSpriteFrame frameWithImageNamed:@"pause_sprite.png"];
     
     pauseButton = [CCButton buttonWithTitle:nil spriteFrame:pauseSprite];
@@ -87,11 +89,15 @@
     
     
     
+    
     // creating the guy //
     newGuySprite = [Guy_Sprite_Object createGuySpriteWithLocation:ccp(xBounds - 64, yBounds / 2)];
     [newGuySprite setZOrder:1];
     
     touchPoint = newGuySprite.position;
+    
+    
+    
     
     [self addChild:newGuySprite];
     
@@ -119,9 +125,90 @@
 
 
 
+// creating a popup that allows the user to resume or go to main menu //
 -(void)onPauseGame{
     
-    NSLog(@"paused");
+    // changing the color of the background to better denote the pausing effect //
+    backgroundColorOnPause = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.6]];
+    backgroundColorOnPause.zOrder = 4;
+    [self addChild:backgroundColorOnPause];
+    
+    
+    
+    // pausing the game //
+    [[CCDirector sharedDirector] pause];
+    
+    
+    
+    // creating elements for the pause menu //
+    CCSprite *menuBoxPause = [CCSprite spriteWithImageNamed:@"menu_box_pause.png"];
+    
+    pauseLayoutBox = [[CCLayoutBox alloc] init];
+    pauseLayoutBox.anchorPoint = ccp(0.5, 0.5);
+    pauseLayoutBox.direction = CCLayoutBoxDirectionVertical;
+    
+    [pauseLayoutBox setZOrder:5];
+    
+    
+    
+    
+    CCButton *resumeButton = [CCButton buttonWithTitle:@"Resume"];
+    [resumeButton setTarget:self selector:@selector(resumeButton)];
+    resumeButton.position = ccp(menuBoxPause.contentSize.width / 2, (menuBoxPause.contentSize.height / 2) + 50.0f);
+    
+    
+    
+    CCButton *mainMenuButton = [CCButton buttonWithTitle:@"Main Menu"];
+    [mainMenuButton setTarget:self selector:@selector(mainMenuButton)];
+    mainMenuButton.position = ccp(menuBoxPause.contentSize.width / 2, (menuBoxPause.contentSize.height / 2) );
+    
+    
+    // setting the resumeButton to be the child of the sprite //
+    // menuBoxPause square //
+    [menuBoxPause addChild:mainMenuButton];
+    [menuBoxPause addChild:resumeButton];
+    
+    
+    
+    
+    [pauseLayoutBox addChild:menuBoxPause];
+    
+    pauseLayoutBox.position = ccp(xBounds / 2, yBounds / 2);
+    
+    [self addChild:pauseLayoutBox];
+}
+
+
+
+// resuming the game //
+-(void)resumeButton{
+    
+    // removes elements from pause from the screen //
+    [backgroundColorOnPause removeFromParentAndCleanup:true];
+    [pauseLayoutBox removeFromParentAndCleanup:true];
+    
+    
+    // resuming the game //
+    [[CCDirector sharedDirector] resume];
+    
+}
+
+
+
+
+// going back to the main menu //
+-(void)mainMenuButton{
+    
+    
+    // removes elements from pause from the screen //
+    [backgroundColorOnPause removeFromParentAndCleanup:true];
+    [pauseLayoutBox removeFromParentAndCleanup:true];
+    
+    // resuming the game //
+    [[CCDirector sharedDirector] resume];
+    
+    [[CCDirector sharedDirector] replaceScene:[MainMenuScene scene]
+                               withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionUp duration:1.0f]];
     
 }
     
