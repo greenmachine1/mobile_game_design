@@ -7,9 +7,17 @@
 //
 
 #import "CCScene.h"
+#import "cocos2d.h"
 
 @interface MainMenuScene : CCScene
-
+{
+    int xBounds;
+    int yBounds;
+    
+    CCLayoutBox *layoutBox;
+}
 
 +(MainMenuScene *)scene;
+
+
 @end

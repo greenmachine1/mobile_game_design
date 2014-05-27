@@ -9,6 +9,7 @@
 #import "SplashScreen.h"
 #import "cocos2d.h"
 #import "IntroScene.h"
+#import "MainMenuScene.h"
 
 @implementation SplashScreen
 
@@ -27,16 +28,13 @@
         int yBounds = self.contentSize.height;
         
         mainSplashScreen = [CCSprite spriteWithImageNamed:@"Intro_graphic.png"];
-        
         mainSplashScreen.scale = 0.5f;
-        
         mainSplashScreen.position = ccp(xBounds / 2, yBounds / 2);
         
         [self addChild:mainSplashScreen];
         
-        
         // switches scenes after 5 seconds of displaying the splash screen //
-        [self performSelector:@selector(switchScreen) withObject:self afterDelay:5.0f];
+        [self performSelector:@selector(switchScreen) withObject:self afterDelay:1.0f];
         
     }
     return  self;
@@ -44,11 +42,12 @@
 }
 
 
+// switches to the menu screen with 1 second duration //
 -(void)switchScreen{
     
     // start spinning scene with transition
-    [[CCDirector sharedDirector] replaceScene:[IntroScene scene]
-                               withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionLeft duration:1.0f]];
+    [[CCDirector sharedDirector] replaceScene:[MainMenuScene scene]
+                               withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionUp duration:1.0f]];
     
 }
 
