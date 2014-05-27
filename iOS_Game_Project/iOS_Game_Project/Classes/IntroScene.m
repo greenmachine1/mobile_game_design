@@ -80,7 +80,7 @@
     CCSpriteFrame *pauseSprite = [CCSpriteFrame frameWithImageNamed:@"pause_sprite.png"];
     
     pauseButton = [CCButton buttonWithTitle:nil spriteFrame:pauseSprite];
-    pauseButton.position = ccp(xBounds - 32.0f, 32.0f);
+    pauseButton.position = ccp(xBounds - 32.0f,  yBounds - 32.0f);
     
     [pauseButton setTarget:self selector:@selector(onPauseGame)];
     
@@ -151,14 +151,15 @@
     
     
     
-    
-    CCButton *resumeButton = [CCButton buttonWithTitle:@"Resume"];
+    // resume button //
+    //CCButton *resumeButton = [CCButton buttonWithTitle:@"Resume"];
+    CCButton *resumeButton = [CCButton buttonWithTitle:@"Resume!" fontName:@"Chalkduster" fontSize:20.0f];
     [resumeButton setTarget:self selector:@selector(resumeButton)];
     resumeButton.position = ccp(menuBoxPause.contentSize.width / 2, (menuBoxPause.contentSize.height / 2) + 50.0f);
     
     
-    
-    CCButton *mainMenuButton = [CCButton buttonWithTitle:@"Main Menu"];
+    // back to main menu button //
+    CCButton *mainMenuButton = [CCButton buttonWithTitle:@"Main Menu!" fontName:@"Chalkduster" fontSize:20.0f];
     [mainMenuButton setTarget:self selector:@selector(mainMenuButton)];
     mainMenuButton.position = ccp(menuBoxPause.contentSize.width / 2, (menuBoxPause.contentSize.height / 2) );
     
@@ -180,6 +181,10 @@
 
 
 
+
+
+
+
 // resuming the game //
 -(void)resumeButton{
     
@@ -192,6 +197,10 @@
     [[CCDirector sharedDirector] resume];
     
 }
+
+
+
+
 
 
 
@@ -212,6 +221,10 @@
     
 }
     
+
+
+
+
 
 
 
