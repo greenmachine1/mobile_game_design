@@ -16,7 +16,6 @@
 #import "heathHeartSprite.h"
 #import "cocos2d.h"
 #import "CCAnimation.h"
-#import "pauseAndPlay.h"
 
 
 
@@ -66,11 +65,6 @@
     // setting the initial score which is 5 //
     score = 4;
     
-    togglePausePlay = 1;
-
-
-    
-    
     
     // background stuff //
     CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.1 green:0.4 blue:0.5 alpha:1.0]];
@@ -81,15 +75,25 @@
     
     
     
+    CCSpriteFrame *pauseSprite = [CCSpriteFrame frameWithImageNamed:@"pause_sprite.png"];
+    
+    pauseButton = [CCButton buttonWithTitle:nil spriteFrame:pauseSprite];
+    pauseButton.position = ccp(xBounds - 32.0f, 32.0f);
+    
+    [pauseButton setTarget:self selector:@selector(onPauseGame)];
+    
+    [self addChild:pauseButton];
+    
+    
+    
     
     // creating the guy //
     newGuySprite = [Guy_Sprite_Object createGuySpriteWithLocation:ccp(xBounds - 64, yBounds / 2)];
     [newGuySprite setZOrder:1];
     
     touchPoint = newGuySprite.position;
+    
     [self addChild:newGuySprite];
-    
-    
     
     [self creationOfBlocks];
     
@@ -99,7 +103,6 @@
     
     [self creationOfHealthHearts];
     
-    [self creationOfPauseAndResume];
     
 	return self;
 }
@@ -112,6 +115,16 @@
     // Enable touch handling on scene node
     self.userInteractionEnabled = YES;
 }
+
+
+
+
+-(void)onPauseGame{
+    
+    NSLog(@"paused");
+    
+}
+    
 
 
 
@@ -161,17 +174,7 @@
 
 
 
--(void)creationOfPauseAndResume{
-    
-    newPauseAndPlay = [pauseAndPlay creationOfPauseAndPlayAtLocation:ccp(xBounds - 32.0f, 32.0f)];
-    
-    [newPauseAndPlay setZOrder:1];
-    
-    [self addChild:newPauseAndPlay];
-    
-    
-    
-}
+
 
 
 
@@ -266,16 +269,6 @@
 -(void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event{
     
     touchPoint = [touch locationInNode:self];
-    
-    if(CGRectContainsPoint([newPauseAndPlay getBoundingBox], touchPoint)){
-        
-        NSLog(@"Yes");
-        // calling on the pause and resume method //
-        [newPauseAndPlay pauseAndResume:togglePausePlay];
-    
-    }
-    
-    togglePausePlay = 0;
 }
 
 

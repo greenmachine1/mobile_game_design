@@ -9,16 +9,11 @@
 
 // Importing cocos2d.h and cocos2d-ui.h, will import anything you need to start using cocos2d-v3
 #import "cocos2d.h"
-
 #import "cocos2d-ui.h"
-
 #import "Guy_Sprite_Object.h"
-
 #import "Enemy_Sprite_Object.h"
-
 #import "EndBox.h"
 
-#import "pauseAndPlay.h"
 
 
 
@@ -53,9 +48,10 @@
     Enemy_Sprite_Object *newEnemySprite;
     EndBox *newEndBox;
     
+    CCButton *pauseButton;
+    
     CCLayoutBox *goalBox;
     
-    pauseAndPlay *newPauseAndPlay;
     
 }
 

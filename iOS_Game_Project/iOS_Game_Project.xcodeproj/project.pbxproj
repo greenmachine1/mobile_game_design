@@ -220,7 +220,6 @@
 		D65677331918979C003CC6E9 /* IntroScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D65677321918979C003CC6E9 /* IntroScene.m */; };
 		D698D42D192E7DE1004FB750 /* pause_sprite.png in Resources */ = {isa = PBXBuildFile; fileRef = D698D42B192E7DE1004FB750 /* pause_sprite.png */; };
 		D698D42E192E7DE1004FB750 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = D698D42C192E7DE1004FB750 /* play.png */; };
-		D698D431192E7E19004FB750 /* pauseAndPlay.m in Sources */ = {isa = PBXBuildFile; fileRef = D698D430192E7E19004FB750 /* pauseAndPlay.m */; };
 		D6AA90941924AEC0000620E1 /* Applause.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D6AA90931924AEC0000620E1 /* Applause.mp3 */; };
 		D6AA90961924AFE5000620E1 /* Goal.png in Resources */ = {isa = PBXBuildFile; fileRef = D6AA90951924AFE5000620E1 /* Goal.png */; };
 		D6AC44D7192DECC700B842FB /* blockanimation.plist in Resources */ = {isa = PBXBuildFile; fileRef = D6AC44D5192DECC700B842FB /* blockanimation.plist */; };
@@ -690,8 +689,6 @@
 		D65677321918979C003CC6E9 /* IntroScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = IntroScene.m; path = Classes/IntroScene.m; sourceTree = "<group>"; };
 		D698D42B192E7DE1004FB750 /* pause_sprite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pause_sprite.png; sourceTree = "<group>"; };
 		D698D42C192E7DE1004FB750 /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
-		D698D42F192E7E19004FB750 /* pauseAndPlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pauseAndPlay.h; sourceTree = "<group>"; };
-		D698D430192E7E19004FB750 /* pauseAndPlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = pauseAndPlay.m; sourceTree = "<group>"; };
 		D6AA90931924AEC0000620E1 /* Applause.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Applause.mp3; sourceTree = "<group>"; };
 		D6AA90951924AFE5000620E1 /* Goal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Goal.png; sourceTree = "<group>"; };
 		D6AC44D5192DECC700B842FB /* blockanimation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = blockanimation.plist; path = Resources/blockanimation.plist; sourceTree = "<group>"; };
@@ -1622,8 +1619,6 @@
 				D6376B31192495AA00BFF544 /* EndBox.m */,
 				D6EECBDB192D613B008D6EF0 /* heathHeartSprite.h */,
 				D6EECBDC192D613B008D6EF0 /* heathHeartSprite.m */,
-				D698D42F192E7E19004FB750 /* pauseAndPlay.h */,
-				D698D430192E7E19004FB750 /* pauseAndPlay.m */,
 				D6317E7319319D55009E232E /* SplashScreen.h */,
 				D6317E7419319D55009E232E /* SplashScreen.m */,
 				D6EC7E831931DE9900690E86 /* MainMenuScene.h */,
@@ -1832,7 +1827,6 @@
 				D63681B5192405EC0011A1BB /* Enemy_Sprite_Object.m in Sources */,
 				D65675421918979B003CC6E9 /* CCPhysicsBody.m in Sources */,
 				D65675C71918979B003CC6E9 /* CCWindow.m in Sources */,
-				D698D431192E7E19004FB750 /* pauseAndPlay.m in Sources */,
 				D65674DC1918979A003CC6E9 /* CCActionProgressTimer.m in Sources */,
 				D65676921918979C003CC6E9 /* plane.c in Sources */,
 				D65676151918979B003CC6E9 /* OALSimpleAudio.m in Sources */,
