@@ -41,44 +41,40 @@
         // creating a layout box for the menu items to reside //
         layoutBox = [[CCLayoutBox alloc] init];
         
-        
-        
-        // creating a sprite for the game menu items //
-        CCSpriteFrame *playGameSpriteFrame = [CCSpriteFrame frameWithImageNamed:@"Block.png"];
-        CCSpriteFrame *gameTutorialSpriteFrame = [CCSpriteFrame frameWithImageNamed:@"Block.png"];
-        CCSpriteFrame *creditsSpriteFrame = [CCSpriteFrame frameWithImageNamed:@"Block.png"];
-        
-        
-        // setting buttons //
-        CCButton *playGameButton = [CCButton buttonWithTitle:@"Play Game!" spriteFrame:playGameSpriteFrame];
-        
-        
-        
-        CCButton *gamePlayTutorialButton = [CCButton buttonWithTitle:@"Game Tutorial!" spriteFrame:gameTutorialSpriteFrame];
-        
-        
-        CCButton *creditsButton = [CCButton buttonWithTitle:@"Credits!" spriteFrame:creditsSpriteFrame];
-        
-        
-        
-        // setting the buttons actions
-        [playGameButton setTarget:self selector:@selector(playGame)];
-        [gamePlayTutorialButton setTarget:self selector:@selector(gamePlayTutorial)];
-        [creditsButton setTarget:self selector:@selector(gameCredits)];
-        
-
-        
-        // positioning and spacing of the layout box //
-        layoutBox.position = ccp((xBounds / 2) - (playGameSpriteFrame.originalSize.width / 2), (yBounds / 2) - 150.0f);
-        layoutBox.spacing = 10.0f;
+        // same image used for the pause menu //
+        CCSprite *menuBoxSprite = [CCSprite spriteWithImageNamed:@"menu_box_pause.png"];
+ 
+        layoutBox.anchorPoint = ccp(0.5f, 0.5f);
         layoutBox.direction = CCLayoutBoxDirectionVertical;
-        layoutBox.color = [CCColor greenColor];
         
         
-        [layoutBox addChild:creditsButton];
-        [layoutBox addChild:gamePlayTutorialButton];
-        [layoutBox addChild:playGameButton];
         
+        // creation of the buttons
+        CCButton *playGameButton = [CCButton buttonWithTitle:@"Play Game!" fontName:@"Chalkduster" fontSize:20.0f];
+        [playGameButton setTarget:self selector:@selector(playGame)];
+        playGameButton.position = ccp(menuBoxSprite.contentSize.width / 2, (menuBoxSprite.contentSize.height / 2) + 35.0f);
+        
+        CCButton *gamePlayTutorialButton = [CCButton buttonWithTitle:@"Game Play Tutorial!" fontName:@"Chalkduster" fontSize:20.0f];
+        [gamePlayTutorialButton setTarget:self selector:@selector(gamePlayTutorial)];
+        gamePlayTutorialButton.position = ccp(menuBoxSprite.contentSize.width / 2, menuBoxSprite.contentSize.height / 2);
+        
+        CCButton *creditsButton = [CCButton buttonWithTitle:@"Credits!" fontName:@"Chalkduster" fontSize:20.0f];
+        [creditsButton setTarget:self selector:@selector(gameCredits)];
+        creditsButton.position = ccp(menuBoxSprite.contentSize.width / 2, (menuBoxSprite.contentSize.height / 2) - 35);
+        
+        
+        
+        // adding the buttons as children to the box sprite //
+        [menuBoxSprite addChild:creditsButton];
+        [menuBoxSprite addChild:gamePlayTutorialButton];
+        [menuBoxSprite addChild:playGameButton];
+        
+        
+        // adding the box sprite to the layout //
+        [layoutBox addChild:menuBoxSprite];
+        layoutBox.position = ccp(xBounds / 2, yBounds / 2);
+        
+        // then finally adding the layout to the scene //
         [self addChild:layoutBox];
         
         

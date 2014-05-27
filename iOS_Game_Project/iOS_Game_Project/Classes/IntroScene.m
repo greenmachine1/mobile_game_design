@@ -78,10 +78,8 @@
     
     // adding pause functionality //
     CCSpriteFrame *pauseSprite = [CCSpriteFrame frameWithImageNamed:@"pause_sprite.png"];
-    
     pauseButton = [CCButton buttonWithTitle:nil spriteFrame:pauseSprite];
     pauseButton.position = ccp(xBounds - 32.0f,  yBounds - 32.0f);
-    
     [pauseButton setTarget:self selector:@selector(onPauseGame)];
     
     [self addChild:pauseButton];
@@ -127,6 +125,8 @@
 
 // creating a popup that allows the user to resume or go to main menu //
 -(void)onPauseGame{
+    
+    pauseButton.enabled = NO;
     
     // changing the color of the background to better denote the pausing effect //
     backgroundColorOnPause = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.6]];
@@ -187,6 +187,8 @@
 
 // resuming the game //
 -(void)resumeButton{
+    
+    pauseButton.enabled = YES;
     
     // removes elements from pause from the screen //
     [backgroundColorOnPause removeFromParentAndCleanup:true];
