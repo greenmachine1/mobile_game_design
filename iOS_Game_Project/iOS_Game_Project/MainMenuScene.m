@@ -88,7 +88,7 @@
 // transition to the gameplay scene //
 -(void)playGame{
     
-    [[CCDirector sharedDirector] replaceScene:[IntroScene scene]
+    [[CCDirector sharedDirector] replaceScene:[IntroScene sceneCameFromTutorial:NO]
                                withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionUp duration:1.0f]];
     
 }
@@ -97,9 +97,9 @@
 // transition to the game play tutorial //
 -(void)gamePlayTutorial{
     
-    [[CCDirector sharedDirector] replaceScene:[GamePlayTutorialScene scene]
-                               withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionUp duration:1.0f]];
     
+    [[CCDirector sharedDirector] replaceScene:[IntroScene sceneCameFromTutorial:YES]
+                               withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionUp duration:1.0f]];
     
 }
 

@@ -53,11 +53,17 @@
     CCButton *pauseButton;
     CCLayoutBox *pauseLayoutBox;
     
+    BOOL tutorialMode;
+    
 }
 
 
 
-+ (IntroScene *)scene;
-- (id)init;
++(IntroScene *)sceneCameFromTutorial:(BOOL)yesOrNo;
+
+
+- (id)initWithTutorialYesOrNo:(BOOL)yesOrNo;
+
+-(void)cameFromTutorial;
 
 @end

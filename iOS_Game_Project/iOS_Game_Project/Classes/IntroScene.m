@@ -17,6 +17,7 @@
 #import "cocos2d.h"
 #import "CCAnimation.h"
 #import "MainMenuScene.h"
+#import "ArrowSprite.h"
 
 
 
@@ -32,31 +33,30 @@
 #pragma mark - Create & Destroy
 // -----------------------------------------------------------------------
 
-+ (IntroScene *)scene
++(IntroScene *)sceneCameFromTutorial:(BOOL)yesOrNo
 {
-	return [[self alloc] init];
+	return [[self alloc] initWithTutorialYesOrNo:yesOrNo];
 }
 
 
 
-- (id)init
+- (id)initWithTutorialYesOrNo:(BOOL)yesOrNo
 {
     // Apple recommend assigning self with supers return value
     self = [super init];
     if (!self) return(nil);
     
+    // setting up for tutorial mode //
+    tutorialMode = yesOrNo;
+
 
     // enabling audio for effects //
     playSound = [OALSimpleAudio sharedInstance];
     
     
-    
-    
     // getting the x and y coords of the screen size //
     xBounds = self.contentSize.width;
     yBounds = self.contentSize.height;
-    
-    
     
     
     
@@ -94,9 +94,6 @@
     
     touchPoint = newGuySprite.position;
     
-    
-    
-    
     [self addChild:newGuySprite];
     
     [self creationOfBlocks];
@@ -106,6 +103,11 @@
     [self createEndBox];
     
     [self creationOfHealthHearts];
+    
+    if(tutorialMode == YES){
+        
+        [self cameFromTutorial];
+    }
     
     
 	return self;
@@ -119,6 +121,12 @@
     // Enable touch handling on scene node
     self.userInteractionEnabled = YES;
 }
+
+
+
+
+
+
 
 
 
@@ -146,7 +154,6 @@
     pauseLayoutBox = [[CCLayoutBox alloc] init];
     pauseLayoutBox.anchorPoint = ccp(0.5, 0.5);
     pauseLayoutBox.direction = CCLayoutBoxDirectionVertical;
-    
     [pauseLayoutBox setZOrder:5];
     
     
@@ -276,14 +283,6 @@
 
 
 
-
-
-
-
-
-
-
-
 -(void)creationOfBlocks{
     
     //   creation of the upper level blocks   //
@@ -295,8 +294,6 @@
     
     
     
-    
-    
     //   creation of the lower level blocks   //
     for(int j = 1; j < xBounds / 64; j++){
         
@@ -304,9 +301,6 @@
         
         [self addChild:newBlockWallLayout z:1];
     }
-    
-    
-    
     
     
     //   creation of the middle block   //
@@ -324,32 +318,44 @@
 
 
 
+
+
 -(void)update:(CCTime)delta{
 
-    // correct movement using delta time //
-    if(newGuySprite.position.x < touchPoint.x){
+
+    if(tutorialMode == false){
+        // correct movement using delta time //
+        if(newGuySprite.position.x < touchPoint.x){
         
-        newGuySprite.position = ccp(newGuySprite.position.x + speed * delta, newGuySprite.position.y);
+            newGuySprite.position = ccp(newGuySprite.position.x + speed * delta, newGuySprite.position.y);
         
-    }
-    if(newGuySprite.position.x > touchPoint.x){
+        }
+        if(newGuySprite.position.x > touchPoint.x){
         
-        newGuySprite.position = ccp(newGuySprite.position.x - speed * delta, newGuySprite.position.y);
+            newGuySprite.position = ccp(newGuySprite.position.x - speed * delta, newGuySprite.position.y);
         
-    }
-    if(newGuySprite.position.y < touchPoint.y){
+        }
+        if(newGuySprite.position.y < touchPoint.y){
         
-        newGuySprite.position = ccp(newGuySprite.position.x, newGuySprite.position.y + speed * delta);
+            newGuySprite.position = ccp(newGuySprite.position.x, newGuySprite.position.y + speed * delta);
         
-    }
-    if(newGuySprite.position.y > touchPoint.y){
+        }
+        if(newGuySprite.position.y > touchPoint.y){
         
-        newGuySprite.position = ccp(newGuySprite.position.x, newGuySprite.position.y - speed * delta);
+            newGuySprite.position = ccp(newGuySprite.position.x, newGuySprite.position.y - speed * delta);
         
-    }
-    if((newGuySprite.position.x == touchPoint.x) && (newGuySprite.position.y == touchPoint.y)){
+        }
+        if((newGuySprite.position.x == touchPoint.x) && (newGuySprite.position.y == touchPoint.y)){
         
-        newGuySprite.position = ccp(newGuySprite.position.x, newGuySprite.position.y);
+            newGuySprite.position = ccp(newGuySprite.position.x, newGuySprite.position.y);
+        
+        }
+        
+    // stop movement of guy if in tutorial mode //
+    }else{
+        
+        
+        
         
     }
     
@@ -535,8 +541,9 @@
     goalBox.direction = CCLayoutBoxDirectionVertical;
     goalBox.spacing = 20.0f;
     goalBox.color = [CCColor greenColor];
+    goalBox.anchorPoint = ccp(0.5f, 0.5f);
     
-    goalBox.position = ccp(xBounds / 2, yBounds / 2);
+    goalBox.position = ccp(self.contentSize.width / 2, self.contentSize.height / 2);
     goalBox.cascadeColorEnabled = YES;
     goalBox.cascadeOpacityEnabled = YES;
 
@@ -558,6 +565,62 @@
 }
 
 
+
+
+
+
+
+// --------------- > tutorial section < ----------------- //
+// this will be a custom version of the game scene that turns off all aspects of the game //
+// but shows the user what do do through an animated tutorial //
+-(void)cameFromTutorial{
+    
+    // stop tutorial button //
+    CCSpriteFrame *stopTutorialButtonSprite = [CCSpriteFrame frameWithImageNamed:@"tutorial_done_box.png"];
+    CCButton *tutorialDoneButton = [CCButton buttonWithTitle:@"Done with Tutorial!" spriteFrame:stopTutorialButtonSprite];
+    tutorialDoneButton.anchorPoint = ccp(0.5f, 0.5f);
+    tutorialDoneButton.position = ccp(xBounds / 2, 40.0f);
+    tutorialDoneButton.name = @"done_with_tutorial";
+    [tutorialDoneButton setTarget:self selector:@selector(nextInstruction:)];
+    [self addChild:tutorialDoneButton z:3];
+    
+    
+    
+    // movement arrow
+    CCSpriteFrame *arrowFrameSprite = [CCSpriteFrame frameWithImageNamed:@"Guy_move_Arrow.png"];
+    CCButton *arrowButton = [CCButton buttonWithTitle:@"Move this way!" spriteFrame:arrowFrameSprite];
+    arrowButton.position = ccp(newGuySprite.position.x - 100.0f, newGuySprite.position.y);
+    arrowButton.name = @"first_Next";
+    arrowButton.anchorPoint = ccp(0.5f, 0.5f);
+    [arrowButton setTarget:self selector:@selector(nextInstruction:)];
+    [self addChild:arrowButton z:2];
+    
+    
+    
+
+    
+}
+
+
+
+
+-(void)nextInstruction:(id)sender{
+    
+    CCButton *button = (CCButton *)sender;
+    
+    
+    if (([button.name isEqualToString:@"first_Next"])) {
+        
+        
+        
+    }else if([button.name isEqualToString:@"second_Next"]){
+        NSLog(@"second");
+    }else if([button.name isEqualToString:@"done_with_tutorial"]){
+        
+        [[CCDirector sharedDirector] replaceScene:[MainMenuScene scene]
+                                   withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionUp duration:1.0f]];
+    }
+}
 
 
 
