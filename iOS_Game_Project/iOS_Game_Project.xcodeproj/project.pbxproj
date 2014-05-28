@@ -233,8 +233,8 @@
 		D6B214D1191A15A3005D3E7F /* enemy.png in Resources */ = {isa = PBXBuildFile; fileRef = D6B214D0191A15A3005D3E7F /* enemy.png */; };
 		D6B214D4191A2048005D3E7F /* Hammer.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D6B214D2191A2048005D3E7F /* Hammer.mp3 */; };
 		D6B214D5191A2048005D3E7F /* sea_audio.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D6B214D3191A2048005D3E7F /* sea_audio.mp3 */; };
-		D6CEDB711935BEC200377347 /* Spash_screen.png in Resources */ = {isa = PBXBuildFile; fileRef = D6CEDB701935BEC200377347 /* Spash_screen.png */; };
 		D6CEDB731935C9D200377347 /* tutorial_done_box.png in Resources */ = {isa = PBXBuildFile; fileRef = D6CEDB721935C9D200377347 /* tutorial_done_box.png */; };
+		D6CEDB751935D67F00377347 /* Splash_screen.png in Resources */ = {isa = PBXBuildFile; fileRef = D6CEDB741935D67F00377347 /* Splash_screen.png */; };
 		D6EC7E851931DE9900690E86 /* MainMenuScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D6EC7E841931DE9900690E86 /* MainMenuScene.m */; };
 		D6EECBDA192D6095008D6EF0 /* healthHeartSprite.png in Resources */ = {isa = PBXBuildFile; fileRef = D6EECBD9192D6095008D6EF0 /* healthHeartSprite.png */; };
 		D6EECBDD192D613B008D6EF0 /* heathHeartSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = D6EECBDC192D613B008D6EF0 /* heathHeartSprite.m */; };
@@ -707,8 +707,8 @@
 		D6B214D0191A15A3005D3E7F /* enemy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = enemy.png; sourceTree = "<group>"; };
 		D6B214D2191A2048005D3E7F /* Hammer.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Hammer.mp3; sourceTree = "<group>"; };
 		D6B214D3191A2048005D3E7F /* sea_audio.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sea_audio.mp3; sourceTree = "<group>"; };
-		D6CEDB701935BEC200377347 /* Spash_screen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Spash_screen.png; sourceTree = "<group>"; };
 		D6CEDB721935C9D200377347 /* tutorial_done_box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tutorial_done_box.png; sourceTree = "<group>"; };
+		D6CEDB741935D67F00377347 /* Splash_screen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Splash_screen.png; sourceTree = "<group>"; };
 		D6EC7E831931DE9900690E86 /* MainMenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuScene.h; sourceTree = "<group>"; };
 		D6EC7E841931DE9900690E86 /* MainMenuScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuScene.m; sourceTree = "<group>"; };
 		D6EECBD9192D6095008D6EF0 /* healthHeartSprite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = healthHeartSprite.png; sourceTree = "<group>"; };
@@ -793,8 +793,8 @@
 				D6B214D0191A15A3005D3E7F /* enemy.png */,
 				D6CEDB721935C9D200377347 /* tutorial_done_box.png */,
 				D698D42B192E7DE1004FB750 /* pause_sprite.png */,
+				D6CEDB741935D67F00377347 /* Splash_screen.png */,
 				D697111B1934354100899F60 /* menu_box_pause.png */,
-				D6CEDB701935BEC200377347 /* Spash_screen.png */,
 				D698D42C192E7DE1004FB750 /* play.png */,
 				D697111D193451F200899F60 /* Guy_move_Arrow.png */,
 				D6EECBD9192D6095008D6EF0 /* healthHeartSprite.png */,
@@ -1724,12 +1724,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				D65674A01918979A003CC6E9 /* Default@2x.png in Resources */,
-				D6CEDB711935BEC200377347 /* Spash_screen.png in Resources */,
 				D6B2120219199933005D3E7F /* guy_pixel_art.png in Resources */,
 				D6B214D1191A15A3005D3E7F /* enemy.png in Resources */,
 				D6B214D5191A2048005D3E7F /* sea_audio.mp3 in Resources */,
 				D65674B31918979A003CC6E9 /* Icon-120.png in Resources */,
 				D65676B71918979C003CC6E9 /* LICENSE_CCBReader.txt in Resources */,
+				D6CEDB751935D67F00377347 /* Splash_screen.png in Resources */,
 				D65674A91918979A003CC6E9 /* Icon@2x.png in Resources */,
 				D6AC44D8192DECC700B842FB /* blockanimation.pvr in Resources */,
 				D6B212041919ACED005D3E7F /* Block.png in Resources */,

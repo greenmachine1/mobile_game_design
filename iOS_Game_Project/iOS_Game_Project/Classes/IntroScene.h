@@ -29,6 +29,7 @@
  */
 @interface IntroScene : CCScene{
     
+    // basic elements //
     OALSimpleAudio *playSound;
     
     int xBounds;
@@ -37,15 +38,12 @@
     int speed;
     int score;
     
-    float xDistance;
-    float yDistance;
-    
     CGPoint touchPoint;
     
+    // main sprites //
     Guy_Sprite_Object *newGuySprite;
     Enemy_Sprite_Object *newEnemySprite;
     EndBox *newEndBox;
-    
     CCLayoutBox *goalBox;
     
     // pause elements //
@@ -53,17 +51,21 @@
     CCButton *pauseButton;
     CCLayoutBox *pauseLayoutBox;
     
+    
+    // tutorial elements //
     BOOL tutorialMode;
+    CCButton *arrowButton;
+    CCButton *tutorialDoneButton;
+    CCButton *secondArrowButton;
+    CCButton *thirdArrowButton;
+    CCButton *forthArrowButton;
+    CCLabelTTF *heartInstruction;
     
 }
 
 
 
 +(IntroScene *)sceneCameFromTutorial:(BOOL)yesOrNo;
-
-
 - (id)initWithTutorialYesOrNo:(BOOL)yesOrNo;
-
--(void)cameFromTutorial;
 
 @end

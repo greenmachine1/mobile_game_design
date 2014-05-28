@@ -27,7 +27,7 @@
         int xBounds = self.contentSize.width;
         int yBounds = self.contentSize.height;
         
-        mainSplashScreen = [CCSprite spriteWithImageNamed:@"Spash_screen.png"];
+        mainSplashScreen = [CCSprite spriteWithImageNamed:@"Splash_screen.png"];
         mainSplashScreen.scale = 0.5f;
         mainSplashScreen.position = ccp(xBounds / 2, yBounds / 2);
         

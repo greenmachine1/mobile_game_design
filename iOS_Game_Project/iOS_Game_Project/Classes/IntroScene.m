@@ -577,7 +577,7 @@
     
     // stop tutorial button //
     CCSpriteFrame *stopTutorialButtonSprite = [CCSpriteFrame frameWithImageNamed:@"tutorial_done_box.png"];
-    CCButton *tutorialDoneButton = [CCButton buttonWithTitle:@"Done with Tutorial!" spriteFrame:stopTutorialButtonSprite];
+    tutorialDoneButton = [CCButton buttonWithTitle:@"Done with Tutorial!" spriteFrame:stopTutorialButtonSprite];
     tutorialDoneButton.anchorPoint = ccp(0.5f, 0.5f);
     tutorialDoneButton.position = ccp(xBounds / 2, 40.0f);
     tutorialDoneButton.name = @"done_with_tutorial";
@@ -588,7 +588,7 @@
     
     // movement arrow
     CCSpriteFrame *arrowFrameSprite = [CCSpriteFrame frameWithImageNamed:@"Guy_move_Arrow.png"];
-    CCButton *arrowButton = [CCButton buttonWithTitle:@"Move this way!" spriteFrame:arrowFrameSprite];
+    arrowButton = [CCButton buttonWithTitle:@"Move this way!" spriteFrame:arrowFrameSprite];
     arrowButton.position = ccp(newGuySprite.position.x - 100.0f, newGuySprite.position.y);
     arrowButton.name = @"first_Next";
     arrowButton.anchorPoint = ccp(0.5f, 0.5f);
@@ -596,25 +596,83 @@
     [self addChild:arrowButton z:2];
     
     
+    secondArrowButton = [CCButton buttonWithTitle:@"Watch for Enemy!" spriteFrame:arrowFrameSprite];
+    secondArrowButton.position = ccp(newEnemySprite.position.x + 100, 200.0f);
+    secondArrowButton.anchorPoint = ccp(0.5f, 0.5f);
+    secondArrowButton.name = @"second_Next";
+    secondArrowButton.visible = false;
+    [secondArrowButton setTarget:self selector:@selector(nextInstruction:)];
+    [self addChild:secondArrowButton z:2];
     
+    
+    thirdArrowButton = [CCButton buttonWithTitle:@"Get to the Goal!" spriteFrame:arrowFrameSprite];
+    thirdArrowButton.position = ccp(newEndBox.position.x + 80.0f, newEndBox.position.y + 80.0f);
+    thirdArrowButton.anchorPoint = ccp(0.5f, 0.5f);
+    thirdArrowButton.name = @"third_Next";
+    thirdArrowButton.rotation = 320.0f;
+    thirdArrowButton.visible = false;
+    [thirdArrowButton setTarget:self selector:@selector(nextInstruction:)];
+    [self addChild:thirdArrowButton z:2];
+    
+    
+    
+    forthArrowButton = [CCButton buttonWithTitle:@"Done with Tutorial!" spriteFrame:arrowFrameSprite];
+    forthArrowButton.position = ccp(220.0f, yBounds - 32);
+    forthArrowButton.anchorPoint = ccp(0.5f, 0.5f);
+    forthArrowButton.name = @"forth_Next";
+    forthArrowButton.visible = false;
+    [forthArrowButton setTarget:self selector:@selector(nextInstruction:)];
+    
+    
+    heartInstruction = [CCLabelTTF labelWithString:@" Hit an enemy and your hearts go down.\nWhen you have zero hearts, the game is over!" fontName:@"Chalkduster" fontSize:10.0f];
+    heartInstruction.position = ccp(forthArrowButton.contentSize.width / 2, forthArrowButton.contentSize.height - 80.0f);
+    heartInstruction.anchorPoint = ccp(0.5f, 0.5f);
+    heartInstruction.name = @"heart_instruction";
+    heartInstruction.visible = false;
+    
+    [forthArrowButton addChild:heartInstruction];
+    
+    
+    
+    [self addChild:forthArrowButton z:2];
 
     
 }
 
 
 
-
+// what to do when a button is pressed //
 -(void)nextInstruction:(id)sender{
     
     CCButton *button = (CCButton *)sender;
-    
-    
     if (([button.name isEqualToString:@"first_Next"])) {
         
-        
+        arrowButton.visible = false;
+        secondArrowButton.visible = true;
         
     }else if([button.name isEqualToString:@"second_Next"]){
-        NSLog(@"second");
+        
+        secondArrowButton.visible = false;
+        thirdArrowButton.visible = true;
+        
+    }else if([button.name isEqualToString:@"third_Next"]){
+        
+        NSLog(@"in here");
+        
+        thirdArrowButton.visible = false;
+        forthArrowButton.visible = true;
+        heartInstruction.visible = true;
+        
+        
+        
+    }else if([button.name isEqualToString:@"forth_Next"]){
+        
+        arrowButton.visible = true;
+        forthArrowButton.visible = false;
+        heartInstruction.visible = false;
+        
+        
+        
     }else if([button.name isEqualToString:@"done_with_tutorial"]){
         
         [[CCDirector sharedDirector] replaceScene:[MainMenuScene scene]
