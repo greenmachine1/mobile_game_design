@@ -7,11 +7,15 @@
 //
 
 #import "CCScene.h"
+#import "cocos2d.h"
+#import "cocos2d-ui.h"
 
 @interface CreditsScene : CCScene
 {
     int xBounds;
     int yBounds;
+    
+    CCLayoutBox *creditsLayout;
     
 }
 
