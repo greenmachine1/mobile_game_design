@@ -244,7 +244,9 @@
     
     for(int i = 1; i < 5; i++){
         
-        heathHeartSprite *newHealthHeart = [heathHeartSprite createHeathHeartAtLocation:ccp(32 * i, yBounds - 32)];
+        newHealthHeart = [heathHeartSprite createHeathHeartAtLocation:ccp(32 * i, yBounds - 32)];
+        
+        
         
         [self addChild:newHealthHeart z:2 name:@"Heart"];
     }
@@ -575,6 +577,10 @@
 // but shows the user what do do through an animated tutorial //
 -(void)cameFromTutorial{
     
+    backgroundColorOnPause = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.6]];
+    backgroundColorOnPause.zOrder = 4;
+    [self addChild:backgroundColorOnPause];
+    
     // stop tutorial button //
     CCSpriteFrame *stopTutorialButtonSprite = [CCSpriteFrame frameWithImageNamed:@"tutorial_done_box.png"];
     tutorialDoneButton = [CCButton buttonWithTitle:@"Done with Tutorial!" spriteFrame:stopTutorialButtonSprite];
@@ -582,7 +588,10 @@
     tutorialDoneButton.position = ccp(xBounds / 2, 40.0f);
     tutorialDoneButton.name = @"done_with_tutorial";
     [tutorialDoneButton setTarget:self selector:@selector(nextInstruction:)];
-    [self addChild:tutorialDoneButton z:3];
+    
+    // making the tutorial done button more visible than anything else //
+    [self addChild:tutorialDoneButton z:5];
+    [newGuySprite setZOrder:5];
     
     
     
@@ -593,7 +602,9 @@
     arrowButton.name = @"first_Next";
     arrowButton.anchorPoint = ccp(0.5f, 0.5f);
     [arrowButton setTarget:self selector:@selector(nextInstruction:)];
-    [self addChild:arrowButton z:2];
+    
+    // making the first arrow more visible than anything else //
+    [self addChild:arrowButton z:5];
     
     
     secondArrowButton = [CCButton buttonWithTitle:@"Watch for Enemy!" spriteFrame:arrowFrameSprite];
@@ -650,10 +661,24 @@
         arrowButton.visible = false;
         secondArrowButton.visible = true;
         
+        [secondArrowButton setZOrder:2];
+        [newGuySprite setZOrder:2];
+        
+        [secondArrowButton setZOrder:5];
+        [newEnemySprite setZOrder:5];
+        
+        
     }else if([button.name isEqualToString:@"second_Next"]){
         
         secondArrowButton.visible = false;
         thirdArrowButton.visible = true;
+        
+        [secondArrowButton setZOrder:2];
+        [newEnemySprite setZOrder:2];
+        
+        [thirdArrowButton setZOrder:5];
+        [newEndBox setZOrder:5];
+        
         
     }else if([button.name isEqualToString:@"third_Next"]){
         
@@ -663,6 +688,12 @@
         forthArrowButton.visible = true;
         heartInstruction.visible = true;
         
+        [thirdArrowButton setZOrder:2];
+        [newEndBox setZOrder:2];
+        
+        [forthArrowButton setZOrder:5];
+        [newHealthHeart setZOrder:5];
+        
         
         
     }else if([button.name isEqualToString:@"forth_Next"]){
@@ -670,6 +701,10 @@
         arrowButton.visible = true;
         forthArrowButton.visible = false;
         heartInstruction.visible = false;
+        
+        [arrowButton setZOrder:5];
+        [newGuySprite setZOrder:5];
+        [newHealthHeart setZOrder:2];
         
         
         
