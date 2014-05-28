@@ -16,12 +16,6 @@
 #import "heathHeartSprite.h"
 
 
-
-
-
-
-
-
 /**
  *  The intro scene
  *  Note, that scenes should now be based on CCScene, and not CCLayer, as previous versions

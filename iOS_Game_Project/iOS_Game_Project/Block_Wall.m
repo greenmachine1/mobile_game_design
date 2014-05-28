@@ -7,7 +7,6 @@
 //
 
 #import "Block_Wall.h"
-
 #import "CCAnimation.h"
 
 @implementation Block_Wall

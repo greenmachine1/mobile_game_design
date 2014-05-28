@@ -7,7 +7,6 @@
 //
 
 #import "CCNode.h"
-
 #import "cocos2d.h"
 
 @interface Enemy_Sprite_Object : CCNode

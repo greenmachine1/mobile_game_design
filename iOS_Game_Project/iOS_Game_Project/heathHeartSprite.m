@@ -7,7 +7,6 @@
 //
 
 #import "heathHeartSprite.h"
-
 #import "cocos2d.h"
 
 @implementation heathHeartSprite

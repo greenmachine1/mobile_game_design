@@ -7,7 +7,6 @@
 //
 
 #import "EndBox.h"
-
 #import "cocos2d.h"
 
 @implementation EndBox

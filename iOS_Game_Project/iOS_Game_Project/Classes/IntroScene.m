@@ -85,9 +85,6 @@
     [self addChild:pauseButton];
     
     
-    
-    
-    
     // creating the guy //
     newGuySprite = [Guy_Sprite_Object createGuySpriteWithLocation:ccp(xBounds - 64, yBounds / 2)];
     [newGuySprite setZOrder:1];
@@ -95,13 +92,9 @@
     touchPoint = newGuySprite.position;
     
     [self addChild:newGuySprite];
-    
     [self creationOfBlocks];
-    
     [self creationOfEnemy];
-    
     [self createEndBox];
-    
     [self creationOfHealthHearts];
     
     if(tutorialMode == YES){
@@ -159,7 +152,6 @@
     
     
     // resume button //
-    //CCButton *resumeButton = [CCButton buttonWithTitle:@"Resume"];
     CCButton *resumeButton = [CCButton buttonWithTitle:@"Resume!" fontName:@"Chalkduster" fontSize:20.0f];
     [resumeButton setTarget:self selector:@selector(resumeButton)];
     resumeButton.position = ccp(menuBoxPause.contentSize.width / 2, (menuBoxPause.contentSize.height / 2) + 50.0f);
@@ -175,9 +167,6 @@
     // menuBoxPause square //
     [menuBoxPause addChild:mainMenuButton];
     [menuBoxPause addChild:resumeButton];
-    
-    
-    
     
     [pauseLayoutBox addChild:menuBoxPause];
     
@@ -217,7 +206,6 @@
 // going back to the main menu //
 -(void)mainMenuButton{
     
-    
     // removes elements from pause from the screen //
     [backgroundColorOnPause removeFromParentAndCleanup:true];
     [pauseLayoutBox removeFromParentAndCleanup:true];
@@ -245,9 +233,6 @@
     for(int i = 1; i < 5; i++){
         
         newHealthHeart = [heathHeartSprite createHeathHeartAtLocation:ccp(32 * i, yBounds - 32)];
-        
-        
-        
         [self addChild:newHealthHeart z:2 name:@"Heart"];
     }
 }
@@ -259,9 +244,7 @@
 -(void)creationOfEnemy{
     
     newEnemySprite = [Enemy_Sprite_Object createEnemyWithLocation:ccp(200.0f, yBounds - 96)];
-    
     [newGuySprite setZOrder:1];
-    
     [self addChild:newEnemySprite];
 }
 
@@ -274,9 +257,7 @@
 -(void)createEndBox{
     
     newEndBox = [EndBox createEndBoxWithLocation:ccp(64.0f, yBounds / 2)];
-    
     [newEndBox setZOrder:1];
-    
     [self addChild:newEndBox];
 }
 
@@ -290,7 +271,6 @@
     //   creation of the upper level blocks   //
     for(int i = 1; i < xBounds / 64; i ++){
         Block_Wall *newBlockWallLayout = [Block_Wall createWallAtPosition:ccp((i * 64), 32.0f)];
-        
         [self addChild:newBlockWallLayout z:1];
     }
     
@@ -300,7 +280,6 @@
     for(int j = 1; j < xBounds / 64; j++){
         
         Block_Wall *newBlockWallLayout = [Block_Wall createWallAtPosition:ccp(j * 64, yBounds - 32)];
-        
         [self addChild:newBlockWallLayout z:1];
     }
     
@@ -310,7 +289,6 @@
     
     // animate the block //
     [midBlock blockAnimate];
-    
     [self addChild:midBlock z:1];
 
 }
@@ -363,9 +341,7 @@
     
     
     [self collisionWithAnyBlock];
-
     [self collisionForEnemy];
-    
     [self collisionWithEnd];
     
 }
@@ -398,7 +374,6 @@
         
         [playSound playBg:@"Applause.mp3"];
         
-        [self goalPopup:@"Gooaaaal!"];
     }
 }
 
@@ -418,12 +393,6 @@
 
         // removes one heart at a time from the screen //
         [self removeChildByName:@"Heart" cleanup:YES];
-    
-        // game over //
-        if(score < 1){
-            
-            [self gameOver];
-        }
         
         touchPoint = ccp(xBounds - 64, yBounds / 2);
         
@@ -436,7 +405,12 @@
         // changes the color when hit to denote visually... that hes been hit //
         [newGuySprite changeColor];
         
-        [self goalPopup:@"Ouch!!!!"];
+        // game over //
+        if(score < 1){
+            
+            [self gameOver];
+            
+        }
     }
     
 }
@@ -446,13 +420,76 @@
 
 -(void)gameOver{
     
-    NSLog(@"Game Over!");
+    
+    
+    // setting the background color to be a transparent black
+    CCNodeColor *backgroundColor = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.6f]];
+    [backgroundColor setZOrder:4];
+    [self addChild:backgroundColor];
+    
+    
+    
+    
+    CCLayoutBox *gameOverLayoutBox = [[CCLayoutBox alloc] init];
+    gameOverLayoutBox.anchorPoint = ccp(0.5f, 0.5f);
+    gameOverLayoutBox.position = ccp(xBounds / 2, yBounds / 2);
+    [gameOverLayoutBox setZOrder:4];
+    
+    
+    CCSprite *gameOverBoxSprite = [CCSprite spriteWithImageNamed:@"menu_box_pause.png"];
+    gameOverBoxSprite.anchorPoint = ccp(0.5f, 0.5f);
+    gameOverBoxSprite.position = ccp(xBounds / 2, yBounds / 2);
+    [gameOverBoxSprite setZOrder:4];
+    [gameOverLayoutBox addChild:gameOverBoxSprite];
+    
+    CCLabelTTF *gameOverLabel = [CCLabelTTF labelWithString:@"Game Over!" fontName:@"Chalkduster" fontSize:30.0f];
+    gameOverLabel.anchorPoint = ccp(0.5f, 0.5f);
+    gameOverLabel.position = ccp((gameOverBoxSprite.contentSize.width / 2), gameOverBoxSprite.position.y + 50.0f);
+    [gameOverBoxSprite addChild:gameOverLabel];
+    
+    
+    CCButton *playAgainButton = [CCButton buttonWithTitle:@"Play Again!" fontName:@"Chalkduster" fontSize:20.0f];
+    playAgainButton.anchorPoint = ccp(0.5f, 0.5f);
+    playAgainButton.position = ccp((gameOverBoxSprite.contentSize.width / 2), gameOverBoxSprite.position.y - 20.0f);
+    playAgainButton.name = @"Play_Again";
+    [playAgainButton setTarget:self selector:@selector(gameOverMenuButtons:)];
+    [gameOverBoxSprite addChild:playAgainButton];
+    
+    
+    CCButton *mainMenuButton = [CCButton buttonWithTitle:@"Main Menu!" fontName:@"Chalkduster" fontSize:20.0f];
+    mainMenuButton.anchorPoint = ccp(0.5f, 0.5f);
+    mainMenuButton.position = ccp((gameOverBoxSprite.contentSize.width / 2), gameOverBoxSprite.position.y - 60.0f);
+    mainMenuButton.name = @"Main_Menu";
+    [mainMenuButton setTarget:self selector:@selector(gameOverMenuButtons:)];
+    [gameOverBoxSprite addChild:mainMenuButton];
+
+    [self addChild:gameOverLayoutBox];
+    
+    pauseButton.enabled = NO;
     
     score = 4;
     
     [self creationOfHealthHearts];
     
-    [self goalPopup:@"Game Over!"];
+}
+
+
+
+-(void)gameOverMenuButtons:(id)sender{
+    
+    CCButton *button = (CCButton *)sender;
+    if([button.name isEqualToString:@"Play_Again"]){
+        
+        [[CCDirector sharedDirector] replaceScene:[IntroScene sceneCameFromTutorial:NO]
+                                   withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionUp duration:1.0f]];
+        
+    }else if([button.name isEqualToString:@"Main_Menu"]){
+        
+        [[CCDirector sharedDirector] replaceScene:[MainMenuScene scene]
+                                   withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionUp duration:1.0f]];
+        
+    }
+    
     
 }
 
@@ -525,46 +562,7 @@
 
 
 
-// creating a pop up message that takes in a string //
--(void)goalPopup:(NSString *)passedInString{
 
-    
-    //   initializing a goalbox   //
-    goalBox = [[CCLayoutBox alloc] init];
-
-    //   setting up a label   //
-    CCLabelTTF *label = [CCLabelTTF labelWithString:passedInString fontName:@"Chalkduster" fontSize:20.0f];
-
-    label.positionType = CCPositionTypeNormalized;
-    label.color = [CCColor redColor];
-    label.position = ccp(0.5f, 0.5f);
-    
-    //   setting parameters for the goal box   //
-    goalBox.direction = CCLayoutBoxDirectionVertical;
-    goalBox.spacing = 20.0f;
-    goalBox.color = [CCColor greenColor];
-    goalBox.anchorPoint = ccp(0.5f, 0.5f);
-    
-    goalBox.position = ccp(self.contentSize.width / 2, self.contentSize.height / 2);
-    goalBox.cascadeColorEnabled = YES;
-    goalBox.cascadeOpacityEnabled = YES;
-
-    [goalBox addChild:label];
-    
-    [self addChild:goalBox];
-    
-    [self performSelector:@selector(removeGoalBox) withObject:self afterDelay:2.0f];
-    
-}
-
-
-
--(void)removeGoalBox{
-    
-    //   dismissing the box   //
-    [goalBox removeFromParentAndCleanup:true];
-    
-}
 
 
 
@@ -634,16 +632,14 @@
     forthArrowButton.visible = false;
     [forthArrowButton setTarget:self selector:@selector(nextInstruction:)];
     
-    
+    // instruction label //
     heartInstruction = [CCLabelTTF labelWithString:@" Hit an enemy and your hearts go down.\nWhen you have zero hearts, the game is over!" fontName:@"Chalkduster" fontSize:10.0f];
     heartInstruction.position = ccp(forthArrowButton.contentSize.width / 2, forthArrowButton.contentSize.height - 80.0f);
     heartInstruction.anchorPoint = ccp(0.5f, 0.5f);
     heartInstruction.name = @"heart_instruction";
     heartInstruction.visible = false;
-    
+
     [forthArrowButton addChild:heartInstruction];
-    
-    
     
     [self addChild:forthArrowButton z:2];
 
@@ -653,6 +649,7 @@
 
 
 // what to do when a button is pressed //
+// highlighting certain elements //
 -(void)nextInstruction:(id)sender{
     
     CCButton *button = (CCButton *)sender;
@@ -695,7 +692,6 @@
         [newHealthHeart setZOrder:5];
         
         
-        
     }else if([button.name isEqualToString:@"forth_Next"]){
         
         arrowButton.visible = true;
@@ -707,7 +703,7 @@
         [newHealthHeart setZOrder:2];
         
         
-        
+    // done with the tutorial //
     }else if([button.name isEqualToString:@"done_with_tutorial"]){
         
         [[CCDirector sharedDirector] replaceScene:[MainMenuScene scene]

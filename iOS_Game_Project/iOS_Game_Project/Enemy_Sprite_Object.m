@@ -7,7 +7,6 @@
 //
 
 #import "Enemy_Sprite_Object.h"
-
 #import "cocos2d.h"
 
 @implementation Enemy_Sprite_Object

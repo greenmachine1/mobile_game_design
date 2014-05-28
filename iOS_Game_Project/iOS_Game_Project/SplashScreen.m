@@ -34,7 +34,7 @@
         [self addChild:mainSplashScreen];
         
         // switches scenes after 5 seconds of displaying the splash screen //
-        [self performSelector:@selector(switchScreen) withObject:self afterDelay:1.0f];
+        [self performSelector:@selector(switchScreen) withObject:self afterDelay:4.0f];
         
     }
     return  self;

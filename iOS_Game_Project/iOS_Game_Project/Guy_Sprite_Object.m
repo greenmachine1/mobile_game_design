@@ -7,7 +7,6 @@
 //
 
 #import "Guy_Sprite_Object.h"
-
 #import "cocos2d.h"
 
 @implementation Guy_Sprite_Object

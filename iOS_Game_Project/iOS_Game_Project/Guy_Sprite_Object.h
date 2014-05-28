@@ -7,7 +7,6 @@
 //
 
 #import "CCNode.h"
-
 #import "cocos2d.h"
 
 @interface Guy_Sprite_Object : CCNode
