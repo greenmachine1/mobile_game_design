@@ -134,24 +134,6 @@
     
     timeIncrease++;
     
-    if(timeIncrease == 200){
-        
-        [self gameOver];
-        
-    }else if((timeIncrease == 150) && (score == 3)){
-        
-        [self gameOver];
-        
-    }else if((timeIncrease == 100) && (score == 2)){
-        
-        [self gameOver];
-        
-    }else if((timeIncrease == 50) && (score == 1)){
-        
-        [self gameOver];
-        
-    }
-    
     NSString *timeString = [NSString stringWithFormat:@"Time %i", timeIncrease];
     
     timeLabel = [CCLabelTTF labelWithString:timeString fontName:@"Papyrus" fontSize:30.0f];
@@ -550,8 +532,12 @@
     int timeScore = timeIncrease * 10;
     int totalScore = heartsScore - timeScore;
     
+    if(totalScore < 0){
+        totalScore = 0;
+    }
     
     NSString *finalScore = [NSString stringWithFormat:@"Final Score (Hearts x Time) = %i", totalScore];
+    
     CCLabelTTF *gameScoreLabel = [CCLabelTTF labelWithString:finalScore fontName:@"Chalkduster" fontSize:12.0f];
     gameScoreLabel.anchorPoint = ccp(0.5f, 0.5f);
     gameScoreLabel.position = ccp((scoreBox.position.x), (scoreBox.contentSize.height / 2));
