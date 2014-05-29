@@ -18,6 +18,7 @@
 #import "CCAnimation.h"
 #import "MainMenuScene.h"
 #import "ArrowSprite.h"
+#import "CreditsScene.h"
 
 
 
@@ -362,15 +363,66 @@
     //   if the guy is in the end box boundry   //
     if(CGRectIntersectsRect([newGuySprite getBoundingBox], [newEndBox getBoundingBox])){
         
+        touchPoint = ccp(xBounds - 64, yBounds / 2);
+        
         //   reposition the guy so as to not keep triggering the collision   //
-        newGuySprite.position = ccp(xBounds - 64, yBounds / 2);
+        newGuySprite.position = touchPoint;
         
         [newGuySprite stopAllActions];
         
         [playSound playBg:@"Applause.mp3"];
         
+        
+        // basically I need to present the user with a good job then transition to the //
+        // credits section of the game //
+        [self displayGoal];
+        
+        
+        
+        
     }
 }
+
+
+-(void)displayGoal{
+    
+    [newGuySprite stopAllActions];
+    
+    // setting the background color to be a transparent black
+    CCNodeColor *backgroundColor = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.6f]];
+    [backgroundColor setZOrder:4];
+    [self addChild:backgroundColor];
+    
+    CCLayoutBox *goalBoxLayout = [[CCLayoutBox alloc] init];
+    goalBoxLayout.anchorPoint = ccp(0.5f, 0.5f);
+    goalBoxLayout.position = ccp(xBounds / 2, yBounds / 2);
+    [goalBoxLayout setZOrder:4];
+    
+    CCSprite *goalBoxSprite = [CCSprite spriteWithImageNamed:@"tutorial_done_box.png"];
+    goalBoxSprite.anchorPoint = ccp(0.5f, 0.5f);
+    goalBoxSprite.position = ccp(xBounds / 2, yBounds / 2);
+    [goalBoxSprite setZOrder:4];
+    [goalBoxLayout addChild:goalBoxSprite];
+    
+    CCLabelTTF *gameOverLabel = [CCLabelTTF labelWithString:@"Goal!!!!!" fontName:@"Chalkduster" fontSize:30.0f];
+    gameOverLabel.anchorPoint = ccp(0.5f, 0.5f);
+    gameOverLabel.position = ccp((goalBoxSprite.contentSize.width / 2), goalBoxSprite.position.y);
+    [goalBoxSprite addChild:gameOverLabel];
+    
+    [self addChild:goalBoxLayout];
+    
+    
+    [self performSelector:@selector(displayCreditsAfterWin) withObject:nil afterDelay:2.0f];
+    
+}
+
+-(void)displayCreditsAfterWin{
+    
+    [[CCDirector sharedDirector] replaceScene:[CreditsScene scene]
+                               withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionUp duration:1.0f]];
+    
+}
+
 
 
 
