@@ -367,9 +367,7 @@
         
         //   reposition the guy so as to not keep triggering the collision   //
         newGuySprite.position = touchPoint;
-        
         [newGuySprite stopAllActions];
-        
         [playSound playBg:@"Applause.mp3"];
         
         
@@ -416,6 +414,7 @@
     
 }
 
+// transitions to the credits after a win //
 -(void)displayCreditsAfterWin{
     
     [[CCDirector sharedDirector] replaceScene:[CreditsScene scene]
@@ -456,8 +455,7 @@
         if(score < 1){
             
             [self gameOver];
-        
-            
+    
         }
     }
     
