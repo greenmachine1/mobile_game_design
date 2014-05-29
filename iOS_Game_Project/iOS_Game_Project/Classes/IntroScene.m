@@ -157,7 +157,7 @@
     timeLabel = [CCLabelTTF labelWithString:timeString fontName:@"Papyrus" fontSize:30.0f];
     timeLabel.anchorPoint = ccp(0.5f, 0.5f);
     timeLabel.position = ccp(xBounds / 2, yBounds - 32.0f);
-    timeLabel.fontColor = [CCColor blueColor];
+    timeLabel.fontColor = [CCColor greenColor];
     [timeLabel setZOrder:4];
     [self addChild:timeLabel];
     
@@ -199,8 +199,6 @@
         Block_Wall *newBlockWallLayout = [Block_Wall createWallAtPosition:ccp((i * 64), 32.0f)];
         [self addChild:newBlockWallLayout z:1];
     }
-    
-    
     
     //   creation of the lower level blocks   //
     for(int j = 1; j < xBounds / 64; j++){
@@ -321,14 +319,6 @@
     
 }
     
-
-
-
-
-
-
-
-
 
 
 
@@ -530,12 +520,8 @@
 
 
 -(void)displayGoal{
-    
-    NSLog(@"Time! %i", timeIncrease);
-    
-    
+
     [startTimer invalidate];
-    
     
     [newGuySprite stopAllActions];
     
@@ -585,10 +571,9 @@
     gameOverLabel.position = ccp((goalBoxSprite.contentSize.width / 2), (goalBoxSprite.contentSize.height / 2));
     [goalBoxSprite addChild:gameOverLabel];
     
-    
     [self addChild:goalBoxLayout];
     
-    
+    // display the Credits after 5 seconds //
     [self performSelector:@selector(displayCreditsAfterWin) withObject:nil afterDelay:5.0f];
     
 }
@@ -611,7 +596,7 @@
 
 
 
-
+// Game Over section //
 -(void)gameOver{
 
     [startTimer invalidate];
@@ -672,15 +657,11 @@
         
         [[CCDirector sharedDirector] replaceScene:[IntroScene sceneCameFromTutorial:NO]
                                    withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionUp duration:1.0f]];
-        
     }else if([button.name isEqualToString:@"Main_Menu"]){
         
         [[CCDirector sharedDirector] replaceScene:[MainMenuScene scene]
                                    withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionUp duration:1.0f]];
-        
     }
-    
-    
 }
 
 
