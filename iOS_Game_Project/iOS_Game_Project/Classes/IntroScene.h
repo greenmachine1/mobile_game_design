@@ -47,6 +47,13 @@
     CCButton *pauseButton;
     CCLayoutBox *pauseLayoutBox;
     
+    CCLabelTTF *timeLabel;
+    
+
+
+    int timeIncrease;
+    NSTimer *startTimer;
+    
     
     // tutorial elements //
     BOOL tutorialMode;

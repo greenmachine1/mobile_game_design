@@ -105,6 +105,8 @@
     }
     
     
+    
+    
 	return self;
 }
 
@@ -113,12 +115,33 @@
 -(void)onEnter{
     [super onEnter];
     
+    
+    if(!tutorialMode){
+        timeIncrease = 0;
+        // timer for the game, gets the total seconds gone by //
+        startTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(timerOfGame:) userInfo:nil repeats:TRUE];
+        [startTimer fire];
+    }
+    
     // Enable touch handling on scene node
     self.userInteractionEnabled = YES;
 }
 
 
-
+-(void)timerOfGame:(NSDate *)time{
+    [timeLabel removeFromParentAndCleanup:TRUE];
+    
+    timeIncrease++;
+    
+    NSString *timeString = [NSString stringWithFormat:@"Time %i", timeIncrease];
+    
+    timeLabel = [CCLabelTTF labelWithString:timeString fontName:@"Chalkduster" fontSize:20.0f];
+    timeLabel.anchorPoint = ccp(0.5f, 0.5f);
+    timeLabel.position = ccp(xBounds / 2, yBounds - 32.0f);
+    [timeLabel setZOrder:4];
+    [self addChild:timeLabel];
+    
+}
 
 
 
@@ -130,6 +153,9 @@
 -(void)onPauseGame{
     
     pauseButton.enabled = NO;
+    
+    // stopping the timer //
+    [startTimer invalidate];
     
     // changing the color of the background to better denote the pausing effect //
     backgroundColorOnPause = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.6]];
@@ -183,6 +209,10 @@
 
 // resuming the game //
 -(void)resumeButton{
+    
+    // resuming the timer //
+    startTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(timerOfGame:) userInfo:nil repeats:TRUE];
+    [startTimer fire];
     
     pauseButton.enabled = YES;
     
@@ -284,16 +314,6 @@
     }
     
     
-    
-    // I want to have a random block appear after the player moves //
-    // it will be within the bounds of the top and bottom blocks //
-    // it will also not be on top of the user, the end goal or the enemy //
-    
-    
-    
-    
-    
-    
     //   creation of the middle block   //
     Block_Wall *midBlock = [Block_Wall createWallAtPosition:ccp(128.0f, 96.0f)];
     
@@ -301,34 +321,9 @@
     [midBlock blockAnimate];
     [self addChild:midBlock z:1];
     
-    // [self performSelector:@selector(makeBlock) withObject:nil afterDelay:10.0f];
 
 }
 
--(void)makeBlock{
-    
-    //   creation of the middle block   //
-    Block_Wall *midBlock = [Block_Wall createWallAtPosition:ccp(256.0f + 64, 96.0f)];
-    
-    // animate the block //
-    [midBlock blockAnimate];
-    [self addChild:midBlock z:1];
-    
-    if(CGRectContainsPoint([midBlock getBoundingBox], ccp(newGuySprite.position.x, newGuySprite.position.y))){
-        NSLog(@"in here!");
-        while(CGRectContainsPoint([midBlock getBoundingBox], ccp(newGuySprite.position.x, newGuySprite.position.y))){
-            NSLog(@"Yes!");
-            
-            newGuySprite.position = ccp(newGuySprite.position.x + 1, newGuySprite.position.y);
-            
-        }
-            
-        
-    }
-    
-    
-    
-}
 
 
 
@@ -411,9 +406,7 @@
         // basically I need to present the user with a good job then transition to the //
         // credits section of the game //
         [self displayGoal];
-        
-        
-        
+    
         
     }
 }
@@ -422,6 +415,12 @@
 
 
 -(void)displayGoal{
+    
+    NSLog(@"Time! %i", timeIncrease);
+    
+    
+    [startTimer invalidate];
+    
     
     [newGuySprite stopAllActions];
     
@@ -433,7 +432,32 @@
     CCLayoutBox *goalBoxLayout = [[CCLayoutBox alloc] init];
     goalBoxLayout.anchorPoint = ccp(0.5f, 0.5f);
     goalBoxLayout.position = ccp(xBounds / 2, yBounds / 2);
+    goalBoxLayout.direction = CCLayoutBoxDirectionVertical;
     [goalBoxLayout setZOrder:4];
+    
+    
+    CCSprite *scoreBox = [CCSprite spriteWithImageNamed:@"tutorial_done_box.png"];
+    scoreBox.anchorPoint = ccp(0.5f, 0.5f);
+    scoreBox.position = ccp((xBounds / 2), yBounds / 2);
+    [scoreBox setZOrder:4];
+    [goalBoxLayout addChild:scoreBox];
+    
+    
+    // hearts = 500 a peice, for every second that goes by, you loose 10 points //
+    // the total is hearts - time
+    int heartsScore = score * 500;
+    int timeScore = timeIncrease * 10;
+    int totalScore = heartsScore - timeScore;
+    
+    
+    NSString *finalScore = [NSString stringWithFormat:@"Final Score (Hearts x Time) = %i", totalScore];
+    CCLabelTTF *gameScoreLabel = [CCLabelTTF labelWithString:finalScore fontName:@"Chalkduster" fontSize:12.0f];
+    gameScoreLabel.anchorPoint = ccp(0.5f, 0.5f);
+    gameScoreLabel.position = ccp((scoreBox.position.x), (scoreBox.contentSize.height / 2));
+    [gameScoreLabel setZOrder:4];
+    [scoreBox addChild:gameScoreLabel];
+    
+    
     
     CCSprite *goalBoxSprite = [CCSprite spriteWithImageNamed:@"tutorial_done_box.png"];
     goalBoxSprite.anchorPoint = ccp(0.5f, 0.5f);
@@ -443,13 +467,14 @@
     
     CCLabelTTF *gameOverLabel = [CCLabelTTF labelWithString:@"Goal!!!!!" fontName:@"Chalkduster" fontSize:30.0f];
     gameOverLabel.anchorPoint = ccp(0.5f, 0.5f);
-    gameOverLabel.position = ccp((goalBoxSprite.contentSize.width / 2), goalBoxSprite.position.y);
+    gameOverLabel.position = ccp((goalBoxSprite.contentSize.width / 2), (goalBoxSprite.contentSize.height / 2));
     [goalBoxSprite addChild:gameOverLabel];
+    
     
     [self addChild:goalBoxLayout];
     
     
-    [self performSelector:@selector(displayCreditsAfterWin) withObject:nil afterDelay:2.0f];
+    [self performSelector:@selector(displayCreditsAfterWin) withObject:nil afterDelay:5.0f];
     
 }
 
@@ -508,6 +533,8 @@
 
 -(void)gameOver{
 
+    [startTimer invalidate];
+    
     [newGuySprite removeFromParentAndCleanup:TRUE];
     
     // setting the background color to be a transparent black
@@ -657,6 +684,9 @@
 // but shows the user what do do through an animated tutorial //
 -(void)cameFromTutorial{
     
+    [startTimer invalidate];
+    
+    
     backgroundColorOnPause = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.6]];
     backgroundColorOnPause.zOrder = 4;
     [self addChild:backgroundColorOnPause];
@@ -714,9 +744,11 @@
     forthArrowButton.visible = false;
     [forthArrowButton setTarget:self selector:@selector(nextInstruction:)];
     
+    
+    
     // instruction label //
-    heartInstruction = [CCLabelTTF labelWithString:@" Hit an enemy and your hearts go down.\nWhen you have zero hearts, the game is over!" fontName:@"Chalkduster" fontSize:10.0f];
-    heartInstruction.position = ccp(forthArrowButton.contentSize.width / 2, forthArrowButton.contentSize.height - 80.0f);
+    heartInstruction = [CCLabelTTF labelWithString:@" Hit an enemy and your hearts go down.\nWhen you have zero hearts, the game is over!\n \n  Hearts are worth 500pts a piece.\nFor every second that goes by, your total\nscore is subtracted by 10 pts." fontName:@"Chalkduster" fontSize:12.0f];
+    heartInstruction.position = ccp(forthArrowButton.contentSize.width / 2, forthArrowButton.contentSize.height - 100.0f);
     heartInstruction.anchorPoint = ccp(0.5f, 0.5f);
     heartInstruction.name = @"heart_instruction";
     heartInstruction.visible = false;
