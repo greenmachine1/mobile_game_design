@@ -284,13 +284,50 @@
     }
     
     
+    
+    // I want to have a random block appear after the player moves //
+    // it will be within the bounds of the top and bottom blocks //
+    // it will also not be on top of the user, the end goal or the enemy //
+    
+    
+    
+    
+    
+    
     //   creation of the middle block   //
     Block_Wall *midBlock = [Block_Wall createWallAtPosition:ccp(128.0f, 96.0f)];
     
     // animate the block //
     [midBlock blockAnimate];
     [self addChild:midBlock z:1];
+    
+    // [self performSelector:@selector(makeBlock) withObject:nil afterDelay:10.0f];
 
+}
+
+-(void)makeBlock{
+    
+    //   creation of the middle block   //
+    Block_Wall *midBlock = [Block_Wall createWallAtPosition:ccp(256.0f + 64, 96.0f)];
+    
+    // animate the block //
+    [midBlock blockAnimate];
+    [self addChild:midBlock z:1];
+    
+    if(CGRectContainsPoint([midBlock getBoundingBox], ccp(newGuySprite.position.x, newGuySprite.position.y))){
+        NSLog(@"in here!");
+        while(CGRectContainsPoint([midBlock getBoundingBox], ccp(newGuySprite.position.x, newGuySprite.position.y))){
+            NSLog(@"Yes!");
+            
+            newGuySprite.position = ccp(newGuySprite.position.x + 1, newGuySprite.position.y);
+            
+        }
+            
+        
+    }
+    
+    
+    
 }
 
 
@@ -382,6 +419,8 @@
 }
 
 
+
+
 -(void)displayGoal{
     
     [newGuySprite stopAllActions];
@@ -450,6 +489,8 @@
         
         // changes the color when hit to denote visually... that hes been hit //
         [newGuySprite changeColor];
+        
+        NSLog(@"Amount of hearts left %i", score);
         
         // game over //
         if(score < 1){
