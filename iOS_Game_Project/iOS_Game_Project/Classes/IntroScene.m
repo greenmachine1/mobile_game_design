@@ -100,6 +100,7 @@
     if(tutorialMode == YES){
         
         [self cameFromTutorial];
+        
     }
     
     
@@ -135,10 +136,8 @@
     [self addChild:backgroundColorOnPause];
     
     
-    
     // pausing the game //
     [[CCDirector sharedDirector] pause];
-    
     
     
     // creating elements for the pause menu //
@@ -334,11 +333,7 @@
     // stop movement of guy if in tutorial mode //
     }else{
         
-        
-        
-        
     }
-    
     
     [self collisionWithAnyBlock];
     [self collisionForEnemy];
@@ -409,6 +404,7 @@
         if(score < 1){
             
             [self gameOver];
+        
             
         }
     }
@@ -418,16 +414,15 @@
 
 
 
+
 -(void)gameOver{
-    
-    
+
+    [newGuySprite removeFromParentAndCleanup:TRUE];
     
     // setting the background color to be a transparent black
     CCNodeColor *backgroundColor = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.6f]];
     [backgroundColor setZOrder:4];
     [self addChild:backgroundColor];
-    
-    
     
     
     CCLayoutBox *gameOverLayoutBox = [[CCLayoutBox alloc] init];
@@ -466,11 +461,7 @@
     [self addChild:gameOverLayoutBox];
     
     pauseButton.enabled = NO;
-    
-    score = 4;
-    
-    [self creationOfHealthHearts];
-    
+
 }
 
 
