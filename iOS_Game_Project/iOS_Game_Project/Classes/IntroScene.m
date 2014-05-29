@@ -103,12 +103,11 @@
         [self cameFromTutorial];
         
     }
-    
-    
-    
-    
+
 	return self;
 }
+
+
 
 
 
@@ -128,20 +127,104 @@
 }
 
 
+
+
 -(void)timerOfGame:(NSDate *)time{
     [timeLabel removeFromParentAndCleanup:TRUE];
     
     timeIncrease++;
     
+    if(timeIncrease == 200){
+        
+        [self gameOver];
+        
+    }else if((timeIncrease == 150) && (score == 3)){
+        
+        [self gameOver];
+        
+    }else if((timeIncrease == 100) && (score == 2)){
+        
+        [self gameOver];
+        
+    }else if((timeIncrease == 50) && (score == 1)){
+        
+        [self gameOver];
+        
+    }
+    
     NSString *timeString = [NSString stringWithFormat:@"Time %i", timeIncrease];
     
-    timeLabel = [CCLabelTTF labelWithString:timeString fontName:@"Chalkduster" fontSize:20.0f];
+    timeLabel = [CCLabelTTF labelWithString:timeString fontName:@"Papyrus" fontSize:30.0f];
     timeLabel.anchorPoint = ccp(0.5f, 0.5f);
     timeLabel.position = ccp(xBounds / 2, yBounds - 32.0f);
+    timeLabel.fontColor = [CCColor blueColor];
     [timeLabel setZOrder:4];
     [self addChild:timeLabel];
     
 }
+
+
+
+
+-(void)creationOfHealthHearts{
+    
+    for(int i = 1; i < 5; i++){
+        
+        newHealthHeart = [heathHeartSprite createHeathHeartAtLocation:ccp(32 * i, yBounds - 32)];
+        [self addChild:newHealthHeart z:2 name:@"Heart"];
+    }
+}
+
+
+-(void)creationOfEnemy{
+    
+    newEnemySprite = [Enemy_Sprite_Object createEnemyWithLocation:ccp(200.0f, yBounds - 96)];
+    [newGuySprite setZOrder:1];
+    [self addChild:newEnemySprite];
+}
+
+
+-(void)createEndBox{
+    
+    newEndBox = [EndBox createEndBoxWithLocation:ccp(64.0f, yBounds / 2)];
+    [newEndBox setZOrder:1];
+    [self addChild:newEndBox];
+}
+
+
+-(void)creationOfBlocks{
+    
+    //   creation of the upper level blocks   //
+    for(int i = 1; i < xBounds / 64; i ++){
+        Block_Wall *newBlockWallLayout = [Block_Wall createWallAtPosition:ccp((i * 64), 32.0f)];
+        [self addChild:newBlockWallLayout z:1];
+    }
+    
+    
+    
+    //   creation of the lower level blocks   //
+    for(int j = 1; j < xBounds / 64; j++){
+        
+        Block_Wall *newBlockWallLayout = [Block_Wall createWallAtPosition:ccp(j * 64, yBounds - 32)];
+        [self addChild:newBlockWallLayout z:1];
+    }
+    
+    
+    //   creation of the middle block   //
+    Block_Wall *midBlock = [Block_Wall createWallAtPosition:ccp(128.0f, 96.0f)];
+    
+    // animate the block //
+    [midBlock blockAnimate];
+    [self addChild:midBlock z:1];
+    
+    
+}
+
+
+
+
+
+
 
 
 
@@ -203,10 +286,6 @@
 
 
 
-
-
-
-
 // resuming the game //
 -(void)resumeButton{
     
@@ -225,12 +304,6 @@
     [[CCDirector sharedDirector] resume];
     
 }
-
-
-
-
-
-
 
 
 // going back to the main menu //
@@ -257,72 +330,6 @@
 
 
 
-
--(void)creationOfHealthHearts{
-    
-    for(int i = 1; i < 5; i++){
-        
-        newHealthHeart = [heathHeartSprite createHeathHeartAtLocation:ccp(32 * i, yBounds - 32)];
-        [self addChild:newHealthHeart z:2 name:@"Heart"];
-    }
-}
-
-
-
-
-
--(void)creationOfEnemy{
-    
-    newEnemySprite = [Enemy_Sprite_Object createEnemyWithLocation:ccp(200.0f, yBounds - 96)];
-    [newGuySprite setZOrder:1];
-    [self addChild:newEnemySprite];
-}
-
-
-
-
-
-
-
--(void)createEndBox{
-    
-    newEndBox = [EndBox createEndBoxWithLocation:ccp(64.0f, yBounds / 2)];
-    [newEndBox setZOrder:1];
-    [self addChild:newEndBox];
-}
-
-
-
-
-
-
--(void)creationOfBlocks{
-    
-    //   creation of the upper level blocks   //
-    for(int i = 1; i < xBounds / 64; i ++){
-        Block_Wall *newBlockWallLayout = [Block_Wall createWallAtPosition:ccp((i * 64), 32.0f)];
-        [self addChild:newBlockWallLayout z:1];
-    }
-    
-    
-    
-    //   creation of the lower level blocks   //
-    for(int j = 1; j < xBounds / 64; j++){
-        
-        Block_Wall *newBlockWallLayout = [Block_Wall createWallAtPosition:ccp(j * 64, yBounds - 32)];
-        [self addChild:newBlockWallLayout z:1];
-    }
-    
-    
-    //   creation of the middle block   //
-    Block_Wall *midBlock = [Block_Wall createWallAtPosition:ccp(128.0f, 96.0f)];
-    
-    // animate the block //
-    [midBlock blockAnimate];
-    [self addChild:midBlock z:1];
-    
-
-}
 
 
 
@@ -413,6 +420,114 @@
 
 
 
+-(void)collisionForEnemy{
+    
+    //   basically If the user touches the enemy, I need to reset their position   //
+    if(CGRectIntersectsRect([newGuySprite getBoundingBox], [newEnemySprite getBoundingBox])){
+        
+        [playSound playBg:@"sea_audio.mp3"];
+        
+        score = score - 1;
+        
+        // removes one heart at a time from the screen //
+        [self removeChildByName:@"Heart" cleanup:YES];
+        
+        touchPoint = ccp(xBounds - 64, yBounds / 2);
+        
+        //   resets the position of the guy   //
+        newGuySprite.position = touchPoint;
+        
+        //   stops the guy from continuing to move after hitting   //
+        [newGuySprite stopAllActions];
+        
+        // changes the color when hit to denote visually... that hes been hit //
+        [newGuySprite changeColor];
+        
+        NSLog(@"Amount of hearts left %i", score);
+        
+        // game over //
+        if(score < 1){
+            
+            [self gameOver];
+            
+        }
+    }
+    
+}
+
+
+-(void)collisionWithAnyBlock{
+    
+    // checking for block objects //
+    for(Block_Wall *blocks in self.children){
+        
+        // checking to see if its the kind of class //
+        if([blocks isKindOfClass:[Block_Wall class]]){
+            
+            // checking for intersection of two bounding boxes //
+            if(CGRectIntersectsRect([blocks getBoundingBox], [newGuySprite getBoundingBox])){
+                
+                //   naming all the constant boundries   //
+                float positiveXForGuy = newGuySprite.position.x + [newGuySprite getBoundingBox].size.width / 2;
+                float negativeXForGuy = newGuySprite.position.x - [newGuySprite getBoundingBox].size.width / 2;
+                float positiveYForGuy = newGuySprite.position.y + [newGuySprite getBoundingBox].size.height / 2;
+                float negativeYForGuy = newGuySprite.position.y - [newGuySprite getBoundingBox].size.height / 2;
+                
+                float positiveXForBlock = blocks.position.x + [blocks getBoundingBox].size.width / 2;
+                float negativeXForBlock = blocks.position.x - [blocks getBoundingBox].size.width / 2;
+                float positiveYForBlock = blocks.position.y + [blocks getBoundingBox].size.height / 2;
+                float negativeYForBlock = blocks.position.y - [blocks getBoundingBox].size.height / 2;
+                
+                
+                //   checking to see if the right side of the free standing block has been touched   //
+                //   if so, check the top and bottom edges to make sure its free before allowing   //
+                //   to pass   //
+                if((negativeXForGuy < positiveXForBlock) && ((negativeYForGuy < positiveYForBlock) && (positiveYForGuy > negativeYForBlock)) && (!(negativeXForGuy < blocks.position.x))){
+                    
+                    newGuySprite.position = ccp(blocks.position.x + 64 , newGuySprite.position.y);
+                    [newGuySprite stopAllActions];
+                }
+                
+                //   checking to see if the left side of the free standing block has been touched   //
+                //   if so, check the top and bottom edges to makes sure its free before allowing   //
+                //   to pass   //
+                else if((positiveXForGuy > negativeXForBlock) && ((negativeYForGuy < positiveYForBlock) && (positiveYForGuy > negativeYForBlock)) && (!(positiveXForGuy > blocks.position.x))){
+                    
+                    newGuySprite.position = ccp(blocks.position.x - 64, newGuySprite.position.y);
+                    [newGuySprite stopAllActions];
+                    
+                }
+                
+                
+                //   use the same principals as above for top and bottom collision   //
+                else if((positiveYForGuy > negativeYForBlock) && ((negativeXForGuy < positiveXForBlock) && (positiveXForGuy > negativeXForBlock)) && (!(positiveYForGuy > blocks.position.y))){
+                    
+                    newGuySprite.position = ccp(newGuySprite.position.x, blocks.position.y - 64);
+                    [newGuySprite stopAllActions];
+                    
+                }
+                
+                
+                else if((negativeYForGuy < positiveYForBlock) && ((negativeXForGuy < positiveXForBlock) && (positiveXForGuy > negativeXForBlock)) && (!(negativeYForGuy < blocks.position.y))){
+                    
+                    newGuySprite.position = ccp(newGuySprite.position.x, blocks.position.y + 64);
+                    [newGuySprite stopAllActions];
+                    
+                }
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
 
 -(void)displayGoal{
     
@@ -492,40 +607,6 @@
 
 
 
--(void)collisionForEnemy{
-    
-    //   basically If the user touches the enemy, I need to reset their position   //
-    if(CGRectIntersectsRect([newGuySprite getBoundingBox], [newEnemySprite getBoundingBox])){
-        
-        [playSound playBg:@"sea_audio.mp3"];
-        
-        score = score - 1;
-
-        // removes one heart at a time from the screen //
-        [self removeChildByName:@"Heart" cleanup:YES];
-        
-        touchPoint = ccp(xBounds - 64, yBounds / 2);
-        
-        //   resets the position of the guy   //
-        newGuySprite.position = touchPoint;
-        
-        //   stops the guy from continuing to move after hitting   //
-        [newGuySprite stopAllActions];
-        
-        // changes the color when hit to denote visually... that hes been hit //
-        [newGuySprite changeColor];
-        
-        NSLog(@"Amount of hearts left %i", score);
-        
-        // game over //
-        if(score < 1){
-            
-            [self gameOver];
-    
-        }
-    }
-    
-}
 
 
 
@@ -555,13 +636,13 @@
     [gameOverBoxSprite setZOrder:4];
     [gameOverLayoutBox addChild:gameOverBoxSprite];
     
-    CCLabelTTF *gameOverLabel = [CCLabelTTF labelWithString:@"Game Over!" fontName:@"Chalkduster" fontSize:30.0f];
+    CCLabelTTF *gameOverLabel = [CCLabelTTF labelWithString:@"Game Over!" fontName:@"Papyrus" fontSize:30.0f];
     gameOverLabel.anchorPoint = ccp(0.5f, 0.5f);
     gameOverLabel.position = ccp((gameOverBoxSprite.contentSize.width / 2), gameOverBoxSprite.position.y + 50.0f);
     [gameOverBoxSprite addChild:gameOverLabel];
     
     
-    CCButton *playAgainButton = [CCButton buttonWithTitle:@"Play Again!" fontName:@"Chalkduster" fontSize:20.0f];
+    CCButton *playAgainButton = [CCButton buttonWithTitle:@"Play Again!" fontName:@"Papyrus" fontSize:20.0f];
     playAgainButton.anchorPoint = ccp(0.5f, 0.5f);
     playAgainButton.position = ccp((gameOverBoxSprite.contentSize.width / 2), gameOverBoxSprite.position.y - 20.0f);
     playAgainButton.name = @"Play_Again";
@@ -569,7 +650,7 @@
     [gameOverBoxSprite addChild:playAgainButton];
     
     
-    CCButton *mainMenuButton = [CCButton buttonWithTitle:@"Main Menu!" fontName:@"Chalkduster" fontSize:20.0f];
+    CCButton *mainMenuButton = [CCButton buttonWithTitle:@"Main Menu!" fontName:@"Papyrus" fontSize:20.0f];
     mainMenuButton.anchorPoint = ccp(0.5f, 0.5f);
     mainMenuButton.position = ccp((gameOverBoxSprite.contentSize.width / 2), gameOverBoxSprite.position.y - 60.0f);
     mainMenuButton.name = @"Main_Menu";
@@ -600,73 +681,6 @@
     }
     
     
-}
-
-
-
-
-
--(void)collisionWithAnyBlock{
-    
-    // checking for block objects //
-    for(Block_Wall *blocks in self.children){
-        
-        // checking to see if its the kind of class //
-        if([blocks isKindOfClass:[Block_Wall class]]){
-            
-            // checking for intersection of two bounding boxes //
-            if(CGRectIntersectsRect([blocks getBoundingBox], [newGuySprite getBoundingBox])){
-            
-                //   naming all the constant boundries   //
-                float positiveXForGuy = newGuySprite.position.x + [newGuySprite getBoundingBox].size.width / 2;
-                float negativeXForGuy = newGuySprite.position.x - [newGuySprite getBoundingBox].size.width / 2;
-                float positiveYForGuy = newGuySprite.position.y + [newGuySprite getBoundingBox].size.height / 2;
-                float negativeYForGuy = newGuySprite.position.y - [newGuySprite getBoundingBox].size.height / 2;
-                
-                float positiveXForBlock = blocks.position.x + [blocks getBoundingBox].size.width / 2;
-                float negativeXForBlock = blocks.position.x - [blocks getBoundingBox].size.width / 2;
-                float positiveYForBlock = blocks.position.y + [blocks getBoundingBox].size.height / 2;
-                float negativeYForBlock = blocks.position.y - [blocks getBoundingBox].size.height / 2;
-                
-                
-                //   checking to see if the right side of the free standing block has been touched   //
-                //   if so, check the top and bottom edges to make sure its free before allowing   //
-                //   to pass   //
-                if((negativeXForGuy < positiveXForBlock) && ((negativeYForGuy < positiveYForBlock) && (positiveYForGuy > negativeYForBlock)) && (!(negativeXForGuy < blocks.position.x))){
-                    
-                    newGuySprite.position = ccp(blocks.position.x + 64 , newGuySprite.position.y);
-                    [newGuySprite stopAllActions];
-                }
-                
-                //   checking to see if the left side of the free standing block has been touched   //
-                //   if so, check the top and bottom edges to makes sure its free before allowing   //
-                //   to pass   //
-                else if((positiveXForGuy > negativeXForBlock) && ((negativeYForGuy < positiveYForBlock) && (positiveYForGuy > negativeYForBlock)) && (!(positiveXForGuy > blocks.position.x))){
-        
-                    newGuySprite.position = ccp(blocks.position.x - 64, newGuySprite.position.y);
-                    [newGuySprite stopAllActions];
-                    
-                }
-                
-                
-                //   use the same principals as above for top and bottom collision   //
-                else if((positiveYForGuy > negativeYForBlock) && ((negativeXForGuy < positiveXForBlock) && (positiveXForGuy > negativeXForBlock)) && (!(positiveYForGuy > blocks.position.y))){
-                    
-                    newGuySprite.position = ccp(newGuySprite.position.x, blocks.position.y - 64);
-                    [newGuySprite stopAllActions];
-                    
-                }
-                
-                
-                else if((negativeYForGuy < positiveYForBlock) && ((negativeXForGuy < positiveXForBlock) && (positiveXForGuy > negativeXForBlock)) && (!(negativeYForGuy < blocks.position.y))){
-                    
-                    newGuySprite.position = ccp(newGuySprite.position.x, blocks.position.y + 64);
-                    [newGuySprite stopAllActions];
-                    
-                }
-            }
-        }
-    }
 }
 
 
@@ -737,7 +751,7 @@
     
     
     
-    forthArrowButton = [CCButton buttonWithTitle:@"Done with Tutorial!" spriteFrame:arrowFrameSprite];
+    forthArrowButton = [CCButton buttonWithTitle:@"Hearts!" spriteFrame:arrowFrameSprite];
     forthArrowButton.position = ccp(220.0f, yBounds - 32);
     forthArrowButton.anchorPoint = ccp(0.5f, 0.5f);
     forthArrowButton.name = @"forth_Next";
