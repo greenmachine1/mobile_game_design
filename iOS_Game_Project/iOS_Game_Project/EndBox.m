@@ -91,13 +91,10 @@
     
     
     
-    
+    // combining both actions to make a loop
     CCActionSequence *backAndForthAnimation = [CCActionSequence actionOne:animateAction two:animateActionBackwards];
     
     CCActionRepeatForever *repeatAllActions = [CCActionRepeatForever actionWithAction:backAndForthAnimation];
-    
-    
-    
     
     
     
