@@ -59,8 +59,6 @@
     xBounds = self.contentSize.width;
     yBounds = self.contentSize.height;
     
-    
-    
     // setting the movement speed of the guy //
     speed = 200;
     
@@ -171,6 +169,8 @@
     newEndBox = [EndBox createEndBoxWithLocation:ccp(64.0f, yBounds / 2)];
     [newEndBox setZOrder:1];
     [self addChild:newEndBox];
+    //[newEndBox flagAnimate];
+    
 }
 
 

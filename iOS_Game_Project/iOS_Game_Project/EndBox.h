@@ -16,5 +16,6 @@
 
 +(id)createEndBoxWithLocation:(CGPoint)location;
 -(CGRect)getBoundingBox;
+-(void)flagAnimate;
 
 @end
