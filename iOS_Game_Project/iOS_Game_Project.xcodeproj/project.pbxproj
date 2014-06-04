@@ -17,6 +17,7 @@
 		D63681B5192405EC0011A1BB /* Enemy_Sprite_Object.m in Sources */ = {isa = PBXBuildFile; fileRef = D63681B4192405EC0011A1BB /* Enemy_Sprite_Object.m */; };
 		D6376B32192495AA00BFF544 /* EndBox.m in Sources */ = {isa = PBXBuildFile; fileRef = D6376B31192495AA00BFF544 /* EndBox.m */; };
 		D63E6DEB1921E33D007D962E /* Guy_Sprite_Object.m in Sources */ = {isa = PBXBuildFile; fileRef = D63E6DEA1921E33D007D962E /* Guy_Sprite_Object.m */; };
+		D63F0992193E9ED000AD88E8 /* MoveableBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = D63F0991193E9ED000AD88E8 /* MoveableBlock.m */; };
 		D65674841918979A003CC6E9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D65674831918979A003CC6E9 /* QuartzCore.framework */; };
 		D65674861918979A003CC6E9 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D65674851918979A003CC6E9 /* OpenGLES.framework */; };
 		D65674881918979A003CC6E9 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D65674871918979A003CC6E9 /* OpenAL.framework */; };
@@ -271,6 +272,8 @@
 		D6376B31192495AA00BFF544 /* EndBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EndBox.m; sourceTree = "<group>"; };
 		D63E6DE91921E33D007D962E /* Guy_Sprite_Object.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Guy_Sprite_Object.h; sourceTree = "<group>"; };
 		D63E6DEA1921E33D007D962E /* Guy_Sprite_Object.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Guy_Sprite_Object.m; sourceTree = "<group>"; };
+		D63F0990193E9ED000AD88E8 /* MoveableBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoveableBlock.h; sourceTree = "<group>"; };
+		D63F0991193E9ED000AD88E8 /* MoveableBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoveableBlock.m; sourceTree = "<group>"; };
 		D65674801918979A003CC6E9 /* iOS_Game_Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOS_Game_Project.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D65674831918979A003CC6E9 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		D65674851918979A003CC6E9 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -1650,6 +1653,8 @@
 				D62E782319340E7B000FE70C /* GamePlayTutorialScene.m */,
 				D697111F1934534900899F60 /* ArrowSprite.h */,
 				D69711201934534900899F60 /* ArrowSprite.m */,
+				D63F0990193E9ED000AD88E8 /* MoveableBlock.h */,
+				D63F0991193E9ED000AD88E8 /* MoveableBlock.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -1889,6 +1894,7 @@
 				D656759C1918979B003CC6E9 /* CCTiledMapLayer.m in Sources */,
 				D65676901918979C003CC6E9 /* neon_matrix_impl.c in Sources */,
 				D65675151918979A003CC6E9 /* CCLabelTTF.m in Sources */,
+				D63F0992193E9ED000AD88E8 /* MoveableBlock.m in Sources */,
 				D65675CA1918979B003CC6E9 /* NSEvent+CC.m in Sources */,
 				D65676271918979B003CC6E9 /* ALDevice.m in Sources */,
 				D61030D91920A0D600A1D150 /* Block_Wall.m in Sources */,

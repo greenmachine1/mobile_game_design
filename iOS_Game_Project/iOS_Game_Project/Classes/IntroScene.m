@@ -19,6 +19,7 @@
 #import "MainMenuScene.h"
 #import "ArrowSprite.h"
 #import "CreditsScene.h"
+#import "MoveableBlock.h"
 
 
 
@@ -92,7 +93,7 @@
     
     [self addChild:newGuySprite];
     [self creationOfBlocks];
-    [self creationOfEnemy];
+    //[self creationOfEnemy];
     [self createEndBox];
     [self creationOfHealthHearts];
     
@@ -176,35 +177,28 @@
 
 -(void)creationOfBlocks{
     
-    //   creation of the upper level blocks   //
-    for(int i = 1; i < xBounds / 64; i ++){
-        Block_Wall *newBlockWallLayout = [Block_Wall createWallAtPosition:ccp((i * 64), 32.0f)];
-        [self addChild:newBlockWallLayout z:1];
-    }
+    // getting the width / 32 + 2
+    int numberOfBlocksInTheWidth = (xBounds / 32 + 2);
     
-    //   creation of the lower level blocks   //
-    for(int j = 1; j < xBounds / 64; j++){
+    for(int i = 1; i < numberOfBlocksInTheWidth; i++){
         
-        Block_Wall *newBlockWallLayout = [Block_Wall createWallAtPosition:ccp(j * 64, yBounds - 32)];
-        [self addChild:newBlockWallLayout z:1];
+        // making sure the blocks get created at intervals of 1 ,3 ,5, 7, 9...
+        if((i % 2) == 1){
+            
+            // creation of the lower and upper walls
+            Block_Wall *lowerWall = [Block_Wall createWallAtPosition:ccp(i * 32, 32.0f)];
+            [self addChild:lowerWall];
+            
+            Block_Wall *upperWall = [Block_Wall createWallAtPosition:ccp(i * 32, yBounds - 32)];
+            [self addChild:upperWall];
+        }
     }
     
+
     
-    //   creation of the middle block   //
-    Block_Wall *midBlock = [Block_Wall createWallAtPosition:ccp(128.0f, 96.0f)];
-    
-    // animate the block //
-    [midBlock blockAnimate];
-    [self addChild:midBlock z:1];
-    
-    
+    moveableBlock = [MoveableBlock createMovableBlockWithLocation:ccp(128.0f, 96.0f)];
+    [self addChild:moveableBlock z:1 name:@"midblock"];
 }
-
-
-
-
-
-
 
 
 
@@ -348,6 +342,7 @@
     }
     
     [self collisionWithAnyBlock];
+    [self collisionWithMovableBlock];
     [self collisionForEnemy];
     [self collisionWithEnd];
     
@@ -428,6 +423,21 @@
 }
 
 
+-(void)collisionWithMovableBlock{
+    
+    
+    if(CGRectIntersectsRect([moveableBlock getBoundingBox], [newGuySprite getBoundingBox])){
+
+                
+        //[self removeChildByName:@"midblock" cleanup:YES];
+        moveableBlock.position = newGuySprite.position;
+        
+    }
+
+}
+
+
+
 -(void)collisionWithAnyBlock{
     
     // checking for block objects //
@@ -436,56 +446,64 @@
         // checking to see if its the kind of class //
         if([blocks isKindOfClass:[Block_Wall class]]){
             
+            
+            
+            
             // checking for intersection of two bounding boxes //
             if(CGRectIntersectsRect([blocks getBoundingBox], [newGuySprite getBoundingBox])){
                 
-                //   naming all the constant boundries   //
-                float positiveXForGuy = newGuySprite.position.x + [newGuySprite getBoundingBox].size.width / 2;
-                float negativeXForGuy = newGuySprite.position.x - [newGuySprite getBoundingBox].size.width / 2;
-                float positiveYForGuy = newGuySprite.position.y + [newGuySprite getBoundingBox].size.height / 2;
-                float negativeYForGuy = newGuySprite.position.y - [newGuySprite getBoundingBox].size.height / 2;
+                if(!([[blocks name] isEqualToString:@"midblock"])){
                 
-                float positiveXForBlock = blocks.position.x + [blocks getBoundingBox].size.width / 2;
-                float negativeXForBlock = blocks.position.x - [blocks getBoundingBox].size.width / 2;
-                float positiveYForBlock = blocks.position.y + [blocks getBoundingBox].size.height / 2;
-                float negativeYForBlock = blocks.position.y - [blocks getBoundingBox].size.height / 2;
+                    //   naming all the constant boundries   //
+                    float positiveXForGuy = newGuySprite.position.x + [newGuySprite getBoundingBox].size.width / 2;
+                    float negativeXForGuy = newGuySprite.position.x - [newGuySprite getBoundingBox].size.width / 2;
+                    float positiveYForGuy = newGuySprite.position.y + [newGuySprite getBoundingBox].size.height / 2;
+                    float negativeYForGuy = newGuySprite.position.y - [newGuySprite getBoundingBox].size.height / 2;
+                
+                    float positiveXForBlock = blocks.position.x + [blocks getBoundingBox].size.width / 2;
+                    float negativeXForBlock = blocks.position.x - [blocks getBoundingBox].size.width / 2;
+                    float positiveYForBlock = blocks.position.y + [blocks getBoundingBox].size.height / 2;
+                    float negativeYForBlock = blocks.position.y - [blocks getBoundingBox].size.height / 2;
                 
                 
-                //   checking to see if the right side of the free standing block has been touched   //
-                //   if so, check the top and bottom edges to make sure its free before allowing   //
-                //   to pass   //
-                if((negativeXForGuy < positiveXForBlock) && ((negativeYForGuy < positiveYForBlock) && (positiveYForGuy > negativeYForBlock)) && (!(negativeXForGuy < blocks.position.x))){
+                    //   checking to see if the right side of the free standing block has been touched   //
+                    //   if so, check the top and bottom edges to make sure its free before allowing   //
+                    //   to pass   //
+                    if((negativeXForGuy < positiveXForBlock) && ((negativeYForGuy < positiveYForBlock) && (positiveYForGuy > negativeYForBlock)) && (!(negativeXForGuy < blocks.position.x))){
                     
-                    newGuySprite.position = ccp(blocks.position.x + 64 , newGuySprite.position.y);
-                    [newGuySprite stopAllActions];
+                        newGuySprite.position = ccp(blocks.position.x + 64 , newGuySprite.position.y);
+                        [newGuySprite stopAllActions];
+                    }
+                
+                    //   checking to see if the left side of the free standing block has been touched   //
+                    //   if so, check the top and bottom edges to makes sure its free before allowing   //
+                    //   to pass   //
+                    else if((positiveXForGuy > negativeXForBlock) && ((negativeYForGuy < positiveYForBlock) && (positiveYForGuy > negativeYForBlock)) && (!(positiveXForGuy > blocks.position.x))){
+                    
+                        newGuySprite.position = ccp(blocks.position.x - 64, newGuySprite.position.y);
+                        [newGuySprite stopAllActions];
+                    
+                    }
+                
+                
+                    //   use the same principals as above for top and bottom collision   //
+                    else if((positiveYForGuy > negativeYForBlock) && ((negativeXForGuy < positiveXForBlock) && (positiveXForGuy > negativeXForBlock)) && (!(positiveYForGuy > blocks.position.y))){
+                    
+                        newGuySprite.position = ccp(newGuySprite.position.x, blocks.position.y - 64);
+                        [newGuySprite stopAllActions];
+                    
+                    }
+                
+                
+                    else if((negativeYForGuy < positiveYForBlock) && ((negativeXForGuy < positiveXForBlock) && (positiveXForGuy > negativeXForBlock)) && (!(negativeYForGuy < blocks.position.y))){
+                    
+                        newGuySprite.position = ccp(newGuySprite.position.x, blocks.position.y + 64);
+                        [newGuySprite stopAllActions];
+                    
+                    }
+                
                 }
-                
-                //   checking to see if the left side of the free standing block has been touched   //
-                //   if so, check the top and bottom edges to makes sure its free before allowing   //
-                //   to pass   //
-                else if((positiveXForGuy > negativeXForBlock) && ((negativeYForGuy < positiveYForBlock) && (positiveYForGuy > negativeYForBlock)) && (!(positiveXForGuy > blocks.position.x))){
-                    
-                    newGuySprite.position = ccp(blocks.position.x - 64, newGuySprite.position.y);
-                    [newGuySprite stopAllActions];
-                    
-                }
-                
-                
-                //   use the same principals as above for top and bottom collision   //
-                else if((positiveYForGuy > negativeYForBlock) && ((negativeXForGuy < positiveXForBlock) && (positiveXForGuy > negativeXForBlock)) && (!(positiveYForGuy > blocks.position.y))){
-                    
-                    newGuySprite.position = ccp(newGuySprite.position.x, blocks.position.y - 64);
-                    [newGuySprite stopAllActions];
-                    
-                }
-                
-                
-                else if((negativeYForGuy < positiveYForBlock) && ((negativeXForGuy < positiveXForBlock) && (positiveXForGuy > negativeXForBlock)) && (!(negativeYForGuy < blocks.position.y))){
-                    
-                    newGuySprite.position = ccp(newGuySprite.position.x, blocks.position.y + 64);
-                    [newGuySprite stopAllActions];
-                    
-                }
+
             }
         }
     }

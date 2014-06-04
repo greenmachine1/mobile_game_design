@@ -14,6 +14,7 @@
 #import "Enemy_Sprite_Object.h"
 #import "EndBox.h"
 #import "heathHeartSprite.h"
+#import "MoveableBlock.h"
 
 
 /**
@@ -41,6 +42,7 @@
     EndBox *newEndBox;
     CCLayoutBox *goalBox;
     heathHeartSprite *newHealthHeart;
+    MoveableBlock *moveableBlock;
     
     // pause elements //
     CCNodeColor *backgroundColorOnPause;
