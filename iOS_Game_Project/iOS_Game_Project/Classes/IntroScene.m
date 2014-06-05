@@ -196,7 +196,7 @@
     
 
     
-    moveableBlock = [MoveableBlock createMovableBlockWithLocation:ccp(128.0f, 96.0f)];
+    moveableBlock = [MoveableBlock createMovableBlockWithLocation:ccp(192.0f, 192.0f)];
     [self addChild:moveableBlock z:1 name:@"midblock"];
 }
 
@@ -423,18 +423,23 @@
 }
 
 
+
+
+// --- > collision with movable block < --- //
 -(void)collisionWithMovableBlock{
-    
     
     if(CGRectIntersectsRect([moveableBlock getBoundingBox], [newGuySprite getBoundingBox])){
 
-                
         //[self removeChildByName:@"midblock" cleanup:YES];
-        moveableBlock.position = newGuySprite.position;
+        //moveableBlock.position = newGuySprite.position;
+        
+        moveableBlock.position = ccp(moveableBlock.position.x - 5.0f, moveableBlock.position.y);
         
     }
 
 }
+
+
 
 
 
