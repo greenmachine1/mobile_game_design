@@ -93,7 +93,7 @@
     
     [self addChild:newGuySprite];
     [self creationOfBlocks];
-    //[self creationOfEnemy];
+    [self creationOfEnemy];
     [self createEndBox];
     [self creationOfHealthHearts];
     
@@ -159,7 +159,7 @@
 
 -(void)creationOfEnemy{
     
-    newEnemySprite = [Enemy_Sprite_Object createEnemyWithLocation:ccp(200.0f, yBounds - 96)];
+    newEnemySprite = [Enemy_Sprite_Object createEnemyWithLocation:ccp(256.0f, yBounds - 96)];
     [newGuySprite setZOrder:1];
     [self addChild:newEnemySprite];
 }
@@ -194,10 +194,16 @@
         }
     }
     
-
+    // creation of the center dividing wall //
+    Block_Wall *centerWallDivider = [Block_Wall createWallAtPosition:ccp(192.0f, yBounds - 96.0f)];
+    [self addChild:centerWallDivider];
     
-    moveableBlock = [MoveableBlock createMovableBlockWithLocation:ccp(192.0f, 192.0f)];
-    [self addChild:moveableBlock z:1 name:@"midblock"];
+    Block_Wall *centerWallDivider2 = [Block_Wall createWallAtPosition:ccp(192.0f, yBounds - 160.0f)];
+    [self addChild:centerWallDivider2];
+    
+    // adding a movable block to the mix //
+    moveableBlock = [MoveableBlock createMovableBlockWithLocation:ccp(192.0f, yBounds - 224.0f)];
+    [self addChild:moveableBlock z:0 name:@"midblock"];
 }
 
 
@@ -429,10 +435,8 @@
 -(void)collisionWithMovableBlock{
     
     if(CGRectIntersectsRect([moveableBlock getBoundingBox], [newGuySprite getBoundingBox])){
-
-        //[self removeChildByName:@"midblock" cleanup:YES];
-        //moveableBlock.position = newGuySprite.position;
         
+        // moving the block //
         moveableBlock.position = ccp(moveableBlock.position.x - 5.0f, moveableBlock.position.y);
         
     }
