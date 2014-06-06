@@ -11,6 +11,8 @@
 		D60738E7193857AE00415A86 /* Flag.pvr in Resources */ = {isa = PBXBuildFile; fileRef = D60738E5193857AE00415A86 /* Flag.pvr */; };
 		D60738E91938590300415A86 /* Flag-1.png in Resources */ = {isa = PBXBuildFile; fileRef = D60738E81938590300415A86 /* Flag-1.png */; };
 		D61030D91920A0D600A1D150 /* Block_Wall.m in Sources */ = {isa = PBXBuildFile; fileRef = D61030D81920A0D600A1D150 /* Block_Wall.m */; };
+		D62DAA501941A57A00BD71C5 /* DpadBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = D62DAA4F1941A57A00BD71C5 /* DpadBackground.png */; };
+		D62DAA521941A6A800BD71C5 /* ThumbPoint.png in Resources */ = {isa = PBXBuildFile; fileRef = D62DAA511941A6A800BD71C5 /* ThumbPoint.png */; };
 		D62E782119340DAD000FE70C /* CreditsScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D62E782019340DAD000FE70C /* CreditsScene.m */; };
 		D62E782419340E7B000FE70C /* GamePlayTutorialScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D62E782319340E7B000FE70C /* GamePlayTutorialScene.m */; };
 		D6317E7519319D55009E232E /* SplashScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = D6317E7419319D55009E232E /* SplashScreen.m */; };
@@ -243,6 +245,7 @@
 		D6EC7E851931DE9900690E86 /* MainMenuScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D6EC7E841931DE9900690E86 /* MainMenuScene.m */; };
 		D6EECBDA192D6095008D6EF0 /* healthHeartSprite.png in Resources */ = {isa = PBXBuildFile; fileRef = D6EECBD9192D6095008D6EF0 /* healthHeartSprite.png */; };
 		D6EECBDD192D613B008D6EF0 /* heathHeartSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = D6EECBDC192D613B008D6EF0 /* heathHeartSprite.m */; };
+		D6F84755194167CE00F990FC /* DPad.m in Sources */ = {isa = PBXBuildFile; fileRef = D6F84754194167CE00F990FC /* DPad.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -261,6 +264,8 @@
 		D60738E81938590300415A86 /* Flag-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Flag-1.png"; sourceTree = "<group>"; };
 		D61030D71920A0D600A1D150 /* Block_Wall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Block_Wall.h; sourceTree = "<group>"; };
 		D61030D81920A0D600A1D150 /* Block_Wall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Block_Wall.m; sourceTree = "<group>"; };
+		D62DAA4F1941A57A00BD71C5 /* DpadBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DpadBackground.png; sourceTree = "<group>"; };
+		D62DAA511941A6A800BD71C5 /* ThumbPoint.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ThumbPoint.png; sourceTree = "<group>"; };
 		D62E781F19340DAD000FE70C /* CreditsScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditsScene.h; sourceTree = "<group>"; };
 		D62E782019340DAD000FE70C /* CreditsScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreditsScene.m; sourceTree = "<group>"; };
 		D62E782219340E7A000FE70C /* GamePlayTutorialScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GamePlayTutorialScene.h; sourceTree = "<group>"; };
@@ -725,6 +730,8 @@
 		D6EECBD9192D6095008D6EF0 /* healthHeartSprite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = healthHeartSprite.png; sourceTree = "<group>"; };
 		D6EECBDB192D613B008D6EF0 /* heathHeartSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = heathHeartSprite.h; sourceTree = "<group>"; };
 		D6EECBDC192D613B008D6EF0 /* heathHeartSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = heathHeartSprite.m; sourceTree = "<group>"; };
+		D6F84753194167CE00F990FC /* DPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPad.h; sourceTree = "<group>"; };
+		D6F84754194167CE00F990FC /* DPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPad.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -807,6 +814,7 @@
 				D6DDBD3A19412906001293D2 /* Block_movable.png */,
 				D6CEDB721935C9D200377347 /* tutorial_done_box.png */,
 				D698D42B192E7DE1004FB750 /* pause_sprite.png */,
+				D62DAA4F1941A57A00BD71C5 /* DpadBackground.png */,
 				D6CEDB741935D67F00377347 /* Splash_screen.png */,
 				D60738E81938590300415A86 /* Flag-1.png */,
 				D697111B1934354100899F60 /* menu_box_pause.png */,
@@ -816,6 +824,7 @@
 				D6AA90951924AFE5000620E1 /* Goal.png */,
 				D6B2120119199933005D3E7F /* guy_pixel_art.png */,
 				D656749D1918979A003CC6E9 /* Default.png */,
+				D62DAA511941A6A800BD71C5 /* ThumbPoint.png */,
 				D656749F1918979A003CC6E9 /* Default@2x.png */,
 				D65674A11918979A003CC6E9 /* Default-568h@2x.png */,
 				D65674A31918979A003CC6E9 /* Default-Landscape~ipad.png */,
@@ -1658,6 +1667,8 @@
 				D69711201934534900899F60 /* ArrowSprite.m */,
 				D63F0990193E9ED000AD88E8 /* MoveableBlock.h */,
 				D63F0991193E9ED000AD88E8 /* MoveableBlock.m */,
+				D6F84753194167CE00F990FC /* DPad.h */,
+				D6F84754194167CE00F990FC /* DPad.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -1758,12 +1769,14 @@
 				D6AA90961924AFE5000620E1 /* Goal.png in Resources */,
 				D656749E1918979A003CC6E9 /* Default.png in Resources */,
 				D65674A71918979A003CC6E9 /* Icon.png in Resources */,
+				D62DAA501941A57A00BD71C5 /* DpadBackground.png in Resources */,
 				D65674B51918979A003CC6E9 /* Icon-iPad-Spotlight-iOS7@2x.png in Resources */,
 				D6CEDB731935C9D200377347 /* tutorial_done_box.png in Resources */,
 				D65674A41918979A003CC6E9 /* Default-Landscape~ipad.png in Resources */,
 				D65674B91918979A003CC6E9 /* Icon-Small.png in Resources */,
 				D65674B71918979A003CC6E9 /* Icon-Small-50.png in Resources */,
 				D60738E6193857AE00415A86 /* Flag.plist in Resources */,
+				D62DAA521941A6A800BD71C5 /* ThumbPoint.png in Resources */,
 				D65676A01918979C003CC6E9 /* LICENSE_Kazmath.txt in Resources */,
 				D65674AB1918979A003CC6E9 /* Icon-72.png in Resources */,
 				D60738E7193857AE00415A86 /* Flag.pvr in Resources */,
@@ -1841,6 +1854,7 @@
 				D65674DF1918979A003CC6E9 /* CCActionTween.m in Sources */,
 				D656764D1918979C003CC6E9 /* NSMutableDictionary+WeakReferences.m in Sources */,
 				D656752A1918979A003CC6E9 /* CCNode+Debug.m in Sources */,
+				D6F84755194167CE00F990FC /* DPad.m in Sources */,
 				D69711211934534900899F60 /* ArrowSprite.m in Sources */,
 				D65674E31918979A003CC6E9 /* CCAnimation.m in Sources */,
 				D656768C1918979C003CC6E9 /* mat3.c in Sources */,

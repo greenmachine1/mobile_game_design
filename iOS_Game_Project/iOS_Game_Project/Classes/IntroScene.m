@@ -20,6 +20,7 @@
 #import "ArrowSprite.h"
 #import "CreditsScene.h"
 #import "MoveableBlock.h"
+#import "DPad.h"
 
 
 
@@ -99,6 +100,8 @@
     [self createEndBox];
     [self creationOfHealthHearts];
     
+    [self creationOfDPad];
+    
     if(tutorialMode == YES){
         
         [self cameFromTutorial];
@@ -145,6 +148,22 @@
     [self addChild:timeLabel];
     
 }
+
+
+
+
+
+
+-(void)creationOfDPad{
+    
+    newDPad = [DPad createDPadAtLocation:ccp(80.0f, 80.0f)];
+    
+    [self addChild:newDPad z:2];
+    
+}
+
+
+
 
 
 
@@ -316,8 +335,45 @@
 
 
 -(void)update:(CCTime)delta{
-
-
+    
+    // if the tutorial mode is off //
+    if(tutorialMode == false){
+        
+        // movement //
+        if([[newDPad direction]  isEqualToString: @"up"]){
+            
+            newGuySprite.position = ccp((newGuySprite.position.x),(newGuySprite.position.y + 1 + (speed * delta)));
+                                        
+        }else if([[newDPad direction] isEqualToString:@"down"]){
+            
+            newGuySprite.position = ccp((newGuySprite.position.x), (newGuySprite.position.y - 1 - (speed * delta)));
+            
+        }else if([[newDPad direction] isEqualToString:@"left"]){
+            
+            newGuySprite.position = ccp((newGuySprite.position.x - 1 - (speed * delta)),(newGuySprite.position.y));
+            
+        }else if([[newDPad direction] isEqualToString:@"right"]){
+            
+            newGuySprite.position = ccp((newGuySprite.position.x + 1 + (speed * delta)) ,(newGuySprite.position.y));
+            
+        }else if([[newDPad direction] isEqualToString:@"stopped"]){
+            
+            //newGuySprite.position = touchPoint;
+            
+        }
+        
+        
+    // do not permit movement in tutorial mode //
+    }else{
+        
+        
+    }
+    
+    
+    
+    
+    
+    /*
     if(tutorialMode == false){
         // correct movement using delta time //
         if(newGuySprite.position.x < touchPoint.x){
@@ -350,6 +406,7 @@
     }else{
         
     }
+     */
     
     [self collisionWithAnyBlock];
     [self collisionWithMovableBlock];

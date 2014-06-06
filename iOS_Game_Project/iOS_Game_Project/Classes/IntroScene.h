@@ -15,6 +15,7 @@
 #import "EndBox.h"
 #import "heathHeartSprite.h"
 #import "MoveableBlock.h"
+#import "DPad.h"
 
 
 /**
@@ -48,6 +49,8 @@
     CCNodeColor *backgroundColorOnPause;
     CCButton *pauseButton;
     CCLayoutBox *pauseLayoutBox;
+    
+    DPad *newDPad;
     
     CCLabelTTF *timeLabel;
     
