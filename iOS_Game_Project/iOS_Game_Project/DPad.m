@@ -40,6 +40,7 @@
         upButton = [CCButton buttonWithTitle:@"" spriteFrame:directionPad];
         upButton.scaleX = 1.4f;
         upButton.scaleY = 1.4f;
+        upButton.rotation = 270.0f;
         upButton.name = @"up";
         upButton.position = ccp(mainDirectionalCircle.position.x, mainDirectionalCircle.position.y + 50);
         [mainDirectionalCircle addChild:upButton];
@@ -47,6 +48,7 @@
         leftButton = [CCButton buttonWithTitle:@"" spriteFrame:directionPad];
         leftButton.scaleX = 1.4f;
         leftButton.scaleY = 1.4f;
+        leftButton.rotation = 180.0f;
         leftButton.name = @"left";
         leftButton.position = ccp(mainDirectionalCircle.position.x - 50, mainDirectionalCircle.position.y);
         [mainDirectionalCircle addChild:leftButton];
@@ -61,6 +63,7 @@
         downButton = [CCButton buttonWithTitle:@"" spriteFrame:directionPad];
         downButton.scaleX = 1.4f;
         downButton.scaleY = 1.4f;
+        downButton.rotation = 90.0f;
         downButton.name = @"down";
         downButton.position = ccp(mainDirectionalCircle.position.x, mainDirectionalCircle.position.y - 50);
         [mainDirectionalCircle addChild:downButton];
