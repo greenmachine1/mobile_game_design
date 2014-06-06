@@ -38,9 +38,9 @@
 
 -(void)moveUpAndDown{
     
-    CCActionMoveTo *downMovement = [CCActionMoveTo actionWithDuration:2.0f position:ccp(self.position.x, self.position.y - 128)];
+    CCActionMoveTo *downMovement = [CCActionMoveTo actionWithDuration:3.0f position:ccp(self.position.x, self.position.y - 128)];
     
-    CCActionMoveTo *upMovement = [CCActionMoveTo actionWithDuration:2.0f position:ccp(self.position.x, locationPoint.y)];
+    CCActionMoveTo *upMovement = [CCActionMoveTo actionWithDuration:3.0f position:ccp(self.position.x, locationPoint.y)];
     
     CCActionSequence *upAndDownActionSequence = [CCActionSequence actionOne:downMovement two:upMovement];
     

@@ -89,6 +89,8 @@
     newGuySprite = [Guy_Sprite_Object createGuySpriteWithLocation:ccp(xBounds - 64, yBounds / 2)];
     [newGuySprite setZOrder:1];
     
+    
+    
     touchPoint = newGuySprite.position;
     
     [self addChild:newGuySprite];
@@ -204,6 +206,8 @@
     // adding a movable block to the mix //
     moveableBlock = [MoveableBlock createMovableBlockWithLocation:ccp(192.0f, yBounds - 224.0f)];
     [self addChild:moveableBlock z:0 name:@"midblock"];
+    
+    
 }
 
 
@@ -358,8 +362,6 @@
 
 
 
-//   touch began should be just for updating the touch point and   //
-//   nothing more   //
 -(void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event{
     
     touchPoint = [touch locationInNode:self];
