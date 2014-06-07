@@ -100,5 +100,22 @@
 }
 
 
+-(void)enableDisableDPadInput:(BOOL)enableDisable{
+    
+    if(enableDisable == YES){
+        upButton.enabled = false;
+        downButton.enabled = false;
+        leftButton.enabled = false;
+        rightButton.enabled = false;
+    }else{
+        upButton.enabled = true;
+        downButton.enabled = true;
+        leftButton.enabled = true;
+        rightButton.enabled = true;
+    }
+    
+}
+
+
 
 @end

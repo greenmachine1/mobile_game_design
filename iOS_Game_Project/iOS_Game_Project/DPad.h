@@ -25,5 +25,6 @@
 }
 +(id)createDPadAtLocation:(CGPoint)location;
 -(NSString *)direction;
+-(void)enableDisableDPadInput:(BOOL)enableDisable;
 
 @end

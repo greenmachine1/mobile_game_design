@@ -83,7 +83,7 @@
     pauseButton.position = ccp(xBounds - 32.0f,  yBounds - 32.0f);
     [pauseButton setTarget:self selector:@selector(onPauseGame)];
     
-    [self addChild:pauseButton];
+    [self addChild:pauseButton z:4];
     
     
     // creating the guy //
@@ -155,9 +155,8 @@
 
 
 -(void)creationOfDPad{
-    
     newDPad = [DPad createDPadAtLocation:ccp(80.0f, 80.0f)];
-    
+    [newDPad enableDisableDPadInput:false];
     [self addChild:newDPad z:2];
     
 }
@@ -239,6 +238,7 @@
 -(void)onPauseGame{
     
     pauseButton.enabled = NO;
+    [newDPad enableDisableDPadInput:true];
     
     // stopping the timer //
     [startTimer invalidate];
@@ -297,6 +297,7 @@
     [startTimer fire];
     
     pauseButton.enabled = YES;
+    [newDPad enableDisableDPadInput:false];
     
     // removes elements from pause from the screen //
     [backgroundColorOnPause removeFromParentAndCleanup:true];
@@ -396,6 +397,7 @@
     if(CGRectIntersectsRect([newGuySprite getBoundingBox], [newEndBox getBoundingBox])){
         
         touchPoint = ccp(xBounds - 64, yBounds / 2);
+        [newDPad enableDisableDPadInput:true];
         
         //   reposition the guy so as to not keep triggering the collision   //
         newGuySprite.position = touchPoint;
@@ -475,14 +477,15 @@
         // checking to see if its the kind of class //
         if([blocks isKindOfClass:[Block_Wall class]]){
             
-            
-            
-            
             // checking for intersection of two bounding boxes //
             if(CGRectIntersectsRect([blocks getBoundingBox], [newGuySprite getBoundingBox])){
                 
                 if(!([[blocks name] isEqualToString:@"midblock"])){
                 
+                    // this will give me the distance to stop at - 64 //
+                    float distance = [blocks getBoundingBox].size.width;
+                    NSLog(@"%f", distance);
+                    
                     //   naming all the constant boundries   //
                     float positiveXForGuy = newGuySprite.position.x + [newGuySprite getBoundingBox].size.width / 2;
                     float negativeXForGuy = newGuySprite.position.x - [newGuySprite getBoundingBox].size.width / 2;
@@ -500,7 +503,7 @@
                     //   to pass   //
                     if((negativeXForGuy < positiveXForBlock) && ((negativeYForGuy < positiveYForBlock) && (positiveYForGuy > negativeYForBlock)) && (!(negativeXForGuy < blocks.position.x))){
                     
-                        newGuySprite.position = ccp(blocks.position.x + 64 , newGuySprite.position.y);
+                        newGuySprite.position = ccp(blocks.position.x + distance , newGuySprite.position.y);
                         [newGuySprite stopAllActions];
                     }
                 
@@ -509,7 +512,7 @@
                     //   to pass   //
                     else if((positiveXForGuy > negativeXForBlock) && ((negativeYForGuy < positiveYForBlock) && (positiveYForGuy > negativeYForBlock)) && (!(positiveXForGuy > blocks.position.x))){
                     
-                        newGuySprite.position = ccp(blocks.position.x - 64, newGuySprite.position.y);
+                        newGuySprite.position = ccp(blocks.position.x - distance, newGuySprite.position.y);
                         [newGuySprite stopAllActions];
                     
                     }
@@ -518,7 +521,7 @@
                     //   use the same principals as above for top and bottom collision   //
                     else if((positiveYForGuy > negativeYForBlock) && ((negativeXForGuy < positiveXForBlock) && (positiveXForGuy > negativeXForBlock)) && (!(positiveYForGuy > blocks.position.y))){
                     
-                        newGuySprite.position = ccp(newGuySprite.position.x, blocks.position.y - 64);
+                        newGuySprite.position = ccp(newGuySprite.position.x, blocks.position.y - distance);
                         [newGuySprite stopAllActions];
                     
                     }
@@ -526,7 +529,7 @@
                 
                     else if((negativeYForGuy < positiveYForBlock) && ((negativeXForGuy < positiveXForBlock) && (positiveXForGuy > negativeXForBlock)) && (!(negativeYForGuy < blocks.position.y))){
                     
-                        newGuySprite.position = ccp(newGuySprite.position.x, blocks.position.y + 64);
+                        newGuySprite.position = ccp(newGuySprite.position.x, blocks.position.y + distance);
                         [newGuySprite stopAllActions];
                     
                     }
@@ -678,6 +681,7 @@
     [self addChild:gameOverLayoutBox];
     
     pauseButton.enabled = NO;
+    
 
 }
 
