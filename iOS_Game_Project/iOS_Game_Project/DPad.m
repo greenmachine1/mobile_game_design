@@ -21,7 +21,7 @@
         
         directionString = @"stopped";
         
-        
+        // setting up the layout for the d-pad //
         CCLayoutBox *newLayoutBox = [[CCLayoutBox alloc] init];
         newLayoutBox.position = location;
         newLayoutBox.anchorPoint = ccp(0.5f, 0.5f);
@@ -33,9 +33,8 @@
         [newLayoutBox addChild:mainDirectionalCircle];
         
         
-        
+        // setting up the sprite frame image //
         directionPad = [CCSpriteFrame frameWithImageNamed:@"ThumbPoint.png"];
-        
         
         upButton = [CCButton buttonWithTitle:@"" spriteFrame:directionPad];
         upButton.scaleX = 1.4f;
@@ -68,15 +67,13 @@
         downButton.position = ccp(mainDirectionalCircle.position.x, mainDirectionalCircle.position.y - 50);
         [mainDirectionalCircle addChild:downButton];
         
-        
-        
         [self addChild:newLayoutBox z:3];
         
     }
     return self;
 }
 
-
+// this method is constantly being polled by the main program //
 -(NSString *)direction{
     
     if(upButton.highlighted == true){
@@ -95,19 +92,11 @@
         
         return @"right";
         
-    }
-    
-    else if(!((upButton.highlighted) || (downButton.highlighted) || (leftButton.highlighted) || (rightButton.highlighted))){
+    }else if(!((upButton.highlighted) || (downButton.highlighted) || (leftButton.highlighted) || (rightButton.highlighted))){
         
         return @"stopped";
-        
     }
-    
-    
     return @"stopped";
-   
-    
-    
 }
 
 

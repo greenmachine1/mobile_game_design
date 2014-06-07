@@ -188,7 +188,7 @@
 
 -(void)createEndBox{
     
-    newEndBox = [EndBox createEndBoxWithLocation:ccp(64.0f, yBounds / 2)];
+    newEndBox = [EndBox createEndBoxWithLocation:ccp(64.0f, yBounds - 96)];
     [newEndBox setZOrder:1];
     [self addChild:newEndBox];
     //[newEndBox flagAnimate];
@@ -368,45 +368,6 @@
         
         
     }
-    
-    
-    
-    
-    
-    /*
-    if(tutorialMode == false){
-        // correct movement using delta time //
-        if(newGuySprite.position.x < touchPoint.x){
-        
-            newGuySprite.position = ccp(newGuySprite.position.x + speed * delta, newGuySprite.position.y);
-        
-        }
-        if(newGuySprite.position.x > touchPoint.x){
-        
-            newGuySprite.position = ccp(newGuySprite.position.x - speed * delta, newGuySprite.position.y);
-        
-        }
-        if(newGuySprite.position.y < touchPoint.y){
-        
-            newGuySprite.position = ccp(newGuySprite.position.x, newGuySprite.position.y + speed * delta);
-        
-        }
-        if(newGuySprite.position.y > touchPoint.y){
-        
-            newGuySprite.position = ccp(newGuySprite.position.x, newGuySprite.position.y - speed * delta);
-        
-        }
-        if((newGuySprite.position.x == touchPoint.x) && (newGuySprite.position.y == touchPoint.y)){
-        
-            newGuySprite.position = ccp(newGuySprite.position.x, newGuySprite.position.y);
-        
-        }
-        
-    // stop movement of guy if in tutorial mode //
-    }else{
-        
-    }
-     */
     
     [self collisionWithAnyBlock];
     [self collisionWithMovableBlock];
