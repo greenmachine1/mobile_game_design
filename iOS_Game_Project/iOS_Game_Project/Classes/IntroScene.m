@@ -206,10 +206,9 @@
 
 -(void)createEndBox{
     
-    newEndBox = [EndBox createEndBoxWithLocation:ccp(256.0f, yBounds - 96.0f)];
+    newEndBox = [EndBox createEndBoxWithLocation:ccp(224.0f, yBounds - 80.0f)];
     [newEndBox setZOrder:1];
     [self addChild:newEndBox];
-    //[newEndBox flagAnimate];
     
 }
 
@@ -217,8 +216,8 @@
 -(void)creationOfBlocks{
     
     // getting the width / 32 + 2
-    int numberOfBlocksInTheWidth = (xBounds / 16 + 2);
-    int numberOfBlocksInTheHeight = (yBounds / 16 + 2);
+    int numberOfBlocksInTheWidth = ((xBounds / 16) + 2);
+    int numberOfBlocksInTheHeight = ((yBounds / 16) + 2);
     
     for(int i = 1; i < numberOfBlocksInTheWidth; i++){
         
@@ -239,13 +238,60 @@
         if((j % 2) == 1){
             Block_Wall *dividingWall = [Block_Wall createWallAtPosition:ccp(176.0f, j * 16)];
             [self addChild:dividingWall];
+            
+            // creating the backwall //
+            Block_Wall *mazeBackWall = [Block_Wall createWallAtPosition:ccp(xBounds - 8, j * 16)];
+            [self addChild:mazeBackWall];
         }
     }
     
-    /*
-    moveableBlock = [MoveableBlock createMovableBlockWithLocation:ccp(192.0f, yBounds - 224.0f)];
+    // ------------------------> creation of the maze itself <-------------------------------- //
+    // wall coming down right before the end //
+    for(int k = 0; k < 6; k++){
+        if((k % 2) == 1){
+            
+            Block_Wall *mazeWall = [Block_Wall createWallAtPosition:ccp(272.0f, (yBounds - 128) + (16 * k))];
+            [self addChild:mazeWall];
+        }
+    }
+    
+    // wall protruding out of the dividing wall //
+    for(int l = 1; l < 6; l++){
+        
+        if((l % 2) == 1){
+            
+            Block_Wall *mazeWall = [Block_Wall createWallAtPosition:ccp(192.0f + (16 * l), yBounds - 208)];
+            [self addChild:mazeWall];
+            
+        }
+    }
+    
+    // wall coming down the middle //
+    for(int m = 1; m < numberOfBlocksInTheHeight; m++){
+        
+        if((m % 2) == 1){
+            
+            Block_Wall *mazeWall = [Block_Wall createWallAtPosition:ccp(368.0f, (yBounds - 224) + (16 * m))];
+            [self addChild:mazeWall];
+        }
+    }
+    
+    
+    
+    
+    
+    // wall coming out of the right side as the starting point divider //
+    for(int n = 1; n < 10; n ++){
+        if((n % 2) == 1){
+            Block_Wall *mazeWall = [Block_Wall createWallAtPosition:ccp(448.0f + (16 * n), yBounds - 208.0f)];
+            [self addChild:mazeWall];
+        }
+    }
+    
+    // creation of the movable blocks
+    moveableBlock = [MoveableBlock createMovableBlockWithLocation:ccp(368.0f, (yBounds - 224.0f) - 32.0f)];
+    moveableBlock.scaleY = 2.0f;
     [self addChild:moveableBlock z:0 name:@"midblock"];
-    */
     
 }
 
@@ -387,8 +433,6 @@
         
     // do not permit movement in tutorial mode //
     }else{
-        
-        
     }
     
     [self collisionWithAnyBlock];
@@ -447,8 +491,6 @@
         
         // removes one heart at a time from the screen //
         [backgroundBox removeChildByName:@"Heart" cleanup:YES];
-        
-        
         
         touchPoint = ccp(xBounds - 64, yBounds / 2);
         
@@ -616,7 +658,6 @@
     gameScoreLabel.position = ccp((scoreBox.position.x), (scoreBox.contentSize.height / 2));
     [gameScoreLabel setZOrder:4];
     [scoreBox addChild:gameScoreLabel];
-    
     
     
     CCSprite *goalBoxSprite = [CCSprite spriteWithImageNamed:@"tutorial_done_box.png"];

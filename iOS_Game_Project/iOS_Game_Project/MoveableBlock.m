@@ -24,7 +24,7 @@
     
     if(self = [super init]){
         
-        blockSprite = [CCSprite spriteWithImageNamed:@"Block_movable.png"];
+        blockSprite = [CCSprite spriteWithImageNamed:@"Block_movable-32.png"];
         blockSprite.color = [CCColor colorWithRed:0.8f green:0.8f blue:0.8f alpha:1.0f];
         
         self.position = location;

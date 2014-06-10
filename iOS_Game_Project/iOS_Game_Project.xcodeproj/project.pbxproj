@@ -228,6 +228,7 @@
 		D69711211934534900899F60 /* ArrowSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = D69711201934534900899F60 /* ArrowSprite.m */; };
 		D698D42D192E7DE1004FB750 /* pause_sprite.png in Resources */ = {isa = PBXBuildFile; fileRef = D698D42B192E7DE1004FB750 /* pause_sprite.png */; };
 		D698D42E192E7DE1004FB750 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = D698D42C192E7DE1004FB750 /* play.png */; };
+		D6990D621947C71C00C570DA /* Block_movable-32.png in Resources */ = {isa = PBXBuildFile; fileRef = D6990D611947C71C00C570DA /* Block_movable-32.png */; };
 		D69C13ED1942797900BD4AB0 /* ThumbPoint.png in Resources */ = {isa = PBXBuildFile; fileRef = D69C13EC1942797900BD4AB0 /* ThumbPoint.png */; };
 		D6AA90941924AEC0000620E1 /* Applause.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D6AA90931924AEC0000620E1 /* Applause.mp3 */; };
 		D6AA90961924AFE5000620E1 /* Goal.png in Resources */ = {isa = PBXBuildFile; fileRef = D6AA90951924AFE5000620E1 /* Goal.png */; };
@@ -715,6 +716,7 @@
 		D69711201934534900899F60 /* ArrowSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArrowSprite.m; sourceTree = "<group>"; };
 		D698D42B192E7DE1004FB750 /* pause_sprite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pause_sprite.png; sourceTree = "<group>"; };
 		D698D42C192E7DE1004FB750 /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
+		D6990D611947C71C00C570DA /* Block_movable-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Block_movable-32.png"; sourceTree = "<group>"; };
 		D69C13EC1942797900BD4AB0 /* ThumbPoint.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ThumbPoint.png; sourceTree = "<group>"; };
 		D6AA90931924AEC0000620E1 /* Applause.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Applause.mp3; sourceTree = "<group>"; };
 		D6AA90951924AFE5000620E1 /* Goal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Goal.png; sourceTree = "<group>"; };
@@ -819,6 +821,7 @@
 				D6AC44D6192DECC700B842FB /* blockanimation.pvr */,
 				D6B214D6191A208C005D3E7F /* Audio */,
 				D6B214D0191A15A3005D3E7F /* enemy.png */,
+				D6990D611947C71C00C570DA /* Block_movable-32.png */,
 				D6B7779C19467CC900939E42 /* enemy-32.png */,
 				D6B7779819467A1500939E42 /* Block-32.png */,
 				D6DDBD3A19412906001293D2 /* Block_movable.png */,
@@ -1765,6 +1768,7 @@
 			files = (
 				D65674A01918979A003CC6E9 /* Default@2x.png in Resources */,
 				D6B2120219199933005D3E7F /* guy_pixel_art.png in Resources */,
+				D6990D621947C71C00C570DA /* Block_movable-32.png in Resources */,
 				D6B214D1191A15A3005D3E7F /* enemy.png in Resources */,
 				D6B214D5191A2048005D3E7F /* sea_audio.mp3 in Resources */,
 				D6B7779F1946878400939E42 /* Options_background.png in Resources */,
