@@ -77,15 +77,6 @@
     
     
     
-    // adding pause functionality //
-    CCSpriteFrame *pauseSprite = [CCSpriteFrame frameWithImageNamed:@"pause_sprite.png"];
-    pauseButton = [CCButton buttonWithTitle:nil spriteFrame:pauseSprite];
-    pauseButton.position = ccp(xBounds - 32.0f,  yBounds - 32.0f);
-    [pauseButton setTarget:self selector:@selector(onPauseGame)];
-    
-    [self addChild:pauseButton z:4];
-    
-    
     // creating the guy //
     newGuySprite = [Guy_Sprite_Object createGuySpriteWithLocation:ccp(xBounds - 64, yBounds / 2)];
     [newGuySprite setZOrder:1];
@@ -95,12 +86,12 @@
     touchPoint = newGuySprite.position;
     
     [self addChild:newGuySprite];
+    
     [self creationOfBlocks];
     [self creationOfEnemy];
     [self createEndBox];
-    [self creationOfHealthHearts];
     
-    [self creationOfDPad];
+    [self creationOfPlayerInfo];
     
     if(tutorialMode == YES){
         
@@ -152,34 +143,58 @@
 
 
 
-
-
--(void)creationOfDPad{
-    newDPad = [DPad createDPadAtLocation:ccp(80.0f, 80.0f)];
+-(void)creationOfPlayerInfo{
+    
+    CCLayoutBox *playerControlsLayoutBox = [[CCLayoutBox alloc] init];
+    playerControlsLayoutBox.position = ccp(90.0f , 128.0f);
+    playerControlsLayoutBox.anchorPoint = ccp(0.5f, 0.5f);
+    
+    
+    CCSprite *backgroundBox = [CCSprite spriteWithImageNamed:@"Options_background.png"];
+    backgroundBox.position = ccp(playerControlsLayoutBox.contentSize.width, playerControlsLayoutBox.contentSize.height);
+    backgroundBox.anchorPoint = ccp(0.5f, 0.5f);
+    [playerControlsLayoutBox addChild:backgroundBox z:3];
+    
+    
+    // this is the bottom left hand corner that will provide the //
+    // D-pad, hearts, pause button, and axes info //
+    newDPad = [DPad createDPadAtLocation:ccp((backgroundBox.contentSize.width / 2) - 4.0f, backgroundBox.contentSize.height - 180.0f)];
     [newDPad enableDisableDPadInput:false];
-    [self addChild:newDPad z:2];
+    [backgroundBox addChild:newDPad z:2];
     
-}
-
-
-
-
-
-
-
--(void)creationOfHealthHearts{
     
+    
+    // creation of the hearts //
     for(int i = 1; i < 5; i++){
         
-        newHealthHeart = [heathHeartSprite createHeathHeartAtLocation:ccp(32 * i, yBounds - 32)];
-        [self addChild:newHealthHeart z:2 name:@"Heart"];
+        newHealthHeart = [heathHeartSprite createHeathHeartAtLocation:ccp(((newDPad.contentSize.width / 2) - 8.0f) + (32 * i), newDPad.position.y + 180.0f)];
+        [newDPad addChild:newHealthHeart z:2 name:@"Heart"];
     }
+    
+    
+    // adding pause functionality //
+    CCSpriteFrame *pauseSprite = [CCSpriteFrame frameWithImageNamed:@"pause_sprite.png"];
+    pauseButton = [CCButton buttonWithTitle:nil spriteFrame:pauseSprite];
+    pauseButton.position = ccp((backgroundBox.contentSize.width / 2) + 32.0f,  backgroundBox.contentSize.height - 32.0f);
+    
+    NSLog(@"width %f, height %f", backgroundBox.contentSize.width, backgroundBox.contentSize.height);
+    
+    [pauseButton setTarget:self selector:@selector(onPauseGame)];
+    
+    [backgroundBox addChild:pauseButton z:4];
+    
+    [self addChild:playerControlsLayoutBox];
 }
+
+
+
+
+
 
 
 -(void)creationOfEnemy{
     
-    newEnemySprite = [Enemy_Sprite_Object createEnemyWithLocation:ccp(256.0f, yBounds - 96)];
+    newEnemySprite = [Enemy_Sprite_Object createEnemyWithLocation:ccp(256.0f, yBounds - 64.0f)];
     [newGuySprite setZOrder:1];
     [self addChild:newEnemySprite];
 }
@@ -187,7 +202,7 @@
 
 -(void)createEndBox{
     
-    newEndBox = [EndBox createEndBoxWithLocation:ccp(64.0f, yBounds - 96)];
+    newEndBox = [EndBox createEndBoxWithLocation:ccp(256.0f, yBounds - 96.0f)];
     [newEndBox setZOrder:1];
     [self addChild:newEndBox];
     //[newEndBox flagAnimate];
@@ -198,7 +213,7 @@
 -(void)creationOfBlocks{
     
     // getting the width / 32 + 2
-    int numberOfBlocksInTheWidth = (xBounds / 32 + 2);
+    int numberOfBlocksInTheWidth = (xBounds / 16 + 2);
     
     for(int i = 1; i < numberOfBlocksInTheWidth; i++){
         
@@ -206,10 +221,10 @@
         if((i % 2) == 1){
             
             // creation of the lower and upper walls
-            Block_Wall *lowerWall = [Block_Wall createWallAtPosition:ccp(i * 32, 32.0f)];
+            Block_Wall *lowerWall = [Block_Wall createWallAtPosition:ccp(i * 16.0f, 16.0f)];
             [self addChild:lowerWall];
             
-            Block_Wall *upperWall = [Block_Wall createWallAtPosition:ccp(i * 32, yBounds - 32)];
+            Block_Wall *upperWall = [Block_Wall createWallAtPosition:ccp(i * 16, yBounds - 16)];
             [self addChild:upperWall];
         }
     }
@@ -482,9 +497,9 @@
                 
                 if(!([[blocks name] isEqualToString:@"midblock"])){
                 
-                    // this will give me the distance to stop at - 64 //
+                    // this will give me the distance to stop at - 32 //
                     float distance = [blocks getBoundingBox].size.width;
-                    NSLog(@"%f", distance);
+                    
                     
                     //   naming all the constant boundries   //
                     float positiveXForGuy = newGuySprite.position.x + [newGuySprite getBoundingBox].size.width / 2;

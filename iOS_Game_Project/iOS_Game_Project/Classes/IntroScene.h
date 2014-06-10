@@ -54,8 +54,6 @@
     
     CCLabelTTF *timeLabel;
     
-
-
     int timeIncrease;
     NSTimer *startTimer;
     

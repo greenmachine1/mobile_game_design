@@ -26,9 +26,7 @@
         
         self.position = locationPoint;
         
-        guySprite = [CCSprite spriteWithImageNamed:@"guy_pixel_art.png"];
-        
-        
+        guySprite = [CCSprite spriteWithImageNamed:@"guy_pixel_art-32.png"];
         
         [self addChild:guySprite];
     }

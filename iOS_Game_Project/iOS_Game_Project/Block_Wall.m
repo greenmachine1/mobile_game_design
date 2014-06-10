@@ -30,7 +30,7 @@
         self.position = point;
         
         //   setting the image of the sprite   //
-        brickWallSprite = [CCSprite spriteWithImageNamed:@"Block.png"];
+        brickWallSprite = [CCSprite spriteWithImageNamed:@"Block-32.png"];
         
         [self addChild:brickWallSprite];
     }
@@ -73,12 +73,10 @@
     // creating an action based on that animation //
     CCActionAnimate *animateAction = [CCActionAnimate actionWithAnimation:animateBlock];
     
-    CCSprite *blockSprite = [CCSprite spriteWithImageNamed:@"Block1.png"];
+    CCSprite *blockSprite = [CCSprite spriteWithImageNamed:@"Block-32.png"];
     
     // attaching that action to the block sprite
     [blockSprite runAction:animateAction];
-    
-    //blockSprite.position = ccp(xBounds / 2, yBounds / 2);
     
     [self addChild:blockSprite];
     

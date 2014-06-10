@@ -61,8 +61,6 @@
     for(int i = 1; i < 8; i++){
         
         [flagImages addObject:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"Flag-%i.png", i]]];
-        NSLog(@"numbers going up %i", i);
-        
     }
     
     // descending order //
@@ -71,8 +69,6 @@
     for(int j = 8; j > 1; j--){
         
         [flagImagesInReverse addObject:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"Flag-%i.png", j]]];
-        NSLog(@"numbers decending %i", j);
-        
     }
     
     
@@ -102,7 +98,6 @@
     
     // attaching that action to the block sprite
     [flagSprite runAction:repeatAllActions];
-    
     
     
     [self addChild:flagSprite];

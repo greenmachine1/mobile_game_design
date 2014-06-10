@@ -26,7 +26,7 @@
         
         self.position = location;
         
-        mainEnemySprite = [CCSprite spriteWithImageNamed:@"enemy.png"];
+        mainEnemySprite = [CCSprite spriteWithImageNamed:@"enemy-32.png"];
         
         [self addChild:mainEnemySprite];
         
@@ -38,7 +38,7 @@
 
 -(void)moveUpAndDown{
     
-    CCActionMoveTo *downMovement = [CCActionMoveTo actionWithDuration:3.0f position:ccp(self.position.x, self.position.y - 128)];
+    CCActionMoveTo *downMovement = [CCActionMoveTo actionWithDuration:3.0f position:ccp(self.position.x, self.position.y - 128.0f)];
     
     CCActionMoveTo *upMovement = [CCActionMoveTo actionWithDuration:3.0f position:ccp(self.position.x, locationPoint.y)];
     
