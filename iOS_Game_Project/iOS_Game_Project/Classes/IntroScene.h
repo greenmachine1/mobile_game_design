@@ -67,6 +67,9 @@
     CCButton *forthArrowButton;
     CCLabelTTF *heartInstruction;
     
+    CCLayoutBox *playerControlsLayoutBox;
+    CCSprite *backgroundBox;
+    
 }
 
 

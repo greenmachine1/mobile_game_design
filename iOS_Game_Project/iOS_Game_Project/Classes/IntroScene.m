@@ -62,7 +62,7 @@
     yBounds = self.contentSize.height;
     
     // setting the movement speed of the guy //
-    speed = 200;
+    speed = 50;
     
     // setting the initial score which is 5 //
     score = 4;
@@ -133,8 +133,12 @@
     
     timeLabel = [CCLabelTTF labelWithString:timeString fontName:@"Papyrus" fontSize:30.0f];
     timeLabel.anchorPoint = ccp(0.5f, 0.5f);
-    timeLabel.position = ccp(xBounds / 2, yBounds - 32.0f);
-    timeLabel.fontColor = [CCColor greenColor];
+
+    // setting the time to be in the player controls box //
+    timeLabel.position = ccp((backgroundBox.contentSize.width / 2) - 20.0f, backgroundBox.contentSize.height - 5.0f);
+    timeLabel.fontSize = 20.0f;
+    
+    timeLabel.fontColor = [CCColor blackColor];
     [timeLabel setZOrder:4];
     [self addChild:timeLabel];
     
@@ -145,12 +149,12 @@
 
 -(void)creationOfPlayerInfo{
     
-    CCLayoutBox *playerControlsLayoutBox = [[CCLayoutBox alloc] init];
-    playerControlsLayoutBox.position = ccp(90.0f , 128.0f);
+    playerControlsLayoutBox = [[CCLayoutBox alloc] init];
+    playerControlsLayoutBox.position = ccp(80.0f , 160.0f);
     playerControlsLayoutBox.anchorPoint = ccp(0.5f, 0.5f);
     
     
-    CCSprite *backgroundBox = [CCSprite spriteWithImageNamed:@"Options_background.png"];
+    backgroundBox = [CCSprite spriteWithImageNamed:@"Options_background.png"];
     backgroundBox.position = ccp(playerControlsLayoutBox.contentSize.width, playerControlsLayoutBox.contentSize.height);
     backgroundBox.anchorPoint = ccp(0.5f, 0.5f);
     [playerControlsLayoutBox addChild:backgroundBox z:3];
@@ -158,7 +162,7 @@
     
     // this is the bottom left hand corner that will provide the //
     // D-pad, hearts, pause button, and axes info //
-    newDPad = [DPad createDPadAtLocation:ccp((backgroundBox.contentSize.width / 2) - 4.0f, backgroundBox.contentSize.height - 180.0f)];
+    newDPad = [DPad createDPadAtLocation:ccp((backgroundBox.contentSize.width / 2) - 2.0f, backgroundBox.contentSize.height - 180.0f)];
     [newDPad enableDisableDPadInput:false];
     [backgroundBox addChild:newDPad z:2];
     
@@ -167,8 +171,8 @@
     // creation of the hearts //
     for(int i = 1; i < 5; i++){
         
-        newHealthHeart = [heathHeartSprite createHeathHeartAtLocation:ccp(((newDPad.contentSize.width / 2) - 8.0f) + (32 * i), newDPad.position.y + 180.0f)];
-        [newDPad addChild:newHealthHeart z:2 name:@"Heart"];
+        newHealthHeart = [heathHeartSprite createHeathHeartAtLocation:ccp(((newDPad.contentSize.width / 2) - 6.0f) + (32 * i), newDPad.position.y + 180.0f)];
+        [backgroundBox addChild:newHealthHeart z:2 name:@"Heart"];
     }
     
     
@@ -214,10 +218,11 @@
     
     // getting the width / 32 + 2
     int numberOfBlocksInTheWidth = (xBounds / 16 + 2);
+    int numberOfBlocksInTheHeight = (yBounds / 16 + 2);
     
     for(int i = 1; i < numberOfBlocksInTheWidth; i++){
         
-        // making sure the blocks get created at intervals of 1 ,3 ,5, 7, 9...
+        // making sure the blocks get created at intervals of 1 ,3 ,5, 7, 9... //
         if((i % 2) == 1){
             
             // creation of the lower and upper walls
@@ -229,17 +234,18 @@
         }
     }
     
-    // creation of the center dividing wall //
-    Block_Wall *centerWallDivider = [Block_Wall createWallAtPosition:ccp(192.0f, yBounds - 96.0f)];
-    [self addChild:centerWallDivider];
+    // creating the dividing wall //
+    for(int j = 1; j < numberOfBlocksInTheHeight; j++){
+        if((j % 2) == 1){
+            Block_Wall *dividingWall = [Block_Wall createWallAtPosition:ccp(176.0f, j * 16)];
+            [self addChild:dividingWall];
+        }
+    }
     
-    Block_Wall *centerWallDivider2 = [Block_Wall createWallAtPosition:ccp(192.0f, yBounds - 160.0f)];
-    [self addChild:centerWallDivider2];
-    
-    // adding a movable block to the mix //
+    /*
     moveableBlock = [MoveableBlock createMovableBlockWithLocation:ccp(192.0f, yBounds - 224.0f)];
     [self addChild:moveableBlock z:0 name:@"midblock"];
-    
+    */
     
 }
 
@@ -440,7 +446,9 @@
         score = score - 1;
         
         // removes one heart at a time from the screen //
-        [self removeChildByName:@"Heart" cleanup:YES];
+        [backgroundBox removeChildByName:@"Heart" cleanup:YES];
+        
+        
         
         touchPoint = ccp(xBounds - 64, yBounds / 2);
         
