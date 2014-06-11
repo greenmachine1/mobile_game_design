@@ -539,7 +539,15 @@
             float heightOfBox = [moveableBlock getBoundingBox].size.height / 2;
         
             // need to say -> if guy position + 16 is greater than block position - 16 but not greater than block position x //
-            
+            if(( (newGuySprite.position.x - widthOfGuy) < (moveableBlock.position.x + widthOfBox) ) && (! ((newGuySprite.position.x) > (moveableBlock.position.x)))) {
+                
+                moveableBlock.position = ccp(moveableBlock.position.x + 5.0f, moveableBlock.position.y);
+                
+            }else if(((newGuySprite.position.x + widthOfGuy) > (moveableBlock.position.x - widthOfBox)) && (!((newGuySprite.position.x) < (moveableBlock.position.x)))){
+                
+                moveableBlock.position = ccp(moveableBlock.position.x - 5.0f, moveableBlock.position.y);
+                
+            }
         
         }
     }
