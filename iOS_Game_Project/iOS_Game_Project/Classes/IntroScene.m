@@ -245,6 +245,10 @@
         }
     }
     
+    
+    
+    
+    
     // ------------------------> creation of the maze itself <-------------------------------- //
     // wall coming down right before the end //
     for(int k = 0; k < 6; k++){
@@ -255,8 +259,9 @@
         }
     }
     
-    // wall protruding out of the dividing wall //
-    for(int l = 1; l < 6; l++){
+    // wall protruding out of the dividing wall
+    /*
+    for(int l = 1; l < 4; l++){
         
         if((l % 2) == 1){
             
@@ -265,6 +270,7 @@
             
         }
     }
+     */
     
     // wall coming down the middle //
     for(int m = 1; m < numberOfBlocksInTheHeight; m++){
@@ -278,15 +284,15 @@
     
     
     
-    
-    
     // wall coming out of the right side as the starting point divider //
-    for(int n = 1; n < 10; n ++){
+    for(int n = 1; n < 4; n ++){
         if((n % 2) == 1){
-            Block_Wall *mazeWall = [Block_Wall createWallAtPosition:ccp(448.0f + (16 * n), yBounds - 208.0f)];
+            Block_Wall *mazeWall = [Block_Wall createWallAtPosition:ccp(480.0f + (16 * n), yBounds - 208.0f)];
             [self addChild:mazeWall];
         }
     }
+    
+    
     
     // creation of the movable blocks
     moveableBlock = [MoveableBlock createMovableBlockWithLocation:ccp(368.0f, (yBounds - 224.0f) - 32.0f)];
@@ -523,9 +529,19 @@
     
     if(CGRectIntersectsRect([moveableBlock getBoundingBox], [newGuySprite getBoundingBox])){
         
-        // moving the block //
-        moveableBlock.position = ccp(moveableBlock.position.x - 5.0f, moveableBlock.position.y);
+        if([moveableBlock.name isEqualToString: @"midblock"]){
+            NSLog(@"hit midblock");
         
+            float widthOfGuy = [newGuySprite getBoundingBox].size.width / 2;
+            float heightOfGuy = [newGuySprite getBoundingBox].size.height / 2;
+        
+            float widthOfBox = [moveableBlock getBoundingBox].size.width / 2;
+            float heightOfBox = [moveableBlock getBoundingBox].size.height / 2;
+        
+            // need to say -> if guy position + 16 is greater than block position - 16 but not greater than block position x //
+            
+        
+        }
     }
 
 }
