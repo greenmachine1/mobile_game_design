@@ -448,6 +448,7 @@
     
     [self collisionWithAnyBlock];
     [self collisionWithMovableBlock];
+    [self collisionWithMovableBlockAndWall];
     [self collisionForEnemy];
     [self collisionWithEnd];
     
@@ -531,50 +532,33 @@
 
 // --- > collision with movable block < --- //
 -(void)collisionWithMovableBlock{
-    
-    for(Block_Wall *blockWallThing in self.children){
-        
-        if([blockWallThing isKindOfClass:[Block_Wall class]]){
-            
-            // checking to see if it is of type MovableBlock //
-            for (MoveableBlock *moveableBlocks in self.children){
+
+        // checking to see if it is of type MovableBlock //
+        for (MoveableBlock *moveableBlocks in self.children){
                 
-                if([moveableBlocks isKindOfClass:[MoveableBlock class]]){
+            if([moveableBlocks isKindOfClass:[MoveableBlock class]]){
                     
-                    if(CGRectIntersectsRect([moveableBlocks getBoundingBox], [newGuySprite getBoundingBox])){
+                if(CGRectIntersectsRect([moveableBlocks getBoundingBox], [newGuySprite getBoundingBox])){
                         
-                        float widthOfGuy = [newGuySprite getBoundingBox].size.width / 2;
-                        float heightOfGuy = [newGuySprite getBoundingBox].size.height / 2;
+                    float widthOfGuy = [newGuySprite getBoundingBox].size.width / 2;
+                    float heightOfGuy = [newGuySprite getBoundingBox].size.height / 2;
                         
-                        float widthOfBox = [moveableBlock getBoundingBox].size.width / 2;
-                        float heightOfBox = [moveableBlock getBoundingBox].size.height / 2;
+                    float widthOfBox = [moveableBlock getBoundingBox].size.width / 2;
+                    float heightOfBox = [moveableBlock getBoundingBox].size.height / 2;
                         
                         
-                        // need to say -> if guy position + 16 is greater than block position - 16 but not greater than block position x //
-                        if(( (newGuySprite.position.x - widthOfGuy) < (moveableBlocks.position.x + widthOfBox) ) && (! ((newGuySprite.position.x) > (moveableBlocks.position.x)))) {
+                    // need to say -> if guy position + 16 is greater than block position - 16 but not greater than block position x //
+                    if(( (newGuySprite.position.x - widthOfGuy) < (moveableBlocks.position.x + widthOfBox) ) && (! ((newGuySprite.position.x) > (moveableBlocks.position.x)))) {
                             
-                            moveableBlocks.position = ccp(moveableBlocks.position.x + 5.0f, moveableBlocks.position.y);
+                        moveableBlocks.position = ccp(moveableBlocks.position.x + 5.0f, moveableBlocks.position.y);
                             
-                        }else if(((newGuySprite.position.x + widthOfGuy) > (moveableBlocks.position.x - widthOfBox)) && (!((newGuySprite.position.x) < (moveableBlocks.position.x)))){
+                    }else if(((newGuySprite.position.x + widthOfGuy) > (moveableBlocks.position.x - widthOfBox)) && (!((newGuySprite.position.x) < (moveableBlocks.position.x)))){
                             
-                            moveableBlocks.position = ccp(moveableBlocks.position.x - 5.0f, moveableBlocks.position.y);
+                        moveableBlocks.position = ccp(moveableBlocks.position.x - 5.0f, moveableBlocks.position.y);
                             
-                        }
-                    }
-                    
-                    // when a movable block hits the wall // 
-                    if(CGRectIntersectsRect([moveableBlocks getBoundingBox], [blockWallThing getBoundingBox])){
-                        
-                        moveableBlocks.position = ccp(blockWallThing.position.x + 32, blockWallThing.position.y);
-                        
-                        NSLog(@"hit the wall!");
-                        
-                    }
                 }
             }
-            
         }
-        
     }
     
     
@@ -605,6 +589,37 @@
             }
         }
     }
+}
+
+-(void)collisionWithMovableBlockAndWall{
+    
+    // loading up the movable block class
+    for(MoveableBlock *moveblock in self.children){
+        
+        if([moveblock isKindOfClass:[MoveableBlock class]]){
+            
+            for(Block_Wall *blockWall in self.children){
+                
+                if([blockWall isKindOfClass:[Block_Wall class]]){
+                    
+                    if(CGRectIntersectsRect([moveblock getBoundingBox], [blockWall getBoundingBox])){
+                        
+                        if( (moveblock.position.x - 32 < blockWall.position.x + 32 ) ){
+                            
+                            moveblock.position = ccp(blockWall.position.x + 32, moveblock.position.y);
+                            newGuySprite.position = ccp(moveblock.position.x + 32, newGuySprite.position.y);
+                            
+                        }
+                        
+                        
+                    }
+                }
+            }
+        }
+    }
+    
+    
+    
 }
 
 
