@@ -297,11 +297,13 @@
     
     // creation of the movable blocks
     moveableBlock = [MoveableBlock createMovableBlockWithLocation:ccp(368.0f, (yBounds - 224.0f) - 32.0f)];
+    moveableBlock.anchorPoint = ccp(0.5f, 0.5f);
     moveableBlock.scaleY = 2.0f;
     [self addChild:moveableBlock z:0 name:@"midblock"];
     
     
     MoveableBlock *newBlock = [MoveableBlock createMovableBlockWithLocation:ccp(464.0f, yBounds - 160.0f)];
+    newBlock.anchorPoint = ccp(0.5f,0.5f);
     newBlock.scaleY = 2.0f;
     [self addChild:newBlock z:0 name:@"midblock1"];
     
@@ -591,6 +593,10 @@
     }
 }
 
+
+
+
+
 -(void)collisionWithMovableBlockAndWall{
     
     // loading up the movable block class
@@ -604,12 +610,23 @@
                     
                     if(CGRectIntersectsRect([moveblock getBoundingBox], [blockWall getBoundingBox])){
                         
-                        if( (moveblock.position.x - 32 < blockWall.position.x + 32 ) ){
+                        if((moveblock.position.x - 32 < blockWall.position.x + 32) && !(moveblock.position.x < blockWall.position.x)){
                             
                             moveblock.position = ccp(blockWall.position.x + 32, moveblock.position.y);
                             newGuySprite.position = ccp(moveblock.position.x + 32, newGuySprite.position.y);
+                            NSLog(@"collision from the left");
+                            
+                        }else if( (moveblock.position.x + 32 > blockWall.position.x - 32) && !(moveblock.position.x > blockWall.position.x)){
+                            
+                            
+                            
+                            moveblock.position = ccp(blockWall.position.x - 32, moveblock.position.y);
+                            newGuySprite.position = ccp(moveblock.position.x - 32, newGuySprite.position.y);
+                            NSLog(@"collision from the right");
                             
                         }
+                        
+                        
                         
                         
                         
