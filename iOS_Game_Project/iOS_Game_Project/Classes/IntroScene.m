@@ -503,8 +503,9 @@
                         
                         movementBoolean = false;
                         
+                        
+                        
                     }
-                    //movementBoolean = true;
                 }
             }
         }
@@ -527,6 +528,7 @@
                     if(CGRectIntersectsRect([enemySpriteObject getBoundingBox], [blockWall getBoundingBox])){
                         
                         movementBoolean = true;
+                        
                         
                     }
                 }
