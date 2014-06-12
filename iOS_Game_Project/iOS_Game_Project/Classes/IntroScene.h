@@ -70,6 +70,8 @@
     CCLayoutBox *playerControlsLayoutBox;
     CCSprite *backgroundBox;
     
+    BOOL movementBoolean;
+    
 }
 
 

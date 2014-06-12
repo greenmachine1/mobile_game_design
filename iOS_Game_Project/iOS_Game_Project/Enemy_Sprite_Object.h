@@ -11,13 +11,20 @@
 
 @interface Enemy_Sprite_Object : CCNode
 {
+    float pointToStopAt;
     
     CGPoint locationPoint;
+    
     CCSprite *mainEnemySprite;
+    
+    CCActionMoveTo *rightMovement;
 }
 
 +(id)createEnemyWithLocation:(CGPoint)location;
 -(CGPoint)returnLocation;
 -(CGRect)getBoundingBox;
+//-(void)sideToSide;
+
+
 
 @end

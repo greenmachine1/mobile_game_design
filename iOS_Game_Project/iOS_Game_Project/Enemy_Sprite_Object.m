@@ -18,11 +18,13 @@
     
 }
 
--(id)initWithLocation:(CGPoint)location{
+-(id)initWithLocation:(CGPoint)location {
     
     if(self = [super init]){
         
         locationPoint = location;
+        
+        pointToStopAt = 128.0f;
         
         self.position = location;
         
@@ -30,15 +32,14 @@
         
         [self addChild:mainEnemySprite];
         
-        [self moveUpAndDown];
         
     }
     return self;
 }
-
+/*
 -(void)moveUpAndDown{
     
-    CCActionMoveTo *downMovement = [CCActionMoveTo actionWithDuration:3.0f position:ccp(self.position.x, self.position.y - 128.0f)];
+    CCActionMoveTo *downMovement = [CCActionMoveTo actionWithDuration:3.0f position:rightPointToStopAt];
     
     CCActionMoveTo *upMovement = [CCActionMoveTo actionWithDuration:3.0f position:ccp(self.position.x, locationPoint.y)];
     
@@ -49,6 +50,24 @@
     [self runAction:repeatAllActions];
     
 }
+*/
+
+-(void)sideToSide{
+    
+    rightMovement = [CCActionMoveTo actionWithDuration:3.0f position:ccp(self.position.x + pointToStopAt, self.position.y)];
+    
+    CCActionMoveTo *leftMovement = [CCActionMoveTo actionWithDuration:3.0f position:ccp(locationPoint.x, self.position.y)];
+    
+    CCActionSequence *leftAndRightActionSequence = [CCActionSequence actionOne:rightMovement two:leftMovement];
+    
+    CCActionRepeatForever *repeatAllActions = [CCActionRepeatForever actionWithAction:leftAndRightActionSequence];
+    
+    [self runAction:repeatAllActions];
+    
+    
+}
+
+
 
 //   returning the position   //
 -(CGPoint)returnLocation{

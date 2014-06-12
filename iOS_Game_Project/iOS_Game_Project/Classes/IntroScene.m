@@ -51,6 +51,9 @@
     
     // setting up for tutorial mode //
     tutorialMode = yesOrNo;
+    
+    // movement right and left //
+    movementBoolean = true;
 
 
     // enabling audio for effects //
@@ -198,9 +201,12 @@
 
 -(void)creationOfEnemy{
     
-    newEnemySprite = [Enemy_Sprite_Object createEnemyWithLocation:ccp(256.0f, yBounds - 64.0f)];
-    [newGuySprite setZOrder:1];
+    newEnemySprite = [Enemy_Sprite_Object createEnemyWithLocation:ccp(208.0f, (yBounds - 224.0f) - 32.0f)];
+    [newEnemySprite setZOrder:1];
     [self addChild:newEnemySprite];
+    
+    
+    
 }
 
 
@@ -211,6 +217,9 @@
     [self addChild:newEndBox];
     
 }
+
+
+
 
 
 -(void)creationOfBlocks{
@@ -294,8 +303,7 @@
     }
     
     
-    
-    // creation of the movable blocks
+    // ---------------> creation of the moveable blocks <----------------- //
     moveableBlock = [MoveableBlock createMovableBlockWithLocation:ccp(368.0f, (yBounds - 224.0f) - 32.0f)];
     moveableBlock.anchorPoint = ccp(0.5f, 0.5f);
     moveableBlock.scaleY = 2.0f;
@@ -453,6 +461,20 @@
     [self collisionWithMovableBlockAndWall];
     [self collisionForEnemy];
     [self collisionWithEnd];
+    [self collisionWithEnemyAndMovableBlock];
+    [self collisionWithEnemyAndWall];
+    
+    
+    // movement of the enemy sprite //
+    if(movementBoolean == true){
+        
+        newEnemySprite.position = ccp(newEnemySprite.position.x + 1 + (speed * delta), newEnemySprite.position.y);
+        
+    }else if(movementBoolean == false){
+        
+        newEnemySprite.position = ccp(newEnemySprite.position.x - 1 - (speed * delta), newEnemySprite.position.y);
+    }
+    
     
 }
 
@@ -466,7 +488,52 @@
 }
 
 
+// detecting collision between the enemy and movable block //
+-(void)collisionWithEnemyAndMovableBlock{
+    
+    for(Enemy_Sprite_Object *enemySprite in self.children){
+        
+        if([enemySprite isKindOfClass:[Enemy_Sprite_Object class]]){
+            
+            for(MoveableBlock *moveableBlockObject in self.children){
+                
+                if([moveableBlockObject isKindOfClass:[MoveableBlock class]]){
+                    
+                    if(CGRectIntersectsRect([enemySprite getBoundingBox], [moveableBlockObject getBoundingBox])){
+                        
+                        movementBoolean = false;
+                        
+                    }
+                    //movementBoolean = true;
+                }
+            }
+        }
+    }
+}
 
+
+
+// detecting collision between the enemy and movable block //
+-(void)collisionWithEnemyAndWall{
+    
+    for(Enemy_Sprite_Object *enemySpriteObject in self.children){
+        
+        if([enemySpriteObject isKindOfClass:[Enemy_Sprite_Object class]]){
+            
+            for(Block_Wall *blockWall in self.children){
+                
+                if([blockWall isKindOfClass:[Block_Wall class]]){
+                    
+                    if(CGRectIntersectsRect([enemySpriteObject getBoundingBox], [blockWall getBoundingBox])){
+                        
+                        movementBoolean = true;
+                        
+                    }
+                }
+            }
+        }
+    }
+}
 
 
 
@@ -557,37 +624,10 @@
                     }else if(((newGuySprite.position.x + widthOfGuy) > (moveableBlocks.position.x - widthOfBox)) && (!((newGuySprite.position.x) < (moveableBlocks.position.x)))){
                             
                         moveableBlocks.position = ccp(moveableBlocks.position.x - 5.0f, moveableBlocks.position.y);
-                            
-                }
-            }
-        }
-    }
-    
-    
-    // checking to see if it is of type MovableBlock //
-    for (MoveableBlock *moveableBlocks in self.children){
-        
-        if([moveableBlocks isKindOfClass:[MoveableBlock class]]){
-            
-            if(CGRectIntersectsRect([moveableBlocks getBoundingBox], [newGuySprite getBoundingBox])){
-            
-                    float widthOfGuy = [newGuySprite getBoundingBox].size.width / 2;
-                    float heightOfGuy = [newGuySprite getBoundingBox].size.height / 2;
-                    
-                    float widthOfBox = [moveableBlock getBoundingBox].size.width / 2;
-                    float heightOfBox = [moveableBlock getBoundingBox].size.height / 2;
-                    
-                
-                    // need to say -> if guy position + 16 is greater than block position - 16 but not greater than block position x //
-                    if(( (newGuySprite.position.x - widthOfGuy) < (moveableBlocks.position.x + widthOfBox) ) && (! ((newGuySprite.position.x) > (moveableBlocks.position.x)))) {
-                        
-                        moveableBlocks.position = ccp(moveableBlocks.position.x + 5.0f, moveableBlocks.position.y);
-                        
-                    }else if(((newGuySprite.position.x + widthOfGuy) > (moveableBlocks.position.x - widthOfBox)) && (!((newGuySprite.position.x) < (moveableBlocks.position.x)))){
-                        
-                        moveableBlocks.position = ccp(moveableBlocks.position.x - 5.0f, moveableBlocks.position.y);
                         
                     }
+                    
+                
             }
         }
     }
@@ -625,20 +665,11 @@
                             NSLog(@"collision from the right");
                             
                         }
-                        
-                        
-                        
-                        
-                        
-                        
                     }
                 }
             }
         }
     }
-    
-    
-    
 }
 
 
