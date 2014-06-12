@@ -16,6 +16,7 @@
 #import "heathHeartSprite.h"
 #import "MoveableBlock.h"
 #import "DPad.h"
+#import "Breakable_Block.h"
 
 
 /**
@@ -44,6 +45,7 @@
     CCLayoutBox *goalBox;
     heathHeartSprite *newHealthHeart;
     MoveableBlock *moveableBlock;
+    Breakable_Block *mazeBreakableBlock;
     
     // pause elements //
     CCNodeColor *backgroundColorOnPause;

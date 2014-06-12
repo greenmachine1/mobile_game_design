@@ -229,6 +229,7 @@
 
 -(void)creationOfBlocks{
     
+    
     // getting the width / 32 + 2
     int numberOfBlocksInTheWidth = ((xBounds / 16) + 2);
     int numberOfBlocksInTheHeight = ((yBounds / 16) + 2);
@@ -265,13 +266,20 @@
     
     // ------------------------> creation of the maze itself <-------------------------------- //
     // wall coming down right before the end //
-    for(int k = 0; k < 6; k++){
+
+    // wall protruding from the dividing wall just before the end flag //
+    for(int k = 1; k < 10; k++){
+        
         if((k % 2) == 1){
             
-            Block_Wall *mazeWall = [Block_Wall createWallAtPosition:ccp(272.0f, (yBounds - 128) + (16 * k))];
-            [self addChild:mazeWall];
+            mazeBreakableBlock = [Breakable_Block createBlockAtLocation:ccp(192.0f + (16 * k), yBounds - 144)];
+            mazeBreakableBlock.name = [NSString stringWithFormat:@"%i", k];
+            
+            [self addChild:mazeBreakableBlock];
         }
+        
     }
+    
     
     // wall protruding out of the dividing wall
     for(int l = 1; l < 4; l++){
@@ -468,6 +476,7 @@
     [self collisionWithEnd];
     [self collisionWithEnemyAndMovableBlock];
     [self collisionWithEnemyAndWall];
+    [self collisionWithGuyAndBreakableBlock];
     
     
     // movement of the enemy sprite //
@@ -488,22 +497,15 @@
         stopXOfEnemy = 1000;
         
         enemyDeath = enemyDeath + 1;
-        [self showEnemyDeath];
         
+        enemyPointSprite = [CCSprite spriteWithImageNamed:@"Enemy_death.png"];
+        enemyPointSprite.position = ccp(xBounds / 2, yBounds / 2);
+        enemyPointSprite.scaleX = 2.0f;
+        enemyPointSprite.scaleY = 2.0f;
+        [self addChild:enemyPointSprite z:3];
+        
+        [self performSelector:@selector(removeEnemyDeath) withObject:nil afterDelay:2.0f];
     }
-    
-}
-
--(void)showEnemyDeath{
-    
-    enemyPointSprite = [CCSprite spriteWithImageNamed:@"Enemy_death.png"];
-    enemyPointSprite.position = ccp(xBounds / 2, yBounds / 2);
-    enemyPointSprite.scaleX = 2.0f;
-    enemyPointSprite.scaleY = 2.0f;
-    [self addChild:enemyPointSprite z:3];
-    
-    [self performSelector:@selector(removeEnemyDeath) withObject:nil afterDelay:2.0f];
-    
 }
 
 -(void)removeEnemyDeath{
@@ -519,6 +521,34 @@
     
     touchPoint = [touch locationInNode:self];
 }
+
+
+// detecting collision between the guy and the breakable block //
+-(void)collisionWithGuyAndBreakableBlock{
+    
+    for(Breakable_Block *breakBlock in self.children){
+        
+        if([breakBlock isKindOfClass:[Breakable_Block class]]){
+            
+            if(CGRectIntersectsRect([breakBlock getBoundingBox], [newGuySprite getBoundingBox])){
+                
+                NSLog(@"name of block hit %@", breakBlock.name);
+                
+                [self getChildByName:breakBlock.name recursively:true].visible = false;
+
+                
+            }
+            
+            
+        }
+        
+    }
+    
+}
+
+
+
+
 
 
 // detecting collision between the enemy and movable block //
@@ -538,9 +568,6 @@
                         
                         // need to get the stopping point //
                         stopXOfEnemy = enemySprite.position.x;
-                        
-                    
-                        
                     }
                 }
             }
@@ -593,8 +620,6 @@
         // basically I need to present the user with a good job then transition to the //
         // credits section of the game //
         [self displayGoal];
-    
-        
     }
 }
 
@@ -629,10 +654,8 @@
         if(score < 1){
             
             [self gameOver];
-            
         }
     }
-    
 }
 
 
@@ -649,12 +672,8 @@
                 if(CGRectIntersectsRect([moveableBlocks getBoundingBox], [newGuySprite getBoundingBox])){
                         
                     float widthOfGuy = [newGuySprite getBoundingBox].size.width / 2;
-                    float heightOfGuy = [newGuySprite getBoundingBox].size.height / 2;
-                        
                     float widthOfBox = [moveableBlock getBoundingBox].size.width / 2;
-                    float heightOfBox = [moveableBlock getBoundingBox].size.height / 2;
-                        
-                        
+
                     // need to say -> if guy position + 16 is greater than block position - 16 but not greater than block position x //
                     if(( (newGuySprite.position.x - widthOfGuy) < (moveableBlocks.position.x + widthOfBox) ) && (! ((newGuySprite.position.x) > (moveableBlocks.position.x)))) {
                             
@@ -665,8 +684,6 @@
                         moveableBlocks.position = ccp(moveableBlocks.position.x - 5.0f, moveableBlocks.position.y);
                         
                     }
-                    
-                
             }
         }
     }
@@ -749,6 +766,9 @@
                     
                         newGuySprite.position = ccp(blocks.position.x + distance , newGuySprite.position.y);
                         [newGuySprite stopAllActions];
+                        
+                        
+                        
                     }
                 
                     //   checking to see if the left side of the free standing block has been touched   //
@@ -759,6 +779,7 @@
                         newGuySprite.position = ccp(blocks.position.x - distance, newGuySprite.position.y);
                         [newGuySprite stopAllActions];
                     
+                        
                     }
                 
                 
@@ -768,6 +789,7 @@
                         newGuySprite.position = ccp(newGuySprite.position.x, blocks.position.y - distance);
                         [newGuySprite stopAllActions];
                     
+                        
                     }
                 
                 
@@ -776,6 +798,7 @@
                         newGuySprite.position = ccp(newGuySprite.position.x, blocks.position.y + distance);
                         [newGuySprite stopAllActions];
                     
+                        
                     }
                 
                 }

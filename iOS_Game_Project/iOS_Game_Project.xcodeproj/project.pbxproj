@@ -14,6 +14,8 @@
 		D62DAA501941A57A00BD71C5 /* DpadBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = D62DAA4F1941A57A00BD71C5 /* DpadBackground.png */; };
 		D62E782119340DAD000FE70C /* CreditsScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D62E782019340DAD000FE70C /* CreditsScene.m */; };
 		D62E782419340E7B000FE70C /* GamePlayTutorialScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D62E782319340E7B000FE70C /* GamePlayTutorialScene.m */; };
+		D62F8A8F194A2BFB00C64BCB /* Breakable_Block.m in Sources */ = {isa = PBXBuildFile; fileRef = D62F8A8E194A2BFB00C64BCB /* Breakable_Block.m */; };
+		D62F8A91194A2CBA00C64BCB /* Breakable_block.png in Resources */ = {isa = PBXBuildFile; fileRef = D62F8A90194A2CBA00C64BCB /* Breakable_block.png */; };
 		D6317E7519319D55009E232E /* SplashScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = D6317E7419319D55009E232E /* SplashScreen.m */; };
 		D63681B5192405EC0011A1BB /* Enemy_Sprite_Object.m in Sources */ = {isa = PBXBuildFile; fileRef = D63681B4192405EC0011A1BB /* Enemy_Sprite_Object.m */; };
 		D6376B32192495AA00BFF544 /* EndBox.m in Sources */ = {isa = PBXBuildFile; fileRef = D6376B31192495AA00BFF544 /* EndBox.m */; };
@@ -275,6 +277,9 @@
 		D62E782019340DAD000FE70C /* CreditsScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreditsScene.m; sourceTree = "<group>"; };
 		D62E782219340E7A000FE70C /* GamePlayTutorialScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GamePlayTutorialScene.h; sourceTree = "<group>"; };
 		D62E782319340E7B000FE70C /* GamePlayTutorialScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GamePlayTutorialScene.m; sourceTree = "<group>"; };
+		D62F8A8D194A2BFB00C64BCB /* Breakable_Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Breakable_Block.h; sourceTree = "<group>"; };
+		D62F8A8E194A2BFB00C64BCB /* Breakable_Block.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Breakable_Block.m; sourceTree = "<group>"; };
+		D62F8A90194A2CBA00C64BCB /* Breakable_block.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Breakable_block.png; sourceTree = "<group>"; };
 		D6317E7319319D55009E232E /* SplashScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplashScreen.h; sourceTree = "<group>"; };
 		D6317E7419319D55009E232E /* SplashScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplashScreen.m; sourceTree = "<group>"; };
 		D63681B3192405EC0011A1BB /* Enemy_Sprite_Object.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Enemy_Sprite_Object.h; sourceTree = "<group>"; };
@@ -826,6 +831,7 @@
 				D6F04CE019499B4A00CEF063 /* Enemy_death.png */,
 				D6990D611947C71C00C570DA /* Block_movable-32.png */,
 				D6B7779C19467CC900939E42 /* enemy-32.png */,
+				D62F8A90194A2CBA00C64BCB /* Breakable_block.png */,
 				D6B7779819467A1500939E42 /* Block-32.png */,
 				D6DDBD3A19412906001293D2 /* Block_movable.png */,
 				D6CEDB721935C9D200377347 /* tutorial_done_box.png */,
@@ -1687,6 +1693,8 @@
 				D63F0991193E9ED000AD88E8 /* MoveableBlock.m */,
 				D6F84753194167CE00F990FC /* DPad.h */,
 				D6F84754194167CE00F990FC /* DPad.m */,
+				D62F8A8D194A2BFB00C64BCB /* Breakable_Block.h */,
+				D62F8A8E194A2BFB00C64BCB /* Breakable_Block.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -1772,6 +1780,7 @@
 				D65674A01918979A003CC6E9 /* Default@2x.png in Resources */,
 				D6B2120219199933005D3E7F /* guy_pixel_art.png in Resources */,
 				D6990D621947C71C00C570DA /* Block_movable-32.png in Resources */,
+				D62F8A91194A2CBA00C64BCB /* Breakable_block.png in Resources */,
 				D6B214D1191A15A3005D3E7F /* enemy.png in Resources */,
 				D6B214D5191A2048005D3E7F /* sea_audio.mp3 in Resources */,
 				D6B7779F1946878400939E42 /* Options_background.png in Resources */,
@@ -1852,6 +1861,7 @@
 				D65675181918979A003CC6E9 /* CCNodeColor.m in Sources */,
 				D65675F11918979B003CC6E9 /* TransformUtils.m in Sources */,
 				D65675921918979B003CC6E9 /* CCTextureCache.m in Sources */,
+				D62F8A8F194A2BFB00C64BCB /* Breakable_Block.m in Sources */,
 				D65675BD1918979B003CC6E9 /* CCAppDelegate.m in Sources */,
 				D65675C11918979B003CC6E9 /* CCDirectorMac.m in Sources */,
 				D65674F51918979A003CC6E9 /* ccDeprecated.m in Sources */,
