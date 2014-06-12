@@ -71,6 +71,13 @@
     CCSprite *backgroundBox;
     
     BOOL movementBoolean;
+    float startXOfEnemy;
+    float stopXOfEnemy;
+    
+    float differenceXOfEnemy;
+    int enemyDeath;
+    
+    CCSprite *enemyPointSprite;
     
 }
 

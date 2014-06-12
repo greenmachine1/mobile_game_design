@@ -54,7 +54,12 @@
     
     // movement right and left //
     movementBoolean = true;
+    
+    // enemy loop stuff //
+    stopXOfEnemy = 100;
+    startXOfEnemy = 50;
 
+    enemyDeath = 0;
 
     // enabling audio for effects //
     playSound = [OALSimpleAudio sharedInstance];
@@ -475,7 +480,35 @@
         newEnemySprite.position = ccp(newEnemySprite.position.x - 1 - (speed * delta), newEnemySprite.position.y);
     }
     
+    // if the proximity between the left and right motions is within 15 points //
+    // of each other.... remove the sprite from the scene //
+    if((stopXOfEnemy - startXOfEnemy) < 15){
+        
+        [newEnemySprite removeFromParentAndCleanup:true];
+        stopXOfEnemy = 1000;
+        
+        enemyDeath = enemyDeath + 1;
+        [self showEnemyDeath];
+        
+    }
     
+}
+
+-(void)showEnemyDeath{
+    
+    enemyPointSprite = [CCSprite spriteWithImageNamed:@"Enemy_death.png"];
+    enemyPointSprite.position = ccp(xBounds / 2, yBounds / 2);
+    enemyPointSprite.scaleX = 2.0f;
+    enemyPointSprite.scaleY = 2.0f;
+    [self addChild:enemyPointSprite z:3];
+    
+    [self performSelector:@selector(removeEnemyDeath) withObject:nil afterDelay:2.0f];
+    
+}
+
+-(void)removeEnemyDeath{
+    
+    [enemyPointSprite removeFromParentAndCleanup:true];
 }
 
 
@@ -503,7 +536,10 @@
                         
                         movementBoolean = false;
                         
+                        // need to get the stopping point //
+                        stopXOfEnemy = enemySprite.position.x;
                         
+                    
                         
                     }
                 }
@@ -529,7 +565,8 @@
                         
                         movementBoolean = true;
                         
-                        
+                        // need to get the starting point //
+                        startXOfEnemy = enemySpriteObject.position.x;
                     }
                 }
             }
@@ -660,8 +697,6 @@
                             
                         }else if( (moveblock.position.x + 32 > blockWall.position.x - 32) && !(moveblock.position.x > blockWall.position.x)){
                             
-                            
-                            
                             moveblock.position = ccp(blockWall.position.x - 32, moveblock.position.y);
                             newGuySprite.position = ccp(moveblock.position.x - 32, newGuySprite.position.y);
                             NSLog(@"collision from the right");
@@ -787,9 +822,11 @@
     
     // hearts = 500 a peice, for every second that goes by, you loose 10 points //
     // the total is hearts - time
+    int enemyDeathFinalScore = 500 * enemyDeath;
+    
     int heartsScore = score * 500;
     int timeScore = timeIncrease * 10;
-    int totalScore = heartsScore - timeScore;
+    int totalScore = heartsScore - timeScore + enemyDeathFinalScore;
     
     if(totalScore < 0){
         totalScore = 0;

@@ -250,6 +250,7 @@
 		D6EC7E851931DE9900690E86 /* MainMenuScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D6EC7E841931DE9900690E86 /* MainMenuScene.m */; };
 		D6EECBDA192D6095008D6EF0 /* healthHeartSprite.png in Resources */ = {isa = PBXBuildFile; fileRef = D6EECBD9192D6095008D6EF0 /* healthHeartSprite.png */; };
 		D6EECBDD192D613B008D6EF0 /* heathHeartSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = D6EECBDC192D613B008D6EF0 /* heathHeartSprite.m */; };
+		D6F04CE119499B4A00CEF063 /* Enemy_death.png in Resources */ = {isa = PBXBuildFile; fileRef = D6F04CE019499B4A00CEF063 /* Enemy_death.png */; };
 		D6F84755194167CE00F990FC /* DPad.m in Sources */ = {isa = PBXBuildFile; fileRef = D6F84754194167CE00F990FC /* DPad.m */; };
 /* End PBXBuildFile section */
 
@@ -740,6 +741,7 @@
 		D6EECBD9192D6095008D6EF0 /* healthHeartSprite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = healthHeartSprite.png; sourceTree = "<group>"; };
 		D6EECBDB192D613B008D6EF0 /* heathHeartSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = heathHeartSprite.h; sourceTree = "<group>"; };
 		D6EECBDC192D613B008D6EF0 /* heathHeartSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = heathHeartSprite.m; sourceTree = "<group>"; };
+		D6F04CE019499B4A00CEF063 /* Enemy_death.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Enemy_death.png; sourceTree = "<group>"; };
 		D6F84753194167CE00F990FC /* DPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPad.h; sourceTree = "<group>"; };
 		D6F84754194167CE00F990FC /* DPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPad.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -821,6 +823,7 @@
 				D6AC44D6192DECC700B842FB /* blockanimation.pvr */,
 				D6B214D6191A208C005D3E7F /* Audio */,
 				D6B214D0191A15A3005D3E7F /* enemy.png */,
+				D6F04CE019499B4A00CEF063 /* Enemy_death.png */,
 				D6990D611947C71C00C570DA /* Block_movable-32.png */,
 				D6B7779C19467CC900939E42 /* enemy-32.png */,
 				D6B7779819467A1500939E42 /* Block-32.png */,
@@ -1795,6 +1798,7 @@
 				D65674B71918979A003CC6E9 /* Icon-Small-50.png in Resources */,
 				D60738E6193857AE00415A86 /* Flag.plist in Resources */,
 				D69C13ED1942797900BD4AB0 /* ThumbPoint.png in Resources */,
+				D6F04CE119499B4A00CEF063 /* Enemy_death.png in Resources */,
 				D65676A01918979C003CC6E9 /* LICENSE_Kazmath.txt in Resources */,
 				D65674AB1918979A003CC6E9 /* Icon-72.png in Resources */,
 				D6B7779919467A1500939E42 /* Block-32.png in Resources */,
