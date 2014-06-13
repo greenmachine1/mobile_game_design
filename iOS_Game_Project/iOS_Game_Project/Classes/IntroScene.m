@@ -533,16 +533,18 @@
             
             if(CGRectIntersectsRect([breakBlock getBoundingBox], [newGuySprite getBoundingBox])){
                 
-                if( (newGuySprite.position.y + 16 > breakBlock.position.y - 16) ){
+                if( (newGuySprite.position.y + 16 > breakBlock.position.y - 16) &&
+                   ((newGuySprite.position.y - 16 < breakBlock.position.y + 16) &&
+                    (newGuySprite.position.y + 16 > breakBlock.position.y - 16))){
                     
-                    newGuySprite.position = ccp(newGuySprite.position.x, breakBlock.position.y - 32 );
-                    [newGuySprite stopAllActions];
                     
-                    // should come up with a popup giving the user the choice to break through the block //
-                    // based on if they have anymore axes to use //
-                    //if(!(numberOfAxes <= 0)){
-                        
-                        // popup that will display an option to destroy the block //
+                        newGuySprite.position = ccp(newGuySprite.position.x, breakBlock.position.y - 32 );
+                        [newGuySprite stopAllActions];
+                    
+                        // should come up with a popup giving the user the choice to break through the block //
+                        // based on if they have anymore axes to use //
+                    
+                    if(!(numberOfAxes <= 0)){
                         CCSpriteFrame *breakBlockButton = [CCSpriteFrame frameWithImageNamed:@"Destroy_sprite.png"];
                         
                         CCButton *destroyButton = [CCButton buttonWithTitle:@"" spriteFrame:breakBlockButton];
@@ -551,13 +553,16 @@
                         destroyButton.name = breakBlock.name;
                         [destroyButton setTarget:self selector:@selector(onDestroyBlock:)];
                         [breakBlock addChild:destroyButton];
-                        
-                    //}
+                    }
                 }
             }
         }
     }
 }
+
+
+
+
 
 // this removes the block from the view //
 -(void)onDestroyBlock:(id)sender{
