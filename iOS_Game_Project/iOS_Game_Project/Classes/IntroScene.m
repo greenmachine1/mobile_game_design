@@ -534,7 +534,18 @@
                 
                 NSLog(@"name of block hit %@", breakBlock.name);
                 
-                [self getChildByName:breakBlock.name recursively:true].visible = false;
+                if( (newGuySprite.position.y + 16 > breakBlock.position.y - 16) ){
+                    
+                    newGuySprite.position = ccp(newGuySprite.position.x, breakBlock.position.y - 32 );
+                    
+                    // should come up with a popup giving the user the choice to break through the block //
+                    // based on if they have anymore axes to use //
+                    
+                    NSLog(@"Yep");
+                }
+                
+                
+                //[self getChildByName:breakBlock.name recursively:true].visible = false;
 
                 
             }
