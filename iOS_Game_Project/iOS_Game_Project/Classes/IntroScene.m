@@ -533,12 +533,14 @@
             
             if(CGRectIntersectsRect([breakBlock getBoundingBox], [newGuySprite getBoundingBox])){
                 
+                // this is correct for collision //
                 if( (newGuySprite.position.y + 16 > breakBlock.position.y - 16) &&
-                   ((newGuySprite.position.y - 16 < breakBlock.position.y + 16) &&
-                    (newGuySprite.position.y + 16 > breakBlock.position.y - 16))){
+                   ((newGuySprite.position.x + 16 > breakBlock.position.x - 16) &&
+                    (newGuySprite.position.x - 16 < breakBlock.position.x + 16)) &&
+                   (!(newGuySprite.position.y - 16 > breakBlock.position.y))){
                     
-                    
-                        newGuySprite.position = ccp(newGuySprite.position.x, breakBlock.position.y - 32 );
+                        // position guy just below the block //
+                        newGuySprite.position = ccp(newGuySprite.position.x, breakBlock.position.y - 32);
                         [newGuySprite stopAllActions];
                     
                         // should come up with a popup giving the user the choice to break through the block //
@@ -554,8 +556,35 @@
                         [destroyButton setTarget:self selector:@selector(onDestroyBlock:)];
                         [breakBlock addChild:destroyButton];
                     }
+                    
+                }else if( (newGuySprite.position.y - 16 < breakBlock.position.y + 16) &&
+                         ((newGuySprite.position.x + 16 > breakBlock.position.x - 16) &&
+                          (newGuySprite.position.x - 16 < breakBlock.position.x + 16)) &&
+                         (!(newGuySprite.position.y + 16 < breakBlock.position.y))){
+                    
+                    newGuySprite.position = ccp(newGuySprite.position.x, breakBlock.position.y + 32);
+                    [newGuySprite stopAllActions];
+                    
+                    if(!(numberOfAxes <= 0)){
+                        CCSpriteFrame *breakBlockButton = [CCSpriteFrame frameWithImageNamed:@"Destroy_sprite.png"];
+                        
+                        CCButton *destroyButton = [CCButton buttonWithTitle:@"" spriteFrame:breakBlockButton];
+                        destroyButton.anchorPoint = ccp(0.5f, 0.5f);
+                        destroyButton.position = ccp(breakBlock.contentSize.width / 2, breakBlock.contentSize.height / 2);
+                        destroyButton.name = breakBlock.name;
+                        [destroyButton setTarget:self selector:@selector(onDestroyBlock:)];
+                        [breakBlock addChild:destroyButton];
+                    }
+                    
+                }else if( (newGuySprite.position.x - 16 < breakBlock.position.x + 16) &&
+                         ((newGuySprite.position.y + 16 > breakBlock.position.y - 16) &&
+                          (newGuySprite.position.y - 16 < breakBlock.position.y + 16)) &&
+                         ((newGuySprite.position.x + 16 < breakBlock.position.x))){
+                    
+                    NSLog(@"Yeppers");
                 }
             }
+                 
         }
     }
 }
@@ -571,8 +600,9 @@
     
         NSLog(@"number of axes left %i", numberOfAxes);
         CCButton *button = (CCButton *)sender;
+        
         [self removeChildByName:button.name cleanup:true];
-    
+        
         numberOfAxes--;
     }
 }
