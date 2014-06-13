@@ -80,6 +80,7 @@
     int enemyDeath;
     
     CCSprite *enemyPointSprite;
+    int numberOfAxes;
     
 }
 

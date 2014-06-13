@@ -21,6 +21,7 @@
 		D6376B32192495AA00BFF544 /* EndBox.m in Sources */ = {isa = PBXBuildFile; fileRef = D6376B31192495AA00BFF544 /* EndBox.m */; };
 		D63E6DEB1921E33D007D962E /* Guy_Sprite_Object.m in Sources */ = {isa = PBXBuildFile; fileRef = D63E6DEA1921E33D007D962E /* Guy_Sprite_Object.m */; };
 		D63F0992193E9ED000AD88E8 /* MoveableBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = D63F0991193E9ED000AD88E8 /* MoveableBlock.m */; };
+		D652D5FB194AD29C0012B5C1 /* Destroy_sprite.png in Resources */ = {isa = PBXBuildFile; fileRef = D652D5FA194AD29C0012B5C1 /* Destroy_sprite.png */; };
 		D65674841918979A003CC6E9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D65674831918979A003CC6E9 /* QuartzCore.framework */; };
 		D65674861918979A003CC6E9 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D65674851918979A003CC6E9 /* OpenGLES.framework */; };
 		D65674881918979A003CC6E9 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D65674871918979A003CC6E9 /* OpenAL.framework */; };
@@ -290,6 +291,7 @@
 		D63E6DEA1921E33D007D962E /* Guy_Sprite_Object.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Guy_Sprite_Object.m; sourceTree = "<group>"; };
 		D63F0990193E9ED000AD88E8 /* MoveableBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoveableBlock.h; sourceTree = "<group>"; };
 		D63F0991193E9ED000AD88E8 /* MoveableBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoveableBlock.m; sourceTree = "<group>"; };
+		D652D5FA194AD29C0012B5C1 /* Destroy_sprite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Destroy_sprite.png; sourceTree = "<group>"; };
 		D65674801918979A003CC6E9 /* iOS_Game_Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOS_Game_Project.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D65674831918979A003CC6E9 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		D65674851918979A003CC6E9 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -842,6 +844,7 @@
 				D6CEDB741935D67F00377347 /* Splash_screen.png */,
 				D60738E81938590300415A86 /* Flag-1.png */,
 				D697111B1934354100899F60 /* menu_box_pause.png */,
+				D652D5FA194AD29C0012B5C1 /* Destroy_sprite.png */,
 				D698D42C192E7DE1004FB750 /* play.png */,
 				D697111D193451F200899F60 /* Guy_move_Arrow.png */,
 				D6EECBD9192D6095008D6EF0 /* healthHeartSprite.png */,
@@ -1786,6 +1789,7 @@
 				D6B7779F1946878400939E42 /* Options_background.png in Resources */,
 				D65674B31918979A003CC6E9 /* Icon-120.png in Resources */,
 				D6B7779B19467BE800939E42 /* guy_pixel_art-32.png in Resources */,
+				D652D5FB194AD29C0012B5C1 /* Destroy_sprite.png in Resources */,
 				D65676B71918979C003CC6E9 /* LICENSE_CCBReader.txt in Resources */,
 				D60738E91938590300415A86 /* Flag-1.png in Resources */,
 				D6CEDB751935D67F00377347 /* Splash_screen.png in Resources */,

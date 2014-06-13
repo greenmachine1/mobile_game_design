@@ -60,6 +60,7 @@
     startXOfEnemy = 50;
 
     enemyDeath = 0;
+    numberOfAxes = 3;
 
     // enabling audio for effects //
     playSound = [OALSimpleAudio sharedInstance];
@@ -537,21 +538,81 @@
                 if( (newGuySprite.position.y + 16 > breakBlock.position.y - 16) ){
                     
                     newGuySprite.position = ccp(newGuySprite.position.x, breakBlock.position.y - 32 );
+                    [newGuySprite stopAllActions];
                     
                     // should come up with a popup giving the user the choice to break through the block //
                     // based on if they have anymore axes to use //
+                    if(numberOfAxes != 0){
+                        
+                        
+                        
+                        // popup that will display an option to destroy the block //
+                        CCSpriteFrame *breakBlockButton = [CCSpriteFrame frameWithImageNamed:@"Destroy_sprite.png"];
+                        
+                        CCButton *destroyButton = [CCButton buttonWithTitle:@"" spriteFrame:breakBlockButton];
+                        destroyButton.anchorPoint = ccp(0.5f, 0.5f);
+                        destroyButton.position = ccp(breakBlock.contentSize.width / 2, breakBlock.contentSize.height / 2);
+                        destroyButton.name = breakBlock.name;
+                        [destroyButton setTarget:self selector:@selector(onDestroyBlock:)];
+                        [breakBlock addChild:destroyButton];
+                        
+                        
+
+                        
+                    }
                     
-                    NSLog(@"Yep");
                 }
                 
                 
                 //[self getChildByName:breakBlock.name recursively:true].visible = false;
-
-                
             }
-            
-            
         }
+    }
+}
+// this removes the block from the view //
+-(void)onDestroyBlock:(id)sender{
+    NSLog(@"in here");
+    
+    CCButton *button = (CCButton *)sender;
+    if([button.name isEqualToString:@"0"]){
+        NSLog(@"0");
+        [self removeChildByName:@"0" cleanup:true];
+        
+    }else if([[button name] isEqualToString:@"1"]){
+        NSLog(@"1");
+        [self removeChildByName:@"1" cleanup:true];
+        
+    }else if([[button name] isEqualToString:@"2"]){
+        NSLog(@"2");
+        [self removeChildByName:@"2" cleanup:true];
+        
+    }else if([[button name] isEqualToString:@"3"]){
+        NSLog(@"3");
+        [self removeChildByName:@"3" cleanup:true];
+        
+    }else if([[button name] isEqualToString:@"4"]){
+        NSLog(@"4");
+        [self removeChildByName:@"4" cleanup:true];
+        
+    }else if([[button name] isEqualToString:@"5"]){
+        NSLog(@"5");
+        [self removeChildByName:@"5" cleanup:true];
+        
+    }else if([[button name] isEqualToString:@"6"]){
+        NSLog(@"6");
+        [self removeChildByName:@"6" cleanup:true];
+        
+    }else if([[button name] isEqualToString:@"7"]){
+        NSLog(@"7");
+        [self removeChildByName:@"7" cleanup:true];
+        
+    }else if([[button name] isEqualToString:@"8"]){
+        NSLog(@"8");
+        [self removeChildByName:@"8" cleanup:true];
+        
+    }else if([[button name] isEqualToString:@"9"]){
+        NSLog(@"9");
+        [self removeChildByName:@"9" cleanup:true];
         
     }
     
