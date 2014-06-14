@@ -144,7 +144,7 @@
     timeLabel.anchorPoint = ccp(0.5f, 0.5f);
 
     // setting the time to be in the player controls box //
-    timeLabel.position = ccp((backgroundBox.contentSize.width / 2) - 20.0f, backgroundBox.contentSize.height - 5.0f);
+    timeLabel.position = ccp((backgroundBox.contentSize.width / 2) - 20.0f, backgroundBox.contentSize.height + 10.0f);
     timeLabel.fontSize = 20.0f;
     
     timeLabel.fontColor = [CCColor blackColor];
@@ -180,15 +180,25 @@
     // creation of the hearts //
     for(int i = 1; i < 5; i++){
         
-        newHealthHeart = [heathHeartSprite createHeathHeartAtLocation:ccp(((newDPad.contentSize.width / 2) - 6.0f) + (32 * i), newDPad.position.y + 180.0f)];
+        newHealthHeart = [heathHeartSprite createHeathHeartAtLocation:ccp(((newDPad.contentSize.width / 2) - 6.0f) + (32 * i), newDPad.position.y + 200.0f)];
         [backgroundBox addChild:newHealthHeart z:2 name:@"Heart"];
     }
+    
+    axeSprite = [CCSprite spriteWithImageNamed:@"Axe_sprite.png"];
+    axeSprite.position = ccp(newDPad.position.x + 92.0f, newDPad.position.y + 165.0f);
+    [backgroundBox addChild:axeSprite z:2 name:@"axe"];
+    
+    amountOfAxesLabel = [CCLabelTTF labelWithString:@"x2" fontName:@"Chalkduster" fontSize:20.0f];
+    
+    amountOfAxesLabel.position = ccp(axeSprite.position.x + 30.0f, axeSprite.position.y);
+    amountOfAxesLabel.fontColor = [CCColor redColor];
+    [backgroundBox addChild:amountOfAxesLabel z:3];
     
     
     // adding pause functionality //
     CCSpriteFrame *pauseSprite = [CCSpriteFrame frameWithImageNamed:@"pause_sprite.png"];
     pauseButton = [CCButton buttonWithTitle:nil spriteFrame:pauseSprite];
-    pauseButton.position = ccp((backgroundBox.contentSize.width / 2) + 32.0f,  backgroundBox.contentSize.height - 32.0f);
+    pauseButton.position = ccp((backgroundBox.contentSize.width / 2) + 50.0f,  backgroundBox.contentSize.height - 20.0f);
     
     NSLog(@"width %f, height %f", backgroundBox.contentSize.width, backgroundBox.contentSize.height);
     
@@ -268,18 +278,7 @@
     // ------------------------> creation of the maze itself <-------------------------------- //
     // wall coming down right before the end //
 
-    // wall protruding from the dividing wall just before the end flag //
-    for(int k = 1; k < 10; k++){
-        
-        if((k % 2) == 1){
-            
-            mazeBreakableBlock = [Breakable_Block createBlockAtLocation:ccp(192.0f + (16 * k), yBounds - 144)];
-            mazeBreakableBlock.name = [NSString stringWithFormat:@"%i", k];
-            
-            [self addChild:mazeBreakableBlock];
-        }
-        
-    }
+    
     
     
     // wall protruding out of the dividing wall
@@ -329,7 +328,25 @@
     newBlock.scaleY = 2.0f;
     [self addChild:newBlock z:0 name:@"midblock1"];
     
+    
+    
+    // -----------------> creation of the breakable blocks <-------------------- //
+    // wall protruding from the dividing wall just before the end flag //
+    for(int k = 1; k < 10; k++){
+        
+        if((k % 2) == 1){
+            
+            mazeBreakableBlock = [Breakable_Block createBlockAtLocation:ccp(192.0f + (16 * k), yBounds - 144)];
+            mazeBreakableBlock.name = [NSString stringWithFormat:@"%i", k];
+            
+            [self addChild:mazeBreakableBlock];
+        }
+        
+    }
+    
 }
+
+
 
 
 
@@ -500,7 +517,7 @@
         enemyDeath = enemyDeath + 1;
         
         enemyPointSprite = [CCSprite spriteWithImageNamed:@"Enemy_death.png"];
-        enemyPointSprite.position = ccp(xBounds / 2, yBounds / 2);
+        enemyPointSprite.position = ccp(newGuySprite.position.x , newGuySprite.position.y + 32);
         enemyPointSprite.scaleX = 2.0f;
         enemyPointSprite.scaleY = 2.0f;
         [self addChild:enemyPointSprite z:3];
@@ -524,6 +541,8 @@
 }
 
 
+
+
 // detecting collision between the guy and the breakable block //
 -(void)collisionWithGuyAndBreakableBlock{
     
@@ -534,6 +553,7 @@
             if(CGRectIntersectsRect([breakBlock getBoundingBox], [newGuySprite getBoundingBox])){
             
                 // this is correct for collision //
+                // up //
                 if( (newGuySprite.position.y + 16 > breakBlock.position.y - 16) &&
                    (((newGuySprite.position.x + 16 > breakBlock.position.x - 16) &&
                      (newGuySprite.position.x - 16 < breakBlock.position.x + 16)) &&
@@ -548,7 +568,7 @@
                         // based on if they have anymore axes to use //
                     
                     if(!(numberOfAxes <= 0)){
-                        CCSpriteFrame *breakBlockButton = [CCSpriteFrame frameWithImageNamed:@"Destroy_sprite.png"];
+                        CCSpriteFrame *breakBlockButton = [CCSpriteFrame frameWithImageNamed:@"Axe_sprite.png"];
                         
                         CCButton *destroyButton = [CCButton buttonWithTitle:@"" spriteFrame:breakBlockButton];
                         destroyButton.anchorPoint = ccp(0.5f, 0.5f);
@@ -557,7 +577,7 @@
                         [destroyButton setTarget:self selector:@selector(onDestroyBlock:)];
                         [breakBlock addChild:destroyButton];
                     }
-                    
+                 // down //
                 }else if( (newGuySprite.position.y - 16 < breakBlock.position.y + 16) &&
                          (((newGuySprite.position.x + 16 > breakBlock.position.x - 16) &&
                           (newGuySprite.position.x - 16 < breakBlock.position.x + 16)) &&
@@ -568,7 +588,7 @@
                     [newGuySprite stopAllActions];
                     
                     if(!(numberOfAxes <= 0)){
-                        CCSpriteFrame *breakBlockButton = [CCSpriteFrame frameWithImageNamed:@"Destroy_sprite.png"];
+                        CCSpriteFrame *breakBlockButton = [CCSpriteFrame frameWithImageNamed:@"Axe_sprite.png"];
                         
                         CCButton *destroyButton = [CCButton buttonWithTitle:@"" spriteFrame:breakBlockButton];
                         destroyButton.anchorPoint = ccp(0.5f, 0.5f);
@@ -580,7 +600,7 @@
                     
                              
                              
-                            
+                // right //
                 }else if( (newGuySprite.position.x - 16 < breakBlock.position.x + 16) &&
                          ((newGuySprite.position.y + 16 > breakBlock.position.y - 16) &&
                           (newGuySprite.position.y - 16 < breakBlock.position.y + 16)) &&
@@ -590,7 +610,7 @@
                     [newGuySprite stopAllActions];
                     
                     if(!(numberOfAxes <= 0)){
-                        CCSpriteFrame *breakBlockButton = [CCSpriteFrame frameWithImageNamed:@"Destroy_sprite.png"];
+                        CCSpriteFrame *breakBlockButton = [CCSpriteFrame frameWithImageNamed:@"Axe_sprite.png"];
                         
                         CCButton *destroyButton = [CCButton buttonWithTitle:@"" spriteFrame:breakBlockButton];
                         destroyButton.anchorPoint = ccp(0.5f, 0.5f);
@@ -601,8 +621,7 @@
                     }
                     
                     
-                    
-                    
+                // left //
                 }else if( (newGuySprite.position.x - 16 < breakBlock.position.x + 16) &&
                          ((newGuySprite.position.y + 16 > breakBlock.position.y - 16) &&
                           (newGuySprite.position.y - 16 < breakBlock.position.y + 16)) &&
@@ -612,7 +631,7 @@
                     [newGuySprite stopAllActions];
                     
                     if(!(numberOfAxes <= 0)){
-                        CCSpriteFrame *breakBlockButton = [CCSpriteFrame frameWithImageNamed:@"Destroy_sprite.png"];
+                        CCSpriteFrame *breakBlockButton = [CCSpriteFrame frameWithImageNamed:@"Axe_sprite.png"];
                         
                         CCButton *destroyButton = [CCButton buttonWithTitle:@"" spriteFrame:breakBlockButton];
                         destroyButton.anchorPoint = ccp(0.5f, 0.5f);
@@ -638,13 +657,23 @@
 -(void)onDestroyBlock:(id)sender{
     
     if(!(numberOfAxes <= 0)){
+        
+        [amountOfAxesLabel removeFromParentAndCleanup:true];
+        
+        amountOfAxesLabel = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"x%i", numberOfAxes - 1] fontName:@"Chalkduster" fontSize:20.0f];
+        
+        amountOfAxesLabel.position = ccp(axeSprite.position.x + 30.0f, axeSprite.position.y);
+        amountOfAxesLabel.fontColor = [CCColor redColor];
+        [backgroundBox addChild:amountOfAxesLabel z:3];
     
+        
         NSLog(@"number of axes left %i", numberOfAxes);
         CCButton *button = (CCButton *)sender;
         
         [self removeChildByName:button.name cleanup:true];
         
         numberOfAxes--;
+        
     }
 }
 

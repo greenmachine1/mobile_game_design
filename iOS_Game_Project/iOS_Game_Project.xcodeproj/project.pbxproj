@@ -12,6 +12,7 @@
 		D60738E91938590300415A86 /* Flag-1.png in Resources */ = {isa = PBXBuildFile; fileRef = D60738E81938590300415A86 /* Flag-1.png */; };
 		D61030D91920A0D600A1D150 /* Block_Wall.m in Sources */ = {isa = PBXBuildFile; fileRef = D61030D81920A0D600A1D150 /* Block_Wall.m */; };
 		D62DAA501941A57A00BD71C5 /* DpadBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = D62DAA4F1941A57A00BD71C5 /* DpadBackground.png */; };
+		D62DD2CB194C390300C56635 /* Axe_sprite.png in Resources */ = {isa = PBXBuildFile; fileRef = D62DD2CA194C390300C56635 /* Axe_sprite.png */; };
 		D62E782119340DAD000FE70C /* CreditsScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D62E782019340DAD000FE70C /* CreditsScene.m */; };
 		D62E782419340E7B000FE70C /* GamePlayTutorialScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D62E782319340E7B000FE70C /* GamePlayTutorialScene.m */; };
 		D62F8A8F194A2BFB00C64BCB /* Breakable_Block.m in Sources */ = {isa = PBXBuildFile; fileRef = D62F8A8E194A2BFB00C64BCB /* Breakable_Block.m */; };
@@ -274,6 +275,7 @@
 		D61030D71920A0D600A1D150 /* Block_Wall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Block_Wall.h; sourceTree = "<group>"; };
 		D61030D81920A0D600A1D150 /* Block_Wall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Block_Wall.m; sourceTree = "<group>"; };
 		D62DAA4F1941A57A00BD71C5 /* DpadBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DpadBackground.png; sourceTree = "<group>"; };
+		D62DD2CA194C390300C56635 /* Axe_sprite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Axe_sprite.png; sourceTree = "<group>"; };
 		D62E781F19340DAD000FE70C /* CreditsScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditsScene.h; sourceTree = "<group>"; };
 		D62E782019340DAD000FE70C /* CreditsScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreditsScene.m; sourceTree = "<group>"; };
 		D62E782219340E7A000FE70C /* GamePlayTutorialScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GamePlayTutorialScene.h; sourceTree = "<group>"; };
@@ -843,6 +845,7 @@
 				D62DAA4F1941A57A00BD71C5 /* DpadBackground.png */,
 				D6CEDB741935D67F00377347 /* Splash_screen.png */,
 				D60738E81938590300415A86 /* Flag-1.png */,
+				D62DD2CA194C390300C56635 /* Axe_sprite.png */,
 				D697111B1934354100899F60 /* menu_box_pause.png */,
 				D652D5FA194AD29C0012B5C1 /* Destroy_sprite.png */,
 				D698D42C192E7DE1004FB750 /* play.png */,
@@ -1798,6 +1801,7 @@
 				D6B212041919ACED005D3E7F /* Block.png in Resources */,
 				D65674BB1918979A003CC6E9 /* Icon-Small@2x.png in Resources */,
 				D6DDBD3B19412906001293D2 /* Block_movable.png in Resources */,
+				D62DD2CB194C390300C56635 /* Axe_sprite.png in Resources */,
 				D6EECBDA192D6095008D6EF0 /* healthHeartSprite.png in Resources */,
 				D65674AD1918979A003CC6E9 /* Icon-72@2x.png in Resources */,
 				D6AA90961924AFE5000620E1 /* Goal.png in Resources */,

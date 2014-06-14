@@ -82,6 +82,9 @@
     CCSprite *enemyPointSprite;
     int numberOfAxes;
     
+    CCSprite *axeSprite;
+    CCLabelTTF *amountOfAxesLabel;
+    
 }
 
 
