@@ -532,13 +532,14 @@
         if([breakBlock isKindOfClass:[Breakable_Block class]]){
             
             if(CGRectIntersectsRect([breakBlock getBoundingBox], [newGuySprite getBoundingBox])){
-                
+            
                 // this is correct for collision //
                 if( (newGuySprite.position.y + 16 > breakBlock.position.y - 16) &&
-                   ((newGuySprite.position.x + 16 > breakBlock.position.x - 16) &&
-                    (newGuySprite.position.x - 16 < breakBlock.position.x + 16)) &&
-                   (!(newGuySprite.position.y - 16 > breakBlock.position.y))){
+                   (((newGuySprite.position.x + 16 > breakBlock.position.x - 16) &&
+                     (newGuySprite.position.x - 16 < breakBlock.position.x + 16)) &&
+                    (!(newGuySprite.position.y + 16 > breakBlock.position.y)))){
                     
+                      
                         // position guy just below the block //
                         newGuySprite.position = ccp(newGuySprite.position.x, breakBlock.position.y - 32);
                         [newGuySprite stopAllActions];
@@ -558,10 +559,11 @@
                     }
                     
                 }else if( (newGuySprite.position.y - 16 < breakBlock.position.y + 16) &&
-                         ((newGuySprite.position.x + 16 > breakBlock.position.x - 16) &&
+                         (((newGuySprite.position.x + 16 > breakBlock.position.x - 16) &&
                           (newGuySprite.position.x - 16 < breakBlock.position.x + 16)) &&
-                         (!(newGuySprite.position.y + 16 < breakBlock.position.y))){
+                         (!(newGuySprite.position.y - 16 < breakBlock.position.y)))){
                     
+                             
                     newGuySprite.position = ccp(newGuySprite.position.x, breakBlock.position.y + 32);
                     [newGuySprite stopAllActions];
                     
@@ -576,12 +578,51 @@
                         [breakBlock addChild:destroyButton];
                     }
                     
+                             
+                             
+                            
                 }else if( (newGuySprite.position.x - 16 < breakBlock.position.x + 16) &&
                          ((newGuySprite.position.y + 16 > breakBlock.position.y - 16) &&
                           (newGuySprite.position.y - 16 < breakBlock.position.y + 16)) &&
-                         ((newGuySprite.position.x + 16 < breakBlock.position.x))){
+                         (!(newGuySprite.position.x - 16 < breakBlock.position.x))){
                     
-                    NSLog(@"Yeppers");
+                    newGuySprite.position = ccp(breakBlock.position.x + 32, newGuySprite.position.y);
+                    [newGuySprite stopAllActions];
+                    
+                    if(!(numberOfAxes <= 0)){
+                        CCSpriteFrame *breakBlockButton = [CCSpriteFrame frameWithImageNamed:@"Destroy_sprite.png"];
+                        
+                        CCButton *destroyButton = [CCButton buttonWithTitle:@"" spriteFrame:breakBlockButton];
+                        destroyButton.anchorPoint = ccp(0.5f, 0.5f);
+                        destroyButton.position = ccp(breakBlock.contentSize.width / 2, breakBlock.contentSize.height / 2);
+                        destroyButton.name = breakBlock.name;
+                        [destroyButton setTarget:self selector:@selector(onDestroyBlock:)];
+                        [breakBlock addChild:destroyButton];
+                    }
+                    
+                    
+                    
+                    
+                }else if( (newGuySprite.position.x - 16 < breakBlock.position.x + 16) &&
+                         ((newGuySprite.position.y + 16 > breakBlock.position.y - 16) &&
+                          (newGuySprite.position.y - 16 < breakBlock.position.y + 16)) &&
+                         (!(newGuySprite.position.x - 16 < breakBlock.position.y))){
+                    
+                    newGuySprite.position = ccp(breakBlock.position.x - 32, newGuySprite.position.y);
+                    [newGuySprite stopAllActions];
+                    
+                    if(!(numberOfAxes <= 0)){
+                        CCSpriteFrame *breakBlockButton = [CCSpriteFrame frameWithImageNamed:@"Destroy_sprite.png"];
+                        
+                        CCButton *destroyButton = [CCButton buttonWithTitle:@"" spriteFrame:breakBlockButton];
+                        destroyButton.anchorPoint = ccp(0.5f, 0.5f);
+                        destroyButton.position = ccp(breakBlock.contentSize.width / 2, breakBlock.contentSize.height / 2);
+                        destroyButton.name = breakBlock.name;
+                        [destroyButton setTarget:self selector:@selector(onDestroyBlock:)];
+                        [breakBlock addChild:destroyButton];
+                    }
+                    
+                    
                 }
             }
                  
@@ -825,6 +866,7 @@
                     //   to pass   //
                     if((negativeXForGuy < positiveXForBlock) && ((negativeYForGuy < positiveYForBlock) && (positiveYForGuy > negativeYForBlock)) && (!(negativeXForGuy < blocks.position.x))){
                     
+                        NSLog(@"hit at left");
                         newGuySprite.position = ccp(blocks.position.x + distance , newGuySprite.position.y);
                         [newGuySprite stopAllActions];
                         
@@ -836,7 +878,8 @@
                     //   if so, check the top and bottom edges to makes sure its free before allowing   //
                     //   to pass   //
                     else if((positiveXForGuy > negativeXForBlock) && ((negativeYForGuy < positiveYForBlock) && (positiveYForGuy > negativeYForBlock)) && (!(positiveXForGuy > blocks.position.x))){
-                    
+                        
+                        NSLog(@"hit at right");
                         newGuySprite.position = ccp(blocks.position.x - distance, newGuySprite.position.y);
                         [newGuySprite stopAllActions];
                     
@@ -847,6 +890,7 @@
                     //   use the same principals as above for top and bottom collision   //
                     else if((positiveYForGuy > negativeYForBlock) && ((negativeXForGuy < positiveXForBlock) && (positiveXForGuy > negativeXForBlock)) && (!(positiveYForGuy > blocks.position.y))){
                     
+                        NSLog(@"hit from up");
                         newGuySprite.position = ccp(newGuySprite.position.x, blocks.position.y - distance);
                         [newGuySprite stopAllActions];
                     
