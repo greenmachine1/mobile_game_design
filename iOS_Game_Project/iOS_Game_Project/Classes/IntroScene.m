@@ -543,6 +543,17 @@
 
 
 
+
+-(void)generalCollisionBetweenTwoObjects:(CCNode*)firstObject secondObject:(CCNode*)secondObject{
+    
+    
+    
+    
+}
+
+
+
+
 // detecting collision between the guy and the breakable block //
 -(void)collisionWithGuyAndBreakableBlock{
     
