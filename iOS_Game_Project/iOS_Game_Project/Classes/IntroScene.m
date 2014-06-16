@@ -317,6 +317,7 @@
     
     
     // ---------------> creation of the moveable blocks <----------------- //
+    
     moveableBlock = [MoveableBlock createMovableBlockWithLocation:ccp(368.0f, (yBounds - 224.0f) - 32.0f)];
     moveableBlock.anchorPoint = ccp(0.5f, 0.5f);
     moveableBlock.scaleY = 2.0f;
@@ -487,10 +488,25 @@
     }else{
     }
     
-    [self collisionWithAnyBlock];
+    //[self collisionWithAnyBlock];
     [self collisionWithMovableBlock];
     [self collisionWithMovableBlockAndWall];
     [self collisionForEnemy];
+    
+    // experiment to see if I can create a generic collision detection function //
+    for(Block_Wall *blockWall in self.children){
+        
+        if([blockWall isKindOfClass:[Block_Wall class]]){
+            
+            if(CGRectIntersectsRect([newGuySprite getBoundingBox], [blockWall getBoundingBox])){
+                
+                [self generalCollisionBetweenTwoObjects:newGuySprite secondObject:blockWall];
+            }
+        }
+    }
+    
+    //[self generalCollisionBetweenTwoObjects:newEnemySprite secondObject:];
+    
     [self collisionWithEnd];
     [self collisionWithEnemyAndMovableBlock];
     [self collisionWithEnemyAndWall];
@@ -543,12 +559,46 @@
 
 
 
-
--(void)generalCollisionBetweenTwoObjects:(CCNode*)firstObject secondObject:(CCNode*)secondObject{
+// general collision //
+-(void)generalCollisionBetweenTwoObjects:(CCNode*)objectInMotion secondObject:(CCNode*)stationaryObject{
     
+    // object in motion collides going up with a stationary object //
+    if( (objectInMotion.position.y + 16 > stationaryObject.position.y - 16) &&
+       (((objectInMotion.position.x + 16 > stationaryObject.position.x - 16) &&
+         (objectInMotion.position.x - 16 < stationaryObject.position.x + 16)) &&
+        (! (objectInMotion.position.y + 16 > stationaryObject.position.y)))){
+           
+           // position the moving object below the stationary one //
+           objectInMotion.position = ccp(objectInMotion.position.x, stationaryObject.position.y - 32);
     
-    
-    
+       // object in motion collides going down with a stationary object //
+       }else if( (objectInMotion.position.y - 16 < stationaryObject.position.y + 16) &&
+                (((objectInMotion.position.x + 16 > stationaryObject.position.x - 16) &&
+                  (objectInMotion.position.x - 16 < stationaryObject.position.x + 16)) &&
+                 (!(objectInMotion.position.y - 16 < stationaryObject.position.y)))){
+                    
+            // position the moving object above the stationary one //
+            objectInMotion.position = ccp(objectInMotion.position.x, stationaryObject.position.y + 32);
+                    
+        // object in motion collides to the left with the stationary one //
+        }else if( (objectInMotion.position.x - 16 < stationaryObject.position.x + 16) &&
+                ((objectInMotion.position.y + 16 > stationaryObject.position.y - 16) &&
+                (objectInMotion.position.y - 16 < stationaryObject.position.y + 16)) &&
+                (!(objectInMotion.position.x - 16 < stationaryObject.position.x))){
+            
+            // position the moving object to the right of the stationary one //
+            objectInMotion.position = ccp(stationaryObject.position.x + 32, objectInMotion.position.y);
+        
+        // object in motion collides to the left of the stationary one //
+        }else if( (objectInMotion.position.x - 16 < stationaryObject.position.x + 16) &&
+                 ((objectInMotion.position.y + 16 > stationaryObject.position.y - 16) &&
+                  (objectInMotion.position.y - 16 < stationaryObject.position.y + 16)) &&
+                 (!(objectInMotion.position.x - 16 < stationaryObject.position.y))){
+            
+            // position of the moving object to the left of the stationary one //
+            objectInMotion.position = ccp(stationaryObject.position.x - 32, objectInMotion.position.y);
+            
+        }
 }
 
 
