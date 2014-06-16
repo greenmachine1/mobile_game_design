@@ -1671,36 +1671,11 @@
 		D656772A1918979C003CC6E9 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				D6D813A4194F92BA001552E0 /* Objects */,
+				D6D813A3194F925D001552E0 /* Walls */,
+				D6D813A2194F9237001552E0 /* Scenes */,
 				D656772B1918979C003CC6E9 /* AppDelegate.h */,
 				D656772C1918979C003CC6E9 /* AppDelegate.m */,
-				D65677311918979C003CC6E9 /* IntroScene.h */,
-				D65677321918979C003CC6E9 /* IntroScene.m */,
-				D61030D71920A0D600A1D150 /* Block_Wall.h */,
-				D61030D81920A0D600A1D150 /* Block_Wall.m */,
-				D63E6DE91921E33D007D962E /* Guy_Sprite_Object.h */,
-				D63E6DEA1921E33D007D962E /* Guy_Sprite_Object.m */,
-				D63681B3192405EC0011A1BB /* Enemy_Sprite_Object.h */,
-				D63681B4192405EC0011A1BB /* Enemy_Sprite_Object.m */,
-				D6376B30192495AA00BFF544 /* EndBox.h */,
-				D6376B31192495AA00BFF544 /* EndBox.m */,
-				D6EECBDB192D613B008D6EF0 /* heathHeartSprite.h */,
-				D6EECBDC192D613B008D6EF0 /* heathHeartSprite.m */,
-				D6317E7319319D55009E232E /* SplashScreen.h */,
-				D6317E7419319D55009E232E /* SplashScreen.m */,
-				D6EC7E831931DE9900690E86 /* MainMenuScene.h */,
-				D6EC7E841931DE9900690E86 /* MainMenuScene.m */,
-				D62E781F19340DAD000FE70C /* CreditsScene.h */,
-				D62E782019340DAD000FE70C /* CreditsScene.m */,
-				D62E782219340E7A000FE70C /* GamePlayTutorialScene.h */,
-				D62E782319340E7B000FE70C /* GamePlayTutorialScene.m */,
-				D697111F1934534900899F60 /* ArrowSprite.h */,
-				D69711201934534900899F60 /* ArrowSprite.m */,
-				D63F0990193E9ED000AD88E8 /* MoveableBlock.h */,
-				D63F0991193E9ED000AD88E8 /* MoveableBlock.m */,
-				D6F84753194167CE00F990FC /* DPad.h */,
-				D6F84754194167CE00F990FC /* DPad.m */,
-				D62F8A8D194A2BFB00C64BCB /* Breakable_Block.h */,
-				D62F8A8E194A2BFB00C64BCB /* Breakable_Block.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -1713,6 +1688,55 @@
 				D6B214D3191A2048005D3E7F /* sea_audio.mp3 */,
 			);
 			name = Audio;
+			sourceTree = "<group>";
+		};
+		D6D813A2194F9237001552E0 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				D6317E7319319D55009E232E /* SplashScreen.h */,
+				D6317E7419319D55009E232E /* SplashScreen.m */,
+				D6EC7E831931DE9900690E86 /* MainMenuScene.h */,
+				D6EC7E841931DE9900690E86 /* MainMenuScene.m */,
+				D62E781F19340DAD000FE70C /* CreditsScene.h */,
+				D62E782019340DAD000FE70C /* CreditsScene.m */,
+				D62E782219340E7A000FE70C /* GamePlayTutorialScene.h */,
+				D62E782319340E7B000FE70C /* GamePlayTutorialScene.m */,
+				D65677311918979C003CC6E9 /* IntroScene.h */,
+				D65677321918979C003CC6E9 /* IntroScene.m */,
+			);
+			name = Scenes;
+			sourceTree = "<group>";
+		};
+		D6D813A3194F925D001552E0 /* Walls */ = {
+			isa = PBXGroup;
+			children = (
+				D62F8A8D194A2BFB00C64BCB /* Breakable_Block.h */,
+				D62F8A8E194A2BFB00C64BCB /* Breakable_Block.m */,
+				D63F0990193E9ED000AD88E8 /* MoveableBlock.h */,
+				D63F0991193E9ED000AD88E8 /* MoveableBlock.m */,
+				D61030D71920A0D600A1D150 /* Block_Wall.h */,
+				D61030D81920A0D600A1D150 /* Block_Wall.m */,
+			);
+			name = Walls;
+			sourceTree = "<group>";
+		};
+		D6D813A4194F92BA001552E0 /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				D63E6DE91921E33D007D962E /* Guy_Sprite_Object.h */,
+				D63E6DEA1921E33D007D962E /* Guy_Sprite_Object.m */,
+				D63681B3192405EC0011A1BB /* Enemy_Sprite_Object.h */,
+				D63681B4192405EC0011A1BB /* Enemy_Sprite_Object.m */,
+				D6376B30192495AA00BFF544 /* EndBox.h */,
+				D6376B31192495AA00BFF544 /* EndBox.m */,
+				D6EECBDB192D613B008D6EF0 /* heathHeartSprite.h */,
+				D6EECBDC192D613B008D6EF0 /* heathHeartSprite.m */,
+				D697111F1934534900899F60 /* ArrowSprite.h */,
+				D69711201934534900899F60 /* ArrowSprite.m */,
+				D6F84753194167CE00F990FC /* DPad.h */,
+				D6F84754194167CE00F990FC /* DPad.m */,
+			);
+			name = Objects;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
