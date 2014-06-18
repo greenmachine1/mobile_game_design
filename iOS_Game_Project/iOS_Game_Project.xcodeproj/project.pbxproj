@@ -228,6 +228,7 @@
 		D65677291918979C003CC6E9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D65677281918979C003CC6E9 /* main.m */; };
 		D656772D1918979C003CC6E9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D656772C1918979C003CC6E9 /* AppDelegate.m */; };
 		D65677331918979C003CC6E9 /* IntroScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D65677321918979C003CC6E9 /* IntroScene.m */; };
+		D666247019522053004F88DF /* ScoreClass.m in Sources */ = {isa = PBXBuildFile; fileRef = D666246F19522053004F88DF /* ScoreClass.m */; };
 		D697111C1934354100899F60 /* menu_box_pause.png in Resources */ = {isa = PBXBuildFile; fileRef = D697111B1934354100899F60 /* menu_box_pause.png */; };
 		D697111E193451F200899F60 /* Guy_move_Arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = D697111D193451F200899F60 /* Guy_move_Arrow.png */; };
 		D69711211934534900899F60 /* ArrowSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = D69711201934534900899F60 /* ArrowSprite.m */; };
@@ -724,6 +725,8 @@
 		D656772C1918979C003CC6E9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Classes/AppDelegate.m; sourceTree = "<group>"; };
 		D65677311918979C003CC6E9 /* IntroScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IntroScene.h; path = Classes/IntroScene.h; sourceTree = "<group>"; };
 		D65677321918979C003CC6E9 /* IntroScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = IntroScene.m; path = Classes/IntroScene.m; sourceTree = "<group>"; };
+		D666246E19522053004F88DF /* ScoreClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreClass.h; sourceTree = "<group>"; };
+		D666246F19522053004F88DF /* ScoreClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoreClass.m; sourceTree = "<group>"; };
 		D697111B1934354100899F60 /* menu_box_pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_box_pause.png; sourceTree = "<group>"; };
 		D697111D193451F200899F60 /* Guy_move_Arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Guy_move_Arrow.png; sourceTree = "<group>"; };
 		D697111F1934534900899F60 /* ArrowSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArrowSprite.h; sourceTree = "<group>"; };
@@ -1685,6 +1688,8 @@
 				D656772C1918979C003CC6E9 /* AppDelegate.m */,
 				D652841F1950E89600B868FD /* GameCenterClass.h */,
 				D65284201950E89600B868FD /* GameCenterClass.m */,
+				D666246E19522053004F88DF /* ScoreClass.h */,
+				D666246F19522053004F88DF /* ScoreClass.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -1959,6 +1964,7 @@
 				D656754F1918979B003CC6E9 /* CCProgressNode.m in Sources */,
 				D63681B5192405EC0011A1BB /* Enemy_Sprite_Object.m in Sources */,
 				D65675421918979B003CC6E9 /* CCPhysicsBody.m in Sources */,
+				D666247019522053004F88DF /* ScoreClass.m in Sources */,
 				D65675C71918979B003CC6E9 /* CCWindow.m in Sources */,
 				D65674DC1918979A003CC6E9 /* CCActionProgressTimer.m in Sources */,
 				D65676921918979C003CC6E9 /* plane.c in Sources */,

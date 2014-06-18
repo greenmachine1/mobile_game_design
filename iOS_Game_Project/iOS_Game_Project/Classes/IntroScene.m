@@ -22,6 +22,7 @@
 #import "MoveableBlock.h"
 #import "DPad.h"
 #import "GameCenterClass.h"
+#import "ScoreClass.h"
 
 
 
@@ -92,8 +93,6 @@
     newGuySprite = [Guy_Sprite_Object createGuySpriteWithLocation:ccp(xBounds - 64, yBounds / 2)];
     [newGuySprite setZOrder:1];
     
-    
-    
     touchPoint = newGuySprite.position;
     
     [self addChild:newGuySprite];
@@ -109,6 +108,22 @@
         [self cameFromTutorial];
         
     }
+    
+    // creating an instance of the score class used to keep //
+    // track of multiple scores //
+    newScoreClass = [ScoreClass sharedInstance];
+    
+    /*
+    for(int i = 0; i < 5; i++){
+        
+        [newScoreClass inputNewScore:[NSString stringWithFormat:@"%i", i] score:500];
+    }
+    */
+    
+    [newScoreClass inputNewScore:@"Grea" score:3];
+    
+    NSLog(@"The dictionary inside %@", [newScoreClass returnPlayerNameAndScores]);
+    
 
 	return self;
 }

@@ -17,6 +17,7 @@
 #import "MoveableBlock.h"
 #import "DPad.h"
 #import "Breakable_Block.h"
+#import "ScoreClass.h"
 
 
 /**
@@ -87,6 +88,7 @@
     CCLabelTTF *amountOfAxesLabel;
     
     NSArray *leaderboard;
+    ScoreClass *newScoreClass;
     
 }
 
