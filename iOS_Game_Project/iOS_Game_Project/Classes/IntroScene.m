@@ -21,6 +21,7 @@
 #import "CreditsScene.h"
 #import "MoveableBlock.h"
 #import "DPad.h"
+#import "GameCenterClass.h"
 
 
 
@@ -31,6 +32,7 @@
 // -----------------------------------------------------------------------
 
 @implementation IntroScene
+@synthesize leaderboard;
 
 // -----------------------------------------------------------------------
 #pragma mark - Create & Destroy
@@ -276,11 +278,6 @@
     
     
     // ------------------------> creation of the maze itself <-------------------------------- //
-    // wall coming down right before the end //
-
-    
-    
-    
     // wall protruding out of the dividing wall
     for(int l = 1; l < 4; l++){
         
@@ -1044,7 +1041,7 @@
     
     int heartsScore = score * 500;
     int timeScore = timeIncrease * 10;
-    int totalScore = heartsScore - timeScore + enemyDeathFinalScore;
+    totalScore = heartsScore - timeScore + enemyDeathFinalScore;
     
     if(totalScore < 0){
         totalScore = 0;
@@ -1057,7 +1054,6 @@
     gameScoreLabel.position = ccp((scoreBox.position.x), (scoreBox.contentSize.height / 2));
     [gameScoreLabel setZOrder:4];
     [scoreBox addChild:gameScoreLabel];
-    
     
     CCSprite *goalBoxSprite = [CCSprite spriteWithImageNamed:@"tutorial_done_box.png"];
     goalBoxSprite.anchorPoint = ccp(0.5f, 0.5f);
@@ -1072,6 +1068,8 @@
     
     [self addChild:goalBoxLayout];
     
+    [self sendScoreToGameCenter];
+    
     // display the Credits after 5 seconds //
     [self performSelector:@selector(displayCreditsAfterWin) withObject:nil afterDelay:5.0f];
     
@@ -1082,6 +1080,37 @@
     
     [[CCDirector sharedDirector] replaceScene:[CreditsScene scene]
                                withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionUp duration:1.0f]];
+}
+
+
+// method that sends info to the game center //
+-(void)sendScoreToGameCenter{
+    
+    // getting the available leaderboards //
+    [GKLeaderboard loadLeaderboardsWithCompletionHandler:^(NSArray *leaderboards, NSError *error) {
+        
+        self.leaderboard = leaderboards;
+        
+        GKScore *scoreReport = [[GKScore alloc] initWithLeaderboardIdentifier:[leaderboard[0] identifier]];
+        scoreReport.value = totalScore;
+        scoreReport.context = 0;
+        
+        
+        NSArray *scoresArray = @[scoreReport];
+        [GKScore reportScores:scoresArray withCompletionHandler:^(NSError *error) {
+            
+            if(!(error)){
+                
+                NSLog(@"Submit success");
+                
+            }else{
+                
+                NSLog(@"Error %@", error);
+            }
+            
+        } ];
+        
+    }];
     
 }
 

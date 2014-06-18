@@ -8,13 +8,19 @@
 
 #import "CCScene.h"
 #import "cocos2d.h"
+#import "GameCenterClass.h"
+#import <GameKit/GameKit.h>
 
-@interface MainMenuScene : CCScene
+@interface MainMenuScene : CCScene<GKGameCenterControllerDelegate>
 {
     int xBounds;
     int yBounds;
     
     CCLayoutBox *layoutBox;
+    
+    GameCenterClass *newGameCenterClass;
+    GKGameCenterViewController *newGameCenterView;
+    
 }
 
 +(MainMenuScene *)scene;

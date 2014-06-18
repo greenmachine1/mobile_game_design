@@ -10,6 +10,9 @@
 #import "AppDelegate.h"
 #import "IntroScene.h"
 #import "SplashScreen.h"
+#import "GameCenterClass.h"
+#import <GameKit/GameKit.h>
+
 
 
 @implementation AppDelegate
@@ -43,6 +46,19 @@
 		// Make iPad's act like they run at a 2x content scale. (iPad retina 4x)
 //		CCSetupTabletScale2X: @(YES),
 	}];
+    
+    
+    
+    
+    
+    // singleton of the game center login so I can use it where I need it //
+    newGameCenterClass = [GameCenterClass sharedGameCenter];
+
+    
+    
+    
+    
+    
 	
 	return YES;
 }

@@ -12,6 +12,9 @@
 #import "IntroScene.h"
 #import "CreditsScene.h"
 #import "GamePlayTutorialScene.h"
+#import "GameCenterClass.h"
+#import <GameKit/GameKit.h>
+
 
 
 @implementation MainMenuScene
@@ -31,8 +34,8 @@
         
         xBounds = self.contentSize.width;
         yBounds = self.contentSize.height;
-        
-        
+    
+    
         // setting the background color //
         CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.1 green:0.4 blue:0.5 alpha:1.0]];
         [self addChild:background];
@@ -62,9 +65,15 @@
         [creditsButton setTarget:self selector:@selector(gameCredits)];
         creditsButton.position = ccp(menuBoxSprite.contentSize.width / 2, (menuBoxSprite.contentSize.height / 2) - 50.0f);
         
+        CCButton *gameCenterButton = [CCButton buttonWithTitle:@"Game Center" fontName:@"Papyrus" fontSize:25.0f];
+        [gameCenterButton setTarget:self selector:@selector(gameCenter)];
+        gameCenterButton.position = ccp(menuBoxSprite.contentSize.width / 2,(menuBoxSprite.contentSize.height / 2) - 90.0f);
+        
+        
         
         
         // adding the buttons as children to the box sprite //
+        [menuBoxSprite addChild:gameCenterButton];
         [menuBoxSprite addChild:creditsButton];
         [menuBoxSprite addChild:gamePlayTutorialButton];
         [menuBoxSprite addChild:playGameButton];
@@ -109,6 +118,33 @@
     
     [[CCDirector sharedDirector] replaceScene:[CreditsScene scene]
                                withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionUp duration:1.0f]];
+    
+}
+
+
+// goes to the game center info //
+-(void)gameCenter{
+
+    newGameCenterClass = [GameCenterClass sharedGameCenter];
+    newGameCenterView = [[GKGameCenterViewController alloc] init];
+    
+    // setting the delegate //
+    newGameCenterView.gameCenterDelegate = self;
+    
+    // checking to see if im logged in on gameCenter //
+    if(newGameCenterClass.isAuthorized == 1){
+        
+        // presenting the game center view //
+        [[CCDirector sharedDirector] presentModalViewController:newGameCenterView animated:true];
+        
+    }
+}
+
+
+// dismisses the game center view controller //
+- (void)gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController{
+    
+    [[CCDirector sharedDirector] dismissViewControllerAnimated:TRUE completion:nil];
     
 }
 

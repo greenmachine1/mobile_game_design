@@ -8,6 +8,14 @@
 // -----------------------------------------------------------------------
 
 #import "cocos2d.h"
+#import "GameCenterClass.h"
 
-@interface AppDelegate : CCAppDelegate
+
+@interface AppDelegate : CCAppDelegate{
+    
+    GameCenterClass *newGameCenterClass;
+    
+}
+
+
 @end

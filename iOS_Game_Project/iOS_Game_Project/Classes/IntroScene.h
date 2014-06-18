@@ -35,6 +35,7 @@
     
     int speed;
     int score;
+    int totalScore;
     
     CGPoint touchPoint;
     
@@ -85,11 +86,15 @@
     CCSprite *axeSprite;
     CCLabelTTF *amountOfAxesLabel;
     
+    NSArray *leaderboard;
+    
 }
 
 
 
 +(IntroScene *)sceneCameFromTutorial:(BOOL)yesOrNo;
 - (id)initWithTutorialYesOrNo:(BOOL)yesOrNo;
+
+@property (nonatomic, strong)NSArray *leaderboard;
 
 @end

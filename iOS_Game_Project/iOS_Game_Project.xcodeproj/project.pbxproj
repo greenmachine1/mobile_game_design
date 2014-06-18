@@ -22,6 +22,7 @@
 		D6376B32192495AA00BFF544 /* EndBox.m in Sources */ = {isa = PBXBuildFile; fileRef = D6376B31192495AA00BFF544 /* EndBox.m */; };
 		D63E6DEB1921E33D007D962E /* Guy_Sprite_Object.m in Sources */ = {isa = PBXBuildFile; fileRef = D63E6DEA1921E33D007D962E /* Guy_Sprite_Object.m */; };
 		D63F0992193E9ED000AD88E8 /* MoveableBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = D63F0991193E9ED000AD88E8 /* MoveableBlock.m */; };
+		D65284211950E89600B868FD /* GameCenterClass.m in Sources */ = {isa = PBXBuildFile; fileRef = D65284201950E89600B868FD /* GameCenterClass.m */; };
 		D652D5FB194AD29C0012B5C1 /* Destroy_sprite.png in Resources */ = {isa = PBXBuildFile; fileRef = D652D5FA194AD29C0012B5C1 /* Destroy_sprite.png */; };
 		D65674841918979A003CC6E9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D65674831918979A003CC6E9 /* QuartzCore.framework */; };
 		D65674861918979A003CC6E9 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D65674851918979A003CC6E9 /* OpenGLES.framework */; };
@@ -250,6 +251,7 @@
 		D6B7779F1946878400939E42 /* Options_background.png in Resources */ = {isa = PBXBuildFile; fileRef = D6B7779E1946878400939E42 /* Options_background.png */; };
 		D6CEDB731935C9D200377347 /* tutorial_done_box.png in Resources */ = {isa = PBXBuildFile; fileRef = D6CEDB721935C9D200377347 /* tutorial_done_box.png */; };
 		D6CEDB751935D67F00377347 /* Splash_screen.png in Resources */ = {isa = PBXBuildFile; fileRef = D6CEDB741935D67F00377347 /* Splash_screen.png */; };
+		D6D813A6194F961A001552E0 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6D813A5194F961A001552E0 /* GameKit.framework */; };
 		D6DDBD3B19412906001293D2 /* Block_movable.png in Resources */ = {isa = PBXBuildFile; fileRef = D6DDBD3A19412906001293D2 /* Block_movable.png */; };
 		D6EC7E851931DE9900690E86 /* MainMenuScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D6EC7E841931DE9900690E86 /* MainMenuScene.m */; };
 		D6EECBDA192D6095008D6EF0 /* healthHeartSprite.png in Resources */ = {isa = PBXBuildFile; fileRef = D6EECBD9192D6095008D6EF0 /* healthHeartSprite.png */; };
@@ -293,6 +295,8 @@
 		D63E6DEA1921E33D007D962E /* Guy_Sprite_Object.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Guy_Sprite_Object.m; sourceTree = "<group>"; };
 		D63F0990193E9ED000AD88E8 /* MoveableBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoveableBlock.h; sourceTree = "<group>"; };
 		D63F0991193E9ED000AD88E8 /* MoveableBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoveableBlock.m; sourceTree = "<group>"; };
+		D652841F1950E89600B868FD /* GameCenterClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameCenterClass.h; sourceTree = "<group>"; };
+		D65284201950E89600B868FD /* GameCenterClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameCenterClass.m; sourceTree = "<group>"; };
 		D652D5FA194AD29C0012B5C1 /* Destroy_sprite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Destroy_sprite.png; sourceTree = "<group>"; };
 		D65674801918979A003CC6E9 /* iOS_Game_Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOS_Game_Project.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D65674831918979A003CC6E9 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -744,6 +748,7 @@
 		D6B7779E1946878400939E42 /* Options_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Options_background.png; sourceTree = "<group>"; };
 		D6CEDB721935C9D200377347 /* tutorial_done_box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tutorial_done_box.png; sourceTree = "<group>"; };
 		D6CEDB741935D67F00377347 /* Splash_screen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Splash_screen.png; sourceTree = "<group>"; };
+		D6D813A5194F961A001552E0 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		D6DDBD3A19412906001293D2 /* Block_movable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Block_movable.png; sourceTree = "<group>"; };
 		D6EC7E831931DE9900690E86 /* MainMenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuScene.h; sourceTree = "<group>"; };
 		D6EC7E841931DE9900690E86 /* MainMenuScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuScene.m; sourceTree = "<group>"; };
@@ -760,6 +765,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D6D813A6194F961A001552E0 /* GameKit.framework in Frameworks */,
 				D6AC44E3192E00F000B842FB /* SpriteKit.framework in Frameworks */,
 				D656749A1918979A003CC6E9 /* libObjectiveChipmunk.a in Frameworks */,
 				D65674881918979A003CC6E9 /* OpenAL.framework in Frameworks */,
@@ -798,6 +804,7 @@
 		D65674821918979A003CC6E9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D6D813A5194F961A001552E0 /* GameKit.framework */,
 				D6AC44E2192E00F000B842FB /* SpriteKit.framework */,
 				D65674831918979A003CC6E9 /* QuartzCore.framework */,
 				D65674851918979A003CC6E9 /* OpenGLES.framework */,
@@ -1676,6 +1683,8 @@
 				D6D813A2194F9237001552E0 /* Scenes */,
 				D656772B1918979C003CC6E9 /* AppDelegate.h */,
 				D656772C1918979C003CC6E9 /* AppDelegate.m */,
+				D652841F1950E89600B868FD /* GameCenterClass.h */,
+				D65284201950E89600B868FD /* GameCenterClass.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -1783,6 +1792,11 @@
 			attributes = {
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Cory Green";
+				TargetAttributes = {
+					D656747F1918979A003CC6E9 = {
+						DevelopmentTeam = YM794S99T5;
+					};
+				};
 			};
 			buildConfigurationList = D656747B1918979A003CC6E9 /* Build configuration list for PBXProject "iOS_Game_Project" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1964,6 +1978,7 @@
 				D65675871918979B003CC6E9 /* CCSpriteFrameCache.m in Sources */,
 				D62E782119340DAD000FE70C /* CreditsScene.m in Sources */,
 				D65676461918979C003CC6E9 /* mach_timing.c in Sources */,
+				D65284211950E89600B868FD /* GameCenterClass.m in Sources */,
 				D656762A1918979B003CC6E9 /* ALListener.m in Sources */,
 				D65675031918979A003CC6E9 /* ccFPSImages.m in Sources */,
 				D65675DA1918979B003CC6E9 /* ccUtils.c in Sources */,
@@ -2157,6 +2172,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2173,6 +2190,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2182,6 +2200,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iOS_Game_Project/Supporting Files/Prefix.pch";
@@ -2197,6 +2217,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};
