@@ -111,6 +111,10 @@
     }
     
     
+    newScoreClass = [ScoreClass sharedInstance];
+    newScoreClass.highScoreModify = 10;
+    NSLog(@"high score %i", newScoreClass.highScoreModify);
+    
     
 
 	return self;

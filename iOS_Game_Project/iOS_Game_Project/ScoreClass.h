@@ -10,12 +10,14 @@
 
 @interface ScoreClass : NSObject{
     
-
-    
+    int highScore;
+    int amountOfScores;
 }
 
 
 +(id)sharedInstance;
 
+@property (nonatomic)int highScoreModify;
+@property (nonatomic)int amountOfScoresModify;
 
 @end

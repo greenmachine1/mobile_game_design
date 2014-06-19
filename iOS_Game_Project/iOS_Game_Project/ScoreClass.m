@@ -9,7 +9,7 @@
 #import "ScoreClass.h"
 
 @implementation ScoreClass
-
+@synthesize highScoreModify, amountOfScoresModify;
 
 +(id)sharedInstance{
     
@@ -25,17 +25,14 @@
     
     if(self = [super init]){
         
-
+        highScore = 0;
+        amountOfScores = 6;
+        
+        amountOfScoresModify = amountOfScores;
+        highScore = highScoreModify;
         
     }
     return self;
 }
-
-
-
-
-
-
-
 
 @end

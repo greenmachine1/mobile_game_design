@@ -23,6 +23,9 @@
         xBounds = self.contentSize.width;
         yBounds = self.contentSize.height;
         
+        newScoreClass = [ScoreClass sharedInstance];
+        NSLog(@"%i", newScoreClass.amountOfScoresModify);
+        
         // setting the background color //
         CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.1 green:0.4 blue:0.5 alpha:1.0]];
         [self addChild:background];
@@ -44,6 +47,18 @@
         leaderBoardLabel.anchorPoint = ccp(0.5f, 0.5f);
         leaderBoardLabel.position = ccp(layoutBoxSprite.position.x, layoutBoxSprite.contentSize.height - 40.0f);
         [layoutBoxSprite addChild:leaderBoardLabel z:2];
+        
+        
+        
+        // creating a list of scores //
+        for(int i = 1; i < newScoreClass.amountOfScoresModify; i++){
+            
+            CCLabelTTF *scoresLabel = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%i Score", i] fontName:@"Chalkduster" fontSize:20.0f];
+            scoresLabel.anchorPoint = ccp(0.5f, 0.5f);
+            scoresLabel.position = ccp(layoutBoxSprite.position.x, (layoutBoxSprite.contentSize.height - 80) - (30 * i));
+            [layoutBoxSprite addChild:scoresLabel];
+            
+        }
         
         
         

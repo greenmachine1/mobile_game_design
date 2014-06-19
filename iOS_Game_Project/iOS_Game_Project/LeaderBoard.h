@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "cocos2d-ui.h"
 #import "cocos2d.h"
+#import "ScoreClass.h"
 
 @interface LeaderBoard : CCScene
 {
@@ -16,6 +17,7 @@
     int yBounds;
     
     CCLayoutBox *mainLayoutBox;
+    ScoreClass *newScoreClass;
 }
 
 +(LeaderBoard *)scene;
