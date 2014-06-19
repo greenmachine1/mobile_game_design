@@ -110,10 +110,10 @@
         
     }
     
-    
+    // setting up instances of my singletons //
     newScoreClass = [ScoreClass sharedInstance];
-    newScoreClass.highScoreModify = 10;
-    NSLog(@"high score %i", newScoreClass.highScoreModify);
+    newGameCenterClass = [GameCenterClass sharedGameCenter];
+
     
     
 
@@ -1016,7 +1016,7 @@
 
 
 
-
+// ---------------------- > End Game Goal < ----------------------- //
 -(void)displayGoal{
 
     [startTimer invalidate];
@@ -1047,13 +1047,6 @@
     int enemyDeathFinalScore = 500 * enemyDeath;
     
     
-    
-    
-    
-    
-    
-    
-    
     // setting the score info //
     int heartsScore = score * 500;
     int timeScore = timeIncrease * 10;
@@ -1062,6 +1055,15 @@
 
     if(totalScore < 0){
         totalScore = 0;
+    }
+    
+    
+    // keeping track of score inside the Scoreclass //
+    if(newScoreClass.highScoreModify < totalScore){
+        
+        NSLog(@"You scored more than the last score!");
+        newScoreClass.highScoreModify = totalScore;
+        NSLog(@"score %i", newScoreClass.highScoreModify);
     }
     
 
@@ -1094,7 +1096,12 @@
     
     [self addChild:goalBoxLayout];
     
-    [self sendScoreToGameCenter];
+    
+    // checking to make sure the user is logged into the game center //
+    if(newGameCenterClass.isAuthorized == true){
+
+        [self sendScoreToGameCenter];
+    }
     
     // display the Credits after 5 seconds //
     [self performSelector:@selector(displayCreditsAfterWin) withObject:nil afterDelay:5.0f];

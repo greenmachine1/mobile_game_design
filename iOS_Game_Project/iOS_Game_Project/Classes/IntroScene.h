@@ -18,6 +18,7 @@
 #import "DPad.h"
 #import "Breakable_Block.h"
 #import "ScoreClass.h"
+#import "GameCenterClass.h"
 
 
 /**
@@ -90,6 +91,7 @@
     // name and score of top scores //
     NSMutableDictionary *scoreArray;
     ScoreClass *newScoreClass;
+    GameCenterClass *newGameCenterClass;
     
 }
 
