@@ -1055,23 +1055,7 @@
     int timeScore = timeIncrease * 10;
     totalScore = heartsScore - timeScore + enemyDeathFinalScore;
     
-    
-    // this will get the scores set as well as the persons name //
-    /*
-    [scoreArray setObject:[NSNumber numberWithInt:totalScore] forKey:@"Cory"];
-    
-    for(NSString *names in [scoreArray allValues]){
-        
-        NSLog(@"score for Cory %@", names );
-        
-    }
-    */
-    
-    
-    
-    
-    
-    
+
     if(totalScore < 0){
         totalScore = 0;
     }
@@ -1102,24 +1086,6 @@
     userNameInput.anchorPoint = ccp(0.5f, 0.5f);
     userNameInput.position = ccp(scoreBox.position.x, (scoreBox.contentSize.height / 2) - 40);
     [goalBoxLayout addChild:userNameInput z:4];
-    
-    
-    
-    
-    UITextField *userName = [[UITextField alloc] initWithFrame:CGRectMake(gameOverLabel.position.x, gameOverLabel.position.y + 40, 100.0f, 30.0f)];
-    
-    userName.delegate = self;
-    userName.textAlignment = UITextAlignmentCenter;
-    userName.placeholder = @"Hello!";
-    
-    [[[CCDirector sharedDirector] view] addSubview:userName];
-    
-     
-
-    
-
-    
-    
     
     
     [self addChild:goalBoxLayout];

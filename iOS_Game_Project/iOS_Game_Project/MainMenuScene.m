@@ -13,6 +13,7 @@
 #import "CreditsScene.h"
 #import "GamePlayTutorialScene.h"
 #import "GameCenterClass.h"
+#import "LeaderBoard.h"
 #import <GameKit/GameKit.h>
 
 
@@ -55,19 +56,19 @@
         // creation of the buttons
         CCButton *playGameButton = [CCButton buttonWithTitle:@"Play Game!" fontName:@"Papyrus" fontSize:25.0f];
         [playGameButton setTarget:self selector:@selector(playGame)];
-        playGameButton.position = ccp(menuBoxSprite.contentSize.width / 2, (menuBoxSprite.contentSize.height / 2) + 50.0f);
+        playGameButton.position = ccp(menuBoxSprite.contentSize.width / 2, (menuBoxSprite.contentSize.height / 2) + 60.0f);
         
         CCButton *gamePlayTutorialButton = [CCButton buttonWithTitle:@"Game Play Tutorial!" fontName:@"Papyrus" fontSize:25.0f];
         [gamePlayTutorialButton setTarget:self selector:@selector(gamePlayTutorial)];
-        gamePlayTutorialButton.position = ccp(menuBoxSprite.contentSize.width / 2, menuBoxSprite.contentSize.height / 2);
+        gamePlayTutorialButton.position = ccp(menuBoxSprite.contentSize.width / 2, (menuBoxSprite.contentSize.height / 2) + 20.0f);
         
         CCButton *creditsButton = [CCButton buttonWithTitle:@"Credits!" fontName:@"Papyrus" fontSize:25.0f];
         [creditsButton setTarget:self selector:@selector(gameCredits)];
-        creditsButton.position = ccp(menuBoxSprite.contentSize.width / 2, (menuBoxSprite.contentSize.height / 2) - 50.0f);
+        creditsButton.position = ccp(menuBoxSprite.contentSize.width / 2, (menuBoxSprite.contentSize.height / 2) - 20.0f);
         
         CCButton *gameCenterButton = [CCButton buttonWithTitle:@"Game Center" fontName:@"Papyrus" fontSize:25.0f];
         [gameCenterButton setTarget:self selector:@selector(gameCenter)];
-        gameCenterButton.position = ccp(menuBoxSprite.contentSize.width / 2,(menuBoxSprite.contentSize.height / 2) - 90.0f);
+        gameCenterButton.position = ccp(menuBoxSprite.contentSize.width / 2,(menuBoxSprite.contentSize.height / 2) - 60.0f);
         
         
         
@@ -137,8 +138,16 @@
         // presenting the game center view //
         [[CCDirector sharedDirector] presentModalViewController:newGameCenterView animated:true];
         
+    // need to be taking the user to the local leader board //
+    }else{
+        
+        [[CCDirector sharedDirector] replaceScene:[LeaderBoard scene] withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionUp duration:1.0f]];
+        
+        
     }
 }
+
+
 
 
 // dismisses the game center view controller //
