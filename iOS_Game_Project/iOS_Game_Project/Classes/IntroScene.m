@@ -1127,7 +1127,7 @@
     [self sendScoreToGameCenter];
     
     // display the Credits after 5 seconds //
-    //[self performSelector:@selector(displayCreditsAfterWin) withObject:nil afterDelay:5.0f];
+    [self performSelector:@selector(displayCreditsAfterWin) withObject:nil afterDelay:5.0f];
     
 }
 
