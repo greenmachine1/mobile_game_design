@@ -10,14 +10,12 @@
 
 @interface ScoreClass : NSObject{
     
-    NSUserDefaults *userDefaults;
-    NSMutableDictionary *initialScoreDictionary;
-    NSMutableDictionary *returnDictionary;
+
     
 }
 
 
 +(id)sharedInstance;
--(void)inputNewScore:(NSString *)name score:(int)score;
--(NSDictionary *)returnPlayerNameAndScores;
+
+
 @end

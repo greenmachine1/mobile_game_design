@@ -87,7 +87,8 @@
     //   adding the background color to the scene   //
     [self addChild:background];
     
-    
+    // scores array //
+    scoreArray = [[NSMutableDictionary alloc] init];
     
     // creating the guy //
     newGuySprite = [Guy_Sprite_Object createGuySpriteWithLocation:ccp(xBounds - 64, yBounds / 2)];
@@ -109,20 +110,7 @@
         
     }
     
-    // creating an instance of the score class used to keep //
-    // track of multiple scores //
-    newScoreClass = [ScoreClass sharedInstance];
     
-    /*
-    for(int i = 0; i < 5; i++){
-        
-        [newScoreClass inputNewScore:[NSString stringWithFormat:@"%i", i] score:500];
-    }
-    */
-    
-    [newScoreClass inputNewScore:@"Grea" score:3];
-    
-    NSLog(@"The dictionary inside %@", [newScoreClass returnPlayerNameAndScores]);
     
 
 	return self;
@@ -1054,13 +1042,41 @@
     // the total is hearts - time
     int enemyDeathFinalScore = 500 * enemyDeath;
     
+    
+    
+    
+    
+    
+    
+    
+    
+    // setting the score info //
     int heartsScore = score * 500;
     int timeScore = timeIncrease * 10;
     totalScore = heartsScore - timeScore + enemyDeathFinalScore;
     
+    
+    // this will get the scores set as well as the persons name //
+    /*
+    [scoreArray setObject:[NSNumber numberWithInt:totalScore] forKey:@"Cory"];
+    
+    for(NSString *names in [scoreArray allValues]){
+        
+        NSLog(@"score for Cory %@", names );
+        
+    }
+    */
+    
+    
+    
+    
+    
+    
     if(totalScore < 0){
         totalScore = 0;
     }
+    
+
     
     NSString *finalScore = [NSString stringWithFormat:@"Final Score (Hearts x Time) = %i", totalScore];
     
@@ -1081,12 +1097,37 @@
     gameOverLabel.position = ccp((goalBoxSprite.contentSize.width / 2), (goalBoxSprite.contentSize.height / 2));
     [goalBoxSprite addChild:gameOverLabel];
     
+    
+    CCSprite *userNameInput = [CCSprite spriteWithImageNamed:@"tutorial_done_box.png"];
+    userNameInput.anchorPoint = ccp(0.5f, 0.5f);
+    userNameInput.position = ccp(scoreBox.position.x, (scoreBox.contentSize.height / 2) - 40);
+    [goalBoxLayout addChild:userNameInput z:4];
+    
+    
+    
+    
+    UITextField *userName = [[UITextField alloc] initWithFrame:CGRectMake(gameOverLabel.position.x, gameOverLabel.position.y + 40, 100.0f, 30.0f)];
+    
+    userName.delegate = self;
+    userName.textAlignment = UITextAlignmentCenter;
+    userName.placeholder = @"Hello!";
+    
+    [[[CCDirector sharedDirector] view] addSubview:userName];
+    
+     
+
+    
+
+    
+    
+    
+    
     [self addChild:goalBoxLayout];
     
     [self sendScoreToGameCenter];
     
     // display the Credits after 5 seconds //
-    [self performSelector:@selector(displayCreditsAfterWin) withObject:nil afterDelay:5.0f];
+    //[self performSelector:@selector(displayCreditsAfterWin) withObject:nil afterDelay:5.0f];
     
 }
 

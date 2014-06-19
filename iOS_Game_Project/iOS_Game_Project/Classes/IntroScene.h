@@ -26,7 +26,7 @@
  *  Main usage for CCLayer now, is to make colored backgrounds (rectangles)
  *
  */
-@interface IntroScene : CCScene{
+@interface IntroScene : CCScene<UITextFieldDelegate>{
     
     // basic elements //
     OALSimpleAudio *playSound;
@@ -87,7 +87,8 @@
     CCSprite *axeSprite;
     CCLabelTTF *amountOfAxesLabel;
     
-    NSArray *leaderboard;
+    // name and score of top scores //
+    NSMutableDictionary *scoreArray;
     ScoreClass *newScoreClass;
     
 }
