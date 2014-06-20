@@ -114,6 +114,11 @@
     newScoreClass = [ScoreClass sharedInstance];
     newGameCenterClass = [GameCenterClass sharedGameCenter];
 
+
+    //[newScoreClass setHighScore:1000];
+    NSLog(@"returned high score %@", [newScoreClass returnhighScore]);
+    
+    
     
     
 
@@ -1058,13 +1063,9 @@
     }
     
     
-    // keeping track of score inside the Scoreclass //
-    if(newScoreClass.highScoreModify < totalScore){
-        
-        NSLog(@"You scored more than the last score!");
-        newScoreClass.highScoreModify = totalScore;
-        NSLog(@"score %i", newScoreClass.highScoreModify);
-    }
+    
+    
+    
     
 
     

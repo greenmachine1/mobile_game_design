@@ -7,6 +7,7 @@
 //
 
 #import "LeaderBoard.h"
+#import "MainMenuScene.h"
 
 @implementation LeaderBoard
 
@@ -55,12 +56,18 @@
             
             CCLabelTTF *scoresLabel = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%i Score", i] fontName:@"Chalkduster" fontSize:20.0f];
             scoresLabel.anchorPoint = ccp(0.5f, 0.5f);
-            scoresLabel.position = ccp(layoutBoxSprite.position.x, (layoutBoxSprite.contentSize.height - 80) - (30 * i));
+            scoresLabel.position = ccp(layoutBoxSprite.position.x, (layoutBoxSprite.contentSize.height - 40.0f) - (30 * i));
             [layoutBoxSprite addChild:scoresLabel];
             
         }
         
         
+        CCButton *backButton = [CCButton buttonWithTitle:@"Done!" fontName:@"Chalkduster" fontSize:30.0f];
+        backButton.anchorPoint = ccp(0.5f, 0.5f);
+        backButton.position = ccp(layoutBoxSprite.position.x, (layoutBoxSprite.contentSize.height - 225.0f));
+        backButton.color = [CCColor redColor];
+        [backButton setTarget:self selector:@selector(onBack)];
+        [layoutBoxSprite addChild:backButton];
         
         
         [self addChild:mainLayoutBox];
@@ -68,6 +75,14 @@
         
     }
     return self;
+    
+}
+
+// back to the main menu //
+-(void)onBack{
+    
+    [[CCDirector sharedDirector] replaceScene:[MainMenuScene scene]
+                               withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionUp duration:1.0f]];
     
 }
 
