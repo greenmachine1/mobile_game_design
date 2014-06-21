@@ -26,10 +26,11 @@
     if(self = [super init]){
         
         amountOfScores = 6;
-        
         amountOfScoresModify = amountOfScores;
-        
         nameOfUser = @"";
+        nameAndScoreOfUser = [[NSMutableDictionary alloc] init];
+        
+        
         
     }
     return self;
@@ -53,6 +54,33 @@
 -(NSNumber *)returnhighScore{
     
     return[[NSUserDefaults standardUserDefaults] objectForKey:@"highScore"];
+}
+
+
+
+// setting the name and score of the user //
+-(void)setNameAndScoreOfUser:(NSString *)name andScore:(int)score{
+    
+    // setting an entry //
+    [nameAndScoreOfUser setObject:[NSNumber numberWithInt:score] forKey:name];
+    
+    
+}
+
+
+// returning the entire dictionary //
+-(NSDictionary *)returnDictionaryOfNameAndScores{
+    
+    return nameAndScoreOfUser;
+    
+}
+
+
+
+-(int)getAmountOfPlayers{
+    
+    return (int)nameAndScoreOfUser.count;
+    
 }
 
 

@@ -51,15 +51,27 @@
         
         
         
+        
+        
+        NSLog(@"amount of players %i", [newScoreClass getAmountOfPlayers]);
+        
         // creating a list of scores //
-        for(int i = 1; i < newScoreClass.amountOfScoresModify; i++){
+        for(int i = 0; i < [newScoreClass getAmountOfPlayers]; i++){
             
-            CCLabelTTF *scoresLabel = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%i Score", i] fontName:@"Chalkduster" fontSize:20.0f];
+            CCLabelTTF *scoresLabel = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%i Score", i + 1] fontName:@"Chalkduster" fontSize:20.0f];
             scoresLabel.anchorPoint = ccp(0.5f, 0.5f);
-            scoresLabel.position = ccp(layoutBoxSprite.position.x, (layoutBoxSprite.contentSize.height - 40.0f) - (30 * i));
+            scoresLabel.position = ccp(layoutBoxSprite.position.x, (layoutBoxSprite.contentSize.height - 40.0f) - (30 * (i + 1)));
             [layoutBoxSprite addChild:scoresLabel];
             
         }
+        
+        
+        NSLog(@"name and score of users %@", [newScoreClass returnDictionaryOfNameAndScores]);
+        
+        
+        
+        
+        
         
         
         CCButton *backButton = [CCButton buttonWithTitle:@"Done!" fontName:@"Chalkduster" fontSize:30.0f];

@@ -23,6 +23,7 @@
 #import "DPad.h"
 #import "GameCenterClass.h"
 #import "ScoreClass.h"
+#import "LeaderBoard.h"
 
 
 
@@ -1172,6 +1173,7 @@
     mainTextField.preferredSize = textSprite.contentSize;
     mainTextField.anchorPoint = ccp(0.5f, 0.5f);
     mainTextField.positionType = CCPositionTypeNormalized;
+    mainTextField.padding = 10.0f;
     mainTextField.position = ccp(0.5f, 0.6f);
     [mainTextField setTarget:self selector:@selector(onTextEntered)];
     
@@ -1184,7 +1186,17 @@
 // called when the return key is pressed on the keyboard
 -(void)onTextEntered{
     
-    NSLog(@"text %@", mainTextField.string);
+    
+    // setting the name of the user //
+    //newScoreClass.nameOfUser = mainTextField.string;
+    
+    // need to also be adding the score //
+    [newScoreClass setNameAndScoreOfUser:mainTextField.string andScore:totalScore];
+    
+    // will take the user to the leaderboard //
+    [[CCDirector sharedDirector] replaceScene:[LeaderBoard scene]
+                               withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionUp duration:1.0f]];
+    
     
 }
 
@@ -1257,7 +1269,7 @@
     [gameOverBoxSprite setZOrder:4];
     [gameOverLayoutBox addChild:gameOverBoxSprite];
     
-    CCLabelTTF *gameOverLabel = [CCLabelTTF labelWithString:@"Game Over!" fontName:@"Papyrus" fontSize:30.0f];
+    gameOverLabel = [CCLabelTTF labelWithString:@"Game Over!" fontName:@"Papyrus" fontSize:30.0f];
     gameOverLabel.anchorPoint = ccp(0.5f, 0.5f);
     gameOverLabel.position = ccp((gameOverBoxSprite.contentSize.width / 2), gameOverBoxSprite.position.y + 50.0f);
     [gameOverBoxSprite addChild:gameOverLabel];

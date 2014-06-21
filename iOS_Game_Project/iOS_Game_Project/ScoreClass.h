@@ -15,12 +15,17 @@
     int amountOfScores;
     
     NSString *nameOfUser;
+    
+    NSMutableDictionary *nameAndScoreOfUser;
 }
 
 
 +(id)sharedInstance;
 -(void)setHighScore:(int)score;
 -(NSNumber *)returnhighScore;
+-(int)getAmountOfPlayers;
+-(void)setNameAndScoreOfUser:(NSString *)name andScore:(int)score;
+-(NSDictionary *)returnDictionaryOfNameAndScores;
 
 
 @property (nonatomic)int amountOfScoresModify;
