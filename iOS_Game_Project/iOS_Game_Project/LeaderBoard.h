@@ -18,6 +18,8 @@
     
     CCLayoutBox *mainLayoutBox;
     ScoreClass *newScoreClass;
+    
+    NSMutableArray *nameArray;
 }
 
 +(LeaderBoard *)scene;

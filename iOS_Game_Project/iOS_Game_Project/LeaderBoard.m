@@ -27,6 +27,8 @@
         newScoreClass = [ScoreClass sharedInstance];
         NSLog(@"%i", newScoreClass.amountOfScoresModify);
         
+        nameArray = [[NSMutableArray alloc] init];
+        
         // setting the background color //
         CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.1 green:0.4 blue:0.5 alpha:1.0]];
         [self addChild:background];
@@ -51,26 +53,36 @@
         
         
         
-        
-        
-        NSLog(@"amount of players %i", [newScoreClass getAmountOfPlayers]);
-        
-        // creating a list of scores //
-        for(int i = 0; i < [newScoreClass getAmountOfPlayers]; i++){
+        // ------------------------- > persistant data of leader boar < --------------------------------- //
+        // loading all the names into an array so I can access them on an //
+        // integer basis //
+        for(NSString *names in [[NSUserDefaults standardUserDefaults] objectForKey:@"userDictionary"]){
             
-            CCLabelTTF *scoresLabel = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%i Score", i + 1] fontName:@"Chalkduster" fontSize:20.0f];
-            scoresLabel.anchorPoint = ccp(0.5f, 0.5f);
-            scoresLabel.position = ccp(layoutBoxSprite.position.x, (layoutBoxSprite.contentSize.height - 40.0f) - (30 * (i + 1)));
-            [layoutBoxSprite addChild:scoresLabel];
+            [nameArray addObject:names];
             
         }
         
+        // creating a list of scores //
+        for(int i = 0; i < nameArray.count; i++){
+            
+            
+            
+            // putting the name and score into a string for use //
+            NSString *tempNameAndScore = [[NSString alloc] initWithFormat:@"%@ %@", [nameArray objectAtIndex:i], [[[NSUserDefaults standardUserDefaults] objectForKey:@"userDictionary"] objectForKey:[nameArray objectAtIndex:i]]];
+            
         
-        NSLog(@"name and score of users %@", [newScoreClass returnDictionaryOfNameAndScores]);
+            // creating a label /
+            CCLabelTTF *scoresLabel = [CCLabelTTF labelWithString:tempNameAndScore fontName:@"Chalkduster" fontSize:20.0f];
+            scoresLabel.anchorPoint = ccp(0.5f, 0.5f);
+            scoresLabel.position = ccp(layoutBoxSprite.position.x, (layoutBoxSprite.contentSize.height - 40.0f) - (30 * (i + 1)));
+            [layoutBoxSprite addChild:scoresLabel];
+        }
+
         
         
-        
-        
+
+
+    
         
         
         

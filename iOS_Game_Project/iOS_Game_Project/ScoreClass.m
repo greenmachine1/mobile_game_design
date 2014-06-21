@@ -63,6 +63,8 @@
     
     // setting an entry //
     [nameAndScoreOfUser setObject:[NSNumber numberWithInt:score] forKey:name];
+    [[NSUserDefaults standardUserDefaults] setObject:nameAndScoreOfUser forKey:@"userDictionary"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     
     
 }
@@ -71,8 +73,8 @@
 // returning the entire dictionary //
 -(NSDictionary *)returnDictionaryOfNameAndScores{
     
-    return nameAndScoreOfUser;
-    
+    //return nameAndScoreOfUser;
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"userDictionary"];
 }
 
 
