@@ -78,10 +78,17 @@
 }
 
 
-
 -(int)getAmountOfPlayers{
     
     return (int)nameAndScoreOfUser.count;
+    
+}
+
+-(void)deleteTheScoreBoard{
+    
+    [nameAndScoreOfUser removeAllObjects];
+    [[NSUserDefaults standardUserDefaults] setObject:nameAndScoreOfUser forKey:@"userDictionary"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     
 }
 

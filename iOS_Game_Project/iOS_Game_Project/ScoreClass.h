@@ -26,6 +26,7 @@
 -(int)getAmountOfPlayers;
 -(void)setNameAndScoreOfUser:(NSString *)name andScore:(int)score;
 -(NSDictionary *)returnDictionaryOfNameAndScores;
+-(void)deleteTheScoreBoard;
 
 
 @property (nonatomic)int amountOfScoresModify;

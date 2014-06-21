@@ -18,6 +18,9 @@
     
     CCLayoutBox *mainLayoutBox;
     ScoreClass *newScoreClass;
+    CCSprite *layoutBoxSprite;
+    
+    CCLabelTTF *scoresLabel;
     
     NSMutableArray *nameArray;
 }
