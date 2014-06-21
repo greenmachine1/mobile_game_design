@@ -9,7 +9,7 @@
 #import "ScoreClass.h"
 
 @implementation ScoreClass
-@synthesize amountOfScoresModify;
+@synthesize amountOfScoresModify, nameOfUser;
 
 +(id)sharedInstance{
     
@@ -29,9 +29,7 @@
         
         amountOfScoresModify = amountOfScores;
         
-        NSLog(@"high score inside class %i", highScore);
-        
-        //[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:highScore] forKey:@"highScore"];
+        nameOfUser = @"";
         
     }
     return self;

@@ -13,6 +13,8 @@
     int highScore;
     
     int amountOfScores;
+    
+    NSString *nameOfUser;
 }
 
 
@@ -22,6 +24,7 @@
 
 
 @property (nonatomic)int amountOfScoresModify;
+@property (nonatomic, strong)NSString *nameOfUser;
 
 
 @end

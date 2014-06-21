@@ -88,10 +88,17 @@
     CCSprite *axeSprite;
     CCLabelTTF *amountOfAxesLabel;
     
-    // name and score of top scores //
-    NSMutableDictionary *scoreArray;
+
     ScoreClass *newScoreClass;
     GameCenterClass *newGameCenterClass;
+    
+    NSMutableDictionary *namesAndScores;
+    
+    CCLabelTTF *gameScoreLabel;
+    CCLabelTTF *gameOverLabel;
+    CCSprite *goalBoxSprite;
+    CCSprite *scoreBox;
+    CCLayoutBox *goalBoxLayout;
     
 }
 

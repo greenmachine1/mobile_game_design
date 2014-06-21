@@ -87,8 +87,6 @@
     //   adding the background color to the scene   //
     [self addChild:background];
     
-    // scores array //
-    scoreArray = [[NSMutableDictionary alloc] init];
     
     // creating the guy //
     newGuySprite = [Guy_Sprite_Object createGuySpriteWithLocation:ccp(xBounds - 64, yBounds / 2)];
@@ -115,8 +113,16 @@
     newGameCenterClass = [GameCenterClass sharedGameCenter];
 
 
-    //[newScoreClass setHighScore:1000];
+    //[newScoreClass setHighScore:10];
     NSLog(@"returned high score %@", [newScoreClass returnhighScore]);
+    
+    // initializing the name and score dictionary //
+    namesAndScores = [[NSMutableDictionary alloc] init];
+    
+    
+    
+    
+    
     
     
     
@@ -1028,19 +1034,22 @@
     
     [newGuySprite stopAllActions];
     
+
+    
+    
     // setting the background color to be a transparent black
     CCNodeColor *backgroundColor = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.6f]];
     [backgroundColor setZOrder:4];
     [self addChild:backgroundColor];
     
-    CCLayoutBox *goalBoxLayout = [[CCLayoutBox alloc] init];
+    goalBoxLayout = [[CCLayoutBox alloc] init];
     goalBoxLayout.anchorPoint = ccp(0.5f, 0.5f);
     goalBoxLayout.position = ccp(xBounds / 2, yBounds / 2);
     goalBoxLayout.direction = CCLayoutBoxDirectionVertical;
     [goalBoxLayout setZOrder:4];
     
     
-    CCSprite *scoreBox = [CCSprite spriteWithImageNamed:@"tutorial_done_box.png"];
+    scoreBox = [CCSprite spriteWithImageNamed:@"tutorial_done_box.png"];
     scoreBox.anchorPoint = ccp(0.5f, 0.5f);
     scoreBox.position = ccp((xBounds / 2), yBounds / 2);
     [scoreBox setZOrder:4];
@@ -1071,41 +1080,61 @@
     
     NSString *finalScore = [NSString stringWithFormat:@"Final Score (Hearts x Time) = %i", totalScore];
     
-    CCLabelTTF *gameScoreLabel = [CCLabelTTF labelWithString:finalScore fontName:@"Chalkduster" fontSize:12.0f];
+    gameScoreLabel = [CCLabelTTF labelWithString:finalScore fontName:@"Chalkduster" fontSize:12.0f];
     gameScoreLabel.anchorPoint = ccp(0.5f, 0.5f);
     gameScoreLabel.position = ccp((scoreBox.position.x), (scoreBox.contentSize.height / 2));
     [gameScoreLabel setZOrder:4];
     [scoreBox addChild:gameScoreLabel];
     
-    CCSprite *goalBoxSprite = [CCSprite spriteWithImageNamed:@"tutorial_done_box.png"];
+    goalBoxSprite = [CCSprite spriteWithImageNamed:@"tutorial_done_box.png"];
     goalBoxSprite.anchorPoint = ccp(0.5f, 0.5f);
     goalBoxSprite.position = ccp(xBounds / 2, yBounds / 2);
     [goalBoxSprite setZOrder:4];
     [goalBoxLayout addChild:goalBoxSprite];
     
-    CCLabelTTF *gameOverLabel = [CCLabelTTF labelWithString:@"Goal!!!!!" fontName:@"Chalkduster" fontSize:30.0f];
+    gameOverLabel = [CCLabelTTF labelWithString:@"Goal!!!!!" fontName:@"Chalkduster" fontSize:30.0f];
     gameOverLabel.anchorPoint = ccp(0.5f, 0.5f);
     gameOverLabel.position = ccp((goalBoxSprite.contentSize.width / 2), (goalBoxSprite.contentSize.height / 2));
     [goalBoxSprite addChild:gameOverLabel];
     
     
-    CCSprite *userNameInput = [CCSprite spriteWithImageNamed:@"tutorial_done_box.png"];
-    userNameInput.anchorPoint = ccp(0.5f, 0.5f);
-    userNameInput.position = ccp(scoreBox.position.x, (scoreBox.contentSize.height / 2) - 40);
-    [goalBoxLayout addChild:userNameInput z:4];
+    
     
     
     [self addChild:goalBoxLayout];
     
     
+    
+    
+    
+    // ---------------------- > local game center and local leaderboard < ---------------------- //
     // checking to make sure the user is logged into the game center //
     if(newGameCenterClass.isAuthorized == true){
 
         [self sendScoreToGameCenter];
+        
+        
+        
+    // if not connected to game center, user can upload the name and score //
+    // into the local leaderboard //
+    }else{
+        
+        if(namesAndScores.count == 0){
+            
+            NSLog(@"prompt user to enter in a name cause they won and this is currently the top local score");
+            
+            [self performSelector:@selector(askForUserName) withObject:nil afterDelay:3.0f];
+            
+    
+        }else{
+            
+            
+        }
+        
     }
     
     // display the Credits after 5 seconds //
-    [self performSelector:@selector(displayCreditsAfterWin) withObject:nil afterDelay:5.0f];
+    //[self performSelector:@selector(displayCreditsAfterWin) withObject:nil afterDelay:5.0f];
     
 }
 
@@ -1114,6 +1143,44 @@
     
     [[CCDirector sharedDirector] replaceScene:[CreditsScene scene]
                                withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionUp duration:1.0f]];
+}
+
+
+
+-(void)askForUserName{
+    
+    gameScoreLabel.visible = false;
+    gameOverLabel.visible = false;
+    goalBoxSprite.visible = false;
+    
+    
+    // replacement text prompting the user to enter their name //
+    CCLabelTTF *gameScoreLabelReplacement = [CCLabelTTF labelWithString:@"Please enter your name!" fontName:@"Chalkduster" fontSize:12.0f];
+    gameScoreLabelReplacement.anchorPoint = ccp(0.5f, 0.5f);
+    gameScoreLabelReplacement.position = ccp((scoreBox.position.x), (scoreBox.contentSize.height / 2));
+    [gameScoreLabelReplacement setZOrder:4];
+    [scoreBox addChild:gameScoreLabelReplacement];
+    
+    
+    NSLog(@"gameScore replacement label coords %@", NSStringFromCGPoint(gameScoreLabelReplacement.position));
+    
+    CCSprite *textSprite = [CCSprite spriteWithImageNamed:@"tutorial_done_box.png"];
+    CCTextField *mainTextField = [CCTextField textFieldWithSpriteFrame:[CCSpriteFrame frameWithImageNamed:@"tutorial_done_box.png"]];
+    
+    mainTextField.fontSize = 20.0f;
+    mainTextField.contentSize = CGSizeMake((scoreBox.contentSize.width), (scoreBox.contentSize.height));
+    mainTextField.preferredSize = textSprite.contentSize;
+    mainTextField.anchorPoint = ccp(0.5f, 0.5f);
+    mainTextField.positionType = CCPositionTypeNormalized;
+    mainTextField.position = ccp(0.5f, 0.6f);
+    [self addChild:mainTextField z:4];
+    
+    NSLog(@"textSprite coords %@", NSStringFromCGPoint(mainTextField.position));
+
+
+
+    
+    
 }
 
 
