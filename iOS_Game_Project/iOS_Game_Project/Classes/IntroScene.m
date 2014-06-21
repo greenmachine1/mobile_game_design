@@ -1162,10 +1162,10 @@
     [scoreBox addChild:gameScoreLabelReplacement];
     
     
-    NSLog(@"gameScore replacement label coords %@", NSStringFromCGPoint(gameScoreLabelReplacement.position));
     
     CCSprite *textSprite = [CCSprite spriteWithImageNamed:@"tutorial_done_box.png"];
-    CCTextField *mainTextField = [CCTextField textFieldWithSpriteFrame:[CCSpriteFrame frameWithImageNamed:@"tutorial_done_box.png"]];
+    mainTextField = [CCTextField textFieldWithSpriteFrame:[CCSpriteFrame frameWithImageNamed:@"tutorial_done_box.png"]];
+    
     
     mainTextField.fontSize = 20.0f;
     mainTextField.contentSize = CGSizeMake((scoreBox.contentSize.width), (scoreBox.contentSize.height));
@@ -1173,15 +1173,22 @@
     mainTextField.anchorPoint = ccp(0.5f, 0.5f);
     mainTextField.positionType = CCPositionTypeNormalized;
     mainTextField.position = ccp(0.5f, 0.6f);
+    [mainTextField setTarget:self selector:@selector(onTextEntered)];
+    
     [self addChild:mainTextField z:4];
     
-    NSLog(@"textSprite coords %@", NSStringFromCGPoint(mainTextField.position));
+
+}
 
 
-
+// called when the return key is pressed on the keyboard
+-(void)onTextEntered{
     
+    NSLog(@"text %@", mainTextField.string);
     
 }
+
+
 
 
 // method that sends info to the game center //

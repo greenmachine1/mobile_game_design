@@ -100,6 +100,8 @@
     CCSprite *scoreBox;
     CCLayoutBox *goalBoxLayout;
     
+    CCTextField *mainTextField;
+    
 }
 
 
