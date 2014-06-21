@@ -30,8 +30,6 @@
         nameOfUser = @"";
         nameAndScoreOfUser = [[NSMutableDictionary alloc] init];
         
-        
-        
     }
     return self;
 }

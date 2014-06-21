@@ -87,7 +87,7 @@
 -(void)persistantLeaderBoard{
     
     
-    // ------------------------- > persistant data of leader boar < --------------------------------- //
+    // ------------------------- > persistant data of leader board < --------------------------------- //
     // loading all the names into an array so I can access them on an //
     // integer basis //
     for(NSString *names in [[NSUserDefaults standardUserDefaults] objectForKey:@"userDictionary"]){
@@ -96,10 +96,18 @@
         
     }
     
+    // need to create a new array that holds the end result of sorting //
+    // also, i only want 5 total scores, so anything that is less than //
+    // the last score needs to be tossed //
+    
+
+    
+    
+    
+    
+    
     // creating a list of scores //
     for(int i = 0; i < nameArray.count; i++){
-        
-        
         
         // putting the name and score into a string for use //
         NSString *tempNameAndScore = [[NSString alloc] initWithFormat:@"%@ %@", [nameArray objectAtIndex:i], [[[NSUserDefaults standardUserDefaults] objectForKey:@"userDictionary"] objectForKey:[nameArray objectAtIndex:i]]];
