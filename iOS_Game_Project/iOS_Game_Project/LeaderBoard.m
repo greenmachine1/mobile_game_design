@@ -96,12 +96,54 @@
         
     }
     
-    // need to create a new array that holds the end result of sorting //
-    // also, i only want 5 total scores, so anything that is less than //
-    // the last score needs to be tossed //
+    
+    NSMutableArray *localScoreArray = [[NSMutableArray alloc] init];
+    for(NSNumber *score in [[[NSUserDefaults standardUserDefaults] objectForKey:@"userDictionary"] allValues]){
+        
+        [localScoreArray addObject:score];
+    }
     
     
+    NSArray *sortedNumbers = [localScoreArray sortedArrayUsingSelector:@selector(compare:)];
+    NSMutableArray *finalSortedNumbers = [[NSMutableArray alloc] init];
+    NSMutableArray *finalSortedNames = [[NSMutableArray alloc] init];
+    NSMutableArray *reversedFinalNames = [[NSMutableArray alloc] init];
     
+    // setting the score and name of the high scores //
+    for(int i = (int)sortedNumbers.count - 1; i >= 0; i--){
+        
+        NSString *scoreString = [NSString stringWithFormat:@"%@", sortedNumbers[i]];
+        [finalSortedNumbers addObject:scoreString];
+ 
+        
+    }
+    
+    NSMutableDictionary *userDictionary = [[NSUserDefaults standardUserDefaults] objectForKey:@"userDictionary"];
+    
+    for(NSString *namesDict in userDictionary){
+        
+        for(int i = 0; i < userDictionary.count; i++){
+            
+            NSLog(@"name and value %@ %@", [userDictionary objectForKey:namesDict], [finalSortedNumbers objectAtIndex:i]);
+            
+            NSString *numberReturned = [NSString stringWithFormat:@"%@", [finalSortedNumbers objectAtIndex:i]];
+            
+            NSString *stringReturnVersionOfDictionaryObject = [NSString stringWithFormat:@"%@", [userDictionary objectForKey:namesDict]];
+
+            
+            // comparing the object returned and the final sorted numbers //
+            if(([stringReturnVersionOfDictionaryObject isEqual:numberReturned]) == true){
+                
+                NSLog(@"name in here %@ and score %@", namesDict, [finalSortedNumbers objectAtIndex:i]);
+                
+                [finalSortedNames addObject:namesDict];
+                
+                [reversedFinalNames removeAllObjects];
+            }
+        }
+    }
+    
+
     
     
     
@@ -110,8 +152,8 @@
     for(int i = 0; i < nameArray.count; i++){
         
         // putting the name and score into a string for use //
-        NSString *tempNameAndScore = [[NSString alloc] initWithFormat:@"%@ %@", [nameArray objectAtIndex:i], [[[NSUserDefaults standardUserDefaults] objectForKey:@"userDictionary"] objectForKey:[nameArray objectAtIndex:i]]];
-        
+        // need to lign up the name and scores 
+        NSString *tempNameAndScore = [[NSString alloc] initWithFormat:@"%@ %@", [nameArray objectAtIndex:i], [finalSortedNumbers objectAtIndex:i] ];
         
         // creating a label /
         scoresLabel = [CCLabelTTF labelWithString:tempNameAndScore fontName:@"Chalkduster" fontSize:20.0f];
@@ -141,6 +183,7 @@
         [scoresLabel removeFromParentAndCleanup:true];
         
         [nameArray removeAllObjects];
+        
         [newScoreClass deleteTheScoreBoard];
         [self persistantLeaderBoard];
         
