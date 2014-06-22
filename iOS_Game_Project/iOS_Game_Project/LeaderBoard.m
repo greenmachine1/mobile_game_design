@@ -103,11 +103,10 @@
         [localScoreArray addObject:score];
     }
     
-    
+    // comparing the elements in the array //
     NSArray *sortedNumbers = [localScoreArray sortedArrayUsingSelector:@selector(compare:)];
+    
     NSMutableArray *finalSortedNumbers = [[NSMutableArray alloc] init];
-    NSMutableArray *finalSortedNames = [[NSMutableArray alloc] init];
-    NSMutableArray *reversedFinalNames = [[NSMutableArray alloc] init];
     
     // setting the score and name of the high scores //
     for(int i = (int)sortedNumbers.count - 1; i >= 0; i--){
@@ -118,30 +117,11 @@
         
     }
     
-    NSMutableDictionary *userDictionary = [[NSUserDefaults standardUserDefaults] objectForKey:@"userDictionary"];
+    NSLog(@"The ordered scores are %@", finalSortedNumbers);
     
-    for(NSString *namesDict in userDictionary){
-        
-        for(int i = 0; i < userDictionary.count; i++){
-            
-            NSLog(@"name and value %@ %@", [userDictionary objectForKey:namesDict], [finalSortedNumbers objectAtIndex:i]);
-            
-            NSString *numberReturned = [NSString stringWithFormat:@"%@", [finalSortedNumbers objectAtIndex:i]];
-            
-            NSString *stringReturnVersionOfDictionaryObject = [NSString stringWithFormat:@"%@", [userDictionary objectForKey:namesDict]];
+    
+    
 
-            
-            // comparing the object returned and the final sorted numbers //
-            if(([stringReturnVersionOfDictionaryObject isEqual:numberReturned]) == true){
-                
-                NSLog(@"name in here %@ and score %@", namesDict, [finalSortedNumbers objectAtIndex:i]);
-                
-                [finalSortedNames addObject:namesDict];
-                
-                [reversedFinalNames removeAllObjects];
-            }
-        }
-    }
     
 
     
