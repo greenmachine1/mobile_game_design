@@ -28,7 +28,7 @@
         amountOfScores = 6;
         amountOfScoresModify = amountOfScores;
         nameOfUser = @"";
-        nameAndScoreOfUser = [[NSMutableDictionary alloc] init];
+        nameAndScoreOfUser = [[NSMutableDictionary alloc] initWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:@"userDictionary"]];
         
     }
     return self;
