@@ -64,6 +64,8 @@
     [[NSUserDefaults standardUserDefaults] setObject:nameAndScoreOfUser forKey:@"userDictionary"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
+
+    
     
 }
 

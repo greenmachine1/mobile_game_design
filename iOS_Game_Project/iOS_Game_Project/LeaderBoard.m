@@ -114,6 +114,14 @@
 
         // saving it all to an array for the leaderboard //
         [finalNameAndSCores addObject:[NSString stringWithFormat:@"%@ %@", [temp lastObject], finalSortedNumbers[j]]];
+        
+        
+        if(finalNameAndSCores.count > 5){
+            
+            [finalNameAndSCores removeLastObject];
+            [localScoreArray removeLastObject];
+        }
+         
     }
     
 
