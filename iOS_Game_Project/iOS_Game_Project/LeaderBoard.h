@@ -22,7 +22,7 @@
     
     CCLabelTTF *scoresLabel;
     
-    NSMutableArray *nameArray;
+    //NSMutableArray *nameArray;
 }
 
 +(LeaderBoard *)scene;

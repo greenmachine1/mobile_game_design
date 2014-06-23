@@ -27,7 +27,7 @@
         newScoreClass = [ScoreClass sharedInstance];
         NSLog(@"%i", newScoreClass.amountOfScoresModify);
         
-        nameArray = [[NSMutableArray alloc] init];
+        //nameArray = [[NSMutableArray alloc] init];
         
         // setting the background color //
         CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.1 green:0.4 blue:0.5 alpha:1.0]];
@@ -83,22 +83,17 @@
     
 }
 
-
+// ------------------------- > persistant data of leader board < --------------------------------- //
 -(void)persistantLeaderBoard{
     
     
-    // ------------------------- > persistant data of leader board < --------------------------------- //
-    // loading all the names into an array so I can access them on an //
-    // integer basis //
-    for(NSString *names in [[NSUserDefaults standardUserDefaults] objectForKey:@"userDictionary"]){
-        
-        [nameArray addObject:names];
-        
-    }
-    
-    
+    // setting the local score array //
     NSMutableArray *localScoreArray = [[NSMutableArray alloc] init];
-    for(NSNumber *score in [[[NSUserDefaults standardUserDefaults] objectForKey:@"userDictionary"] allValues]){
+    NSMutableArray *finalSortedNumbers = [[NSMutableArray alloc] init];
+    NSMutableArray *finalNameAndSCores = [[NSMutableArray alloc] init];
+    NSMutableDictionary *userDictionary = [[NSUserDefaults standardUserDefaults] objectForKey:@"userDictionary"];
+    
+    for(NSNumber *score in [userDictionary allValues]){
         
         [localScoreArray addObject:score];
     }
@@ -106,34 +101,29 @@
     // comparing the elements in the array //
     NSArray *sortedNumbers = [localScoreArray sortedArrayUsingSelector:@selector(compare:)];
     
-    NSMutableArray *finalSortedNumbers = [[NSMutableArray alloc] init];
-    
-    // setting the score and name of the high scores //
+    // the sorted array is ascending so I reverse the array //
     for(int i = (int)sortedNumbers.count - 1; i >= 0; i--){
         
-        NSString *scoreString = [NSString stringWithFormat:@"%@", sortedNumbers[i]];
-        [finalSortedNumbers addObject:scoreString];
- 
+        [finalSortedNumbers addObject:sortedNumbers[i]];
+    }
+
+    // going through the dictionary and seing which value corresponds to the key //
+    for(int j = 0; j < finalSortedNumbers.count; j++){
         
+        NSArray *temp = [userDictionary allKeysForObject:[finalSortedNumbers objectAtIndex:j]];
+
+        // saving it all to an array for the leaderboard //
+        [finalNameAndSCores addObject:[NSString stringWithFormat:@"%@ %@", [temp lastObject], finalSortedNumbers[j]]];
     }
     
-    NSLog(@"The ordered scores are %@", finalSortedNumbers);
-    
-    
-    
 
     
-
-    
-    
-    
-    
-    // creating a list of scores //
-    for(int i = 0; i < nameArray.count; i++){
+    // -----------------> making of the score labels <-------------------- //
+    for(int i = 0; i < localScoreArray.count; i++){
         
         // putting the name and score into a string for use //
         // need to lign up the name and scores 
-        NSString *tempNameAndScore = [[NSString alloc] initWithFormat:@"%@ %@", [nameArray objectAtIndex:i], [finalSortedNumbers objectAtIndex:i] ];
+        NSString *tempNameAndScore = [[NSString alloc] initWithFormat:@"%@", finalNameAndSCores[i]];
         
         // creating a label /
         scoresLabel = [CCLabelTTF labelWithString:tempNameAndScore fontName:@"Chalkduster" fontSize:20.0f];
@@ -141,10 +131,8 @@
         scoresLabel.position = ccp(layoutBoxSprite.position.x, (layoutBoxSprite.contentSize.height - 40.0f) - (30 * (i + 1)));
         [layoutBoxSprite addChild:scoresLabel];
     }
-    
-    
-    
 }
+
 
 
 // going back to the main menu and deleting //
@@ -162,7 +150,7 @@
         
         [scoresLabel removeFromParentAndCleanup:true];
         
-        [nameArray removeAllObjects];
+        //[nameArray removeAllObjects];
         
         [newScoreClass deleteTheScoreBoard];
         [self persistantLeaderBoard];
