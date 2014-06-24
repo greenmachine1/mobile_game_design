@@ -21,6 +21,7 @@
     CCSprite *layoutBoxSprite;
     
     CCLabelTTF *scoresLabel;
+    CCButton *scoresButton;
     
     //NSMutableArray *nameArray;
 }

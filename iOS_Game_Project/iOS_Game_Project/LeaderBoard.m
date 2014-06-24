@@ -8,6 +8,7 @@
 
 #import "LeaderBoard.h"
 #import "MainMenuScene.h"
+#import "AchievementsScene.h"
 
 @implementation LeaderBoard
 
@@ -48,6 +49,7 @@
         // leader board label //
         CCLabelTTF *leaderBoardLabel = [CCLabelTTF labelWithString:@"High Scores" fontName:@"Chalkduster" fontSize:20.0f];
         leaderBoardLabel.anchorPoint = ccp(0.5f, 0.5f);
+        leaderBoardLabel.color = [CCColor redColor];
         leaderBoardLabel.position = ccp(layoutBoxSprite.position.x, layoutBoxSprite.contentSize.height - 40.0f);
         [layoutBoxSprite addChild:leaderBoardLabel z:2];
         
@@ -55,7 +57,6 @@
         
         // setting the leaderboard //
         [self persistantLeaderBoard];
-        
         
         
         CCButton *backButton = [CCButton buttonWithTitle:@"Done!" fontName:@"Chalkduster" fontSize:15.0f];
@@ -69,7 +70,7 @@
         
         CCButton *deleteScoresButton = [CCButton buttonWithTitle:@"Delete Scores!" fontName:@"Chalkduster" fontSize:15.0f];
         deleteScoresButton.anchorPoint = ccp(0.5f, 0.5f);
-        deleteScoresButton.position = ccp(layoutBoxSprite.position.x + ((layoutBoxSprite.contentSize.width / 2) /2), (layoutBoxSprite.contentSize.height - 225.0f));
+        deleteScoresButton.position = ccp(layoutBoxSprite.position.x + (((layoutBoxSprite.contentSize.width / 2) /2) - 30.0f), (layoutBoxSprite.contentSize.height - 225.0f));
         deleteScoresButton.name = @"delete";
         deleteScoresButton.color = [CCColor redColor];
         [deleteScoresButton setTarget:self selector:@selector(onBack:)];
@@ -107,13 +108,18 @@
         [finalSortedNumbers addObject:sortedNumbers[i]];
     }
 
+    
+    
+    
+    
     // going through the dictionary and seing which value corresponds to the key //
     for(int j = 0; j < finalSortedNumbers.count; j++){
         
-        NSArray *temp = [userDictionary allKeysForObject:[finalSortedNumbers objectAtIndex:j]];
+        // this holds all the names of the array //
+        NSArray *tempNames = [userDictionary allKeysForObject:[finalSortedNumbers objectAtIndex:j]];
 
         // saving it all to an array for the leaderboard //
-        [finalNameAndSCores addObject:[NSString stringWithFormat:@"%@ %@", [temp lastObject], finalSortedNumbers[j]]];
+        [finalNameAndSCores addObject:[NSString stringWithFormat:@"%@ %@", [tempNames lastObject], finalSortedNumbers[j]]];
         
         
         if(finalNameAndSCores.count > 5){
@@ -124,6 +130,8 @@
          
     }
     
+    
+    
 
     
     // -----------------> making of the score labels <-------------------- //
@@ -133,12 +141,29 @@
         // need to lign up the name and scores 
         NSString *tempNameAndScore = [[NSString alloc] initWithFormat:@"%@", finalNameAndSCores[i]];
         
-        // creating a label /
-        scoresLabel = [CCLabelTTF labelWithString:tempNameAndScore fontName:@"Chalkduster" fontSize:20.0f];
-        scoresLabel.anchorPoint = ccp(0.5f, 0.5f);
-        scoresLabel.position = ccp(layoutBoxSprite.position.x, (layoutBoxSprite.contentSize.height - 40.0f) - (30 * (i + 1)));
-        [layoutBoxSprite addChild:scoresLabel];
+        // creating a label //
+        // need to convert this to buttons so that I can take the user to the corresponding //
+        // achievement page //
+        scoresButton = [CCButton buttonWithTitle:tempNameAndScore fontName:@"Chalkduster" fontSize:20.0f];
+        scoresButton.anchorPoint = ccp(0.5f, 0.5f);
+        scoresButton.position = ccp(layoutBoxSprite.position.x, (layoutBoxSprite.contentSize.height - 40.0f) - (30 * (i + 1)));
+        scoresButton.name = tempNameAndScore;
+        [scoresButton setTarget:self selector:@selector(onScoreButton:)];
+        [layoutBoxSprite addChild:scoresButton];
+        
     }
+}
+
+
+-(void)onScoreButton:(id)sender{
+    
+    CCButton *button = (CCButton *)sender;
+    NSLog(@"button name %@", button.name);
+    
+    // passing the name of the person you wish to see achievements on to the next scene //
+    [[CCDirector sharedDirector] replaceScene:[AchievementsScene sceneWithName:button.name]
+                               withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionUp duration:1.0f]];
+    
 }
 
 
@@ -149,11 +174,12 @@
     
     CCButton *button = (CCButton *)sender;
     
+    // back button //
     if([button.name isEqualToString:@"back"]){
     
         [[CCDirector sharedDirector] replaceScene:[MainMenuScene scene]
                                    withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionUp duration:1.0f]];
-        
+    // delete the leaderboard button //
     }else if([button.name isEqualToString:@"delete"]){
         
         [scoresLabel removeFromParentAndCleanup:true];

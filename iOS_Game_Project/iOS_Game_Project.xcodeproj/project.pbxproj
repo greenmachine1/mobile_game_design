@@ -22,6 +22,8 @@
 		D6376B32192495AA00BFF544 /* EndBox.m in Sources */ = {isa = PBXBuildFile; fileRef = D6376B31192495AA00BFF544 /* EndBox.m */; };
 		D63E6DEB1921E33D007D962E /* Guy_Sprite_Object.m in Sources */ = {isa = PBXBuildFile; fileRef = D63E6DEA1921E33D007D962E /* Guy_Sprite_Object.m */; };
 		D63F0992193E9ED000AD88E8 /* MoveableBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = D63F0991193E9ED000AD88E8 /* MoveableBlock.m */; };
+		D64048431958E51E007A5CA9 /* Achievements.m in Sources */ = {isa = PBXBuildFile; fileRef = D64048421958E51E007A5CA9 /* Achievements.m */; };
+		D64048461958EF81007A5CA9 /* AchievementsScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D64048451958EF81007A5CA9 /* AchievementsScene.m */; };
 		D65284211950E89600B868FD /* GameCenterClass.m in Sources */ = {isa = PBXBuildFile; fileRef = D65284201950E89600B868FD /* GameCenterClass.m */; };
 		D652D5FB194AD29C0012B5C1 /* Destroy_sprite.png in Resources */ = {isa = PBXBuildFile; fileRef = D652D5FA194AD29C0012B5C1 /* Destroy_sprite.png */; };
 		D65674841918979A003CC6E9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D65674831918979A003CC6E9 /* QuartzCore.framework */; };
@@ -297,6 +299,10 @@
 		D63E6DEA1921E33D007D962E /* Guy_Sprite_Object.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Guy_Sprite_Object.m; sourceTree = "<group>"; };
 		D63F0990193E9ED000AD88E8 /* MoveableBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoveableBlock.h; sourceTree = "<group>"; };
 		D63F0991193E9ED000AD88E8 /* MoveableBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoveableBlock.m; sourceTree = "<group>"; };
+		D64048411958E51E007A5CA9 /* Achievements.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Achievements.h; sourceTree = "<group>"; };
+		D64048421958E51E007A5CA9 /* Achievements.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Achievements.m; sourceTree = "<group>"; };
+		D64048441958EF81007A5CA9 /* AchievementsScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AchievementsScene.h; sourceTree = "<group>"; };
+		D64048451958EF81007A5CA9 /* AchievementsScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AchievementsScene.m; sourceTree = "<group>"; };
 		D652841F1950E89600B868FD /* GameCenterClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameCenterClass.h; sourceTree = "<group>"; };
 		D65284201950E89600B868FD /* GameCenterClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameCenterClass.m; sourceTree = "<group>"; };
 		D652D5FA194AD29C0012B5C1 /* Destroy_sprite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Destroy_sprite.png; sourceTree = "<group>"; };
@@ -789,6 +795,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D640483E1958E4A2007A5CA9 /* ScoresAndAchievements */ = {
+			isa = PBXGroup;
+			children = (
+				D666246E19522053004F88DF /* ScoreClass.h */,
+				D666246F19522053004F88DF /* ScoreClass.m */,
+				D64048411958E51E007A5CA9 /* Achievements.h */,
+				D64048421958E51E007A5CA9 /* Achievements.m */,
+			);
+			name = ScoresAndAchievements;
+			sourceTree = "<group>";
+		};
+		D64048401958E4D7007A5CA9 /* GameCenter */ = {
+			isa = PBXGroup;
+			children = (
+				D652841F1950E89600B868FD /* GameCenterClass.h */,
+				D65284201950E89600B868FD /* GameCenterClass.m */,
+			);
+			name = GameCenter;
+			sourceTree = "<group>";
+		};
 		D65674771918979A003CC6E9 = {
 			isa = PBXGroup;
 			children = (
@@ -1684,15 +1710,13 @@
 		D656772A1918979C003CC6E9 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				D64048401958E4D7007A5CA9 /* GameCenter */,
+				D640483E1958E4A2007A5CA9 /* ScoresAndAchievements */,
 				D6D813A4194F92BA001552E0 /* Objects */,
 				D6D813A3194F925D001552E0 /* Walls */,
 				D6D813A2194F9237001552E0 /* Scenes */,
 				D656772B1918979C003CC6E9 /* AppDelegate.h */,
 				D656772C1918979C003CC6E9 /* AppDelegate.m */,
-				D652841F1950E89600B868FD /* GameCenterClass.h */,
-				D65284201950E89600B868FD /* GameCenterClass.m */,
-				D666246E19522053004F88DF /* ScoreClass.h */,
-				D666246F19522053004F88DF /* ScoreClass.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -1722,6 +1746,8 @@
 				D65677321918979C003CC6E9 /* IntroScene.m */,
 				D66957C419537E2600813BB4 /* LeaderBoard.h */,
 				D66957C519537E2600813BB4 /* LeaderBoard.m */,
+				D64048441958EF81007A5CA9 /* AchievementsScene.h */,
+				D64048451958EF81007A5CA9 /* AchievementsScene.m */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -1927,6 +1953,7 @@
 				D65676541918979C003CC6E9 /* OALTools.m in Sources */,
 				D656750A1918979A003CC6E9 /* ccGLStateCache.m in Sources */,
 				D65676021918979B003CC6E9 /* OALActionManager.m in Sources */,
+				D64048461958EF81007A5CA9 /* AchievementsScene.m in Sources */,
 				D65675611918979B003CC6E9 /* CCScheduler.m in Sources */,
 				D65675351918979A003CC6E9 /* CCParticleExamples.m in Sources */,
 				D65676671918979C003CC6E9 /* CCSlider.m in Sources */,
@@ -2011,6 +2038,7 @@
 				D61030D91920A0D600A1D150 /* Block_Wall.m in Sources */,
 				D656769A1918979C003CC6E9 /* vec2.c in Sources */,
 				D65674CA1918979A003CC6E9 /* CCAction.m in Sources */,
+				D64048431958E51E007A5CA9 /* Achievements.m in Sources */,
 				D656752E1918979A003CC6E9 /* CCParallaxNode.m in Sources */,
 				D65676961918979C003CC6E9 /* ray2.c in Sources */,
 				D65676121918979B003CC6E9 /* OALAudioTracks.m in Sources */,

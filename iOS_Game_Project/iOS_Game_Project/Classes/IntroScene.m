@@ -24,6 +24,7 @@
 #import "GameCenterClass.h"
 #import "ScoreClass.h"
 #import "LeaderBoard.h"
+#import "Achievements.h"
 
 
 
@@ -112,10 +113,9 @@
     // setting up instances of my singletons //
     newScoreClass = [ScoreClass sharedInstance];
     newGameCenterClass = [GameCenterClass sharedGameCenter];
-
-
-    //[newScoreClass setHighScore:10];
-    NSLog(@"returned high score %@", [newScoreClass returnhighScore]);
+    playerAchievements = [Achievements sharedInstance];
+    
+    
     
     // initializing the name and score dictionary //
     namesAndScores = [[NSMutableDictionary alloc] init];
@@ -823,6 +823,13 @@
         newGuySprite.position = touchPoint;
         [newGuySprite stopAllActions];
         [playSound playBg:@"Applause.mp3"];
+        
+        
+        // setting the time achievement //
+        
+        int timeAtStop = (int)timeIncrease;
+        
+        NSLog(@"%@",[playerAchievements beatTheLevelInUnder_30_Seconds:timeAtStop]);
         
         
         // basically I need to present the user with a good job then transition to the //

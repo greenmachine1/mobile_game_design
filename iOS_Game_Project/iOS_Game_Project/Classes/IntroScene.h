@@ -19,7 +19,7 @@
 #import "Breakable_Block.h"
 #import "ScoreClass.h"
 #import "GameCenterClass.h"
-
+#import "Achievements.h"
 
 /**
  *  The intro scene
@@ -74,6 +74,7 @@
     
     CCLayoutBox *playerControlsLayoutBox;
     CCSprite *backgroundBox;
+    Achievements *playerAchievements;
     
     BOOL movementBoolean;
     float startXOfEnemy;
@@ -91,6 +92,7 @@
 
     ScoreClass *newScoreClass;
     GameCenterClass *newGameCenterClass;
+    
     
     NSMutableDictionary *namesAndScores;
     
