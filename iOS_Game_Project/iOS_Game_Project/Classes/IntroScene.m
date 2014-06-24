@@ -113,7 +113,6 @@
     // setting up instances of my singletons //
     newScoreClass = [ScoreClass sharedInstance];
     newGameCenterClass = [GameCenterClass sharedGameCenter];
-    playerAchievements = [Achievements sharedInstance];
     
     
     
@@ -829,7 +828,12 @@
         
         int timeAtStop = (int)timeIncrease;
         
+        
+        playerAchievements = [Achievements sharedInstanceWithName:@"Cory"];
+
         NSLog(@"%@",[playerAchievements beatTheLevelInUnder_30_Seconds:timeAtStop]);
+        
+        NSLog(@"number of achievements %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"Cory"]);
         
         
         // basically I need to present the user with a good job then transition to the //

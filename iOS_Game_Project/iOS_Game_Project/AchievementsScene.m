@@ -29,6 +29,8 @@
         personsName = name;
         NSLog(@"person -> %@",personsName);
         
+        newAchievements = [Achievements sharedInstanceWithName:personsName];
+        
         // setting the background color //
         CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.1 green:0.4 blue:0.5 alpha:1.0]];
         [self addChild:background];
@@ -60,8 +62,12 @@
     [mainLayoutBox addChild:mainLabel];
     
     
-    
-    
+    // creation of the achievement list //
+    for(int i = 0; i < newAchievements.numberOfAchievements; i++){
+        
+        NSLog(@"Yes!");
+        
+    }
     
     
     

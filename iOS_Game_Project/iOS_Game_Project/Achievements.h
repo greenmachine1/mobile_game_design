@@ -10,11 +10,19 @@
 
 @interface Achievements : NSObject{
     
+    int numberOfAchievements;
+    NSString *personsName;
+    
+    NSMutableArray *arrayOfAchievements;
+    
+    NSMutableDictionary *arrayOfAchievementsDictionary;
     
 }
 
-+(id)sharedInstance;
++(id)sharedInstanceWithName:(NSString *)name;
 -(NSString *)beatTheLevelInUnder_30_Seconds:(int)time;
+-(NSMutableDictionary *)listOfAchievements:(NSString *)name;
 
+@property (nonatomic)int numberOfAchievements;
 
 @end

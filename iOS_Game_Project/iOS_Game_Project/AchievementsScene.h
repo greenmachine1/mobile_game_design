@@ -9,6 +9,7 @@
 #import "CCScene.h"
 #import "cocos2d.h"
 #import "cocos2d-ui.h"
+#import "Achievements.h"
 
 @interface AchievementsScene : CCScene
 {
@@ -17,6 +18,8 @@
     
     NSString *personsName;
     CCLayoutBox *mainLayout;
+    
+    Achievements *newAchievements;
 }
 
 
