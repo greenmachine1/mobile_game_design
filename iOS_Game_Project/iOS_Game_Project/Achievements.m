@@ -10,32 +10,55 @@
 
 @implementation Achievements
 
+// creating a constant name place //
+static NSString *USERACHIEVE = @"userAchievements";
+
+
++(Achievements *)sharedInstance{
+    
+    static Achievements *achievements;
+    if(achievements == nil){
+        achievements = [[self alloc] init];
+    }
+    return achievements;
+}
+
+
 
 -(id)init{
     
     if(self = [super init]){
         
-        nameOfUser = [[NSString alloc] init];
+        userName = [[NSString alloc] init];
+        
+        userAchievementsDictionary = [[NSMutableDictionary alloc] initWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:USERACHIEVE]];
         
     }
     return self;
-}
-
-
-
-
--(void)changeName:(NSString *)name{
-    
-    nameOfUser = name;
-    
-    NSLog(@"Name passed in %@", nameOfUser);
-    
     
 }
 
 
 
+-(void)setNameOfCurrentUser:(NSString *)passedInName{
+    
+    userName = passedInName;
+    
+    NSLog(@"Current user Passed in %@", userName);
+    
 
+}
+
+-(void)settingAnAchievementForuser{
+    
+    // saving an achievement for the current user //
+    [userAchievementsDictionary setObject:@"Yep" forKey:userName];
+    
+    // setting it to correspond with the achievements NSUserDefaults //
+    [[NSUserDefaults standardUserDefaults] setObject:userAchievementsDictionary forKey:USERACHIEVE];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+}
 
 
 

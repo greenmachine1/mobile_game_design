@@ -9,12 +9,12 @@
 
 #import "cocos2d.h"
 #import "GameCenterClass.h"
+#import "Achievements.h"
 
 
 @interface AppDelegate : CCAppDelegate{
     
     GameCenterClass *newGameCenterClass;
-    
 }
 
 

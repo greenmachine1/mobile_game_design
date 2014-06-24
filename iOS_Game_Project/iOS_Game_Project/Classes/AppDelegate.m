@@ -51,9 +51,8 @@
     
     
     
-    // singleton of the game center login so I can use it where I need it //
+    // singleton of the game center and Achievements login so I can use it where I need it //
     newGameCenterClass = [GameCenterClass sharedGameCenter];
-
     
     
     

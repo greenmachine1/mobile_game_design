@@ -113,7 +113,7 @@
     // setting up instances of my singletons //
     newScoreClass = [ScoreClass sharedInstance];
     newGameCenterClass = [GameCenterClass sharedGameCenter];
-    playerAchievements = [[Achievements alloc] init];
+    playerAchievements = [Achievements sharedInstance];
     
 	return self;
 }
@@ -826,12 +826,11 @@
         // setting the time achievement //
         int timeAtStop = (int)timeIncrease;
         
+        [playerAchievements setNameOfCurrentUser:[[NSUserDefaults standardUserDefaults] objectForKey:@"mainName"]];
         
+        //[playerAchievements settingAnAchievementForuser];
         
-        
-        // ----------------- > achievement! < -----------------
-        [playerAchievements changeName:[[NSUserDefaults standardUserDefaults] objectForKey:@"mainName"]];
-        
+        NSLog(@"%@", [[[NSUserDefaults standardUserDefaults] objectForKey:@"userAchievements"]objectForKey:[[NSUserDefaults standardUserDefaults] objectForKey:@"mainName"]]);
         
         
         
@@ -1192,6 +1191,7 @@
     
     // setting the main name user default //
     [[NSUserDefaults standardUserDefaults] setObject:mainName forKey:@"mainName"];
+    
     
     
     // resuming the timer //

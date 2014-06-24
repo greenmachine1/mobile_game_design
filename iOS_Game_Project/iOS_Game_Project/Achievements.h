@@ -10,12 +10,14 @@
 
 @interface Achievements : NSObject{
     
-    NSString *nameOfUser;
+    NSString *userName;
+    
+    NSMutableDictionary *userAchievementsDictionary;
     
 }
-
--(id)init;
--(void)changeName:(NSString *)name;
++(Achievements *)sharedInstance;
+-(void)setNameOfCurrentUser:(NSString *)passedInName;
+-(void)settingAnAchievementForuser;
 
 
 @end
