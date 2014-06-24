@@ -9,6 +9,7 @@
 #import "LeaderBoard.h"
 #import "MainMenuScene.h"
 #import "AchievementsScene.h"
+#import "IntroScene.h"
 
 @implementation LeaderBoard
 
@@ -59,22 +60,33 @@
         [self persistantLeaderBoard];
         
         
-        CCButton *backButton = [CCButton buttonWithTitle:@"Done!" fontName:@"Chalkduster" fontSize:15.0f];
+        CCButton *backButton = [CCButton buttonWithTitle:@"Play again!" fontName:@"Chalkduster" fontSize:15.0f];
         backButton.anchorPoint = ccp(0.5f, 0.5f);
-        backButton.position = ccp(layoutBoxSprite.position.x - ((layoutBoxSprite.contentSize.width / 2) / 2), (layoutBoxSprite.contentSize.height - 225.0f));
-        backButton.name = @"back";
+        backButton.position = ccp(layoutBoxSprite.position.x - (((layoutBoxSprite.contentSize.width / 2) / 2) + 5.0f), (layoutBoxSprite.contentSize.height - 220.0f));
+        backButton.name = @"play";
         backButton.color = [CCColor redColor];
         [backButton setTarget:self selector:@selector(onBack:)];
         [layoutBoxSprite addChild:backButton];
         
         
+        
+        
         CCButton *deleteScoresButton = [CCButton buttonWithTitle:@"Delete Scores!" fontName:@"Chalkduster" fontSize:15.0f];
         deleteScoresButton.anchorPoint = ccp(0.5f, 0.5f);
-        deleteScoresButton.position = ccp(layoutBoxSprite.position.x + (((layoutBoxSprite.contentSize.width / 2) /2) - 30.0f), (layoutBoxSprite.contentSize.height - 225.0f));
+        deleteScoresButton.position = ccp(layoutBoxSprite.position.x + (((layoutBoxSprite.contentSize.width / 2) /2) - 5.0f), (layoutBoxSprite.contentSize.height - 220.0f));
         deleteScoresButton.name = @"delete";
         deleteScoresButton.color = [CCColor redColor];
         [deleteScoresButton setTarget:self selector:@selector(onBack:)];
         [layoutBoxSprite addChild:deleteScoresButton];
+        
+        
+        CCButton *menuButton = [CCButton buttonWithTitle:@"Main Menu!" fontName:@"Chalkduster" fontSize:15.0f];
+        menuButton.anchorPoint = ccp(0.5f, 0.5f);
+        menuButton.position = ccp(layoutBoxSprite.position.x, (layoutBoxSprite.contentSize.height) - 240.0f);
+        menuButton.name = @"menu";
+        menuButton.color = [CCColor redColor];
+        [menuButton setTarget:self selector:@selector(onBack:)];
+        [layoutBoxSprite addChild:menuButton];
         
         [self addChild:mainLayoutBox];
         
@@ -174,11 +186,12 @@
     
     CCButton *button = (CCButton *)sender;
     
-    // back button //
-    if([button.name isEqualToString:@"back"]){
+    // play again button //
+    if([button.name isEqualToString:@"play"]){
     
-        [[CCDirector sharedDirector] replaceScene:[MainMenuScene scene]
+        [[CCDirector sharedDirector] replaceScene:[IntroScene sceneCameFromTutorial:NO]
                                    withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionUp duration:1.0f]];
+        
     // delete the leaderboard button //
     }else if([button.name isEqualToString:@"delete"]){
         
@@ -188,6 +201,12 @@
         
         [newScoreClass deleteTheScoreBoard];
         [self persistantLeaderBoard];
+        
+        [[CCDirector sharedDirector] replaceScene:[MainMenuScene scene]
+                                   withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionUp duration:1.0f]];
+        
+    // menu button //
+    }else if([button.name isEqualToString:@"menu"]){
         
         [[CCDirector sharedDirector] replaceScene:[MainMenuScene scene]
                                    withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionUp duration:1.0f]];

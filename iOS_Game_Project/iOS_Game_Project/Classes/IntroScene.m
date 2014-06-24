@@ -114,20 +114,6 @@
     newScoreClass = [ScoreClass sharedInstance];
     newGameCenterClass = [GameCenterClass sharedGameCenter];
     
-    
-    
-    // initializing the name and score dictionary //
-    namesAndScores = [[NSMutableDictionary alloc] init];
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
 	return self;
 }
 
@@ -144,6 +130,19 @@
         // timer for the game, gets the total seconds gone by //
         startTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(timerOfGame:) userInfo:nil repeats:TRUE];
         [startTimer fire];
+    }
+    
+    // should be asking for user info here
+    if(newGameCenterClass.isAuthorized == false){
+        
+        // asking if there is a current user logged in //
+        // if not, then ask the user to log in //
+        if( [[[NSUserDefaults standardUserDefaults] objectForKey:@"mainName"] isEqualToString:@""] ){
+            // stop the timer so the user can enter in their name //
+            [startTimer invalidate];
+        
+            [self askForUserName];
+        }
     }
     
     // Enable touch handling on scene node
@@ -749,7 +748,6 @@
         [self removeChildByName:button.name cleanup:true];
         
         numberOfAxes--;
-        
     }
 }
 
@@ -829,11 +827,17 @@
         int timeAtStop = (int)timeIncrease;
         
         
-        playerAchievements = [Achievements sharedInstanceWithName:@"Cory"];
+        
+        /*
+        // checking to see if the beat under 30, 20, or 10 seconds achievement is true //
+        playerAchievements = [Achievements sharedInstanceWithName:[[NSUserDefaults standardUserDefaults] objectForKey:@"mainName"]];
 
         NSLog(@"%@",[playerAchievements beatTheLevelInUnder_30_Seconds:timeAtStop]);
         
-        NSLog(@"number of achievements %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"Cory"]);
+        NSLog(@"number of achievements %@", [playerAchievements listOfAchievements:[[NSUserDefaults standardUserDefaults] objectForKey:@"mainName"]]);
+        */
+        
+        
         
         
         // basically I need to present the user with a good job then transition to the //
@@ -1131,41 +1135,32 @@
     // into the local leaderboard //
     }else{
         
-        if(namesAndScores.count == 0){
+        if( !([[[NSUserDefaults standardUserDefaults] objectForKey:@"mainName"] isEqualToString:@""] )){
             
-            NSLog(@"prompt user to enter in a name cause they won and this is currently the top local score");
+            [newScoreClass setNameAndScoreOfUser:[[NSUserDefaults standardUserDefaults] objectForKey:@"mainName"] andScore:totalScore];
             
-            [self performSelector:@selector(askForUserName) withObject:nil afterDelay:3.0f];
+            [self performSelector:@selector(transitionToLeaderBoard) withObject:nil afterDelay:4.0f];
             
-    
         }else{
-            
-            
-        }
         
+            [self performSelector:@selector(transitionToLeaderBoard) withObject:nil afterDelay:4.0f];
+        }
     }
-    
-    // display the Credits after 5 seconds //
-    //[self performSelector:@selector(displayCreditsAfterWin) withObject:nil afterDelay:5.0f];
-    
 }
 
-// transitions to the credits after a win //
--(void)displayCreditsAfterWin{
+
+-(void)transitionToLeaderBoard{
     
-    [[CCDirector sharedDirector] replaceScene:[CreditsScene scene]
+    [[CCDirector sharedDirector] replaceScene:[LeaderBoard scene]
                                withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionUp duration:1.0f]];
 }
 
 
 
+
+
 -(void)askForUserName{
-    
-    gameScoreLabel.visible = false;
-    gameOverLabel.visible = false;
-    goalBoxSprite.visible = false;
-    
-    
+
     // replacement text prompting the user to enter their name //
     CCLabelTTF *gameScoreLabelReplacement = [CCLabelTTF labelWithString:@"Please enter your name!" fontName:@"Chalkduster" fontSize:12.0f];
     gameScoreLabelReplacement.anchorPoint = ccp(0.5f, 0.5f);
@@ -1197,18 +1192,24 @@
 // called when the return key is pressed on the keyboard
 -(void)onTextEntered{
     
+    // setting the main name for the achievements //
+    mainName = mainTextField.string;
     
-    // setting the name of the user //
-    //newScoreClass.nameOfUser = mainTextField.string;
-    
-    // need to also be adding the score //
-    [newScoreClass setNameAndScoreOfUser:mainTextField.string andScore:totalScore];
-    
-    // will take the user to the leaderboard //
-    [[CCDirector sharedDirector] replaceScene:[LeaderBoard scene]
-                               withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionUp duration:1.0f]];
+    NSLog(@"%@", mainName);
     
     
+    
+    // setting the main name user default //
+    [[NSUserDefaults standardUserDefaults] setObject:mainName forKey:@"mainName"];
+    
+    
+    
+    
+    // resuming the timer //
+    startTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(timerOfGame:) userInfo:nil repeats:TRUE];
+    [startTimer fire];
+    
+    [mainTextField removeFromParentAndCleanup:true];
 }
 
 

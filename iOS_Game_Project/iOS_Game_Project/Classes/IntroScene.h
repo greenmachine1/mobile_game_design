@@ -39,6 +39,8 @@
     int score;
     int totalScore;
     
+    NSString *mainName;
+    
     CGPoint touchPoint;
     
     // main sprites //
@@ -74,7 +76,7 @@
     
     CCLayoutBox *playerControlsLayoutBox;
     CCSprite *backgroundBox;
-    Achievements *playerAchievements;
+    //Achievements *playerAchievements;
     
     BOOL movementBoolean;
     float startXOfEnemy;
@@ -94,7 +96,6 @@
     GameCenterClass *newGameCenterClass;
     
     
-    NSMutableDictionary *namesAndScores;
     
     CCLabelTTF *gameScoreLabel;
     CCLabelTTF *gameOverLabel;

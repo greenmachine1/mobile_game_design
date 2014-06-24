@@ -35,6 +35,8 @@
         
         xBounds = self.contentSize.width;
         yBounds = self.contentSize.height;
+        
+        [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"mainName"];
     
     
         // setting the background color //
