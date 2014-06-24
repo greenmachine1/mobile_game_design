@@ -113,6 +113,7 @@
     // setting up instances of my singletons //
     newScoreClass = [ScoreClass sharedInstance];
     newGameCenterClass = [GameCenterClass sharedGameCenter];
+    playerAchievements = [[Achievements alloc] init];
     
 	return self;
 }
@@ -823,19 +824,14 @@
         
         
         // setting the time achievement //
-        
         int timeAtStop = (int)timeIncrease;
         
         
         
-        /*
-        // checking to see if the beat under 30, 20, or 10 seconds achievement is true //
-        playerAchievements = [Achievements sharedInstanceWithName:[[NSUserDefaults standardUserDefaults] objectForKey:@"mainName"]];
-
-        NSLog(@"%@",[playerAchievements beatTheLevelInUnder_30_Seconds:timeAtStop]);
         
-        NSLog(@"number of achievements %@", [playerAchievements listOfAchievements:[[NSUserDefaults standardUserDefaults] objectForKey:@"mainName"]]);
-        */
+        // ----------------- > achievement! < -----------------
+        [playerAchievements changeName:[[NSUserDefaults standardUserDefaults] objectForKey:@"mainName"]];
+        
         
         
         
@@ -1113,10 +1109,6 @@
     gameOverLabel.position = ccp((goalBoxSprite.contentSize.width / 2), (goalBoxSprite.contentSize.height / 2));
     [goalBoxSprite addChild:gameOverLabel];
     
-    
-    
-    
-    
     [self addChild:goalBoxLayout];
     
     
@@ -1137,6 +1129,8 @@
         
         if( !([[[NSUserDefaults standardUserDefaults] objectForKey:@"mainName"] isEqualToString:@""] )){
             
+            
+            // sets the score with the saved name and current score //
             [newScoreClass setNameAndScoreOfUser:[[NSUserDefaults standardUserDefaults] objectForKey:@"mainName"] andScore:totalScore];
             
             [self performSelector:@selector(transitionToLeaderBoard) withObject:nil afterDelay:4.0f];
@@ -1195,14 +1189,9 @@
     // setting the main name for the achievements //
     mainName = mainTextField.string;
     
-    NSLog(@"%@", mainName);
-    
-    
     
     // setting the main name user default //
     [[NSUserDefaults standardUserDefaults] setObject:mainName forKey:@"mainName"];
-    
-    
     
     
     // resuming the timer //

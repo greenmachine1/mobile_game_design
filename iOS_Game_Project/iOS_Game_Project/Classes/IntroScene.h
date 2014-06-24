@@ -76,7 +76,7 @@
     
     CCLayoutBox *playerControlsLayoutBox;
     CCSprite *backgroundBox;
-    //Achievements *playerAchievements;
+    Achievements *playerAchievements;
     
     BOOL movementBoolean;
     float startXOfEnemy;
