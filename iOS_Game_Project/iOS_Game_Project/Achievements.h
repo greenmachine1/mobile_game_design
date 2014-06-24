@@ -14,10 +14,14 @@
     
     NSMutableDictionary *userAchievementsDictionary;
     
+    NSMutableArray *arrayOfAchievements;
+    
 }
 +(Achievements *)sharedInstance;
 -(void)setNameOfCurrentUser:(NSString *)passedInName;
--(void)settingAnAchievementForuser;
+-(void)finishingLevelWithinTime:(int)time;
+-(NSArray *)returnAllAchievements;
+-(void)deleteAllAchievements;
 
 
 @end

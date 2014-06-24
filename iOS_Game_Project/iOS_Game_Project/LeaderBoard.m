@@ -197,9 +197,8 @@
         
         [scoresLabel removeFromParentAndCleanup:true];
         
-        //[nameArray removeAllObjects];
-        
         [newScoreClass deleteTheScoreBoard];
+        
         [self persistantLeaderBoard];
         
         [[CCDirector sharedDirector] replaceScene:[MainMenuScene scene]

@@ -115,6 +115,9 @@
     newGameCenterClass = [GameCenterClass sharedGameCenter];
     playerAchievements = [Achievements sharedInstance];
     
+    // --------------- > deleting all achievements < -------------- //
+    //[playerAchievements deleteAllAchievements];
+    
 	return self;
 }
 
@@ -143,7 +146,32 @@
             [startTimer invalidate];
         
             [self askForUserName];
+        }else{
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            // print out any achievements associated with that user //
+            NSLog(@"%@", [[[NSUserDefaults standardUserDefaults] objectForKey:@"userAchievements"]objectForKey:[[NSUserDefaults standardUserDefaults] objectForKey:@"mainName"]]);
+    
+    
+    
         }
+    
+    
+    
+    
+    
+    
+    
     }
     
     // Enable touch handling on scene node
@@ -421,6 +449,10 @@
     pauseLayoutBox.position = ccp(xBounds / 2, yBounds / 2);
     
     [self addChild:pauseLayoutBox];
+    
+    
+    // print out any achievements associated with that user //
+    NSLog(@"%@", [[[NSUserDefaults standardUserDefaults] objectForKey:@"userAchievements"]objectForKey:[[NSUserDefaults standardUserDefaults] objectForKey:@"mainName"]]);
 }
 
 
@@ -519,8 +551,7 @@
             }
         }
     }
-    
-    //[self generalCollisionBetweenTwoObjects:newEnemySprite secondObject:];
+
     
     [self collisionWithEnd];
     [self collisionWithEnemyAndMovableBlock];
@@ -826,13 +857,19 @@
         // setting the time achievement //
         int timeAtStop = (int)timeIncrease;
         
-        [playerAchievements setNameOfCurrentUser:[[NSUserDefaults standardUserDefaults] objectForKey:@"mainName"]];
         
-        //[playerAchievements settingAnAchievementForuser];
+
+        // --------- > setting an achievement < ----------------//
+        // checking to see if the finished time is within range //
+        // if it is, award and achievement to that user //
         
-        NSLog(@"%@", [[[NSUserDefaults standardUserDefaults] objectForKey:@"userAchievements"]objectForKey:[[NSUserDefaults standardUserDefaults] objectForKey:@"mainName"]]);
+        // making sure that game center isnt authorized //
+        if(!(newGameCenterClass.isAuthorized)){
+            [playerAchievements finishingLevelWithinTime:timeAtStop];
         
-        
+            // print out any achievements associated with that user //
+            NSLog(@"Super array of stuff ---- >%@", [playerAchievements returnAllAchievements]);
+        }
         
         
         // basically I need to present the user with a good job then transition to the //
@@ -1082,13 +1119,7 @@
         totalScore = 0;
     }
     
-    
-    
-    
-    
-    
 
-    
     NSString *finalScore = [NSString stringWithFormat:@"Final Score (Hearts x Time) = %i", totalScore];
     
     gameScoreLabel = [CCLabelTTF labelWithString:finalScore fontName:@"Chalkduster" fontSize:12.0f];
@@ -1120,6 +1151,8 @@
 
         [self sendScoreToGameCenter];
         
+        [self performSelector:@selector(transitionToMainMenu) withObject:nil afterDelay:4.0f];
+        
         
         
     // if not connected to game center, user can upload the name and score //
@@ -1141,6 +1174,12 @@
     }
 }
 
+-(void)transitionToMainMenu{
+    
+    [[CCDirector sharedDirector] replaceScene:[MainMenuScene scene]
+                               withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionUp duration:1.0f]];
+}
+
 
 -(void)transitionToLeaderBoard{
     
@@ -1152,6 +1191,7 @@
 
 
 
+// asking for the users name //
 -(void)askForUserName{
 
     // replacement text prompting the user to enter their name //
@@ -1192,6 +1232,9 @@
     // setting the main name user default //
     [[NSUserDefaults standardUserDefaults] setObject:mainName forKey:@"mainName"];
     
+    
+    // setting the name of the user within the achievements class
+    [playerAchievements setNameOfCurrentUser:[[NSUserDefaults standardUserDefaults] objectForKey:@"mainName"]];
     
     
     // resuming the timer //

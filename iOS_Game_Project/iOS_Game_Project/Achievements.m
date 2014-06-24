@@ -33,6 +33,8 @@ static NSString *USERACHIEVE = @"userAchievements";
         
         userAchievementsDictionary = [[NSMutableDictionary alloc] initWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:USERACHIEVE]];
         
+        
+        
     }
     return self;
     
@@ -46,17 +48,82 @@ static NSString *USERACHIEVE = @"userAchievements";
     
     NSLog(@"Current user Passed in %@", userName);
     
+    arrayOfAchievements = [[NSMutableArray alloc] initWithArray:[userAchievementsDictionary objectForKey:[NSString stringWithFormat:@"%@_achieve",userName ]]];
+    
+    NSLog(@"array -> %@", arrayOfAchievements);
 
 }
 
--(void)settingAnAchievementForuser{
+
+
+
+-(void)finishingLevelWithinTime:(int)time{
+    
+    if((time <= 30) && (time > 20)){
+        
+        [self saveInfo:@"Achievement:30 seconds!"];
+        
+    }else if((time <= 20) && (time > 10)){
+        
+        [self saveInfo:@"Achievement:20 seconds!"];
+        
+    }else if((time <= 10) && (time > 0)){
+        
+        [self saveInfo:@"Achievement:10 seconds!"];
+        
+    }
+    
+    
+}
+
+
+
+
+// saving the info for the current user //
+-(void)saveInfo:(NSString *)passedInStringToSave{
+    
+    [arrayOfAchievements addObject:passedInStringToSave];
+    
+    
+    NSCountedSet *set = [[NSCountedSet alloc] initWithArray:arrayOfAchievements];
+    
+    for(id item in set){
+        
+        NSLog(@"name %@ count %lu", item, (unsigned long)[set countForObject:item]);
+        
+        if([set countForObject:item] > 1){
+            
+            [arrayOfAchievements removeObject:item];
+            [arrayOfAchievements addObject:item];
+        }
+        
+    }
+    
+    
+    NSLog(@"remaining array ->%@", arrayOfAchievements);
     
     // saving an achievement for the current user //
-    [userAchievementsDictionary setObject:@"Yep" forKey:userName];
+    [userAchievementsDictionary setObject:arrayOfAchievements forKey:[NSString stringWithFormat:@"%@_achieve",userName ]];
     
     // setting it to correspond with the achievements NSUserDefaults //
     [[NSUserDefaults standardUserDefaults] setObject:userAchievementsDictionary forKey:USERACHIEVE];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    
+}
+
+-(void)deleteAllAchievements{
+    
+    [userAchievementsDictionary removeAllObjects];
+    [[NSUserDefaults standardUserDefaults] setObject:userAchievementsDictionary forKey:USERACHIEVE];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+}
+
+
+-(NSArray *)returnAllAchievements{
+    
+    return arrayOfAchievements;
     
 }
 
