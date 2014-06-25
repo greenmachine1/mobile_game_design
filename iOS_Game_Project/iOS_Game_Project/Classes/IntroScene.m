@@ -78,7 +78,7 @@
     // setting the movement speed of the guy //
     speed = 50;
     
-    // setting the initial score which is 5 //
+    // setting the initial score which is 4 //
     score = 4;
     
     
@@ -115,8 +115,8 @@
     newGameCenterClass = [GameCenterClass sharedGameCenter];
     playerAchievements = [Achievements sharedInstance];
     
-    // --------------- > deleting all achievements < -------------- //
-    //[playerAchievements deleteAllAchievements];
+    
+    
     
 	return self;
 }
@@ -869,6 +869,30 @@
                 [achievementsArray addObject:[playerAchievements finishedLevelWithinTime:timeAtStop andKilledNinjaSquid:enemyDeath]];
             }
             
+
+            // everytime this is called, it will increment by 1 //
+            [playerAchievements incrementGamePlayed];
+            
+            
+            // saying that if all the hearts are still in place by the end //
+            // add an achievement to the list!
+            if(score == 4){
+                
+                [playerAchievements incrementHeartsAvailable];
+                
+                if(!([[playerAchievements finishedAfter_3_GamesAndStillHaveAllHeartsLeft] isEqualToString:@""])){
+                    
+                    [achievementsArray addObject:[playerAchievements finishedAfter_3_GamesAndStillHaveAllHeartsLeft]];
+                    
+                }
+            }
+            
+            
+            
+            
+            
+            
+
             // displays the achievement //
             [self displayAchievement];
 
@@ -1264,15 +1288,7 @@
     mainTextField.padding = 10.0f;
     mainTextField.position = ccp(0.5f, 0.6f);
     [mainTextField setTarget:self selector:@selector(onTextEntered)];
-    
-    
-    
-    /*
-    CCLabelTTF *enterYourNameText = [CCLabelTTF labelWithString:@"Enter your name!" fontName:@"Chalkduster" fontSize:20.0f];
-    enterYourNameText.anchorPoint = ccp(0.5f, 0.5f);
-    enterYourNameText.position = ccp(0.5f, 0.5f);
-    [self addChild:enterYourNameText z:4];
-    */
+
     [self addChild:mainTextField z:4];
     
 
@@ -1290,6 +1306,8 @@
     
     // setting the name of the user within the achievements class
     [playerAchievements setNameOfCurrentUser:[[NSUserDefaults standardUserDefaults] objectForKey:@"mainName"]];
+    
+    NSLog(@"%@", [playerAchievements returnAmountOfPlayedGames]);
     
     // resuming the timer //
     startTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(timerOfGame:) userInfo:nil repeats:TRUE];

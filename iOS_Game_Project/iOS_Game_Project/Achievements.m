@@ -31,7 +31,14 @@ static NSString *USERACHIEVE = @"userAchievements";
         
         userName = [[NSString alloc] init];
         
+        numberOfHearts = 0;
+        
+        // setting the exsisting Dictionary to hold the stored dictionary for the user //
         userAchievementsDictionary = [[NSMutableDictionary alloc] initWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:USERACHIEVE]];
+        
+        NSLog(@"Whats in here! %@", userAchievementsDictionary);
+        
+        
         
     }
     return self;
@@ -46,12 +53,20 @@ static NSString *USERACHIEVE = @"userAchievements";
     
     NSLog(@"Current user Passed in %@", userName);
     
+    // loading the array with existing data for this user //
     arrayOfAchievements = [[NSMutableArray alloc] initWithArray:[userAchievementsDictionary objectForKey:[NSString stringWithFormat:@"%@_achieve",userName ]]];
     
+    // loading the number with existing data for this user //
+    numberOfGamesPlayed = [userAchievementsDictionary objectForKey:[NSString stringWithFormat:@"%@_numberOfGames", userName]];
+    
+    // loading the number with existing data for this user //
+    numberOfHearts = [userAchievementsDictionary objectForKey:[NSString stringWithFormat:@"%@_numberOfHearts", userName]];
+    
+    
     NSLog(@"array -> %@", arrayOfAchievements);
-
+    NSLog(@"int value ->%i", [numberOfGamesPlayed intValue]);
+    
 }
-
 
 
 // finished the level in a certain amount of time //
@@ -84,6 +99,27 @@ static NSString *USERACHIEVE = @"userAchievements";
 
 
 
+// achievement for making it through 3 games with all hearts left //
+-(NSString *)finishedAfter_3_GamesAndStillHaveAllHeartsLeft{
+    
+    NSLog(@"games played %@ and hearts left %@", numberOfGamesPlayed, numberOfHearts);
+    
+    // making sure that every 3 games is checked
+    if(([numberOfGamesPlayed intValue] % 3 == 0) && ([numberOfHearts intValue] % 3 == 0)){
+    
+        [self saveInfo:@"Achievement:After 3 levels and all lives left!"];
+    
+        return @"Achievement:After 3 levels and all lives left!";
+    }
+    return @"";
+    
+}
+
+
+
+
+
+
 
 // finished the level in a certain amount of time and killed the ninja squid //
 -(NSString *)finishedLevelWithinTime:(int)time andKilledNinjaSquid:(int)trueOrFalse{
@@ -109,8 +145,37 @@ static NSString *USERACHIEVE = @"userAchievements";
     }
     
     return @"";
+}
+
+
+-(void)incrementGamePlayed{
     
+    numberOfGamesPlayed = [NSNumber numberWithInt:[numberOfGamesPlayed intValue] + 1];
     
+    NSLog(@"increment of games %@", numberOfGamesPlayed);
+    
+    [userAchievementsDictionary setObject:numberOfGamesPlayed forKey:[NSString stringWithFormat:@"%@_numberOfGames",userName ]];
+    
+    // setting it to correspond with the achievements NSUserDefaults //
+    [[NSUserDefaults standardUserDefaults] setObject:userAchievementsDictionary forKey:USERACHIEVE];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+}
+
+
+
+-(void)incrementHeartsAvailable{
+    
+    // incrementing the hearts
+    numberOfHearts = [NSNumber numberWithInt:[numberOfHearts intValue] + 1];
+    
+    NSLog(@"increment of hearts %@", numberOfHearts);
+    
+    [userAchievementsDictionary setObject:numberOfHearts forKey:[NSString stringWithFormat:@"%@_numberOfHearts", userName]];
+    
+    // setting it to correspond with the achievements NSUserDefaults //
+    [[NSUserDefaults standardUserDefaults] setObject:userAchievementsDictionary forKey:USERACHIEVE];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     
 }
 
@@ -154,6 +219,19 @@ static NSString *USERACHIEVE = @"userAchievements";
     [[NSUserDefaults standardUserDefaults] setObject:userAchievementsDictionary forKey:USERACHIEVE];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
+    numberOfGamesPlayed = [NSNumber numberWithInt:0];
+    [userAchievementsDictionary setObject:numberOfGamesPlayed forKey:[NSString stringWithFormat:@"%@_numberOfGames",userName ]];
+    // setting it to correspond with the achievements NSUserDefaults //
+    [[NSUserDefaults standardUserDefaults] setObject:userAchievementsDictionary forKey:USERACHIEVE];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    numberOfHearts = [NSNumber numberWithInt:0];
+    [userAchievementsDictionary setObject:numberOfGamesPlayed forKey:[NSString stringWithFormat:@"%@_numberOfHearts",userName ]];
+    // setting it to correspond with the achievements NSUserDefaults //
+    [[NSUserDefaults standardUserDefaults] setObject:userAchievementsDictionary forKey:USERACHIEVE];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    
 }
 
 
@@ -161,6 +239,11 @@ static NSString *USERACHIEVE = @"userAchievements";
     
     return arrayOfAchievements;
     
+}
+
+-(NSNumber *)returnAmountOfPlayedGames{
+
+    return numberOfGamesPlayed;
 }
 
 
