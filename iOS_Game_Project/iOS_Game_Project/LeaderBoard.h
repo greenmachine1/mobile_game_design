@@ -10,6 +10,7 @@
 #import "cocos2d-ui.h"
 #import "cocos2d.h"
 #import "ScoreClass.h"
+#import "Achievements.h"
 
 @interface LeaderBoard : CCScene
 {
@@ -24,6 +25,8 @@
     CCButton *scoresButton;
     
     NSMutableArray *nameArray;
+    
+    Achievements *achievements;
 }
 
 +(LeaderBoard *)scene;

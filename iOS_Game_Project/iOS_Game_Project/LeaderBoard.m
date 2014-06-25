@@ -10,6 +10,7 @@
 #import "MainMenuScene.h"
 #import "AchievementsScene.h"
 #import "IntroScene.h"
+#import "Achievements.h"
 
 @implementation LeaderBoard
 
@@ -29,7 +30,7 @@
         newScoreClass = [ScoreClass sharedInstance];
         NSLog(@"%i", newScoreClass.amountOfScoresModify);
         
-        //nameArray = [[NSMutableArray alloc] init];
+        achievements = [Achievements sharedInstance];
         
         // setting the background color //
         CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.1 green:0.4 blue:0.5 alpha:1.0]];
@@ -131,8 +132,6 @@
         // this holds all the names of the array //
         NSArray *tempNames = [userDictionary allKeysForObject:[finalSortedNumbers objectAtIndex:j]];
         
-        
-
         // saving it all to an array for the leaderboard //
         [finalNameAndSCores addObject:[NSString stringWithFormat:@"%@ %@", [tempNames lastObject], finalSortedNumbers[j]]];
         
@@ -166,6 +165,20 @@
         scoresButton.position = ccp(layoutBoxSprite.position.x, (layoutBoxSprite.contentSize.height - 40.0f) - (30 * (i + 1)));
         scoresButton.name = [NSString stringWithFormat:@"%i", i];
         [scoresButton setTarget:self selector:@selector(onScoreButton:)];
+        
+        
+        // the achievement sprite next to each name //
+        CCSprite *arrowSprite = [CCSprite spriteWithImageNamed:@"Achievement_arrow.png"];
+        arrowSprite.anchorPoint = ccp(0.5f, 0.5f);
+        arrowSprite.scale = 0.7f;
+        arrowSprite.position = ccp((layoutBoxSprite.contentSize.width) - 20.0f, scoresButton.position.y);
+        [layoutBoxSprite addChild:arrowSprite z:5];
+        
+        
+        
+        
+        
+        
         [layoutBoxSprite addChild:scoresButton];
     }
 }
@@ -209,6 +222,8 @@
         [scoresLabel removeFromParentAndCleanup:true];
         
         [newScoreClass deleteTheScoreBoard];
+        
+        [achievements deleteAllAchievements];
         
         [self persistantLeaderBoard];
         

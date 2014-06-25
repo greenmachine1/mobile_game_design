@@ -59,25 +59,27 @@ static NSString *USERACHIEVE = @"userAchievements";
 // finished the level in a certain amount of time //
 -(NSString *)finishingLevelWithinTime:(int)time{
     
-    if((time <= 30) && (time > 20)){
-        
-        [self saveInfo:@"Achievement:30 seconds!"];
-        
-        return @"Achievement:30 seconds!";
-        
-    }else if((time <= 20) && (time > 10)){
-        
-        [self saveInfo:@"Achievement:20 seconds!"];
-        
-        return @"Achievement:20 seconds!";
-        
-    }else if((time <= 10) && (time > 0)){
-        
-        [self saveInfo:@"Achievement:10 seconds!"];
-        
-        return @"Achievement:20 seconds!";
-        
-    }
+        if((time <= 30) && (time > 20)){
+            
+            [self saveInfo:@"Achievement:30 seconds!"];
+                
+            return @"Achievement:30 seconds!";
+            
+        }else if((time <= 20) && (time > 10)){
+            
+            [self saveInfo:@"Achievement:20 seconds!"];
+                
+            return @"Achievement:20 seconds!";
+                
+            
+        }else if((time <= 10) && (time > 0)){
+            
+            [self saveInfo:@"Achievement:10 seconds!"];
+                
+            return @"Achievement:10 seconds!";
+                
+                
+         }
     
     return @"";
 }
@@ -123,18 +125,16 @@ static NSString *USERACHIEVE = @"userAchievements";
     [arrayOfAchievements addObject:passedInStringToSave];
     
     
+    // finding out if more than one of the same achievement exsist //
     NSCountedSet *set = [[NSCountedSet alloc] initWithArray:arrayOfAchievements];
     
     for(id item in set){
-        
-        NSLog(@"name %@ count %lu", item, (unsigned long)[set countForObject:item]);
         
         if([set countForObject:item] > 1){
             
             [arrayOfAchievements removeObject:item];
             [arrayOfAchievements addObject:item];
         }
-        
     }
     
     

@@ -872,24 +872,22 @@
         // making sure that game center isnt authorized //
         if(!(newGameCenterClass.isAuthorized)){
             
-            // finished level within an amount of time //
-            [self displayAchievement:[playerAchievements finishingLevelWithinTime:timeAtStop]];
+            achievementsArray = [[NSMutableArray alloc] init];
             
+            if(!([[playerAchievements finishingLevelWithinTime:timeAtStop] isEqualToString:@""])){
+                
+                [achievementsArray addObject:[playerAchievements finishingLevelWithinTime:timeAtStop]];
+            }
             
+            if(!([[playerAchievements finishedLevelWithinTime:timeAtStop andKilledNinjaSquid:enemyDeath] isEqualToString:@""])){
+                
+                [achievementsArray addObject:[playerAchievements finishedLevelWithinTime:timeAtStop andKilledNinjaSquid:enemyDeath]];
+            }
             
-            // finished level within an amount of time + killed enemy //
-            [self displayAchievement:[playerAchievements finishedLevelWithinTime:timeAtStop andKilledNinjaSquid:enemyDeath]];
-            
-        
-            
-            // print out any achievements associated with that user //
-            NSLog(@"Super array of stuff ---- >%@", [playerAchievements returnAllAchievements]);
+            // displays the achievement //
+            [self displayAchievement];
+
         }
-        
-        
-        // basically I need to present the user with a good job then transition to the //
-        // credits section of the game //
-        [self displayGoal];
     }
 }
 
@@ -898,17 +896,31 @@
 
 
 // shows the achievement to the user //
--(void)displayAchievement:(NSString *)stringPassedIn{
+-(void)displayAchievement{
     
-    NSLog(@"display achievement ->%@", stringPassedIn);
+    for(int i = 0; i < achievementsArray.count; i++){
     
+        achievementLabel = [CCLabelTTF labelWithString:[achievementsArray objectAtIndex:i] fontName:@"Chalkduster" fontSize:20.0f];
+        achievementLabel.anchorPoint = ccp(0.5f, 0.5f);
+        achievementLabel.position = ccp(xBounds / 2, (yBounds - 40.0f) - (20 * (i + 1)));
+        achievementLabel.color = [CCColor greenColor];
+        [self addChild:achievementLabel z:4];
+        
+    }
     
-    
-    
-    
+    [self performSelector:@selector(removeAchievementsLabel) withObject:nil afterDelay:4.0f];
 }
 
-
+-(void)removeAchievementsLabel{
+    
+    [achievementLabel removeFromParentAndCleanup:true];
+    [achievementsArray removeAllObjects];
+    
+    // basically I need to present the user with a good job then transition to the //
+    // credits section of the game //
+    [self displayGoal];
+    
+}
 
 
 

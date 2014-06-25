@@ -91,12 +91,12 @@
     CCSprite *axeSprite;
     CCLabelTTF *amountOfAxesLabel;
     
-
+    // score and game center stuff
     ScoreClass *newScoreClass;
     GameCenterClass *newGameCenterClass;
     
     
-    
+    // score labels
     CCLabelTTF *gameScoreLabel;
     CCLabelTTF *gameOverLabel;
     CCSprite *goalBoxSprite;
@@ -104,6 +104,10 @@
     CCLayoutBox *goalBoxLayout;
     
     CCTextField *mainTextField;
+    
+    // displaying achievements //
+    CCLabelTTF *achievementLabel;
+    NSMutableArray *achievementsArray;
     
 }
 
