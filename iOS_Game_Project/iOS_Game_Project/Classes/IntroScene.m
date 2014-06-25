@@ -859,17 +859,29 @@
         
         
 
+        
+        
+        
+        
+        
+        
         // --------- > setting an achievement < ----------------//
         // checking to see if the finished time is within range //
         // if it is, award and achievement to that user //
         
         // making sure that game center isnt authorized //
         if(!(newGameCenterClass.isAuthorized)){
-            [playerAchievements finishingLevelWithinTime:timeAtStop];
             
-            // checking to see if the user has completed the level and killed the enemy //
-            [playerAchievements finishedLevelWithinTime:timeAtStop andKilledNinjaSquid:enemyDeath];
+            // finished level within an amount of time //
+            [self displayAchievement:[playerAchievements finishingLevelWithinTime:timeAtStop]];
+            
+            
+            
+            // finished level within an amount of time + killed enemy //
+            [self displayAchievement:[playerAchievements finishedLevelWithinTime:timeAtStop andKilledNinjaSquid:enemyDeath]];
+            
         
+            
             // print out any achievements associated with that user //
             NSLog(@"Super array of stuff ---- >%@", [playerAchievements returnAllAchievements]);
         }
@@ -880,6 +892,33 @@
         [self displayGoal];
     }
 }
+
+
+
+
+
+// shows the achievement to the user //
+-(void)displayAchievement:(NSString *)stringPassedIn{
+    
+    NSLog(@"display achievement ->%@", stringPassedIn);
+    
+    
+    
+    
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
