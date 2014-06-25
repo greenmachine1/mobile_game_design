@@ -56,7 +56,7 @@ static NSString *USERACHIEVE = @"userAchievements";
 
 
 
-
+// finished the level in a certain amount of time //
 -(void)finishingLevelWithinTime:(int)time{
     
     if((time <= 30) && (time > 20)){
@@ -72,6 +72,28 @@ static NSString *USERACHIEVE = @"userAchievements";
         [self saveInfo:@"Achievement:10 seconds!"];
         
     }
+}
+
+
+
+
+// finished the level in a certain amount of time and killed the ninja squid //
+-(void)finishedLevelWithinTime:(int)time andKilledNinjaSquid:(int)trueOrFalse{
+    
+    if(((time <= 30) && (time > 20)) && (trueOrFalse == 1)){
+        
+        [self saveInfo:@"Achievement:30 seconds and Ninja Squid Death!"];
+        
+    }else if (((time <= 20) && (time > 10)) && (trueOrFalse == 1)){
+        
+        [self saveInfo:@"Achievement:20 seconds and Ninja Squid Death!"];
+        
+    }else if (((time <= 100) && (time > 0)) && (trueOrFalse == 1)){
+        
+        [self saveInfo:@"Achievement:10 seconds and Ninja Squid Death!"];
+        
+    }
+    
     
     
 }

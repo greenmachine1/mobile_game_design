@@ -20,6 +20,7 @@
 +(Achievements *)sharedInstance;
 -(void)setNameOfCurrentUser:(NSString *)passedInName;
 -(void)finishingLevelWithinTime:(int)time;
+-(void)finishedLevelWithinTime:(int)time andKilledNinjaSquid:(int)trueOrFalse;
 -(NSArray *)returnAllAchievements;
 -(void)deleteAllAchievements;
 

@@ -30,6 +30,11 @@
         NSLog(@"person -> %@",personsName);
         
         
+        newAchievements = [Achievements sharedInstance];
+        
+        [newAchievements setNameOfCurrentUser:personsName];
+        
+        
         
         // setting the background color //
         CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.1 green:0.4 blue:0.5 alpha:1.0]];
@@ -49,7 +54,7 @@
     mainLayout.position = ccp(xBounds / 2, yBounds / 2);
     
     // main green background box //
-    CCSprite *mainLayoutBox = [CCSprite spriteWithImageNamed:@"menu_box_pause.png"];
+    CCSprite *mainLayoutBox = [CCSprite spriteWithImageNamed:@"Achievements_box.png"];
     mainLayoutBox.anchorPoint = ccp(0.5f, 0.5f);
     mainLayoutBox.position = ccp(mainLayout.position.x, mainLayout.position.y);
     
@@ -60,16 +65,23 @@
     mainLabel.anchorPoint = ccp(0.5f, 0.5f);
     mainLabel.position = ccp(mainLayoutBox.position.x, (mainLayoutBox.contentSize.height / 2) + 100.0f);
     [mainLayoutBox addChild:mainLabel];
+
     
     
-    // creation of the achievement list //
-    /*
-    for(int i = 0; i < newAchievements.numberOfAchievements; i++){
+    
+    for(int i = 0; i < [newAchievements returnAllAchievements].count; i++){
         
-        NSLog(@"Yes!");
-        
+        CCLabelTTF *newAchievementLabel = [CCLabelTTF labelWithString:[[newAchievements returnAllAchievements] objectAtIndex:i] fontName:@"Chalkduster" fontSize:15.0f];
+        newAchievementLabel.anchorPoint = ccp(0.5f, 0.5f);
+        newAchievementLabel.position = ccp(mainLayoutBox.position.x, (mainLayoutBox.contentSize.height - 40.0f) - (20 * (i + 1)));
+        [mainLayoutBox addChild:newAchievementLabel];
     }
-    */
+    
+    
+    
+    
+    
+    
     
     
     

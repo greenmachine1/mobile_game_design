@@ -19,7 +19,7 @@
     NSString *personsName;
     CCLayoutBox *mainLayout;
     
-    
+    Achievements *newAchievements;
 }
 
 

@@ -104,6 +104,7 @@
     NSMutableArray *localScoreArray = [[NSMutableArray alloc] init];
     NSMutableArray *finalSortedNumbers = [[NSMutableArray alloc] init];
     NSMutableArray *finalNameAndSCores = [[NSMutableArray alloc] init];
+    nameArray = [[NSMutableArray alloc] init];
     NSMutableDictionary *userDictionary = [[NSUserDefaults standardUserDefaults] objectForKey:@"userDictionary"];
     
     for(NSNumber *score in [userDictionary allValues]){
@@ -129,9 +130,13 @@
         
         // this holds all the names of the array //
         NSArray *tempNames = [userDictionary allKeysForObject:[finalSortedNumbers objectAtIndex:j]];
+        
+        
 
         // saving it all to an array for the leaderboard //
         [finalNameAndSCores addObject:[NSString stringWithFormat:@"%@ %@", [tempNames lastObject], finalSortedNumbers[j]]];
+        
+        [nameArray addObject:[tempNames lastObject]];
         
         
         if(finalNameAndSCores.count > 5){
@@ -159,21 +164,27 @@
         scoresButton = [CCButton buttonWithTitle:tempNameAndScore fontName:@"Chalkduster" fontSize:20.0f];
         scoresButton.anchorPoint = ccp(0.5f, 0.5f);
         scoresButton.position = ccp(layoutBoxSprite.position.x, (layoutBoxSprite.contentSize.height - 40.0f) - (30 * (i + 1)));
-        scoresButton.name = tempNameAndScore;
+        scoresButton.name = [NSString stringWithFormat:@"%i", i];
         [scoresButton setTarget:self selector:@selector(onScoreButton:)];
         [layoutBoxSprite addChild:scoresButton];
-        
     }
 }
 
 
+
+
+// user clicks on the name to take them to the achievements section //
 -(void)onScoreButton:(id)sender{
     
     CCButton *button = (CCButton *)sender;
-    NSLog(@"button name %@", button.name);
     
+    int indexOfButton = [button.name intValue];
+    
+    NSLog(@"index # %d", indexOfButton);
+    
+
     // passing the name of the person you wish to see achievements on to the next scene //
-    [[CCDirector sharedDirector] replaceScene:[AchievementsScene sceneWithName:button.name]
+    [[CCDirector sharedDirector] replaceScene:[AchievementsScene sceneWithName:[nameArray objectAtIndex:indexOfButton]]
                                withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionUp duration:1.0f]];
     
 }
