@@ -33,8 +33,6 @@ static NSString *USERACHIEVE = @"userAchievements";
         
         userAchievementsDictionary = [[NSMutableDictionary alloc] initWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:USERACHIEVE]];
         
-        
-        
     }
     return self;
     

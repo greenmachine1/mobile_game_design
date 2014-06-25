@@ -146,32 +146,7 @@
             [startTimer invalidate];
         
             [self askForUserName];
-        }else{
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-            // print out any achievements associated with that user //
-            NSLog(@"%@", [[[NSUserDefaults standardUserDefaults] objectForKey:@"userAchievements"]objectForKey:[[NSUserDefaults standardUserDefaults] objectForKey:@"mainName"]]);
-    
-    
-    
         }
-    
-    
-    
-    
-    
-    
-    
     }
     
     // Enable touch handling on scene node
@@ -266,10 +241,13 @@
 -(void)creationOfEnemy{
     
     newEnemySprite = [Enemy_Sprite_Object createEnemyWithLocation:ccp(208.0f, (yBounds - 224.0f) - 32.0f)];
-    [newEnemySprite setZOrder:1];
-    [self addChild:newEnemySprite];
+    [self addChild:newEnemySprite z:1 name:@"mainEnemy"];
     
     
+    otherEnemySprite = [Enemy_Sprite_Object createEnemyWithLocation:ccp(xBounds - 150.0f, 64.0f)];
+    [otherEnemySprite setZOrder:1];
+    [otherEnemySprite moveUpAndDown];
+    [self addChild:otherEnemySprite];
     
 }
 
@@ -573,7 +551,10 @@
     // of each other.... remove the sprite from the scene //
     if((stopXOfEnemy - startXOfEnemy) < 15){
         
-        [newEnemySprite removeFromParentAndCleanup:true];
+        NSLog(@"in here!");
+        
+        [self removeChildByName:@"mainEnemy" cleanup:true];
+        //[newEnemySprite removeFromParentAndCleanup:true];
         stopXOfEnemy = 1000;
         
         enemyDeath = enemyDeath + 1;
@@ -801,10 +782,14 @@
                     
                     if(CGRectIntersectsRect([enemySprite getBoundingBox], [moveableBlockObject getBoundingBox])){
                         
-                        movementBoolean = false;
+                        if([[enemySprite name] isEqualToString:@"mainEnemy"]){
+                            
+                            movementBoolean = false;
+                            
+                            // need to get the stopping point //
+                            stopXOfEnemy = enemySprite.position.x;
+                        }
                         
-                        // need to get the stopping point //
-                        stopXOfEnemy = enemySprite.position.x;
                     }
                 }
             }
@@ -827,10 +812,14 @@
                     
                     if(CGRectIntersectsRect([enemySpriteObject getBoundingBox], [blockWall getBoundingBox])){
                         
-                        movementBoolean = true;
-                        
-                        // need to get the starting point //
-                        startXOfEnemy = enemySpriteObject.position.x;
+                        if([[enemySpriteObject name] isEqualToString:@"mainEnemy"]){
+                            
+                            movementBoolean = true;
+                            
+                            // need to get the stopping point //
+                            startXOfEnemy = enemySpriteObject.position.x;
+                        }
+
                     }
                 }
             }
@@ -853,18 +842,14 @@
         [newGuySprite stopAllActions];
         [playSound playBg:@"Applause.mp3"];
         
+        // stopping the timer //
+        [startTimer invalidate];
+        
         
         // setting the time achievement //
         int timeAtStop = (int)timeIncrease;
         
-        
 
-        
-        
-        
-        
-        
-        
         // --------- > setting an achievement < ----------------//
         // checking to see if the finished time is within range //
         // if it is, award and achievement to that user //
@@ -897,6 +882,11 @@
 
 // shows the achievement to the user //
 -(void)displayAchievement{
+    
+    // setting the background color to be a transparent black
+    CCNodeColor *newbackgroundColor = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.6f]];
+    [newbackgroundColor setZOrder:4];
+    [self addChild:newbackgroundColor];
     
     for(int i = 0; i < achievementsArray.count; i++){
     
@@ -937,7 +927,7 @@
 -(void)collisionForEnemy{
     
     //   basically If the user touches the enemy, I need to reset their position   //
-    if(CGRectIntersectsRect([newGuySprite getBoundingBox], [newEnemySprite getBoundingBox])){
+    if((CGRectIntersectsRect([newGuySprite getBoundingBox], [newEnemySprite getBoundingBox])) || (CGRectIntersectsRect([otherEnemySprite getBoundingBox], [newGuySprite getBoundingBox]))){
         
         [playSound playBg:@"sea_audio.mp3"];
         
@@ -1132,17 +1122,15 @@
 // ---------------------- > End Game Goal < ----------------------- //
 -(void)displayGoal{
 
-    [startTimer invalidate];
-    
     [newGuySprite stopAllActions];
     
 
     
     
     // setting the background color to be a transparent black
-    CCNodeColor *backgroundColor = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.6f]];
-    [backgroundColor setZOrder:4];
-    [self addChild:backgroundColor];
+    CCNodeColor* newbackgroundColor = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.6f]];
+    [newbackgroundColor setZOrder:4];
+    [self addChild:newbackgroundColor];
     
     goalBoxLayout = [[CCLayoutBox alloc] init];
     goalBoxLayout.anchorPoint = ccp(0.5f, 0.5f);
@@ -1250,18 +1238,23 @@
 // asking for the users name //
 -(void)askForUserName{
 
+    // setting the background color to be a transparent black
+    backgroundColor = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.6f]];
+    [backgroundColor setZOrder:3];
+    [self addChild:backgroundColor];
+    
     // replacement text prompting the user to enter their name //
-    CCLabelTTF *gameScoreLabelReplacement = [CCLabelTTF labelWithString:@"Please enter your name!" fontName:@"Chalkduster" fontSize:12.0f];
+    
+    gameScoreLabelReplacement = [CCLabelTTF labelWithString:@"Please enter your name!" fontName:@"Chalkduster" fontSize:12.0f];
     gameScoreLabelReplacement.anchorPoint = ccp(0.5f, 0.5f);
-    gameScoreLabelReplacement.position = ccp((scoreBox.position.x), (scoreBox.contentSize.height / 2));
+    gameScoreLabelReplacement.position = ccp(xBounds / 2, (yBounds / 2) - 20.0f);
     [gameScoreLabelReplacement setZOrder:4];
-    [scoreBox addChild:gameScoreLabelReplacement];
+    [self addChild:gameScoreLabelReplacement];
     
     
     
     CCSprite *textSprite = [CCSprite spriteWithImageNamed:@"tutorial_done_box.png"];
     mainTextField = [CCTextField textFieldWithSpriteFrame:[CCSpriteFrame frameWithImageNamed:@"tutorial_done_box.png"]];
-    
     
     mainTextField.fontSize = 20.0f;
     mainTextField.contentSize = CGSizeMake((scoreBox.contentSize.width), (scoreBox.contentSize.height));
@@ -1272,6 +1265,14 @@
     mainTextField.position = ccp(0.5f, 0.6f);
     [mainTextField setTarget:self selector:@selector(onTextEntered)];
     
+    
+    
+    /*
+    CCLabelTTF *enterYourNameText = [CCLabelTTF labelWithString:@"Enter your name!" fontName:@"Chalkduster" fontSize:20.0f];
+    enterYourNameText.anchorPoint = ccp(0.5f, 0.5f);
+    enterYourNameText.position = ccp(0.5f, 0.5f);
+    [self addChild:enterYourNameText z:4];
+    */
     [self addChild:mainTextField z:4];
     
 
@@ -1284,20 +1285,21 @@
     // setting the main name for the achievements //
     mainName = mainTextField.string;
     
-    
     // setting the main name user default //
     [[NSUserDefaults standardUserDefaults] setObject:mainName forKey:@"mainName"];
     
-    
     // setting the name of the user within the achievements class
     [playerAchievements setNameOfCurrentUser:[[NSUserDefaults standardUserDefaults] objectForKey:@"mainName"]];
-    
     
     // resuming the timer //
     startTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(timerOfGame:) userInfo:nil repeats:TRUE];
     [startTimer fire];
     
     [mainTextField removeFromParentAndCleanup:true];
+    
+    [gameScoreLabelReplacement removeFromParentAndCleanup:true];
+    
+    [backgroundColor removeFromParentAndCleanup:true];
 }
 
 
@@ -1352,9 +1354,9 @@
     [newGuySprite removeFromParentAndCleanup:TRUE];
     
     // setting the background color to be a transparent black
-    CCNodeColor *backgroundColor = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.6f]];
-    [backgroundColor setZOrder:4];
-    [self addChild:backgroundColor];
+    CCNodeColor *newbackgroundColor = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.6f]];
+    [newbackgroundColor setZOrder:4];
+    [self addChild:newbackgroundColor];
     
     
     CCLayoutBox *gameOverLayoutBox = [[CCLayoutBox alloc] init];

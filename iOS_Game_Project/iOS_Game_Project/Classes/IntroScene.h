@@ -46,6 +46,7 @@
     // main sprites //
     Guy_Sprite_Object *newGuySprite;
     Enemy_Sprite_Object *newEnemySprite;
+    Enemy_Sprite_Object *otherEnemySprite;
     EndBox *newEndBox;
     CCLayoutBox *goalBox;
     heathHeartSprite *newHealthHeart;
@@ -56,6 +57,8 @@
     CCNodeColor *backgroundColorOnPause;
     CCButton *pauseButton;
     CCLayoutBox *pauseLayoutBox;
+    
+    CCNodeColor *backgroundColor;
     
     DPad *newDPad;
     
@@ -104,6 +107,7 @@
     CCLayoutBox *goalBoxLayout;
     
     CCTextField *mainTextField;
+    CCLabelTTF *gameScoreLabelReplacement;
     
     // displaying achievements //
     CCLabelTTF *achievementLabel;

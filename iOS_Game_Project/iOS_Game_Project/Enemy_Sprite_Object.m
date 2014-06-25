@@ -24,6 +24,8 @@
         
         locationPoint = location;
         
+        rightPointToStopAt = ccp(self.position.x, 64.0f);
+        
         pointToStopAt = 128.0f;
         
         self.position = location;
@@ -36,12 +38,12 @@
     }
     return self;
 }
-/*
+
 -(void)moveUpAndDown{
     
-    CCActionMoveTo *downMovement = [CCActionMoveTo actionWithDuration:3.0f position:rightPointToStopAt];
+    CCActionMoveTo *downMovement = [CCActionMoveTo actionWithDuration:3.0f position:ccp(self.position.x, 256.0f)];
     
-    CCActionMoveTo *upMovement = [CCActionMoveTo actionWithDuration:3.0f position:ccp(self.position.x, locationPoint.y)];
+    CCActionMoveTo *upMovement = [CCActionMoveTo actionWithDuration:3.0f position:ccp(self.position.x, 64.0f)];
     
     CCActionSequence *upAndDownActionSequence = [CCActionSequence actionOne:downMovement two:upMovement];
     
@@ -50,7 +52,7 @@
     [self runAction:repeatAllActions];
     
 }
-*/
+
 
 -(void)sideToSide{
     
