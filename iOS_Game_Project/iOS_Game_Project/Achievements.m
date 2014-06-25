@@ -104,12 +104,37 @@ static NSString *USERACHIEVE = @"userAchievements";
     
     NSLog(@"games played %@ and hearts left %@", numberOfGamesPlayed, numberOfHearts);
     
+    
+    
+    // need the number of games played to be able to hold 3
+    
+    
+    
+    
+    
+    
+    
+    // ------------ > this is incorrect < ------------- //
+    
     // making sure that every 3 games is checked
-    if(([numberOfGamesPlayed intValue] % 3 == 0) && ([numberOfHearts intValue] % 3 == 0)){
+    if((([numberOfGamesPlayed intValue] % 3 == 0) ||
+        ([numberOfGamesPlayed integerValue] % 3 == 1)
+        || ([numberOfGamesPlayed integerValue] % 3 == 2)) && ([numberOfHearts intValue] % 3 == 0)){
     
         [self saveInfo:@"Achievement:After 3 levels and all lives left!"];
     
         return @"Achievement:After 3 levels and all lives left!";
+        
+        
+        // resetting the value of the number of hearts back down to 0 //
+        numberOfHearts = [NSNumber numberWithInt:0];
+        
+        [userAchievementsDictionary setObject:numberOfHearts forKey:[NSString stringWithFormat:@"%@_numberOfHearts", userName]];
+        
+        // setting it to correspond with the achievements NSUserDefaults //
+        [[NSUserDefaults standardUserDefaults] setObject:userAchievementsDictionary forKey:USERACHIEVE];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
     }
     return @"";
     
