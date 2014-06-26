@@ -39,6 +39,8 @@
     int score;
     int totalScore;
     
+    BOOL cameFromGoal;
+    
     NSString *mainName;
     
     CGPoint touchPoint;

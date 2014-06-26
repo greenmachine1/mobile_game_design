@@ -859,6 +859,8 @@
             
             achievementsArray = [[NSMutableArray alloc] init];
             
+            
+            // finished game within a certain amount of time
             if(!([[playerAchievements finishingLevelWithinTime:timeAtStop] isEqualToString:@""])){
                 
                 [achievementsArray addObject:[playerAchievements finishingLevelWithinTime:timeAtStop]];
@@ -868,6 +870,9 @@
                 
                 [achievementsArray addObject:[playerAchievements finishedLevelWithinTime:timeAtStop andKilledNinjaSquid:enemyDeath]];
             }
+            
+            
+            
             
 
             // everytime this is called, it will increment by 1 //
@@ -886,15 +891,16 @@
                     
                 }
             }
-            
-            
-            
-            
-            
-            
+
+            // completed a perfect game ---> no time restriction <---//
+            if(!([[playerAchievements completionPerfect:score andKillingOfNinjaSquid:enemyDeath] isEqualToString:@""])){
+                
+                [achievementsArray addObject:[playerAchievements completionPerfect:score andKillingOfNinjaSquid:enemyDeath]];
+                
+            }
 
             // displays the achievement //
-            [self displayAchievement];
+            [self displayAchievementCameFromGameWin:true];
 
         }
     }
@@ -905,25 +911,40 @@
 
 
 // shows the achievement to the user //
--(void)displayAchievement{
+-(void)displayAchievementCameFromGameWin:(BOOL)trueOrFalse{
     
-    // setting the background color to be a transparent black
-    CCNodeColor *newbackgroundColor = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.6f]];
-    [newbackgroundColor setZOrder:4];
-    [self addChild:newbackgroundColor];
     
-    for(int i = 0; i < achievementsArray.count; i++){
-    
-        achievementLabel = [CCLabelTTF labelWithString:[achievementsArray objectAtIndex:i] fontName:@"Chalkduster" fontSize:20.0f];
-        achievementLabel.anchorPoint = ccp(0.5f, 0.5f);
-        achievementLabel.position = ccp(xBounds / 2, (yBounds - 40.0f) - (20 * (i + 1)));
-        achievementLabel.color = [CCColor greenColor];
-        [self addChild:achievementLabel z:4];
+    if(trueOrFalse == true){
         
+        cameFromGoal = true;
+        
+    }else{
+        
+        cameFromGoal = false;
     }
     
+        // setting the background color to be a transparent black
+        CCNodeColor *newbackgroundColor = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.6f]];
+        [newbackgroundColor setZOrder:4];
+        [self addChild:newbackgroundColor];
+    
+        NSLog(@"count for achievements array %lu", (unsigned long)[achievementsArray count]);
+    
+        for(int i = 0; i < achievementsArray.count; i++){
+    
+            achievementLabel = [CCLabelTTF labelWithString:[achievementsArray objectAtIndex:i] fontName:@"Chalkduster" fontSize:20.0f];
+            achievementLabel.anchorPoint = ccp(0.5f, 0.5f);
+            achievementLabel.position = ccp(xBounds / 2, (yBounds - 40.0f) - (20 * (i + 1)));
+            achievementLabel.color = [CCColor greenColor];
+            [self addChild:achievementLabel z:4];
+        
+        }
+    
     [self performSelector:@selector(removeAchievementsLabel) withObject:nil afterDelay:4.0f];
+
 }
+
+
 
 -(void)removeAchievementsLabel{
     
@@ -931,8 +952,16 @@
     [achievementsArray removeAllObjects];
     
     // basically I need to present the user with a good job then transition to the //
-    // credits section of the game //
-    [self displayGoal];
+    // goal section or the game over section //
+    if(cameFromGoal == true){
+        
+        [self displayGoal];
+        
+    }else if(cameFromGoal == false){
+        
+        [self gameOver];
+        
+    }
     
 }
 
@@ -973,11 +1002,44 @@
         
         NSLog(@"Amount of hearts left %i", score);
         
-        // game over //
-        if(score < 1){
+        if(!(newGameCenterClass.isAuthorized)){
+            
+            achievementsArray = [[NSMutableArray alloc] init];
+            
+            // game over //
+            if(score < 1){
+            
+                // setting the name and score (Even though you lost) to the achievements center //
+                if( !([[[NSUserDefaults standardUserDefaults] objectForKey:@"mainName"] isEqualToString:@""] )){
+                
+                    NSLog(@"In here super in here!");
+                
+                    // sets the score with the saved name and current score //
+                    [newScoreClass setNameAndScoreOfUser:[[NSUserDefaults standardUserDefaults] objectForKey:@"mainName"] andScore:totalScore];
+                }
+                
+                // add the award for dying to the player achievements //
+                if(!([[playerAchievements awardPlayerForDeath:score] isEqualToString:@""])){
+                    
+                    NSLog(@"In here super in here as welllllllllllllllll!");
+                    
+                    [achievementsArray addObject:[playerAchievements awardPlayerForDeath:score]];
+                    
+                    NSLog(@"Whats in the array %@", [playerAchievements awardPlayerForDeath:score]);
+                    NSLog(@"Whats in the array %@", achievementsArray);
+                    
+                }
+
+                [self displayAchievementCameFromGameWin:false];
+            }
+            
+        // if connected to game center //
+        }else{
             
             [self gameOver];
+            
         }
+        
     }
 }
 
@@ -1377,6 +1439,13 @@
     [self addChild:newbackgroundColor];
     
     
+    [self displayGameOver];
+
+}
+
+
+-(void)displayGameOver{
+    
     CCLayoutBox *gameOverLayoutBox = [[CCLayoutBox alloc] init];
     gameOverLayoutBox.anchorPoint = ccp(0.5f, 0.5f);
     gameOverLayoutBox.position = ccp(xBounds / 2, yBounds / 2);
@@ -1409,12 +1478,13 @@
     mainMenuButton.name = @"Main_Menu";
     [mainMenuButton setTarget:self selector:@selector(gameOverMenuButtons:)];
     [gameOverBoxSprite addChild:mainMenuButton];
-
+    
     [self addChild:gameOverLayoutBox];
     
     pauseButton.enabled = NO;
     
-
+    
+    
 }
 
 

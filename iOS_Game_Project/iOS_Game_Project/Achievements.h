@@ -20,16 +20,20 @@
 }
 +(Achievements *)sharedInstance;
 -(void)setNameOfCurrentUser:(NSString *)passedInName;
+
 -(NSString *)finishingLevelWithinTime:(int)time;
 -(NSString *)finishedLevelWithinTime:(int)time andKilledNinjaSquid:(int)trueOrFalse;
--(NSArray *)returnAllAchievements;
--(void)deleteAllAchievements;
-
 -(NSNumber *)returnAmountOfPlayedGames;
+
+-(NSString *)finishedAfter_3_GamesAndStillHaveAllHeartsLeft;
+-(NSString *)completionPerfect:(int)allHeartsStillIntact andKillingOfNinjaSquid:(int)trueOrFalse;
+
+-(NSString *)awardPlayerForDeath:(int)heartsLeft;
+
 -(void)incrementGamePlayed;
 -(void)incrementHeartsAvailable;
--(NSString *)finishedAfter_3_GamesAndStillHaveAllHeartsLeft;
 
-
+-(NSArray *)returnAllAchievements;
+-(void)deleteAllAchievements;
 
 @end

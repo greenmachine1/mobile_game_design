@@ -69,36 +69,10 @@ static NSString *USERACHIEVE = @"userAchievements";
 }
 
 
-// finished the level in a certain amount of time //
--(NSString *)finishingLevelWithinTime:(int)time{
-    
-        if((time <= 30) && (time > 20)){
-            
-            [self saveInfo:@"Achievement:30 seconds!"];
-                
-            return @"Achievement:30 seconds!";
-            
-        }else if((time <= 20) && (time > 10)){
-            
-            [self saveInfo:@"Achievement:20 seconds!"];
-                
-            return @"Achievement:20 seconds!";
-                
-            
-        }else if((time <= 10) && (time > 0)){
-            
-            [self saveInfo:@"Achievement:10 seconds!"];
-                
-            return @"Achievement:10 seconds!";
-                
-                
-         }
-    
-    return @"";
-}
 
 
 
+// incremental achievement //
 // achievement for making it through 3 games with all hearts left //
 -(NSString *)finishedAfter_3_GamesAndStillHaveAllHeartsLeft{
     
@@ -127,11 +101,37 @@ static NSString *USERACHIEVE = @"userAchievements";
 }
 
 
+// completion //
+// finished the level in a certain amount of time //
+-(NSString *)finishingLevelWithinTime:(int)time{
+    
+    if((time <= 30) && (time > 20)){
+        
+        [self saveInfo:@"Achievement:30 seconds!"];
+        
+        return @"Achievement:30 seconds!";
+        
+    }else if((time <= 20) && (time > 10)){
+        
+        [self saveInfo:@"Achievement:20 seconds!"];
+        
+        return @"Achievement:20 seconds!";
+        
+        
+    }else if((time <= 10) && (time > 0)){
+        
+        [self saveInfo:@"Achievement:10 seconds!"];
+        
+        return @"Achievement:10 seconds!";
+        
+        
+    }
+    
+    return @"";
+}
 
 
-
-
-
+// completion with killing the ninja squid //
 // finished the level in a certain amount of time and killed the ninja squid //
 -(NSString *)finishedLevelWithinTime:(int)time andKilledNinjaSquid:(int)trueOrFalse{
     
@@ -147,7 +147,7 @@ static NSString *USERACHIEVE = @"userAchievements";
         
         return @"Achievement:30 seconds and Ninja Squid Death!";
         
-    }else if (((time <= 100) && (time > 0)) && (trueOrFalse == 1)){
+    }else if (((time <= 10) && (time > 0)) && (trueOrFalse == 1)){
         
         [self saveInfo:@"Achievement:10 seconds and Ninja Squid Death!"];
         
@@ -157,6 +157,50 @@ static NSString *USERACHIEVE = @"userAchievements";
     
     return @"";
 }
+
+
+
+
+// completino of a perfect game.  Killing of the Ninja Squid no time limit //
+-(NSString *)completionPerfect:(int)allHeartsStillIntact andKillingOfNinjaSquid:(int)trueOrFalse{
+    
+    // all hearts are still intact and the ninja squid is dead!
+    if((allHeartsStillIntact == 4) && (trueOrFalse == 1)){
+        
+        [self saveInfo:@"Achievement:Perfect Game!"];
+        
+        return @"Achievement:Perfect Game!";
+        
+    }else{
+        
+        return @"";
+        
+    }
+}
+
+
+
+
+
+-(NSString *)awardPlayerForDeath:(int)heartsLeft{
+    
+    if(heartsLeft == 0){
+        
+        [self saveInfo:@"Achievement:Insta-deth!"];
+        
+        return @"Achievement:Insta-deth!";
+        
+        
+    }else{
+        
+        return @"";
+    }
+    
+    
+    
+}
+
+
 
 
 -(void)incrementGamePlayed{
@@ -189,6 +233,24 @@ static NSString *USERACHIEVE = @"userAchievements";
     [[NSUserDefaults standardUserDefaults] synchronize];
     
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
