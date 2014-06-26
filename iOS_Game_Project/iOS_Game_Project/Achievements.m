@@ -102,20 +102,6 @@ static NSString *USERACHIEVE = @"userAchievements";
 // achievement for making it through 3 games with all hearts left //
 -(NSString *)finishedAfter_3_GamesAndStillHaveAllHeartsLeft{
     
-    NSLog(@"games played %@ and hearts left %@", numberOfGamesPlayed, numberOfHearts);
-    
-    
-    
-    // need the number of games played to be able to hold 3
-    
-    
-    
-    
-    
-    
-    
-    // ------------ > this is incorrect < ------------- //
-    
     // making sure that every 3 games is checked
     if((([numberOfGamesPlayed intValue] % 3 == 0) ||
         ([numberOfGamesPlayed integerValue] % 3 == 1)
